@@ -787,7 +787,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y ,
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -807,7 +807,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "wordWrapWidth":piece[item].wordWrapWidth ,
                         "alignment":piece[item].alignment
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString = "applet.push(" + newObject + ")" ;
                     //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + encodeURIComponent(piece[item].text).replace(/'/g, "%27")  + "' , '" + piece[item].fontString + "' , '" + piece[item].fill + "' , " + piece[item].wordWrap + " , " + piece[item].wordWrapWidth + ", null , null " + ", '" + piece[item].alignment +"'));" ;
                     printString = printString + openTag + constructorString + closeTag;
@@ -825,7 +825,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "randomCeiling":piece[item].randomCeiling,
                         "randomFloor":piece[item].randomFloor
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "," + "' '" + ", '" + piece[item].fontString + "' , '" + piece[item].fill + "' , " + "''" + " , " + "''" + " , " + piece[item].randomCeiling + " , " + piece[item].randomFloor + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -847,7 +847,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new RandomFractionConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" +  piece[item].fontString + "' , " + piece[item].size + " , '" + piece[item].fill + "' , " + piece[item].numeratorRandomCeiling + " , " + piece[item].numeratorRandomFloor + " , " + piece[item].denominatorRandomCeiling + " , " + piece[item].denominatorRandomFloor +"));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -859,7 +859,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -871,7 +871,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;     
                     constructorString="tests[" + newAppletID + "]= '" + appletDoneTest + "';" ;
@@ -892,7 +892,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "randomFloor":piece[item].randomFloor,
                         "randomDigits":piece[item].randomDigits
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new RandomDecimalConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '"  + piece[item].fontString + "' , '" + piece[item].fill + "' , " + piece[item].randomCeiling + " , " + piece[item].randomFloor + " , " + piece[item].randomDigits + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -914,7 +914,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new RandomMixedNumberConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].fontString + "' , " + piece[item].size + " , '" + piece[item].fill + "' , " + piece[item].wholeNumberRandomCeiling + " , " + piece[item].wholeNumberRandomFloor + " , " + piece[item].numeratorRandomCeiling + " , " + piece[item].numeratorRandomFloor + " , " + piece[item].denominatorRandomCeiling + " , " + piece[item].denominatorRandomFloor +"));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -930,7 +930,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fill":piece[item].fill ,
                         "size":piece[item].size 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new DraggableNumbersConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].orientation + "' , '" + piece[item].clonable + "' , '" + piece[item].size + "' , '" + piece[item].fill + "'));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;  
@@ -943,7 +943,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startY":piece[item].y , 
                         "userScale":piece[item].userScale 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new DragToConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item].userScale + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -964,7 +964,7 @@ function printPieces(newAppletID, appletDoneTest) {
                             "spaceX":piece[item].spaceX,
                             "spaceY":piece[item].spaceY
                             });
-                        constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                        constructorString = getConstructorString(newObject);
                         //(appletID, type, multiType, startX, startY, correct, incorrect1, incorrect2, incorrect3, multipleChoiceFontSize, spaceX, spaceY) {
                         //constructorString="applet.push(new MultipleChoiceNumberConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].multiType + "," + piece[item].x + "," + piece[item].y + " , '" + piece[item].correct + "' , '" + piece[item].incorrect1 + "' , '" + piece[item].incorrect2 + "' , '" + piece[item].incorrect3 + "' , " + piece[item].multipleChoiceFontSize + " , " + piece[item].spaceX + " , " + piece[item].spaceY + "));" ;
                         printString = printString + openTag + constructorString + closeTag;
@@ -983,7 +983,7 @@ function printPieces(newAppletID, appletDoneTest) {
                             "protractorX":piece[item].protractorX ,
                             "protractorY":piece[item].protractorY
                             });
-                        constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                        constructorString = getConstructorString(newObject);
                         //constructorString="applet.push(new ProtractorAngleConstructor(" + newAppletID + "," + piece[item].type +  "," + piece[item].x + "," + piece[item].y + " , '" + piece[item].lowerAngle + "' , '" + piece[item].upperAngle + "' , '" + piece[item].protractorX + "' , '" + piece[item].protractorY + "'));" ;
                         //keep this in the if statement so we don't get a second line
                         printString = printString + openTag + constructorString + closeTag;  
@@ -999,7 +999,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startY":piece[item].y , 
                         "initialValue":piece[item].initialValue
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new TallyConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item].initialValue + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1016,7 +1016,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "dragWidth":baseTenDragTo.width, 
                         "dragHeight":baseTenDragTo.height
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new BaseTenCloneConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "," + piece[item-1].x + "," + piece[item-1].y + "," + baseTenDragTo.width + "," + baseTenDragTo.height + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1032,7 +1032,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "displayY":piece[item+1].y, 
                         "displayDigits":piece[item].displayDigits
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new NumberEntryConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].orientation + "' ," + piece[item+1].x  + "," + piece[item+1].y + "," + piece[item].displayDigits + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1050,7 +1050,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "wordWrapWidth":piece[item].wordWrapWidth, 
                         "align":piece[item].align 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new EvaluatedExpressionConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].expression + "' , '" + piece[item].fontString  + "' , '" + piece[item].fill + "' , " + piece[item].wordWrap + " , '" + piece[item].wordWrapWidth + "' , '" + piece[item].align + "' ));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1061,7 +1061,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "type": piece[item].type, 
                         "expression": fixedEncodeURIComponent(piece[item].expression)
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new HiddenNumberConstructor(" + newAppletID + "," + piece[item].type + ", '" + piece[item].expression + "' ));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1075,7 +1075,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "displayX":piece[item+1].x , 
                         "displayY":piece[item+1].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new InequalityEntryConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item+1].x  + "," + piece[item+1].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1096,7 +1096,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "itemLabel":piece[item].itemLabel, 
                         "itemValueList":piece[item].itemValueList
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new BarGraphConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].titleText + "' , " + piece[item].min + " , " + piece[item].max + " , " + piece[item].interval + " , '" + piece[item].numberLabel + "' , '" + piece[item].numberedAxis + "' , " + listString(piece[item].itemList) + " , '" + piece[item].itemLabel + "' , " + listString(piece[item].itemValueList) + " , " + piece[item].x + " , " + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1115,7 +1115,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "expressionLabel":piece[item].expressionLabel, 
                         "expressionList": piece[item].expressionList
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new TTableConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].wordLabel + "' , " + listString(piece[item].wordList) + " , '" + piece[item].expressionLabel + "' , " + listString(piece[item].expressionList) +  " , " + piece[item].x + " , " + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1142,7 +1142,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "dotLabel" : piece[item].dotLabel , 
                         "dotSnapping" : piece[item].dotSnapping
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new TTableConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].wordLabel + "' , " + listString(piece[item].wordList) + " , '" + piece[item].expressionLabel + "' , " + listString(piece[item].expressionList) +  " , " + piece[item].x + " , " + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1156,7 +1156,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "drawingBoxEndX": piece[item].drawingBoxEndX,
                         "drawingBoxEndY": piece[item].drawingBoxEndY
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     //constructorString="applet.push(new DrawBoxConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", " + (piece[item].x+Math.abs(piece[item].drawingBoxStartX-piece[item].drawingBoxEndX)) + " ," + (piece[item].y+Math.abs(piece[item].drawingBoxStartY-piece[item].drawingBoxEndY)) +"));" ;
                     printString = printString + openTag + constructorString + closeTag;
                     break;
@@ -1171,6 +1171,16 @@ function printPieces(newAppletID, appletDoneTest) {
         callback: function(){ state="build"; }  //continue building
     });
 }
+
+function getConstructorString(newObject) {
+    if (typeof newObject == "object") {
+        var json = JSON.stringify(newObject);
+    } else {
+        var json = newObject;
+    }
+    return "              " + json + ",";
+}
+
         /***********************************************************************
          *          PIECE CONSTRUCTORS AND FUNCTIONS
          * ********************************************************************/
