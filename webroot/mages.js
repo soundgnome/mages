@@ -1173,10 +1173,10 @@ function printPieces(newAppletID, appletDoneTest) {
 }
 
 function getConstructorString(newObject) {
-    if (typeof newObject == "object") {
-        var json = JSON.stringify(newObject);
-    } else {
+    if (typeof newObject == "string") {
         var json = newObject;
+    } else {
+        var json = JSON.stringify(newObject);
     }
     return "              " + json + ",";
 }
