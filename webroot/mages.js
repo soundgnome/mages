@@ -52,6 +52,8 @@ function preload() {
     game.load.image('tallyButtonMinus', 'assets/tallyButtonMinus.png');
     game.load.image('numberEntryButton', 'assets/numberEntryButton.svg');
     game.load.image('numberEntryDisplay', 'assets/numberEntryDisplay.svg');
+    game.load.image('textureDragBox', 'assets/whiteBox.svg');
+    
     
     //gui stuff
     game.load.image('grid', 'assets/grid.png');
@@ -76,6 +78,9 @@ function preload() {
     game.load.image('menuEvaluatedExpression', 'assets/menuEvaluatedExpression.png');
     game.load.image('menuHiddenNumber', 'assets/menuHiddenNumber.png');
     game.load.image('menuBarGraph', 'assets/menuBarGraph.png');
+    game.load.image('menuInequalityEntry', 'assets/menuInequalityEntry.png');
+    game.load.image('menuNumberLine', 'assets/menuNumberLine.png');
+    game.load.image('menuTTable', 'assets/menuTTable.png');
     
 }
 
@@ -349,8 +354,12 @@ function loadApplet() {
             buildtTable(applet[i]);
             break;
             
-            case 20: //numberLine
+            case 20: //tTable
             buildNumberLine(applet[i]);
+            break;
+            
+            case 21: //texture Area
+            buildTextureArea(applet[i]);
             break;
             
             case 99: //buildDrawBox(drawingBoxStartX, drawingBoxStartY, drawingBoxEndX , drawingBoxEndY) 
@@ -420,6 +429,7 @@ function setupCanvas() {
 var menu0;
 var menu1;
 var menu2;
+var menu3;
 var menus;
 var id=0;
 function defineMenu() {
@@ -431,15 +441,7 @@ function defineMenu() {
         game.add.sprite(300, 300, 'menuHundredChart'),
         game.add.sprite(550, 300, 'menuDoneButton'),
         ];
-    for (var i = 0; i < 6; i++) //this could be combined with the one below with a forEach on menus[]
-        {
-            menu0[i].alpha=0;
-            menu0[i].inputEnabled='true';
-            menu0[i].id = id;
-            id++;
-            menu0[i].events.onInputDown.add(onBuildMenuClick, menu0[i]);
-            menu0[i].events.onInputUp.add(onFinishDrag, menu0[i]);
-        }
+
     menu1=[//PAGE 2 
         game.add.sprite(50 , 50, 'menuRandomDecimal'),
         game.add.sprite(300, 50, 'menuRandomMixedNumber'),
@@ -448,33 +450,37 @@ function defineMenu() {
         game.add.sprite(300, 300, 'menuMultipleChoice'),
         game.add.sprite(550, 300, 'menuProtractorAngle'),
         ];
-    for (i = 0; i < 6; i++)
-        {
-            menu1[i].alpha=0;
-            menu1[i].inputEnabled='true';
-            menu1[i].id = id;
-            id++;
-            menu1[i].events.onInputDown.add(onBuildMenuClick, menu1[i]);
-            menu1[i].events.onInputUp.add(onFinishDrag, menu1[i]);
-        }
+
     menu2=[//PAGE 3 
         game.add.sprite(50 , 50, 'menuTallyBox'),
         game.add.sprite(300, 50, 'menuDraggableBaseTenBlocks'),
         game.add.sprite(550, 50, 'menuNumberEntry'),
         game.add.sprite(50 , 300, 'menuEvaluatedExpression'),
         game.add.sprite(300, 300, 'menuHiddenNumber'),
-        game.add.sprite(550, 300, 'menuBarGraph'),
+        game.add.sprite(550, 300, 'menuInequalityEntry'),
         ];
-    for (i = 0; i < 6; i++)
+    
+    menu3=[//PAGE 4 
+        game.add.sprite(50 , 50, 'menuBarGraph'),
+        game.add.sprite(300, 50, 'menuTTable'),
+        game.add.sprite(550, 50, 'menuNumberLine'),
+        game.add.sprite(50 , 300, 'menuButton'),
+        game.add.sprite(300, 300, 'menuButton'),
+        game.add.sprite(550, 300, 'menuButton'),
+        ];
+    
+    menus=[menu0, menu1, menu2, menu3];
+    menus.forEach(function(item){
+        for (var i = 0; i < 6; i++)
         {
-            menu2[i].alpha=0;
-            menu2[i].inputEnabled='true';
-            menu2[i].id = id;
+            item[i].alpha=0;
+            item[i].inputEnabled='true';
+            item[i].id = id;
             id++;
-            menu2[i].events.onInputDown.add(onBuildMenuClick, menu2[i]);
-            menu2[i].events.onInputUp.add(onFinishDrag, menu2[i]);
-        }
-    menus=[menu0, menu1, menu2];
+            item[i].events.onInputDown.add(onBuildMenuClick, item[i]);
+            item[i].events.onInputUp.add(onFinishDrag, item[i]);
+        }    
+    });
 }
 
 
@@ -638,8 +644,20 @@ function onBuildMenuClick(item, pointer) {
             getHiddenNumberSettings() //in mages.dialogs.js
             break;
             
-            case 17:  //barGrap
+            case 17:  //inequality entry
+            getInequalityEntrySettings() //in mages.dialogs.js
+            break;
+            
+            case 18:  //bar graph
             getBarGraphSettings() //in mages.dialogs.js
+            break;
+            
+            case 19:  //t-table
+            gettTableSettings() //in mages.dialogs.js
+            break;
+            
+            case 20:  //number line
+            getNumberLineSettings() //in mages.dialogs.js
             break;
             
         }
@@ -661,7 +679,7 @@ function adjustNewPiece() {
     
     if(piece[piece.length-1].grouped != 1)
     {
-        if(piece[piece.length-1].type !=1  && piece[piece.length-1].type !=2 &&  piece[piece.length-1].type !=11 &&  piece[piece.length-1].type !='14b' &&  piece[piece.length-1].type !='17b') //text is achored left
+        if(piece[piece.length-1].type !=1  && piece[piece.length-1].type !=2 &&  piece[piece.length-1].type !=11 &&  piece[piece.length-1].type !='14b' &&  piece[piece.length-1].type !='17b' &&  piece[piece.length-1].type !=19) //text is achored left
         {
             draggingPiece.anchor.setTo(0.5, 0.5);     
         }
@@ -787,8 +805,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y ,
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
@@ -807,9 +824,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "wordWrapWidth":piece[item].wordWrapWidth ,
                         "alignment":piece[item].alignment
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString = "applet.push(" + newObject + ")" ;
-                    //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + encodeURIComponent(piece[item].text).replace(/'/g, "%27")  + "' , '" + piece[item].fontString + "' , '" + piece[item].fill + "' , " + piece[item].wordWrap + " , " + piece[item].wordWrapWidth + ", null , null " + ", '" + piece[item].alignment +"'));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
@@ -823,10 +838,10 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fontString":piece[item].fontString,
                         "fill":piece[item].fill ,
                         "randomCeiling":piece[item].randomCeiling,
-                        "randomFloor":piece[item].randomFloor
+                        "randomFloor":piece[item].randomFloor,
+                        "draggable": piece[item].draggable
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "," + "' '" + ", '" + piece[item].fontString + "' , '" + piece[item].fill + "' , " + "''" + " , " + "''" + " , " + piece[item].randomCeiling + " , " + piece[item].randomFloor + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -846,9 +861,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomCeiling":piece[item].denominatorRandomCeiling,
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
+                        "draggable": piece[item].draggable
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new RandomFractionConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" +  piece[item].fontString + "' , " + piece[item].size + " , '" + piece[item].fill + "' , " + piece[item].numeratorRandomCeiling + " , " + piece[item].numeratorRandomFloor + " , " + piece[item].denominatorRandomCeiling + " , " + piece[item].denominatorRandomFloor +"));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -859,8 +874,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -872,10 +886,8 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startY":piece[item].y 
                         });
                     constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new PieceConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "));" ;
                     printString = printString + openTag + constructorString + closeTag;     
                     constructorString="tests[" + newAppletID + "]= '" + appletDoneTest + "';" ;
-                    printString = printString + openTag + constructorString + closeTag;
                     break;
                     
                 case 6: //random decimal constructor
@@ -890,12 +902,12 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fill":piece[item].fill ,
                         "randomCeiling":piece[item].randomCeiling,
                         "randomFloor":piece[item].randomFloor,
-                        "randomDigits":piece[item].randomDigits
+                        "randomDigits":piece[item].randomDigits,
+                        "draggable": piece[item].draggable
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new RandomDecimalConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '"  + piece[item].fontString + "' , '" + piece[item].fill + "' , " + piece[item].randomCeiling + " , " + piece[item].randomFloor + " , " + piece[item].randomDigits + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
-                    break;
+                     break;
                 
                 case 7: //random mixed number constructor
                     var newObject = JSON.stringify({    
@@ -913,11 +925,11 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomCeiling":piece[item].denominatorRandomCeiling,
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
+                        "draggable": piece[item].draggable
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new RandomMixedNumberConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].fontString + "' , " + piece[item].size + " , '" + piece[item].fill + "' , " + piece[item].wholeNumberRandomCeiling + " , " + piece[item].wholeNumberRandomFloor + " , " + piece[item].numeratorRandomCeiling + " , " + piece[item].numeratorRandomFloor + " , " + piece[item].denominatorRandomCeiling + " , " + piece[item].denominatorRandomFloor +"));" ;
+                   constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
-                    break;
+                     break;
                 
                 case 8: //draggable number constructor
                     var newObject = JSON.stringify({    
@@ -930,10 +942,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fill":piece[item].fill ,
                         "size":piece[item].size 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new DraggableNumbersConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].orientation + "' , '" + piece[item].clonable + "' , '" + piece[item].size + "' , '" + piece[item].fill + "'));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
-                    break;  
+                     break;
                 
                 case 9: //dragTo Box
                     var newObject = JSON.stringify({    
@@ -941,12 +952,12 @@ function printPieces(newAppletID, appletDoneTest) {
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
-                        "userScale":piece[item].userScale 
+                        "userScaleX":piece[item].userScaleX ,
+                        "userScaleY":piece[item].userScaleY 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new DragToConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item].userScale + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
-                    break;
+                     break;
                 
                 case 10: //multiple choice
                     if(piece[item].multiType==0)
@@ -964,10 +975,9 @@ function printPieces(newAppletID, appletDoneTest) {
                             "spaceX":piece[item].spaceX,
                             "spaceY":piece[item].spaceY
                             });
-                        constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                        //(appletID, type, multiType, startX, startY, correct, incorrect1, incorrect2, incorrect3, multipleChoiceFontSize, spaceX, spaceY) {
-                        //constructorString="applet.push(new MultipleChoiceNumberConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].multiType + "," + piece[item].x + "," + piece[item].y + " , '" + piece[item].correct + "' , '" + piece[item].incorrect1 + "' , '" + piece[item].incorrect2 + "' , '" + piece[item].incorrect3 + "' , " + piece[item].multipleChoiceFontSize + " , " + piece[item].spaceX + " , " + piece[item].spaceY + "));" ;
-                        printString = printString + openTag + constructorString + closeTag;
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                     break;
                     }
                     break;
                         
@@ -983,10 +993,9 @@ function printPieces(newAppletID, appletDoneTest) {
                             "protractorX":piece[item].protractorX ,
                             "protractorY":piece[item].protractorY
                             });
-                        constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                        //constructorString="applet.push(new ProtractorAngleConstructor(" + newAppletID + "," + piece[item].type +  "," + piece[item].x + "," + piece[item].y + " , '" + piece[item].lowerAngle + "' , '" + piece[item].upperAngle + "' , '" + piece[item].protractorX + "' , '" + piece[item].protractorY + "'));" ;
-                        //keep this in the if statement so we don't get a second line
-                        printString = printString + openTag + constructorString + closeTag;  
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
                     }
                     break;
                     
@@ -999,8 +1008,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startY":piece[item].y , 
                         "initialValue":piece[item].initialValue
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new TallyConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item].initialValue + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1016,8 +1024,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "dragWidth":baseTenDragTo.width, 
                         "dragHeight":baseTenDragTo.height
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new BaseTenCloneConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + "," + piece[item-1].x + "," + piece[item-1].y + "," + baseTenDragTo.width + "," + baseTenDragTo.height + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1032,8 +1039,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "displayY":piece[item+1].y, 
                         "displayDigits":piece[item].displayDigits
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new NumberEntryConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].orientation + "' ," + piece[item+1].x  + "," + piece[item+1].y + "," + piece[item].displayDigits + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1048,10 +1054,10 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fill":piece[item].fill, 
                         "wordWrap":piece[item].wordWrap, 
                         "wordWrapWidth":piece[item].wordWrapWidth, 
-                        "align":piece[item].align 
+                        "align":piece[item].align ,
+                        "draggable": piece[item].draggable
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new EvaluatedExpressionConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", '" + piece[item].expression + "' , '" + piece[item].fontString  + "' , '" + piece[item].fill + "' , " + piece[item].wordWrap + " , '" + piece[item].wordWrapWidth + "' , '" + piece[item].align + "' ));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
@@ -1061,8 +1067,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "type": piece[item].type, 
                         "expression": fixedEncodeURIComponent(piece[item].expression)
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new HiddenNumberConstructor(" + newAppletID + "," + piece[item].type + ", '" + piece[item].expression + "' ));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
@@ -1075,8 +1080,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "displayX":piece[item+1].x , 
                         "displayY":piece[item+1].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new InequalityEntryConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + " , " + piece[item+1].x  + "," + piece[item+1].y + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1096,8 +1100,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "itemLabel":piece[item].itemLabel, 
                         "itemValueList":piece[item].itemValueList
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new BarGraphConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].titleText + "' , " + piece[item].min + " , " + piece[item].max + " , " + piece[item].interval + " , '" + piece[item].numberLabel + "' , '" + piece[item].numberedAxis + "' , " + listString(piece[item].itemList) + " , '" + piece[item].itemLabel + "' , " + listString(piece[item].itemValueList) + " , " + piece[item].x + " , " + piece[item].y + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1108,15 +1111,14 @@ function printPieces(newAppletID, appletDoneTest) {
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
-                        "startX":piece[item].x , 
-                        "startY":piece[item].y , 
-                        "wordLabel":piece[item].wordLabel , 
-                        "wordList":piece[item].wordList, 
-                        "expressionLabel":piece[item].expressionLabel, 
+                        "startX": piece[item].x , 
+                        "startY": piece[item].y , 
+                        "wordLabel": piece[item].wordLabel , 
+                        "wordList": piece[item].wordList, 
+                        "expressionLabel": piece[item].expressionLabel, 
                         "expressionList": piece[item].expressionList
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new TTableConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].wordLabel + "' , " + listString(piece[item].wordList) + " , '" + piece[item].expressionLabel + "' , " + listString(piece[item].expressionList) +  " , " + piece[item].x + " , " + piece[item].y + "));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
@@ -1142,8 +1144,22 @@ function printPieces(newAppletID, appletDoneTest) {
                         "dotLabel" : piece[item].dotLabel , 
                         "dotSnapping" : piece[item].dotSnapping
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new TTableConstructor(" + newAppletID + " , " + piece[item].type + " , '" + piece[item].wordLabel + "' , " + listString(piece[item].wordList) + " , '" + piece[item].expressionLabel + "' , " + listString(piece[item].expressionList) +  " , " + piece[item].x + " , " + piece[item].y + "));" ;
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
+                
+                case 21: //Texture Area
+                console.log(piece[item].textureExpression)
+                    var newObject = JSON.stringify({  
+                        "appletID": newAppletID, 
+                        "type": piece[item].type, 
+                        "startX":piece[item].x,
+                        "startY":piece[item].y,
+                        "textureExpression": piece[item].textureExpression,
+                        "number": piece[item].number ,
+                        "draggable": piece[item].draggable
+                        });
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
@@ -1156,8 +1172,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "drawingBoxEndX": piece[item].drawingBoxEndX,
                         "drawingBoxEndY": piece[item].drawingBoxEndY
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
-                    //constructorString="applet.push(new DrawBoxConstructor(" + newAppletID + "," + piece[item].type + "," + piece[item].x + "," + piece[item].y + ", " + (piece[item].x+Math.abs(piece[item].drawingBoxStartX-piece[item].drawingBoxEndX)) + " ," + (piece[item].y+Math.abs(piece[item].drawingBoxStartY-piece[item].drawingBoxEndY)) +"));" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
             }   
@@ -1167,13 +1182,84 @@ function printPieces(newAppletID, appletDoneTest) {
     bootbox.alert({
         size: 'large',
         title: "Applet Constructor Code Output - Add to mages.applets.js",
-        message: printString, //this is now possibly quite long
+        message: printString.slice(0, - 5) , //this is now possibly quite long
         callback: function(){ state="build"; }  //continue building
     });
 }
+
+function getConstructorString(newObject) {
+    if (typeof newObject == "object") {
+        var json = JSON.stringify(newObject);
+    } else {
+        var json = newObject;
+    }
+    return "              " + json + ",";
+}
+
         /***********************************************************************
          *          PIECE CONSTRUCTORS AND FUNCTIONS
          * ********************************************************************/
+var textureArea;
+function buildTextureArea(item) {
+    var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression).generateTexture() )
+    var bmd = game.add.bitmapData(newTexture.width,newTexture.height);
+
+    // draw to the canvas context like normal
+    bmd.ctx.beginPath();
+    bmd.ctx.rect(0,0,newTexture.width,newTexture.height);
+    bmd.ctx.fillStyle = '#CCCCCC';
+    bmd.ctx.fill();
+    
+    piece[piece.length] = game.add.sprite(0, 0 , bmd)
+
+    //textureArea.push(piece[piece.length-1]);
+    //lastTexture.clear()
+    piece[piece.length-1].x=item.startX
+    piece[piece.length-1].y=item.startY
+    
+    
+    piece[piece.length-1].addChild(newTexture)
+    piece[piece.length-1].events.onInputDown.add(buildRedragPiece, this);
+    piece[piece.length-1].events.onInputUp.add(onFinishDrag, this);
+    piece[piece.length-1].inputEnabled='true';
+    console.log(item.textureExpression)
+    piece[piece.length-1].textureExpression = item.textureExpression;
+    piece[piece.length-1].type = item.type;
+    piece[piece.length-1].number = item.number;
+    piece[piece.length-1].draggable = item.draggable;
+    console.log(item.draggable)
+    if(state!='build' && item.draggable == 1)
+    {
+        piece[piece.length-1].inputEnabled='true';
+        piece[piece.length-1].dragOffsetX = 0
+        piece[piece.length-1].dragDoneOffsetX = 0
+        piece[piece.length-1].dragOffsetY = 0
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+        piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+    }
+    newTextureTemp.clear()
+}
+
+var newTextureTemp
+function testTexture() {
+    var newGraphic = game.add.graphics(0, 0);
+    newGraphic.lineStyle(2, 0x000000, 1);
+   
+    newGraphic.beginFill(0xFF0000, 1);
+    newGraphic.drawCircle(90, 90, 180);
+    newGraphic.beginFill(0xFFAAAA, 1);
+    newGraphic.drawCircle(90, 90, 120);
+    newGraphic.beginFill(0xFFDDDD, 1);
+    newGraphic.drawCircle(90, 90, 60);
+     newGraphic.moveTo(0,0)
+    newGraphic.lineTo(180,180)
+    newGraphic.moveTo(180,0)
+    newGraphic.lineTo(0,180)
+    newTextureTemp = newGraphic
+    return newGraphic;
+}
+
 var numberLine
 function buildNumberLine(item) {
     piece[piece.length] = game.add.group();
@@ -1642,6 +1728,7 @@ function TTableConstructor(appletID, type, wordLabel, wordList, expressionLabel,
 
 var tTable;
 function buildtTable(item) {
+    
     for(var i = 0 ; i < item.expressionList.length ; i ++)
     {
         item.expressionList[i] = decodeURIComponent(item.expressionList[i])
@@ -1667,6 +1754,7 @@ function buildtTable(item) {
     var newGraphic = game.add.graphics(0, 0);
     newGraphic.beginFill(0xD0D0D0);
     newGraphic.lineStyle(2, 0x000000, 1);
+    console.log(item.expressionLabel)
     newGraphic.drawRect(10,0, 10+maxWordLength*5/2+170+maxWordLength*5+item.expressionLabel.length*5/2+item.expressionLabel.length*5+10, (item.wordList.length+1)*40);
     newGraphic.endFill();
     
@@ -1680,8 +1768,9 @@ function buildtTable(item) {
     
     
     
-    
-    piece[piece.length-1].add(newGraphic);
+    var graphicSprite = game.add.sprite(0, 0, newGraphic.generateTexture());
+    newGraphic.clear();
+    piece[piece.length-1].add(graphicSprite);
     
     
     
@@ -1738,15 +1827,11 @@ function buildtTable(item) {
     piece[piece.length-1].expressionList  = item.expressionList;
     
     piece[piece.length-1].forEach(function(item) {
-        if(item.draggable == 1)
-        {
             item.inputEnabled='true';
             item.events.onInputDown.add(buildGroupPieceClick, this);
             item.events.onInputUp.add(onFinishDrag, draggingPiece);
             item.clicked=0;
             item.ParentPosition=piece.length-1;   
-            item.parent.bringToTop(item)
-        }
     });
 }
 
@@ -2138,6 +2223,7 @@ function buildInequalityEntry(item) {
     
     piece[piece.length-1].grouped=1;
     piece[piece.length-1].type=17;
+    
     piece[piece.length-1].inequalityEntryX = item.inequalityEntryX;
     piece[piece.length-1].inequalityEntryY = item.inequalityEntryY;
     piece[piece.length-1].displayX = item.displayX;
@@ -2223,6 +2309,10 @@ function draggableNumbersClickClone(item) {
     newClone.size = Number(item.size);
     newClone.fontString = item.fontString;
     newClone.fill = item.fill;
+    newClone.dragOffsetX = item.dragOffsetX;
+    newClone.dragDoneOffsetX = item.dragDoneOffsetX;
+    newClone.dragOffsetY = 0
+    
    
     newClone.x = item.x;
     newClone.y = item.y;
@@ -2291,13 +2381,16 @@ function buildDraggableNumbers(item) {
             draggableNumbers[slot].size=item.size;
             draggableNumbers[slot].inputEnabled='true';
             draggableNumbers[slot].input.useHandCursor=true; 
-            
+            draggableNumbers[slot].dragOffsetX = 0;
+            draggableNumbers[slot].dragDoneOffsetX = 0;
+            draggableNumbers[slot].dragOffsetY = 0
             if(item.clonable != "n") //"n" is default
             {//clonable; add a cloning function
                 draggableNumbers[slot].events.onInputDown.add(draggableNumbersClickClone, this); 
             }  
             draggableNumbers[slot].events.onInputDown.add(startDraggingNumber, this);
             draggableNumbers[slot].events.onInputUp.add(stopDraggingNumber, this); 
+            
         }
     } else
     {
@@ -2312,11 +2405,11 @@ function buildDraggableNumbers(item) {
             
             
             piece[piece.length-1].forEach(function(item) {
-            item.inputEnabled='true';
-            item.events.onInputDown.add(buildGroupPieceClick, this);
-            item.events.onInputUp.add(onFinishDrag, draggingPiece);
-            item.clicked=0;
-            item.ParentPosition=piece.length-1;
+                item.inputEnabled='true';
+                item.events.onInputDown.add(buildGroupPieceClick, this);
+                item.events.onInputUp.add(onFinishDrag, draggingPiece);
+                item.clicked=0;
+                item.ParentPosition=piece.length-1;
         });
     }
     piece[piece.length-1].type=8;
@@ -2332,12 +2425,13 @@ var draggingNumber=0;
 var draggingNumberID=-1;
 var draggingNumberHandle=null;
 function startDraggingNumber(item) {
+    
     draggingNumber=1;
     game.world.bringToTop(item);  //bring the number above the boxes
     //draggingNumberID++;  //new ID
     //item.draggingNumber=draggingNumberID;  //set it to the current ID
     item.events.onInputDown.remove(draggableNumbersClickClone, this); //we don't want it to clone over and over
-    if (item.occupying != null) //I'm in a box already
+    if (item.occupying != null && item.type!=52) //I'm in a box already
     {//clear the box
         dragToBoxes[item.occupying].occupied=0;  
         dragToBoxes[item.occupying].contents= null;
@@ -2349,11 +2443,11 @@ function startDraggingNumber(item) {
 function stopDraggingNumber(item) {
     draggingNumber=0;
     for (var i=0; i<dragToBoxes.length; i++ )  //check all the dragToBoxes
-    {
-        if(item.x==dragToBoxes[i].x-20*dragToBoxes[i].userScale && item.y==dragToBoxes[i].y-40*dragToBoxes[i].userScale && dragToBoxes[i].occupied == 0) 
-        {//I'm close to a drag box.  Snap to it.
-            item.x=dragToBoxes[i].x-20*dragToBoxes[i].userScale;
-            item.y=dragToBoxes[i].y-40*dragToBoxes[i].userScale;
+    {   
+        if(item.x==dragToBoxes[i].x-draggingNumberHandle.width/2+draggingNumberHandle.dragOffsetX+draggingNumberHandle.dragDoneOffsetX && item.y==dragToBoxes[i].y-draggingNumberHandle.height/2+draggingNumberHandle.dragOffsetY && dragToBoxes[i].occupied == 0) 
+        {
+            item.x=dragToBoxes[i].x-draggingNumberHandle.width/2+draggingNumberHandle.dragOffsetX+draggingNumberHandle.dragDoneOffsetX;
+            item.y=dragToBoxes[i].y-draggingNumberHandle.height/2+3+draggingNumberHandle.dragOffsetY;
             //set the box as occupied
             item.occupying = i;  
             dragToBoxes[i].occupied=1;
@@ -2365,14 +2459,14 @@ function stopDraggingNumber(item) {
 function dragNumber() {
     if(draggingNumberHandle!=null && draggingNumber==1)
     {
-        draggingNumberHandle.x=game.input.x-draggingNumberHandle.size/7;
-        draggingNumberHandle.y=game.input.y-draggingNumberHandle.size/2;
+        draggingNumberHandle.x=game.input.x-draggingNumberHandle.dragOffsetX
+        draggingNumberHandle.y=game.input.y-draggingNumberHandle.height/2+draggingNumberHandle.dragOffsetY;
         for (var i=0; i<dragToBoxes.length; i++ )
         {//every drag to box
-            if(Math.abs(draggingNumberHandle.x-dragToBoxes[i].x+20*dragToBoxes[i].userScale) < 20 && Math.abs(draggingNumberHandle.y-dragToBoxes[i].y+40*dragToBoxes[i].userScale) < 20 && dragToBoxes[i].occupied == 0) 
+            if(Math.abs(draggingNumberHandle.x - dragToBoxes[i].x + draggingNumberHandle.width/2 +draggingNumberHandle.dragOffsetX ) < draggingNumberHandle.width && Math.abs(draggingNumberHandle.y-dragToBoxes[i].y+draggingNumberHandle.height/2-draggingNumberHandle.dragOffsetY) < draggingNumberHandle.height/2 && dragToBoxes[i].occupied == 0) 
             {//I'm close to a box.  Snap to it.
-                draggingNumberHandle.x=dragToBoxes[i].x-20*dragToBoxes[i].userScale;
-                draggingNumberHandle.y=dragToBoxes[i].y-40*dragToBoxes[i].userScale;
+                draggingNumberHandle.x=dragToBoxes[i].x-draggingNumberHandle.width/2+draggingNumberHandle.dragOffsetX+draggingNumberHandle.dragDoneOffsetX;
+                draggingNumberHandle.y=dragToBoxes[i].y-draggingNumberHandle.height/2+draggingNumberHandle.dragOffsetY;
             } 
         }    
     }
@@ -2401,13 +2495,19 @@ function buildDragToBox(item) {
         startX=400;
         startY=250;
     }
+    var dragToGraphic = game.add.graphics(0, 0);
+    dragToGraphic.beginFill(0xFFFFFF);
+    dragToGraphic.lineStyle(2, 0x000000, 1);
+    dragToGraphic.drawRect(0, 0, Number(item.userScaleX)*80, Number(item.userScaleY)*80);
+    dragToGraphic.endFill();
     
-    piece[piece.length] = game.add.sprite(startX, startY, 'dragToBox');
+    piece[piece.length] = game.add.sprite(startX, startY, dragToGraphic.generateTexture());
+    dragToGraphic.clear()
     piece[piece.length-1].anchor.setTo(0.5, 0.5);
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type=9;
-    piece[piece.length-1].userScale = item.userScale;
-    piece[piece.length-1].scale.setTo(Number(item.userScale), Number(item.userScale));
+    piece[piece.length-1].userScaleX = item.userScaleX;
+    piece[piece.length-1].userScaleY = item.userScaleY;
     piece[piece.length-1].occupied = 0;
     piece[piece.length-1].contents = 0;
     dragToBoxes[dragToBoxes.length] = piece[piece.length-1];  //add myself to the dragToBoxes array.
@@ -3060,7 +3160,6 @@ function buildRandomNumber(item) {
         startY=item.startY;
     } else
     {
-        
         startX=400;
         startY=250;
         fontString="" + newBold + " " + newTextSize + "px Arial";
@@ -3076,7 +3175,20 @@ function buildRandomNumber(item) {
     piece[piece.length-1].randomCeiling = item.randomCeiling;
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type=2;
-    piece[piece.length-1].fontString=fontString;  
+    piece[piece.length-1].fontString=fontString; 
+    piece[piece.length-1].draggable = item.draggable;
+    if(state!='build' && item.draggable == 1)
+    {
+        piece[piece.length-1].inputEnabled='true';
+        piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width
+        piece[piece.length-1].dragOffsetY = 0
+        piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width*2
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+        piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+        piece[piece.length-1].number = newRandom;
+        
+    }
 }
 
 var hundredBoxesClicked=-1;
@@ -3231,6 +3343,20 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].fontString=fontString;
     piece[piece.length-1].fill=newTextColor;
     piece[piece.length-1].expression=item.expression;
+    piece[piece.length-1].draggable = item.draggable;
+    if(state!='build' && item.draggable == 1)
+    {
+        piece[piece.length-1].inputEnabled='true';
+        console.log(item.align)
+        piece[piece.length-1].dragOffsetX = 0
+        piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width/2
+        piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+        piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+        piece[piece.length-1].number = evaluatedExpression[evaluatedExpression.length-1];
+        
+    }
 }
 
 //HIDDEN NUMBER
@@ -3278,10 +3404,7 @@ function buildRandomMixedNumber(item) {
     var newWholeNumberRandom = getRandomInt(Number(item.wholeNumberRandomFloor), Number(item.wholeNumberRandomCeiling) );
     var newNumeratorRandom = getRandomInt(Number(item.numeratorRandomFloor), Number(item.numeratorRandomCeiling) );
     var newDenominatorRandom = getRandomInt(Number(item.denominatorRandomFloor), Number(item.denominatorRandomCeiling) );
-    piece[piece.length] = game.add.group();
     randomMixedNumber.push(new MixedNumberConstructor(newWholeNumberRandom, newNumeratorRandom, newDenominatorRandom));
-    var fontString;
-    
     if(state!='build')
     {
         fontString=item.font;
@@ -3289,48 +3412,85 @@ function buildRandomMixedNumber(item) {
         newTextWrap=item.wordWrap;
         newTextWidth=item.wordWrapWidth;
         newTextSize = item.size;
-        piece[piece.length-1].x = item.startX;
-        piece[piece.length-1].y = item.startY;
+
     } else
     {
-        piece[piece.length-1].x=400;
-        piece[piece.length-1].y=300;   
+  
     }
+        var fontString = newTextSize + "px Arial";
+        var bigFontString = newTextSize*2 + "px Arial";
+    var newWholeNumberRandomText = game.add.text(newTextSize/2, 0, newWholeNumberRandom.toString(), {
+            font: bigFontString,
+            fill: newTextColor,
+            align: "right"
+    });
+    
+    var newNumeratorRandomText = game.add.text(newTextSize*1.5, 0, newNumeratorRandom.toString(), {
+            font: fontString,
+            fill: newTextColor,
+            align: "center"
+    });
+    var newDenominatorRandomText = game.add.text(newTextSize*1.5, newTextSize, newDenominatorRandom.toString(), {
+            font: fontString,
+            fill: newTextColor,
+            align: "center"
+    });
+    
+    var fractionBarText = game.add.text(newTextSize*1.5, 0, "___", {
+            font: fontString,
+            fill: newTextColor,
+            align: "center"
+    });
+    
+    var boxLength = Number(newTextSize)
+    var boxGraphic = game.add.graphics(0, 0);
+    boxGraphic.lineStyle(2, 0x000000, 1)
+    boxGraphic.drawCircle(0, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(0, boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(boxLength*3, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(boxLength*3, boxLength, 0.01);//these four dots keep the whole thing centered
+    
+    
+    piece[piece.length] = game.add.sprite(0,0, boxGraphic.generateTexture());
+    boxGraphic.clear();
+    newNumeratorRandomText.anchor.setTo(0.5,0)
+    newDenominatorRandomText.anchor.setTo(0.5,0)
+    fractionBarText.anchor.setTo(0.5,0)
+    newWholeNumberRandomText.anchor.setTo(1,0)
+    //piece[piece.length] = game.add.sprite(0,0,'fractionBar');
+    piece[piece.length-1].addChild(fractionBarText);
+    piece[piece.length-1].addChild(newNumeratorRandomText);
+    piece[piece.length-1].addChild(newDenominatorRandomText);
+    piece[piece.length-1].addChild(newWholeNumberRandomText);
+    piece[piece.length-1].inputEnabled='true';
+    piece[piece.length-1].x=400;
+    piece[piece.length-1].draggable = item.draggable;
+    if(state != 'build')
+    {
+        piece[piece.length-1].x=item.startX;
+        piece[piece.length-1].y=item.startY;
+        
+        if(item.draggable == 1)
+        {
+            piece[piece.length-1].align = 'center'
+            piece[piece.length-1].input.useHandCursor=true;
+            piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+            piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+            piece[piece.length-1].number = newWholeNumberRandom+newNumeratorRandom/newDenominatorRandom;
+            
+            piece[piece.length-1].dragOffsetX = piece[piece.length-1].width/2.8 ;
+            piece[piece.length-1].dragDoneOffsetX = 0
+            piece[piece.length-1].dragOffsetY = 0
+        }
+    }
+    
 
-    var newWholeNumberRandomText = game.add.text(0, 0, newWholeNumberRandom.toString(), {
-            font: "" + newBold + " " + newTextSize + "px Arial",
-            fill: newTextColor,
-            align: "center"
-    });
     
-    var newNumeratorRandomText = game.add.text(newTextSize/1.5, newTextSize/40*-10, newNumeratorRandom.toString(), {
-            font: "" + newBold + " " + newTextSize/2 + "px Arial",
-            fill: newTextColor,
-            align: "center"
-    });
-    
-    var newDenominatorRandomText = game.add.text(newTextSize/1.5, newTextSize/40*10, newDenominatorRandom.toString(), {
-            font: "" + newBold + " " + newTextSize/2 + "px Arial",
-            fill: newTextColor,
-            align: "center"
-    });
-    
-    piece[piece.length-1].add(newNumeratorRandomText);
-    piece[piece.length-1].add(newDenominatorRandomText);
-    piece[piece.length-1].add(newWholeNumberRandomText);
-    var fractionBarImage = game.add.sprite(newTextSize/1.5,newTextSize/40*-3,'fractionBar');
-    fractionBarImage.scale.setTo(newTextSize/100, newTextSize/100);
-    piece[piece.length-1].add(fractionBarImage);
-    
-    
-    piece[piece.length-1].forEach(function(item) {
-        item.anchor.setTo(0.5, 0.5); 
-        item.inputEnabled='true';
-        item.events.onInputDown.add(buildGroupPieceClick, this);
-        item.events.onInputUp.add(onFinishDrag, draggingPiece);
-        item.clicked=0;
-        item.ParentPosition=piece.length-1;
-    });
+    piece[piece.length-1].events.onInputDown.add(buildGroupPieceClick, this);
+    piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
+    piece[piece.length-1].clicked=0;
+    piece[piece.length-1].ParentPosition=piece.length-1;
+
     piece[piece.length-1].wholeNumberRandomFloor = item.wholeNumberRandomFloor;
     piece[piece.length-1].wholeNumberRandomCeiling = item.wholeNumberRandomCeiling;
     piece[piece.length-1].numeratorRandomFloor = item.numeratorRandomFloor;
@@ -3403,7 +3563,7 @@ function buildRandomFraction(item) {
     randomDenominator.push(newDenominatorRandom);
     if(state!='build')
     {
-        fontString=item.font;
+        fontString=item.fontString;
         newTextColor=item.fill;
         newTextWrap=item.wordWrap;
         newTextWidth=item.wordWrapWidth;
@@ -3417,49 +3577,78 @@ function buildRandomFraction(item) {
     //build start coordinates; will change down below if we're running an applet
     piece[piece.length-1].x=400;
     piece[piece.length-1].y=300;
-    var newNumeratorRandomText = game.add.text(0, newTextSize/40*-20, newNumeratorRandom.toString(), {
+    var newNumeratorRandomText = game.add.text(newTextSize/2.5, 0, newNumeratorRandom.toString(), {
+            font: fontString,
+            fill: newTextColor,
+            align: "center"
+    });
+    console.log(newNumeratorRandomText.font)
+    var newDenominatorRandomText = game.add.text(newTextSize/2.5, newTextSize, newDenominatorRandom.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
     
-    var newDenominatorRandomText = game.add.text(0, newTextSize/40*20, newDenominatorRandom.toString(), {
+    var fractionBarText = game.add.text(-newTextSize/2.5, 0, "___", {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
+    
+    var boxLength = Number(newTextSize)
+    var boxGraphic = game.add.graphics(0, 0);
+    boxGraphic.lineStyle(2, 0x000000, 1)
+    boxGraphic.drawCircle(0, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(0, boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(boxLength, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(boxLength, boxLength, 0.01);//these four dots keep the whole thing centered
+    
+    piece[piece.length] = game.add.sprite(0,0, boxGraphic.generateTexture());
+    boxGraphic.clear();
+    newNumeratorRandomText.anchor.setTo(0.5,0)
+    newDenominatorRandomText.anchor.setTo(0.5,0)
+    //piece[piece.length] = game.add.sprite(0,0,'fractionBar');
+    piece[piece.length-1].anchor.setTo(0.2,0)
+    piece[piece.length-1].addChild(fractionBarText);
+    piece[piece.length-1].addChild(newNumeratorRandomText);
+    piece[piece.length-1].addChild(newDenominatorRandomText);
+    
+    piece[piece.length-1].scale.setTo(newTextSize/40, newTextSize/40);
     
     piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
-    piece[piece.length-1].add(newNumeratorRandomText);
-    piece[piece.length-1].add(newDenominatorRandomText);
-    var fractionBarImage = game.add.sprite(0,newTextSize/40*-4,'fractionBar');
-    fractionBarImage.scale.setTo(newTextSize/40, newTextSize/40);
-    piece[piece.length-1].add(fractionBarImage);
-    
+    piece[piece.length-1].draggable = item.draggable;
     if(state != 'build')
     {
         piece[piece.length-1].x=item.startX;
-        piece[piece.length-1].y=item.startY;   
-    }
+        piece[piece.length-1].y=item.startY;
+        if(item.draggable == 1)
+        {
+            piece[piece.length-1].inputEnabled='true';
+            piece[piece.length-1].input.useHandCursor=true;
+            piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+            piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+            piece[piece.length-1].number = newNumeratorRandom/newDenominatorRandom;
+            piece[piece.length-1].dragOffsetX = 0
+            piece[piece.length-1].dragDoneOffsetX = 0
+            piece[piece.length-1].dragOffsetY = 0
+        }
+    } else
 
-        piece[piece.length-1].forEach(function(item) {
-        item.anchor.setTo(0.5, 0.5); 
-        item.inputEnabled='true';
-        item.events.onInputDown.add(buildGroupPieceClick, this);
-        item.events.onInputUp.add(onFinishDrag, draggingPiece);
-        item.clicked=0;
-        item.ParentPosition=piece.length-1;
-    });
-    
-    piece[piece.length-1].numeratorRandomFloor = item.numeratorRandomFloor;
-    piece[piece.length-1].numeratorRandomCeiling = item.numeratorRandomCeiling;
-    piece[piece.length-1].denominatorRandomFloor = item.denominatorRandomFloor;
-    piece[piece.length-1].denominatorRandomCeiling = item.denominatorRandomCeiling;
-    piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
-    piece[piece.length-1].fill = newTextColor;
-    piece[piece.length-1].size = newTextSize;
-    piece[piece.length-1].grouped=1;
-    piece[piece.length-1].type=3;
+        piece[piece.length-1].anchor.setTo(0.5, 0.5); 
+        piece[piece.length-1].inputEnabled='true';
+        piece[piece.length-1].events.onInputDown.add(buildGroupPieceClick, this);
+        piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
+        piece[piece.length-1].clicked=0;
+        piece[piece.length-1].ParentPosition=piece.length-1;
+        piece[piece.length-1].numeratorRandomFloor = item.numeratorRandomFloor;
+        piece[piece.length-1].numeratorRandomCeiling = item.numeratorRandomCeiling;
+        piece[piece.length-1].denominatorRandomFloor = item.denominatorRandomFloor;
+        piece[piece.length-1].denominatorRandomCeiling = item.denominatorRandomCeiling;
+        piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
+        piece[piece.length-1].fill = newTextColor;
+        piece[piece.length-1].size = newTextSize;
+        piece[piece.length-1].grouped=1;
+        piece[piece.length-1].type=3;
 }
 
 
@@ -3525,7 +3714,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    game.debug.text("Mages Alpha.31 - Load applets #1-29 and #100-110 for examples.", 10, 20);
+    //game.debug.text("test", 10, 20);
 }
 
 
