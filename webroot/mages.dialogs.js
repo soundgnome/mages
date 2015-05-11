@@ -1,29 +1,246 @@
-function getNumberLineSettings() {
-    var newObject = JSON.parse(JSON.stringify({
-        "type": 20, 
-        "startX":100 ,
-        "startY":10,
-        "lineOrientation":'h',
-        "lineLength":500 ,
-        "min": 0,
-        "minLabel" : true , 
-        "max" : 20 , 
-        "maxLabel" : true , 
-        "interval" : 2 ,
-        "intervalLabel" : true , 
-        "subDivide" : 2 ,
-        "staticDots" : false,
-        "dotStartX" : 400 , 
-        "dotStartY" : 300 ,
-        "dotOrientation" : 'v' , 
-        "dotNumber" : 3 ,
-        "dotLabel" : true , 
-        "dotSnapping" : true,
-        "dotExpressions" : ['3' , '4' , '5']
-        })) ;
-    buildNumberLine(newObject)
+function getTextureAreaSettings(item) {
+    bootbox.dialog({
+                title: "Teture Area Settings",
+                message: 
+                    getMenuEntryString("Texture expression?" , "texture", "testTexture()" , null) +
+                    getMenuEntryString("Texture value?" , "number", "1" , null) +
+                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") + 
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            var newObject = JSON.parse(JSON.stringify({
+                                "type": 21, 
+                                "startX":100 ,
+                                "startY":10,
+                                "textureExpression": $('#texture').val(),
+                                "number": $('#number').val(),
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                            })) ;
+                            buildTextureArea(newObject)
+                        }
+                    }
+                }
+            }
+        );
     
 }
+
+function getNumberLineSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "Number Line Settings",
+                message: 
+                    getMenuEntryString("Line orientation:" , "lineOrientation", "h" , null) +
+                    getMenuEntryString("Line length (pixels):" , "lineLength", "500" , null) +
+                    getMenuEntryString("Minimum value:" , "min", "0" , null) +
+                    getMenuYesNoString("Label Minimum?", "minLabel", null) + 
+                    getMenuEntryString("Maximum Value:" , "max", "10" , null) +
+                    getMenuYesNoString("Label Maximum?", "maxLabel", null) + 
+                    getMenuEntryString("Interval:" , "interval", "1" , null) +
+                    getMenuYesNoString("Label Interval?", "intervalLabel", null) + 
+                    getMenuEntryString("Subdivision:" , "subDivide", "1" , "1 for no subdivision.") +
+                    getMenuEntryString("Number of dots:" , "dotNumber", "1" , null) +
+                    getMenuYesNoString("Static dots?", "staticDots", "Static dots are immovable.") + 
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            var newObject = JSON.parse(JSON.stringify({
+                                "type": 20, 
+                                "startX":100 ,
+                                "startY":10,
+                                "dotStartX" : 400 , 
+                                "dotStartY" : 300 ,
+                                "dotExpressions" : [] ,
+                                "lineOrientation": $('#lineOrientation').val() ,
+                                "lineLength": $('#lineLength').val()  ,
+                                "min": $('#min').val() ,
+                                "minLabel" : ($("input[name='minLabel']:checked").val() == "Yes" ? true : false)  , 
+                                "max" : $('#max').val() ,
+                                "maxLabel" : ($("input[name='maxLabel']:checked").val() == "Yes" ? true : false)  , 
+                                "interval" : $('#interval').val() ,
+                                "intervalLabel" : ($("input[name='intervalLabel']:checked").val() == "Yes" ? true : false) , 
+                                "subDivide" : $('#subDivide').val() ,
+                                "dotNumber" : $('#dotNumber').val() ,
+                                "staticDots" : ($("input[name='staticDots']:checked").val() == "Yes" ? true : false) ,
+                            })) ;
+                            
+                            if(newObject.staticDots == true)
+                            {
+                                getNumberLineStaticDotSettings(newObject.dotNumber, newObject )  ; 
+                            } else
+                            {
+                                getNumberLineMovableDotSettings(newObject ) ; 
+                            }
+                        }
+                    }
+                }
+            }
+        );
+}
+
+function getNumberLineMovableDotSettings(item) {
+    bootbox.dialog({
+                title: "Number Line Static Dots",
+                message: 
+                    getMenuEntryString("Dot orientation:" , "dotOrientation", "h" , null) +
+                    getMenuYesNoString("Label dots?", "dotLabel", null) + 
+                    getMenuYesNoString("Snap dots to line?", "dotSnapping", null) + 
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            item.dotOrientation = $('#dotOrientation').val() 
+                            item.dotLabel = ($("input[name='dotLabel']:checked").val() == "Yes" ? true : false) 
+                            item.dotSnapping = ($("input[name='dotSnapping']:checked").val() == "Yes" ? true : false) 
+                            state = 'build'
+                            buildNumberLine(item);
+                        }
+                    }
+                }
+            }
+        );
+    
+}
+
+function getNumberLineStaticDotSettings(numItems, item) {
+    bootbox.dialog({
+                title: 'Number Line Movable Dot: ' + (item.dotNumber-numItems) ,
+                message: 
+                    getMenuEntryString("Value:" , "label", 1 , null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            item.dotExpressions.push( $('#label').val() )
+                            if(numItems > 1)
+                            {
+                                getNumberLineStaticDotSettings(numItems-1, item)        
+                            } else
+                            {
+                                state = 'build'
+                                buildNumberLine(item);
+                            }
+                        }
+                    }
+                }
+            }
+        );
+}
+
+function getInequalityEntrySettings() {
+    var newObject = JSON.parse(JSON.stringify({
+        "type": 17 , 
+        "inequalityEntryX":300 , 
+        "inequalityEntryY":200,
+        "displayX":200 , 
+        "displayY":300 
+        })) ;
+    buildInequalityEntry(newObject)
+    
+}
+
+function gettTableSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "TTable Settings",
+                message: 
+                    getMenuEntryString("Label for Items:" , "wordlabel", "Items" , null) +
+                    getMenuEntryString("Label for Values:" , "expressionlabel", "Values" , null) +
+                    getMenuEntryString("Number of Items" , "numitems", 4 , null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            var wordLabel = $('#wordlabel').val();
+                            var expressionlabel = $('#expressionlabel').val();
+                            var numItems = $('#numitems').val();
+                            var newObject = JSON.parse(JSON.stringify({
+                                "type": 19, 
+                                "startX": 200 , 
+                                "startY": 200 , 
+                                "wordLabel": wordLabel,
+                                "wordList" : [] ,
+                                "expressionLabel" : expressionlabel , 
+                                "expressionList" : [] ,
+                                "numItems" : numItems
+                            })) ;
+                            gettTableItem(numItems, newObject);
+                        }
+                    }
+                }
+            }
+        );
+}
+
+function gettTableItem(numItems, item) {
+    console.log(item.numItems-numItems)
+    bootbox.dialog({
+                title: 'TTable item: ' + (item.numItems-numItems) ,
+                message: 
+                    getMenuEntryString("Label:" , "label", "Name" , null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            item.wordList.push( $('#label').val() )
+                            if(numItems > 1)
+                            {
+                                gettTableItem(numItems-1, item)        
+                            } else
+                            {
+                                gettTableValue(item.numItems, item)
+                            }
+                        }
+                    }
+                }
+            }
+        );
+}
+
+function gettTableValue(numItems, item) {
+    bootbox.dialog({
+                title: 'TTable value: ' + (item.numItems-numItems),
+                message: 
+                    getMenuEntryString("Value:" , "label", 1 , null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            item.expressionList.push( $('#label').val() )
+                            if(numItems > 1)
+                            {
+                                gettTableValue(numItems-1, item)        
+                            } else
+                            {
+                                state = 'build'
+                                buildtTable(item)
+                            }
+                        }
+                    }
+                }
+            }
+        );
+}
+
+
 
 function getRandomDecimalSettings() {
     menuKeyPressed ==0;
@@ -37,6 +254,7 @@ function getRandomDecimalSettings() {
                     getMenuEntryString("Color" , "color", newTextColor , null) +
                     getMenuEntryString("Size" , "size", 72 , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
+                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -60,7 +278,8 @@ function getRandomDecimalSettings() {
                             var newObject = JSON.parse(JSON.stringify({   
                                 "randomCeiling":newRandomCeiling,
                                 "randomFloor":newRandomFloor,
-                                "randomDigits":newRandomDigits
+                                "randomDigits":newRandomDigits,
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                                 })) ;
                             buildRandomDecimal(newObject);
                             adjustNewPiece();
@@ -70,11 +289,10 @@ function getRandomDecimalSettings() {
                 }
             }
         );
-    
 }
 
 function getRandomMixedNumberSettings() {
-     menuKeyPressed ==0;
+    menuKeyPressed ==0;
     state = 'prompt';
     bootbox.dialog({
                 title: "Random Mixed Number Settings",
@@ -88,6 +306,7 @@ function getRandomMixedNumberSettings() {
                     getMenuEntryString("Color" , "color", newTextColor , null) +
                     getMenuEntryString("Size" , "size", 72 , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
+                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -117,6 +336,7 @@ function getRandomMixedNumberSettings() {
                                 "numeratorRandomFloor":newNumeratorRandomFloor,
                                 "denominatorRandomCeiling":newDenominatorRandomCeiling,
                                 "denominatorRandomFloor":newDenominatorRandomFloor,
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                                 })) ;
                             buildRandomMixedNumber(newObject);
                             adjustNewPiece();
@@ -141,6 +361,7 @@ function getRandomFractionSettings() {
                 getMenuEntryString("Color" , "color", newTextColor , null) +
                 getMenuEntryString("Size" , "size", 72 , null) +
                 getMenuYesNoString("Bold?", "bold", null) +
+                getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -167,6 +388,7 @@ function getRandomFractionSettings() {
                                 "numeratorRandomFloor":newNumeratorRandomFloor,
                                 "denominatorRandomCeiling":newDenominatorRandomCeiling,
                                 "denominatorRandomFloor":newDenominatorRandomFloor,
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                                 })) ;
                             buildRandomFraction(newObject);
                             adjustNewPiece();
@@ -189,6 +411,7 @@ function getRandomNumberSettings() {
                 getMenuEntryString("Color" , "color", newTextColor , null) +
                 getMenuEntryString("Size" , "size", 72 , null) +
                 getMenuYesNoString("Bold?", "bold", null) +
+                getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -210,7 +433,8 @@ function getRandomNumberSettings() {
                             state = 'build';
                             var newObject = JSON.parse(JSON.stringify({   
                                 "randomCeiling":newRandomCeiling,
-                                "randomFloor":newRandomFloor
+                                "randomFloor":newRandomFloor,
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                                 })) ;
                             buildRandomNumber(newObject);
                             adjustNewPiece();
@@ -276,7 +500,7 @@ function getTextAreaSettings() {
                             if($('#wrapWidth').val() > 0)
                             {
                                 newTextWrap=true;
-                                newTextWidth = $('#wrapWidth').val() ;nul
+                                newTextWidth = $('#wrapWidth').val() ;
                             } else
                             {
                                 newTextWrap=false;
@@ -352,7 +576,8 @@ function getDragToBoxSettings() {
     bootbox.dialog({
                 title: "DragTo Box Settings",
                 message: 
-                getMenuEntryString("Scale:" , "scale", 0.5 , null) +
+                getMenuEntryString("ScaleX:" , "scalex", 0.5 , null) +
+                getMenuEntryString("ScaleY:" , "scaley", 0.5 , null) +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -362,10 +587,12 @@ function getDragToBoxSettings() {
                            // newAppletID = Number(prompt("Enter new applet ID#:"));  
 	                        // appletDoneTest = new DoneTest(newAppletID, prompt("Enter new doneTest:"));
                             
-                            var userScale = $('#scale').val();
+                            var userScaleX = $('#scalex').val();
+                            var userScaleY = $('#scaley').val();
                             state = 'build';
                             var newObject = JSON.parse(JSON.stringify({
-                                "userScale":Number(userScale)
+                                "userScaleX":Number(userScaleX),
+                                "userScaleY":Number(userScaleY)
                                 })) ;
                             buildDragToBox(newObject);
                             adjustNewPiece();
@@ -400,7 +627,8 @@ function getNumberEntrySettings() {
                                 "orientation":orientation , 
                                 "displayX":300, 
                                 "displayY":300, 
-                                "displayDigits":Number(digits)
+                                "displayDigits":Number(digits),
+                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                                 })) ;
                             buildNumberEntry(newObject)
                             
@@ -450,6 +678,7 @@ function getEvaluatedExpressionSettings() {
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
                     getMenuYesNoString("Bold?", "bold", null) +
                     getMenuEntryString("Alighnment? l/c/r:" , "alignment", "r" , null) +
+                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
