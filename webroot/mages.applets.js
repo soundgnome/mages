@@ -10,14 +10,13 @@ function defineApplets() {
             var problem_count = data.applets[i].problems.length;
             for (var j=0; j<problem_count; j++) {
                 applet.push(data.applets[i].problems[j]);
+                if ("solution" in data.applets[i]) {
+                    var applet_id = parseInt(data.applets[i].problems[0].appletID);
+                    tests[applet_id] = data.applets[i].solution;
+                }
             }
         }
 
-        console.log("loading tests");
-        var test_count = data.tests.length;
-        for (var i=0; i<test_count; i++) {
-            tests[data.tests[i].id] = data.tests[i].test;
-        }
         console.log("applets ready");
     });
 }

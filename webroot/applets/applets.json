@@ -15,7 +15,8 @@
               {"appletID":"1","type":1,"startX":420,"startY":40,"text":"You%20can%20use%20the%20draggable%20numbers%20as%20regrouping%20numbers%20too!","newText":"You%20can%20use%20the%20draggable%20numbers%20as%20regrouping%20numbers%20too!","font":"","fontString":" 12px Arial","fill":"Red","wordWrap":true,"wordWrapWidth":200,"alignment":"center"},
               {"appletID":"1","type":99,"drawingBoxStartX":313,"drawingBoxStartY":27,"drawingBoxEndX":673,"drawingBoxEndY":479},
               {"appletID":"1","type":5,"startX":580,"startY":420}
-          ]
+          ],
+          "solution": "valueDragToBoxes()==randomNumber[0]+randomNumber[1]"
         },
         { "summary": "addition of two digit numbers on the hundred chart",
           "problems": [
@@ -26,14 +27,20 @@
               {"appletID":"2","type":1,"startX":118,"startY":262,"text":"%2B","newText":"%2B","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"2","type":8,"startX":40,"startY":380,"orientation":"v","clonable":"undefined","fill":"Black","size":"40"},
               {"appletID":"2","type":4,"startX":580,"startY":220},
-              {"appletID":"2","type":5,"startX":580,"startY":400},
+              {"appletID":"2","type":5,"startX":580,"startY":400}
+          ],
+          "solution": "randomNumber[0]+randomNumber[1]==hundredBoxesClicked"
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"3","type":2,"startX":440,"startY":60,"font":" 60px Arial","fontString":" 60px Arial","fill":"Black","randomCeiling":40,"randomFloor":20},
               {"appletID":"3","type":2,"startX":440,"startY":120,"font":" 60px Arial","fontString":" 60px Arial","fill":"Black","randomCeiling":40,"randomFloor":20},
               {"appletID":"3","type":1,"startX":330,"startY":122,"text":"____","newText":"____","font":"","fontString":" 60px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"3","type":1,"startX":325,"startY":125,"text":"%2B","newText":"%2B","font":"","fontString":" 60px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"3","type":10,"startX":260,"startY":380,"correct":"randomNumber[0]+randomNumber[1]","incorrect1":"getRandomInt(20,50)","incorrect2":"getRandomInt(20,50)","incorrect3":"getRandomInt(20,50)","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"3","type":5,"startX":700,"startY":540}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "addition of two-digit numbers: multiple choice",
           "problems": [
@@ -49,7 +56,8 @@
               {"appletID":"4","type":8,"startX":380,"startY":320,"orientation":"h","clonable":"undefined","fill":"Black","size":"40"},
               {"appletID":"4","type":1,"startX":60,"startY":40,"text":"Drag%20the%20numbers%20to%20represent%20the%20sum.","newText":"Drag%20the%20numbers%20to%20represent%20the%20sum.","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"4","type":5,"startX":380,"startY":460}
-          ]
+          ],
+          "solution": "randomNumerator[0]+randomNumerator[1]==dragToBoxes[0].contents+dragToBoxes[1].contents*10&&11==dragToBoxes[2].contents+dragToBoxes[3].contents*10"
         },
         { "summary": "identify parts of a mixed number",
           "problems" : [
@@ -66,7 +74,8 @@
               {"appletID":"5","type":0,"startX":640,"startY":360},
               {"appletID":"5","type":0,"startX":720,"startY":360},
               {"appletID":"5","type":5,"startX":560,"startY":500}
-          ]
+          ],
+          "solution": "boxesClicked==randomMixedNumber[0].numerator"
         },
         { "summary": "addition of 4-digit numbers with dragTo numbers and multiple choice",
           "problems": [
@@ -82,7 +91,8 @@
               {"appletID":"6","type":8,"startX":540,"startY":200,"orientation":"v","clonable":"y","fill":"Black","size":"40"},
               {"appletID":"6","type":10,"startX":60,"startY":480,"correct":"randomNumber[0]+randomNumber[1]","incorrect1":"getCloseAnswer(randomNumber[0]+randomNumber[1], 30)","incorrect2":"getCloseAnswer(randomNumber[0]+randomNumber[1], 30)","incorrect3":"getCloseAnswer(randomNumber[0]+randomNumber[1], 30)","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"6","type":5,"startX":660,"startY":520}
-          ]
+          ],
+          "solution": "randomNumber[0]+randomNumber[1]==valueDragToBoxes()&&multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "subtraction of two digit numbers with multiple choice",
           "problems": [
@@ -92,7 +102,8 @@
               {"appletID":"7","type":1,"startX":307,"startY":142,"text":"-","newText":"-","font":"","fontString":" 80px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"7","type":10,"startX":240,"startY":340,"correct":"randomNumber[0]-randomNumber[1]","incorrect1":"getRandomInt(0,40)","incorrect2":"getRandomInt(0,40)","incorrect3":"getRandomInt(0,40)","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"7","type":5,"startX":400,"startY":500}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "protractor and angle",
           "problems": [
@@ -100,7 +111,8 @@
               {"appletID":"8","type":10,"startX":100,"startY":400,"correct":"protractorAngle.angle","incorrect1":"Math.abs(getCloseAnswer(protractorAngle.angle, 40) )","incorrect2":"Math.abs(getCloseAnswer(protractorAngle.angle, 40) )","incorrect3":"Math.abs(getCloseAnswer(protractorAngle.angle, 40) )","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"8","type":1,"startX":80,"startY":40,"text":"Select%20the%20closest%20angle%20measure%3A","newText":"Select%20the%20closest%20angle%20measure%3A","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"8","type":5,"startX":700,"startY":520}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "long parts of fraction problem",
           "problems": [
@@ -121,7 +133,8 @@
               {"appletID":"9","type":3,"startX":272,"startY":70,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20},
               {"appletID":"9","type":3,"startX":82,"startY":363,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20},
               {"appletID":"9","type":3,"startX":81,"startY":523,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20}
-          ]
+          ],
+          "solution": "dragToBoxes[0].contents/dragToBoxes[1].contents > 3/7 && dragToBoxes[2].contents/dragToBoxes[2].contents > 3/7 && dragToBoxes[1].contents < 7 && dragToBoxes[3].contents > 7"
         },
         { "summary": "addition of like denominators to mixed numbers",
           "problems": [
@@ -135,7 +148,8 @@
               {"appletID":"10","type":1,"startX":470,"startY":145,"text":"%3D","newText":"%3D","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"10","type":8,"startX":700,"startY":240,"orientation":"v","clonable":"undefined","fill":"Black","size":"40"},
               {"appletID":"10","type":5,"startX":420,"startY":420}
-          ]
+          ],
+          "solution": "((randomNumerator[0]+randomNumerator[1])/7 == dragToBoxes[0].contents + (dragToBoxes[2].contents > 0 ? dragToBoxes[1].contents/dragToBoxes[2].contents : dragToBoxes[1].contents ))"
         },
         { "summary": "number of tens/hundreds in 4-digit number",
           "problems": [
@@ -153,7 +167,8 @@
               {"appletID":"11","type":8,"startX":160,"startY":320,"orientation":"v","clonable":"undefined","fill":"Black","size":"40"},
               {"appletID":"11","type":5,"startX":660,"startY":520},
               {"appletID":"11","type":1,"startX":440,"startY":360,"text":"hundreds","newText":"hundreds","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"}
-          ]
+          ],
+          "solution": "parseInt(randomNumber[0]/10)==dragToBoxes[0].contents+dragToBoxes[1].contents*10+dragToBoxes[2].contents*100&&parseInt(randomNumber[0]/100)==dragToBoxes[3].contents+dragToBoxes[4].contents*10+dragToBoxes[5].contents*100"
         },
         { "summary": "standard to word form: multiple choice",
           "problems": [
@@ -161,7 +176,8 @@
               {"appletID":"12","type":1,"startX":100,"startY":60,"text":"Click%20the%20matching%20number%20in%20word%20form.","newText":"Click%20the%20matching%20number%20in%20word%20form.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"12","type":10,"startX":60,"startY":300,"correct":"inWordForm(randomNumber[0])","incorrect1":"inWordForm(getCloseAnswer(randomNumber[0], 100))","incorrect2":"inWordForm(getCloseAnswer(randomNumber[0], 100))","incorrect3":"inWordForm(changeDigit(randomNumber[0]))","multipleChoiceFontSize":18,"spaceX":350,"spaceY":60},
               {"appletID":"12","type":5,"startX":400,"startY":480}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "standard to expanded form: multiple choice",
           "problems": [
@@ -169,7 +185,8 @@
               {"appletID":"13","type":1,"startX":40,"startY":40,"text":"Click%20the%20matching%20number%20in%20expanded%20form.","newText":"Click%20the%20matching%20number%20in%20expanded%20form.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"13","type":10,"startX":30,"startY":320,"correct":"inExpandedForm(randomNumber[0])","incorrect1":"inExpandedForm(changeDigit(randomNumber[0]))","incorrect2":"inExpandedForm(changeDigit(randomNumber[0]))","incorrect3":"inExpandedForm(getCloseAnswer(randomNumber[0], 100))","multipleChoiceFontSize":18,"spaceX":400,"spaceY":60},
               {"appletID":"13","type":5,"startX":420,"startY":500}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "standard to draggable base ten blocks",
           "problems": [
@@ -177,7 +194,8 @@
               {"appletID":"14","type":1,"startX":40,"startY":40,"text":"Represent%20the%20number%20by%20dragging%20the%20correct%20base%20ten%20blocks%20onto%20the%20mat.","newText":"Represent%20the%20number%20by%20dragging%20the%20correct%20base%20ten%20blocks%20onto%20the%20mat.","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"14","type":13,"startX":180,"startY":220,"dragX":575,"dragY":300,"dragWidth":400,"dragHeight":500},
               {"appletID":"14","type":5,"startX":180,"startY":520}
-          ]
+          ],
+          "solution": "baseTenDragToContents==randomNumber[0]"
         },
         { "summary": "2digitx2digit multiplication with numberEntry",
           "problems": [
@@ -187,7 +205,8 @@
               {"appletID":"15","type":1,"startX":310,"startY":140,"text":"x","newText":"x","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"15","type":14,"numberEntryX":140,"numberEntryY":300,"orientation":"h","displayX":260,"displayY":220,"displayDigits":4},
               {"appletID":"15","type":5,"startX":680,"startY":500}
-          ]
+          ],
+          "solution": "numberEntryValue==randomNumber[0]*randomNumber[1]"
         },
         { "summary": "word to number form: multiple choice",
           "problems": [
@@ -196,7 +215,8 @@
               {"appletID":"16","type":10,"startX":240,"startY":380,"correct":"hiddenNumber[0]","incorrect1":"getCloseAnswer(hiddenNumber[0],30)","incorrect2":"changeDigit(hiddenNumber[0],30)","incorrect3":"changeDigit(hiddenNumber[0],30)","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"16","type":1,"startX":80,"startY":60,"text":"Choose%20the%20matching%20number.","newText":"Choose%20the%20matching%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"16","type":5,"startX":700,"startY":520}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "expanded to word form: multiple choice",
           "problems": [
@@ -206,7 +226,8 @@
               {"appletID":"17","type":1,"startX":80,"startY":20,"text":"Choose%20the%20matching%20number%20in%20word%20form.","newText":"Choose%20the%20matching%20number%20in%20word%20form.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":650,"alignment":"left"},
               {"appletID":"17","type":99,"drawingBoxStartX":92,"drawingBoxStartY":196,"drawingBoxEndX":722,"drawingBoxEndY":471},
               {"appletID":"17","type":5,"startX":400,"startY":540}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "word form to tally box",
           "problems": [
@@ -217,7 +238,8 @@
               {"appletID":"18","type":99,"drawingBoxStartX":97,"drawingBoxStartY":79,"drawingBoxEndX":366,"drawingBoxEndY":269},
               {"appletID":"18","type":5,"startX":240,"startY":380},
               {"appletID":"18","type":99,"drawingBoxStartX":53,"drawingBoxStartY":43,"drawingBoxEndX":741,"drawingBoxEndY":545}
-          ]
+          ],
+          "solution": "tallyTotal==hiddenNumber[0]"
         },
         { "summary": "4-digt number comparison with inequality entry",
           "problems": [
@@ -227,7 +249,8 @@
               {"appletID":"19","type":99,"drawingBoxStartX":125,"drawingBoxStartY":130,"drawingBoxEndX":652,"drawingBoxEndY":320},
               {"appletID":"19","type":1,"startX":160,"startY":80,"text":"Click%20the%20button%20to%20make%20the%20inequality%20true.","newText":"Click%20the%20button%20to%20make%20the%20inequality%20true.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"19","type":5,"startX":380,"startY":420}
-          ]
+          ],
+          "solution": "eval(randomNumber[0] + inequality + randomNumber[1])"
         },
         { "summary": "word to standard form with number entry box",
           "problems": [
@@ -238,7 +261,8 @@
               {"appletID":"20","type":99,"drawingBoxStartX":14,"drawingBoxStartY":90,"drawingBoxEndX":787,"drawingBoxEndY":327},
               {"appletID":"20","type":5,"startX":400,"startY":400},
               {"appletID":"20","type":1,"startX":20,"startY":20,"text":"Enter%20the%20number.","newText":"Enter%20the%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[0]"
         },
         { "summary": "expanded to standard form: multiple choice",
           "problems": [
@@ -248,7 +272,8 @@
               {"appletID":"21","type":5,"startX":400,"startY":500},
               {"appletID":"21","type":99,"drawingBoxStartX":140,"drawingBoxStartY":280,"drawingBoxEndX":662,"drawingBoxEndY":573},
               {"appletID":"21","type":99,"drawingBoxStartX":103,"drawingBoxStartY":20,"drawingBoxEndX":698,"drawingBoxEndY":589}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "multiplication 1-digitx2-digit: word problem",
           "problems": [
@@ -260,7 +285,8 @@
               {"appletID":"22","type":1,"startX":440,"startY":260,"text":"sq.%20ft.","newText":"sq.%20ft.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":400,"alignment":"left"},
               {"appletID":"22","type":99,"drawingBoxStartX":152,"drawingBoxStartY":46,"drawingBoxEndX":658,"drawingBoxEndY":536},
               {"appletID":"22","type":5,"startX":380,"startY":420}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]"
         },
         { "summary": "division 3-digit/1-digit: word problem",
           "problems": [
@@ -272,7 +298,8 @@
               {"appletID":"23","type":1,"startX":380,"startY":340,"text":"pages","newText":"pages","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":400,"alignment":"left"},
               {"appletID":"23","type":5,"startX":360,"startY":500},
               {"appletID":"23","type":99,"drawingBoxStartX":138,"drawingBoxStartY":67,"drawingBoxEndX":638,"drawingBoxEndY":564}
-          ]
+          ],
+          "solution": "Math.floor(hiddenNumber[1]/hiddenNumber[2])==numberEntryValue"
         },
         { "summary": "bar graph - relative values: multiple choice items",
           "problems": [
@@ -284,7 +311,8 @@
               {"appletID":"24","type":5,"startX":620,"startY":500},
               {"appletID":"24","type":99,"drawingBoxStartX":11,"drawingBoxStartY":8,"drawingBoxEndX":782,"drawingBoxEndY":419},
               {"appletID":"24","type":99,"drawingBoxStartX":68,"drawingBoxStartY":420,"drawingBoxEndX":730,"drawingBoxEndY":573}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "bar graph - relative values: multiple choice values",
           "problems": [
@@ -298,7 +326,8 @@
               {"appletID":"25","type":1,"startX":600,"startY":340,"text":"inches","newText":"inches","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"25","type":5,"startX":520,"startY":520},
               {"appletID":"25","type":99,"drawingBoxStartX":8,"drawingBoxStartY":10,"drawingBoxEndX":784,"drawingBoxEndY":579}
-          ]
+          ],
+          "solution": "numberEntryValue==Math.abs( barGraph.value[ hiddenNumber[0] ] - barGraph.value[ hiddenNumber[1] ] )"
         },
         { "summary": "bar graph - toal amount relative to answer: multiple choice",
           "problems": [
@@ -307,14 +336,23 @@
               {"appletID":"26","type":15,"startX":208,"startY":229,"expression":"%22The%20total%20amount%20of%20snow%20shown%20in%20the%20graph%20is%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20times%20as%20much%20snow%20as%20was%20recorded%20during%20the%20winter%20of%202014.%20How%20much%20snow%20was%20recorded%20during%20the%20winter%20of%202014%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"350","align":"left"},
               {"appletID":"26","type":14,"numberEntryX":20,"numberEntryY":540,"orientation":"h","displayX":40,"displayY":460,"displayDigits":3},
               {"appletID":"26","type":1,"startX":180,"startY":480,"text":"inches","newText":"inches","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
-              {"appletID":"26","type":5,"startX":640,"startY":540},
+              {"appletID":"26","type":5,"startX":640,"startY":540}
+          ],
+          "solution": "numberEntryValue == barGraph.totalValue() / hiddenNumber[0]"
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"27","type":18,"startX":120,"startY":80,"titleText":"Cans Collected","min":0,"max":300,"interval":50,"numberLabel":"Cans","numberedAxis":"x","itemList":["Henderson","Dreyfus","Columbus","Cantor","Reed"],"itemLabel":"Class","itemValueList":["getRandomInt(0,300)","getRandomInt(0,300)","getRandomInt(0,300)","getRandomInt(0,300)","getRandomInt(0,300)"]},
               {"appletID":"27","type":10,"startX":120,"startY":440,"correct":"barGraph.itemList[ barGraph.topSpot() ]","incorrect1":"barGraph.itemList[ getRandomIntExcluding(0,4,barGraph.topSpot() ) ]","incorrect2":"barGraph.itemList[ getRandomIntExcluding(0,4,barGraph.topSpot() ) ]","incorrect3":"barGraph.itemList[ getRandomIntExcluding(0,4,barGraph.topSpot() ) ]","multipleChoiceFontSize":24,"spaceX":200,"spaceY":40},
               {"appletID":"27","type":1,"startX":120,"startY":380,"text":"Which%20teacher%27s%20class%20collected%20the%20most%20cans%20of%20all%3F","newText":"Which%20teacher%27s%20class%20collected%20the%20most%20cans%20of%20all%3F","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":600,"alignment":"left"},
               {"appletID":"27","type":5,"startX":620,"startY":480},
               {"appletID":"27","type":99,"drawingBoxStartX":99,"drawingBoxStartY":361,"drawingBoxEndX":702,"drawingBoxEndY":550},
-              {"appletID":"27","type":99,"drawingBoxStartX":125,"drawingBoxStartY":16,"drawingBoxEndX":688,"drawingBoxEndY":333},
-
+              {"appletID":"27","type":99,"drawingBoxStartX":125,"drawingBoxStartY":16,"drawingBoxEndX":688,"drawingBoxEndY":333}
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"28","type":20,"startX":100,"startY":340,"lineOrientation":"h","lineLength":600,"min":0,"minLabel":true,"max":10,"maxLabel":true,"interval":1,"intervalLabel":true,"subDivide":4,"dotStartX":100,"dotStartY":260,"dotOrientation":"h","dotNumber":2,"dotLabel":true,"dotSnapping":true},
               {"appletID":"28","type":1,"startX":40,"startY":40,"text":"Drag%20the%20dots%20to%20the%20numbers%20indicated%3A","newText":"Drag%20the%20dots%20to%20the%20numbers%20indicated%3A","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"28","type":7,"startX":280,"startY":180,"font":" 72px Arial","fontString":" 72px Arial","fill":"Red","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"4","numeratorRandomFloor":"1","denominatorRandomCeiling":"4","denominatorRandomFloor":"4","size":"72"},
@@ -322,8 +360,12 @@
               {"appletID":"28","type":1,"startX":420,"startY":120,"text":"B.","newText":"B.","font":"","fontString":" 24px Arial","fill":"Orange","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"28","type":1,"startX":240,"startY":120,"text":"A.","newText":"A.","font":"","fontString":" 24px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"28","type":5,"startX":400,"startY":460},
-              {"appletID":"28","type":99,"drawingBoxStartX":21,"drawingBoxStartY":20,"drawingBoxEndX":780,"drawingBoxEndY":558},
-
+              {"appletID":"28","type":99,"drawingBoxStartX":21,"drawingBoxStartY":20,"drawingBoxEndX":780,"drawingBoxEndY":558}
+          ],
+          "solution": "numberLine.dotValue[0]==randomMixedNumber[0].wholeNumber + (randomMixedNumber[0].numerator / randomMixedNumber[0].denominator)&&numberLine.dotValue[1]==randomMixedNumber[1].wholeNumber + (randomMixedNumber[1].numerator / randomMixedNumber[1].denominator)"
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"29","type":16,"expression":"getRandomInt%281%2C12%29"},
               {"appletID":"29","type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D%29"},
               {"appletID":"29","type":15,"startX":400,"startY":180,"expression":"hiddenNumber%5B1%5D","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right"},
@@ -331,13 +373,25 @@
               {"appletID":"29","type":1,"startX":340,"startY":134,"text":"___","newText":"___","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"center"},
               {"appletID":"29","type":20,"startX":100,"startY":340,"lineOrientation":"h","lineLength":600,"min":0,"minLabel":false,"max":1,"maxLabel":false,"interval":1,"intervalLabel":false,"subDivide":1,"dotStartX":390,"dotStartY":386,"dotOrientation":"h","dotNumber":1,"dotLabel":false,"dotSnapping":false},
               {"appletID":"29","type":1,"startX":140,"startY":60,"text":"Drag%20the%20dot%20to%20represent%20the%20fraction%20on%20the%20line%3A","newText":"Drag%20the%20dot%20to%20represent%20the%20fraction%20on%20the%20line%3A","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"appletID":"29","type":5,"startX":400,"startY":480},
-
+              {"appletID":"29","type":5,"startX":400,"startY":480}
+          ],
+          "solution": "Math.abs(numberLine.dotValue[0]-hiddenNumber[1]/hiddenNumber[0])<.05"
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
               {"appletID":"42","type":14,"numberEntryX":160,"numberEntryY":400,"orientation":"h","displayX":100,"displayY":320,"displayDigits":12},
-              {"appletID":"42","type":5,"startX":360,"startY":500},
-
-              {"appletID":"97","type":20,"startX":180,"startY":160,"lineOrientation":"h","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":400,"dotStartY":300,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true},
+              {"appletID":"42","type":5,"startX":360,"startY":500}
+          ],
+          "solution": "numberEntryValue==42"
+        },
+        { "summary": "",
+          "problems": [
+              {"appletID":"97","type":20,"startX":180,"startY":160,"lineOrientation":"h","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":400,"dotStartY":300,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true}
+          ]
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"98","type":20,"startX":100,"startY":10,"lineOrientation":"v","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":394,"dotStartY":271,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true}
           ]
         },
@@ -351,7 +405,8 @@
               {"appletID":"100","type":14,"numberEntryX":200,"numberEntryY":260,"orientation":"h","displayX":320,"displayY":180,"displayDigits":2},
               {"appletID":"100","type":5,"startX":420,"startY":400},
               {"appletID":"100","type":99,"drawingBoxStartX":20,"drawingBoxStartY":19,"drawingBoxEndX":780,"drawingBoxEndY":583}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[0]"
         },
         { "summary": "Properties of multiplication",
           "problems": [
@@ -361,7 +416,8 @@
               {"appletID":"101","type":10,"startX":140,"startY":300,"correct":"multiplicationProperty( hiddenNumber[0] )","incorrect1":"multiplicationProperty( getRandomIntExcluding(0,4,hiddenNumber[0]))","incorrect2":"multiplicationProperty( getRandomIntExcluding(0,4,hiddenNumber[0]))","incorrect3":"multiplicationProperty( getRandomIntExcluding(0,4,hiddenNumber[0]))","multipleChoiceFontSize":18,"spaceX":325,"spaceY":60},
               {"appletID":"101","type":5,"startX":400,"startY":480},
               {"appletID":"101","type":99,"drawingBoxStartX":18,"drawingBoxStartY":19,"drawingBoxEndX":781,"drawingBoxEndY":579}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "4.4.OA.2 Estimate products: word problems",
           "problems": [
@@ -372,7 +428,8 @@
               {"appletID":"102","type":10,"startX":260,"startY":260,"correct":"(Math.round(hiddenNumber[1] / 10) * 10) * (hiddenNumber[2] > 10 ? (Math.round(hiddenNumber[2] / 10) * 10) : hiddenNumber[2])","incorrect1":"(Math.round(hiddenNumber[1] / 10) * 10) * (Math.round(hiddenNumber[2] / 10) * 10)+100","incorrect2":"(Math.round(hiddenNumber[1] / 10) * 10) * (Math.round(hiddenNumber[2] / 10) * 10)-100","incorrect3":"(Math.round(hiddenNumber[1] / 10) * 10) * (Math.round(hiddenNumber[2] / 10) * 10)+200","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"102","type":5,"startX":400,"startY":420},
               {"appletID":"102","type":99,"drawingBoxStartX":21,"drawingBoxStartY":20,"drawingBoxEndX":782,"drawingBoxEndY":581}
-          ]
+          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "Multiply a 2-digit number by a 2-digit number: word problems",
           "problems": [
@@ -386,7 +443,8 @@
               {"appletID":"103","type":14,"numberEntryX":140,"numberEntryY":60,"orientation":"v","displayX":240,"displayY":340,"displayDigits":5},
               {"appletID":"103","type":99,"drawingBoxStartX":19,"drawingBoxStartY":21,"drawingBoxEndX":778,"drawingBoxEndY":581},
               {"appletID":"103","type":5,"startX":600,"startY":480}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]"
         },
         { "summary": "Multiply a 2-digit number by a larger number: word problems",
           "problems": [
@@ -398,7 +456,8 @@
               {"appletID":"104","type":1,"startX":520,"startY":280,"text":"dollars","newText":"dollars","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":500,"alignment":"left"},
               {"appletID":"104","type":5,"startX":540,"startY":440},
               {"appletID":"104","type":99,"drawingBoxStartX":23,"drawingBoxStartY":23,"drawingBoxEndX":769,"drawingBoxEndY":584}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]"
         },
         { "summary": "Multiply numbers ending in zeroes: word problems",
           "problems": [
@@ -409,7 +468,8 @@
               {"appletID":"105","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":220,"displayY":360,"displayDigits":7},
               {"appletID":"105","type":5,"startX":380,"startY":480},
               {"appletID":"105","type":99,"drawingBoxStartX":20,"drawingBoxStartY":18,"drawingBoxEndX":777,"drawingBoxEndY":581}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]"
         },
         { "summary": "Division facts to 12: word problems",
           "problems": [
@@ -420,7 +480,8 @@
               {"appletID":"106","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":220,"displayY":360,"displayDigits":7},
               {"appletID":"106","type":5,"startX":380,"startY":480},
               {"appletID":"106","type":99,"drawingBoxStartX":20,"drawingBoxStartY":18,"drawingBoxEndX":777,"drawingBoxEndY":581}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[2]/hiddenNumber[1]"
         },
         { "summary": "Divide larger numbers by 2-12: word problems",
           "problems": [
@@ -432,7 +493,8 @@
               {"appletID":"107","type":15,"startX":460,"startY":420,"expression":"%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"400","align":"left"},
               {"appletID":"107","type":5,"startX":380,"startY":500},
               {"appletID":"107","type":99,"drawingBoxStartX":23,"drawingBoxStartY":17,"drawingBoxEndX":778,"drawingBoxEndY":583}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[2]/hiddenNumber[1]"
         },
         { "summary": "Divide numbers ending in zeroes by numbers ending in zeroes: word problems",
           "problems": [
@@ -443,7 +505,8 @@
               {"appletID":"108","type":14,"numberEntryX":120,"numberEntryY":60,"orientation":"v","displayX":200,"displayY":460,"displayDigits":7},
               {"appletID":"108","type":5,"startX":620,"startY":480},
               {"appletID":"108","type":99,"drawingBoxStartX":21,"drawingBoxStartY":21,"drawingBoxEndX":782,"drawingBoxEndY":580}
-          ]
+          ],
+          "solution": "numberEntryValue==hiddenNumber[2]"
         },
         { "summary": "Divide by 2-digit numbers and interpreting remainders: word problems",
           "problems": [
@@ -458,7 +521,8 @@
               {"appletID":"109","type":15,"startX":280,"startY":335,"expression":"%28hiddenNumber%5B4%5D%20%3D%3D%201%20%3F%20%22%22%20%3A%20%22%24%22%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"right"},
               {"appletID":"109","type":5,"startX":400,"startY":480},
               {"appletID":"109","type":99,"drawingBoxStartX":22,"drawingBoxStartY":21,"drawingBoxEndX":780,"drawingBoxEndY":581}
-          ]
+          ],
+          "solution": "numberEntryValue==(hiddenNumber[4] == 1 ? hiddenNumber[2] : hiddenNumber[3] )"
         },
         { "summary": "Estimate sums: word problems",
           "problems": []
@@ -476,50 +540,8 @@
               {"appletID":"110","type":1,"startX":240,"startY":380,"text":"%24","newText":"%24","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":600,"alignment":"left"},
               {"appletID":"110","type":5,"startX":680,"startY":520},
               {"appletID":"110","type":99,"drawingBoxStartX":20,"drawingBoxStartY":21,"drawingBoxEndX":782,"drawingBoxEndY":581}
-          ]
+          ],
+          "solution": "numberEntryValue== Number( (tTable.value[ hiddenNumber[0] ]).replace(/[^0-9\\.]+/g,\"\"))* hiddenNumber[1]"
         }
-    ],
-    "tests": [
-        { "id": 1, "test": "valueDragToBoxes()==randomNumber[0]+randomNumber[1]" },
-        { "id": 2, "test": "randomNumber[0]+randomNumber[1]==hundredBoxesClicked" },
-        { "id": 3, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 4, "test": "randomNumerator[0]+randomNumerator[1]==dragToBoxes[0].contents+dragToBoxes[1].contents*10&&11==dragToBoxes[2].contents+dragToBoxes[3].contents*10" },
-        { "id": 5, "test": "boxesClicked==randomMixedNumber[0].numerator" },
-        { "id": 6, "test": "randomNumber[0]+randomNumber[1]==valueDragToBoxes()&&multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 7, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 8, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 9, "test": "dragToBoxes[0].contents/dragToBoxes[1].contents > 3/7 && dragToBoxes[2].contents/dragToBoxes[2].contents > 3/7 && dragToBoxes[1].contents < 7 && dragToBoxes[3].contents > 7" },
-        { "id": 10, "test": "((randomNumerator[0]+randomNumerator[1])/7 == dragToBoxes[0].contents + (dragToBoxes[2].contents > 0 ? dragToBoxes[1].contents/dragToBoxes[2].contents : dragToBoxes[1].contents ))" },
-        { "id": 11, "test": "parseInt(randomNumber[0]/10)==dragToBoxes[0].contents+dragToBoxes[1].contents*10+dragToBoxes[2].contents*100&&parseInt(randomNumber[0]/100)==dragToBoxes[3].contents+dragToBoxes[4].contents*10+dragToBoxes[5].contents*100" },
-        { "id": 12, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 13, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 14, "test": "baseTenDragToContents==randomNumber[0]" },
-        { "id": 15, "test": "numberEntryValue==randomNumber[0]*randomNumber[1]" },
-        { "id": 16, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 17, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 18, "test": "tallyTotal==hiddenNumber[0]" },
-        { "id": 19, "test": "eval(randomNumber[0] + inequality + randomNumber[1])" },
-        { "id": 20, "test": "numberEntryValue==hiddenNumber[0]" },
-        { "id": 21, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 22, "test": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]" },
-        { "id": 23, "test": "Math.floor(hiddenNumber[1]/hiddenNumber[2])==numberEntryValue" },
-        { "id": 24, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 25, "test": "numberEntryValue==Math.abs( barGraph.value[ hiddenNumber[0] ] - barGraph.value[ hiddenNumber[1] ] )" },
-        { "id": 26, "test": "numberEntryValue == barGraph.totalValue() / hiddenNumber[0]" },
-        { "id": 27, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 28, "test": "numberLine.dotValue[0]==randomMixedNumber[0].wholeNumber + (randomMixedNumber[0].numerator / randomMixedNumber[0].denominator)&&numberLine.dotValue[1]==randomMixedNumber[1].wholeNumber + (randomMixedNumber[1].numerator / randomMixedNumber[1].denominator)" },
-        { "id": 29, "test": "Math.abs(numberLine.dotValue[0]-hiddenNumber[1]/hiddenNumber[0])<.05" },
-        { "id": 42, "test": "numberEntryValue==42" },
-        { "id": 100, "test": "numberEntryValue==hiddenNumber[0]" },
-        { "id": 101, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 102, "test": "multipleChoiceCorrectAnswer==multipleChoiceSelected" },
-        { "id": 103, "test": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]" },
-        { "id": 104, "test": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]" },
-        { "id": 105, "test": "numberEntryValue==hiddenNumber[1]*hiddenNumber[2]" },
-        { "id": 106, "test": "numberEntryValue==hiddenNumber[2]/hiddenNumber[1]" },
-        { "id": 107, "test": "numberEntryValue==hiddenNumber[2]/hiddenNumber[1]" },
-        { "id": 108, "test": "numberEntryValue==hiddenNumber[2]" },
-        { "id": 109, "test": "numberEntryValue==(hiddenNumber[4] == 1 ? hiddenNumber[2] : hiddenNumber[3] )" },
-        { "id": 110, "test": "numberEntryValue== Number( (tTable.value[ hiddenNumber[0] ]).replace(/[^0-9\\.]+/g,\"\"))* hiddenNumber[1]"}
     ]
 }
