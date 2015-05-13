@@ -6,7 +6,7 @@ var result;
 var state='title';
 var gridSize = 20;
 var titleBack;
-//test
+
 
 function preload() {
     //debug text
@@ -1164,6 +1164,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     break;
                     
                 case 99: //DrawBoxConstructor(appletID, type, drawingBoxStartX, drawingBoxStartY, drawingBoxEndX , drawingBoxEndY) 
+                    console.log("WRONG- " + piece[item])
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
@@ -1201,7 +1202,7 @@ function getConstructorString(newObject) {
          * ********************************************************************/
 var textureArea;
 function buildTextureArea(item) {
-    var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression).generateTexture() )
+    var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression) )
     var bmd = game.add.bitmapData(newTexture.width,newTexture.height);
 
     // draw to the canvas context like normal
@@ -1225,8 +1226,14 @@ function buildTextureArea(item) {
     console.log(item.textureExpression)
     piece[piece.length-1].textureExpression = item.textureExpression;
     piece[piece.length-1].type = item.type;
-    piece[piece.length-1].number = item.number;
     piece[piece.length-1].draggable = item.draggable;
+    if(state!='build')
+    {
+        piece[piece.length-1].number = eval(item.number);
+    } else
+    {
+        piece[piece.length-1].number = item.number;
+    }
     console.log(item.draggable)
     if(state!='build' && item.draggable == 1)
     {
@@ -1252,13 +1259,61 @@ function testTexture() {
     newGraphic.drawCircle(90, 90, 120);
     newGraphic.beginFill(0xFFDDDD, 1);
     newGraphic.drawCircle(90, 90, 60);
-     newGraphic.moveTo(0,0)
+    newGraphic.moveTo(0,0)
     newGraphic.lineTo(180,180)
     newGraphic.moveTo(180,0)
     newGraphic.lineTo(0,180)
     newTextureTemp = newGraphic
-    return newGraphic;
+    return newGraphic.generateTexture();
 }
+
+function drawClock(minutes) {
+    var angle;
+    var angleHour = (minutes/60-15)/12*360*Math.PI/180
+    var angleMinute = (minutes%60-15)*6*Math.PI/180
+    var newGraphic = game.add.graphics(0, 0);
+    var returnGroup = game.add.group();
+    newGraphic.lineStyle(2, 0x000000, 1);
+    newGraphic.beginFill(0xDDDDDD, 1);
+    newGraphic.drawCircle(90, 90, 200);
+    for(var i = 0 ; i < 60 ; i++) {
+        angle = i*6*Math.PI/180
+        newGraphic.moveTo(90+( (i*6)%5==0 ? 90 : 95 )*Math.cos(angle),90+( (i*6)%5==0 ? 90 : 95 )*Math.sin(angle))
+        newGraphic.lineTo(90+100*Math.cos(angle),90+100*Math.sin(angle))  
+    } 
+    newGraphic.moveTo(90,90)
+    newGraphic.lineTo(90+90*Math.cos(angleMinute),90+90*Math.sin(angleMinute))
+    newGraphic.moveTo(90,90)
+    newGraphic.lineStyle(4, 0x000000, 1);
+    newGraphic.lineTo(90+60*Math.cos(angleHour),90+60*Math.sin(angleHour))
+    returnGroup.add(newGraphic)
+    newTextureTemp = newGraphic
+    
+    var clockNumber = []
+    for(i = 1 ; i < 13 ; i++) {
+        angle = (i-3)*30*Math.PI/180
+        clockNumber[clockNumber.length] = game.add.text(90+80*Math.cos(angle) , 90+80*Math.sin(angle) , i.toString(), {
+            font: 20+"px Arial",
+            fill: "black",
+            align: 'center'}); 
+        clockNumber[clockNumber.length-1].anchor.setTo(0.5,0.4)
+        returnGroup.add(clockNumber[clockNumber.length-1])
+    }
+    var newAMPMLabel = game.add.text(155,170, (minutes>720 ? "PM" : "AM"), {
+            font: 20+"px Arial",
+            fill: "black",
+            align: 'center'}); 
+        returnGroup.add(newAMPMLabel)
+        
+    var returnTexture = returnGroup.generateTexture();
+    for(i = 0 ; i < 12 ; i++) {
+        clockNumber[i].destroy();
+    }
+    newAMPMLabel.destroy();
+    return returnTexture;
+}
+
+
 
 var numberLine
 function buildNumberLine(item) {
@@ -1879,20 +1934,8 @@ function buildProtractorAngle(item) {
     var upperEndX   = legLength * Math.sin(item.upperAngle);
     var upperEndY   = legLength * Math.cos(item.upperAngle);
     //add the angle
-    angleGraphic = game.add.graphics(0, 0);
-    angleGraphic.lineStyle(2, 0x000000);
-    angleGraphic.moveTo(0,0);
-    angleGraphic.lineTo(lowerEndX, lowerEndY);
-    angleGraphic.moveTo(0,0);
-    angleGraphic.lineTo(upperEndX,upperEndY);
-    angleGraphic.lineStyle(1, 0x000000);
-    angleGraphic.beginFill(0x000000, 1);
-    angleGraphic.drawCircle(0, 0, 5);
-    angleGraphic.drawCircle(legLength, legLength, 0.01);//these four dots keep the whole thing centered
-    angleGraphic.drawCircle(-legLength, legLength, 0.01);
-    angleGraphic.drawCircle(legLength, -legLength, 0.01);
-    angleGraphic.drawCircle(-legLength, -legLength, 0.01);
-    piece[piece.length] = game.add.sprite(item.angleX+3, item.angleY+1, angleGraphic.generateTexture());
+    angleGraphic = drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) ;
+    piece[piece.length] = game.add.sprite(item.angleX+3, item.angleY+1, angleGraphic);
     adjustNewPiece();
     piece[piece.length-1].type=11;
     vertexX=item.angleX+4;
@@ -1904,7 +1947,7 @@ function buildProtractorAngle(item) {
         item.angle+=360;
     }
 
-    angleGraphic.destroy(true);
+    //angleGraphic.destroy(true);
     //add the protractor
     piece[piece.length] = game.add.sprite(item.protractorX, item.protractorY, 'protractor180deg');
     piece[piece.length-1].anchor.setTo(0.50, 0.90);
@@ -1923,6 +1966,24 @@ function buildProtractorAngle(item) {
     piece[piece.length-1].input.useHandCursor=true; 
     piece[piece.length-1].events.onInputDown.add(startDraggingProtractor, this);
     piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);    
+}
+
+function drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) {
+    var angleGraphic = game.add.graphics(0, 0);
+    angleGraphic.lineStyle(2, 0x000000);
+    angleGraphic.moveTo(0,0);
+    angleGraphic.lineTo(lowerEndX, lowerEndY);
+    angleGraphic.moveTo(0,0);
+    angleGraphic.lineTo(upperEndX,upperEndY);
+    angleGraphic.lineStyle(1, 0x000000);
+    angleGraphic.beginFill(0x000000, 1);
+    angleGraphic.drawCircle(0, 0, 5);
+    angleGraphic.drawCircle(legLength, legLength, 0.01);//these four dots keep the whole thing centered
+    angleGraphic.drawCircle(-legLength, legLength, 0.01);
+    angleGraphic.drawCircle(legLength, -legLength, 0.01);
+    angleGraphic.drawCircle(-legLength, -legLength, 0.01);
+    newTextureTemp = angleGraphic;
+    return angleGraphic.generateTexture()
 }
 
 var draggingProtractor=0;
