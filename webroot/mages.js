@@ -6,7 +6,7 @@ var result;
 var state='title';
 var gridSize = 20;
 var titleBack;
-
+//test
 
 function preload() {
     //debug text
