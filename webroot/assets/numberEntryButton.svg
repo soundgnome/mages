@@ -1,0 +1,17 @@
+<svg version="1.1" width="40" height="40" viewBox="-1 -1 85 85" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="grad_1" x2="1">
+      <stop offset="0" stop-color="#E5E5E5" stop-opacity="1"/>
+      <stop offset="1" stop-color="#B2B2B2" stop-opacity="1"/>
+    </linearGradient>
+    <radialGradient id="grad_2" cx="0.5755" cy="0.5861" r="0.76193">
+      <stop offset="0" stop-color="#E5E5E5" stop-opacity="1"/>
+      <stop offset="1" stop-color="#B2B2B2" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <!-- Exported by Scratch - http://scratch.mit.edu/ -->
+  <g id="ID0.07669576536864042" transform="matrix(1, 0, 0, 1, -29, -28)">
+    <path id="ID0.9610010287724435" fill="url(#grad_1)" d="M 70.875 28.632 C 47.991 28.632 29.375 47.249 29.375 70.132 C 29.375 93.014 47.992 111.632 70.875 111.632 C 93.759 111.632 112.375 93.014 112.375 70.132 C 112.375 47.250 93.759 28.632 70.875 28.632 Z "/>
+    <path id="ID0.1650495445355773" fill="url(#grad_2)" d="M 70.875 36.189 C 80.240 36.189 88.726 39.993 94.871 46.137 C 101.015 52.282 104.819 60.768 104.819 70.133 C 104.819 79.498 101.015 87.984 94.871 94.129 C 88.726 100.273 80.240 104.077 70.875 104.077 C 61.510 104.077 53.024 100.273 46.879 94.129 C 40.735 87.984 36.931 79.498 36.931 70.133 C 36.931 60.768 40.735 52.282 46.879 46.137 C 53.024 39.993 61.510 36.189 70.875 36.189 Z "/>
+  </g>
+</svg>
