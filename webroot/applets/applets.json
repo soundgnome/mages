@@ -411,11 +411,11 @@
         },
         { "summary": "testing - box",
           "problems": [
- {"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":10,"drawingBoxEndX":371,"drawingBoxEndY":369},
-{"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":9,"drawingBoxEndX":789,"drawingBoxEndY":371},
-{"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":379,"drawingBoxEndX":788,"drawingBoxEndY":591},
-{"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":377,"drawingBoxEndX":372,"drawingBoxEndY":589}
-                       ],
+              {"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":10,"drawingBoxEndX":371,"drawingBoxEndY":369},
+              {"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":9,"drawingBoxEndX":789,"drawingBoxEndY":371},
+              {"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":379,"drawingBoxEndX":788,"drawingBoxEndY":591},
+              {"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":377,"drawingBoxEndX":372,"drawingBoxEndY":589}
+                     ],
           "solution": ""
         },
         { "summary": "",
