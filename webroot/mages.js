@@ -2079,6 +2079,18 @@ function drawBox() {
         }   
     } else
     {
+        var bufferspot
+        if(drawingBoxStartX > drawingBoxEndX ) {
+            bufferspot = drawingBoxStartX
+            drawingBoxStartX = drawingBoxEndX
+            drawingBoxEndX = bufferspot
+        }
+        if(drawingBoxStartY > drawingBoxEndY ) {
+            bufferspot = drawingBoxStartY
+            drawingBoxStartY = drawingBoxEndY
+            drawingBoxEndY = bufferspot
+        }
+        
         if(drawingBox==1)
         {//drawingBoxGraphic.generateTexture()
             drawingBox = 0;
