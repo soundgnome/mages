@@ -81,6 +81,7 @@ function preload() {
     game.load.image('menuInequalityEntry', 'assets/menuInequalityEntry.png');
     game.load.image('menuNumberLine', 'assets/menuNumberLine.png');
     game.load.image('menuTTable', 'assets/menuTTable.png');
+    game.load.image('menuTextureArea', 'assets/menuTextureArea.png');
     
 }
 
@@ -464,7 +465,7 @@ function defineMenu() {
         game.add.sprite(50 , 50, 'menuBarGraph'),
         game.add.sprite(300, 50, 'menuTTable'),
         game.add.sprite(550, 50, 'menuNumberLine'),
-        game.add.sprite(50 , 300, 'menuButton'),
+        game.add.sprite(50 , 300, 'menuTextureArea'),
         game.add.sprite(300, 300, 'menuButton'),
         game.add.sprite(550, 300, 'menuButton'),
         ];
@@ -658,6 +659,10 @@ function onBuildMenuClick(item, pointer) {
             
             case 20:  //number line
             getNumberLineSettings() //in mages.dialogs.js
+            break;
+            
+            case 21:  //texture area
+            getTextureAreaSettings() //in mages.dialogs.js
             break;
             
         }

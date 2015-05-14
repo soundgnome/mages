@@ -1,4 +1,6 @@
 function getTextureAreaSettings(item) {
+    menuKeyPressed ==0;
+    state = 'prompt';
     bootbox.dialog({
                 title: "Teture Area Settings",
                 message: 
@@ -20,6 +22,7 @@ function getTextureAreaSettings(item) {
                                 "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
                             })) ;
                             buildTextureArea(newObject)
+                            state = 'build';
                         }
                     }
                 }
