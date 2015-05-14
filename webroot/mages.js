@@ -885,9 +885,8 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
                         });
-                    constructorString = "applet.push(JSON.parse('" + newObject + "'))" ;
+                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;     
-                    constructorString="tests[" + newAppletID + "]= '" + appletDoneTest + "';" ;
                     break;
                     
                 case 6: //random decimal constructor
@@ -1179,11 +1178,14 @@ function printPieces(newAppletID, appletDoneTest) {
             }   
             }
         }
+    printString = printString.slice(0, - 5)
+    constructorString="<br>SOLUTION: " + appletDoneTest + " ";
+    printString = printString + openTag + constructorString + closeTag;  
     state="prompt";
     bootbox.alert({
         size: 'large',
         title: "Applet Constructor Code Output - Add to mages.applets.js",
-        message: printString.slice(0, - 5) , //this is now possibly quite long
+        message: printString , //this is now possibly quite long
         callback: function(){ state="build"; }  //continue building
     });
 }
@@ -3616,7 +3618,7 @@ function RandomFractionConstructor(appletID, type, startX, startY, font, size, f
 
 function buildRandomFraction(item) {
     var fontString;
-    piece[piece.length] = game.add.group();
+    //piece[piece.length] = game.add.group();
     var newNumeratorRandom = getRandomInt(Number(item.numeratorRandomFloor), Number(item.numeratorRandomCeiling) );
     var newDenominatorRandom = getRandomInt(Number(item.denominatorRandomFloor), Number(item.denominatorRandomCeiling) );
     randomNumerator.push(newNumeratorRandom);
@@ -3635,8 +3637,7 @@ function buildRandomFraction(item) {
     
     
     //build start coordinates; will change down below if we're running an applet
-    piece[piece.length-1].x=400;
-    piece[piece.length-1].y=300;
+
     var newNumeratorRandomText = game.add.text(newTextSize/2.5, 0, newNumeratorRandom.toString(), {
             font: fontString,
             fill: newTextColor,
@@ -3677,6 +3678,7 @@ function buildRandomFraction(item) {
     
     piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].anchor.setTo(0.5, 0.5); 
     if(state != 'build')
     {
         piece[piece.length-1].x=item.startX;
@@ -3693,8 +3695,10 @@ function buildRandomFraction(item) {
             piece[piece.length-1].dragOffsetY = 0
         }
     } else
-
-        piece[piece.length-1].anchor.setTo(0.5, 0.5); 
+    {
+        piece[piece.length-1].x=400;
+        piece[piece.length-1].y=300;
+        
         piece[piece.length-1].inputEnabled='true';
         piece[piece.length-1].events.onInputDown.add(buildGroupPieceClick, this);
         piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
@@ -3709,6 +3713,9 @@ function buildRandomFraction(item) {
         piece[piece.length-1].size = newTextSize;
         piece[piece.length-1].grouped=1;
         piece[piece.length-1].type=3;
+    }
+        
+    
 }
 
 
