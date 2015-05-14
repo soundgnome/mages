@@ -44,8 +44,8 @@
         },
         { "summary": "addition of two-digit numbers: multiple choice",
           "problems": [
-              {"appletID":"4","type":3,"startX":220,"startY":220,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","numeratorRandomCeiling":6,"numeratorRandomFloor":0,"denominatorRandomCeiling":11,"denominatorRandomFloor":11,"size":72},
-              {"appletID":"4","type":3,"startX":360,"startY":220,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","numeratorRandomCeiling":5,"numeratorRandomFloor":0,"denominatorRandomCeiling":11,"denominatorRandomFloor":11,"size":72},
+              {"appletID":"4","type":3,"startX":195,"startY":155,"font":" 36px Arial","fontString":" 48px Arial","fill":"Black","numeratorRandomCeiling":6,"numeratorRandomFloor":0,"denominatorRandomCeiling":11,"denominatorRandomFloor":11,"size":48},
+              {"appletID":"4","type":3,"startX":335,"startY":155,"font":" 36px Arial","fontString":" 48px Arial","fill":"Black","numeratorRandomCeiling":5,"numeratorRandomFloor":0,"denominatorRandomCeiling":11,"denominatorRandomFloor":11,"size":48},
               {"appletID":"4","type":1,"startX":269,"startY":175,"text":"%2B","newText":"%2B","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"4","type":1,"startX":418,"startY":177,"text":"%3D","newText":"%3D","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"4","type":9,"startX":540,"startY":180,"userScale":0.5},
@@ -130,16 +130,16 @@
               {"appletID":"9","type":1,"startX":564,"startY":319,"text":"_____","newText":"_____","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"9","type":8,"startX":600,"startY":440,"orientation":"h","clonable":"n","fill":"Black","size":"50"},
               {"appletID":"9","type":5,"startX":620,"startY":540},
-              {"appletID":"9","type":3,"startX":272,"startY":70,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20},
-              {"appletID":"9","type":3,"startX":82,"startY":363,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20},
-              {"appletID":"9","type":3,"startX":81,"startY":523,"font":" 20px Arial","fontString":" 20px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":20}
+              {"appletID":"9","type":3,"startX":267,"startY":55,"font":" 20px Arial","fontString":" 24px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":24},
+              {"appletID":"9","type":3,"startX":77,"startY":348,"font":" 20px Arial","fontString":" 24px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":24},
+              {"appletID":"9","type":3,"startX":76,"startY":508,"font":" 20px Arial","fontString":" 24px Arial","fill":"Black","numeratorRandomCeiling":3,"numeratorRandomFloor":3,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":24}
           ],
           "solution": "dragToBoxes[0].contents/dragToBoxes[1].contents > 3/7 && dragToBoxes[2].contents/dragToBoxes[2].contents > 3/7 && dragToBoxes[1].contents < 7 && dragToBoxes[3].contents > 7"
         },
         { "summary": "addition of like denominators to mixed numbers",
           "problems": [
-              {"appletID":"10","type":3,"startX":272,"startY":190,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","numeratorRandomCeiling":7,"numeratorRandomFloor":1,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":72},
-              {"appletID":"10","type":3,"startX":419,"startY":190,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","numeratorRandomCeiling":7,"numeratorRandomFloor":1,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":72},
+              {"appletID":"10","type":3,"startX":251,"startY":123,"font":" 72px Arial","fontString":" 48px Arial","fill":"Black","numeratorRandomCeiling":7,"numeratorRandomFloor":1,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":48},
+              {"appletID":"10","type":3,"startX":397,"startY":123,"font":" 72px Arial","fontString":" 48px Arial","fill":"Black","numeratorRandomCeiling":7,"numeratorRandomFloor":1,"denominatorRandomCeiling":7,"denominatorRandomFloor":7,"size":48},
               {"appletID":"10","type":9,"startX":540,"startY":180,"userScale":0.5},
               {"appletID":"10","type":9,"startX":600,"startY":150,"userScale":0.5},
               {"appletID":"10","type":9,"startX":600,"startY":208,"userScale":0.5},
@@ -411,12 +411,20 @@
         },
         { "summary": "testing - box",
           "problems": [
-              {"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":10,"drawingBoxEndX":371,"drawingBoxEndY":369},
-              {"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":9,"drawingBoxEndX":789,"drawingBoxEndY":371},
-              {"appletID":"95","type":99,"drawingBoxStartX":380,"drawingBoxStartY":379,"drawingBoxEndX":788,"drawingBoxEndY":591},
-              {"appletID":"95","type":99,"drawingBoxStartX":9,"drawingBoxStartY":377,"drawingBoxEndX":372,"drawingBoxEndY":589}
-                     ],
-          "solution": ""
+              {"appletID":"95","type":16,"expression":"getRandomInt%280%2C180%29"},
+              {"appletID":"95","type":16,"expression":"180-hiddenNumber%5B0%5D"},
+              {"appletID":"95","type":99,"drawingBoxStartX":799,"drawingBoxStartY":282,"drawingBoxEndX":799,"drawingBoxEndY":282},
+              {"appletID":"95","type":99,"drawingBoxStartX":797,"drawingBoxStartY":235,"drawingBoxEndX":797,"drawingBoxEndY":235},
+              {"appletID":"95","type":21,"startX":20,"startY":0,"textureExpression":"drawAngle(125,90,90+hiddenNumber[0])","number":"hiddenNumber[0]","draggable":1},
+              {"appletID":"95","type":21,"startX":500,"startY":0,"textureExpression":"drawAngle(125,90,90+hiddenNumber[1])","number":"hiddenNumber[1]","draggable":1},
+              {"appletID":"95","type":9,"startX":640,"startY":420,"userScaleX":3,"userScaleY":3},
+              {"appletID":"95","type":9,"startX":160,"startY":420,"userScaleX":3,"userScaleY":3},
+              {"appletID":"95","type":1,"startX":580,"startY":540,"text":"Obtuse","newText":"Obtuse","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"95","type":1,"startX":100,"startY":540,"text":"Acute","newText":"Acute","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"95","type":5,"startX":400,"startY":480},
+              {"appletID":"95","type":1,"startX":300,"startY":400,"text":"Drag%20each%20angle%20to%20the%20correct%20box.","newText":"Drag%20each%20angle%20to%20the%20correct%20box.","font":"","fontString":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","alignment":"left"}       
+],
+          "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
         { "summary": "",
           "problems": [
