@@ -1982,7 +1982,6 @@ function drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) {
     angleGraphic.drawCircle(-legLength, legLength, 0.01);
     angleGraphic.drawCircle(legLength, -legLength, 0.01);
     angleGraphic.drawCircle(-legLength, -legLength, 0.01);
-    newTextureTemp = angleGraphic;
     return angleGraphic.generateTexture()
 }
 
@@ -3996,6 +3995,8 @@ function makeWordProblemSet(returnNumber) {
     setArray.push(new WordProblemSet("birds","in","flock","flocks") )
     return setArray[returnNumber]
 }
+
+//test
 
 function fixedEncodeURIComponent (str) {
   return encodeURIComponent(str).replace(/[!'()*"+]/g, function(c) {
