@@ -387,6 +387,12 @@
         },
         { "summary": "",
           "problems": [
+            {"appletID":"96","type":16,"expression":"getRandomInt%280%2C1440%29"},
+            {"appletID":"96","type":21,"startX":20,"startY":20,"textureExpression":"drawClock(hiddenNumber[0] )","number":"hiddenNumber[0]","draggable":1},
+            {"appletID":"96","type":9,"startX":700,"startY":500,"userScaleX":2,"userScaleY":2}]
+        },
+        { "summary": "",
+          "problems": [
               {"appletID":"97","type":20,"startX":180,"startY":160,"lineOrientation":"h","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":400,"dotStartY":300,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true}
           ]
         },
