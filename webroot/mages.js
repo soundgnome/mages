@@ -2571,6 +2571,8 @@ function buildDragToBox(item) {
         startX=400;
         startY=250;
     }
+    if (typeof item.userScaleX === 'undefined') { item.userScaleX = item.userScale; }
+    if (typeof item.userScaleY === 'undefined') { item.userScaleY = item.userScale; }
     var dragToGraphic = game.add.graphics(0, 0);
     dragToGraphic.beginFill(0xFFFFFF);
     dragToGraphic.lineStyle(2, 0x000000, 1);
