@@ -1924,19 +1924,23 @@ function buildProtractorAngle(item) {
     var legLength=270;
     item.lowerAngleExpression = item.lowerAngle;
     item.lowerAngle=eval(item.lowerAngle)
+    item.upperAngleExpression = item.upperAngle;
+    item.upperAngle=eval(item.upperAngle)
     var oldLowerAngle=item.lowerAngle;
+    var oldUpperAngle=item.upperAngle;
+    
+    angleGraphic = drawAngle(legLength, item.lowerAngle, item.upperAngle ) ;
+    
     item.lowerAngle = item.lowerAngle * Math.PI / 180;
     var lowerEndX   = legLength * Math.sin(item.lowerAngle);
     var lowerEndY   = legLength * Math.cos(item.lowerAngle);
-    
-    item.upperAngleExpression = item.upperAngle;
-    item.upperAngle=eval(item.upperAngle)
-    var oldUpperAngle=item.upperAngle;
+
     item.upperAngle = item.upperAngle * Math.PI / 180;
     var upperEndX   = legLength * Math.sin(item.upperAngle);
     var upperEndY   = legLength * Math.cos(item.upperAngle);
+    
     //add the angle
-    angleGraphic = drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) ;
+    
     piece[piece.length] = game.add.sprite(item.angleX+3, item.angleY+1, angleGraphic);
     adjustNewPiece();
     piece[piece.length-1].type=11;
@@ -1970,7 +1974,15 @@ function buildProtractorAngle(item) {
     piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);    
 }
 
-function drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) {
+function drawAngle(legLength, lowerAngle, upperAngle ) {
+    lowerAngle = lowerAngle * Math.PI / 180;
+    var lowerEndX   = legLength * Math.sin(lowerAngle);
+    var lowerEndY   = legLength * Math.cos(lowerAngle);
+
+    upperAngle = upperAngle * Math.PI / 180;
+    var upperEndX   = legLength * Math.sin(upperAngle);
+    var upperEndY   = legLength * Math.cos(upperAngle);
+
     var angleGraphic = game.add.graphics(0, 0);
     angleGraphic.lineStyle(2, 0x000000);
     angleGraphic.moveTo(0,0);
@@ -1984,6 +1996,7 @@ function drawAngle(legLength, lowerEndX, lowerEndY, upperEndX, upperEndY) {
     angleGraphic.drawCircle(-legLength, legLength, 0.01);
     angleGraphic.drawCircle(legLength, -legLength, 0.01);
     angleGraphic.drawCircle(-legLength, -legLength, 0.01);
+    newTextureTemp = angleGraphic
     return angleGraphic.generateTexture()
 }
 
@@ -2833,7 +2846,7 @@ function buildTally(item) {
     var tallyMinus;
     
     piece[piece.length] = game.add.group();
-    tallyChart = piece[piece.length-1].create(0, 0, drawTally(item.initialValue).generateTexture());
+    tallyChart = piece[piece.length-1].create(0, 0, drawTally(item.initialValue));
     tallyGraphic.clear();
     
     
@@ -2885,7 +2898,7 @@ function tallyMinusClick() {
 }
 
 function setTally(tallyValue) {
-    tallyChart.loadTexture(drawTally(tallyValue).generateTexture());
+    tallyChart.loadTexture(drawTally(tallyValue));
     tallyGraphic.clear();
 }
 
@@ -2914,7 +2927,8 @@ function drawTally(tallyValue) {
             tallyY+=60;
         } 
     }
-    return tallyGraphic;
+    newTextureTemp = tallyGraphic;
+    return tallyGraphic.generateTexture();
 }
 
 //MULTIPLE CHOICE VALUES
@@ -3698,7 +3712,6 @@ function buildRandomFraction(item) {
     {
         piece[piece.length-1].x=400;
         piece[piece.length-1].y=300;
-        
         piece[piece.length-1].inputEnabled='true';
         piece[piece.length-1].events.onInputDown.add(buildGroupPieceClick, this);
         piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
@@ -3714,8 +3727,6 @@ function buildRandomFraction(item) {
         piece[piece.length-1].grouped=1;
         piece[piece.length-1].type=3;
     }
-        
-    
 }
 
 
