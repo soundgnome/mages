@@ -3810,7 +3810,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    //game.debug.text("test", 10, 20);
+    //game.debug.text("Mages Public Alpha.32 - Load applets 1-30 and 100-109 for examples.", 10, 20);
 }
 
 
