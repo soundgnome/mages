@@ -851,8 +851,6 @@ function printPieces(newAppletID, appletDoneTest) {
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
-                        "font":piece[item].fontString ,
-                        "fontString":piece[item].fontString,
                         "fill":piece[item].fill ,
                         "randomCeiling":piece[item].randomCeiling,
                         "randomFloor":piece[item].randomFloor,
@@ -3654,38 +3652,38 @@ function buildRandomFraction(item) {
     randomDenominator.push(newDenominatorRandom);
     if(state!='build')
     {
-        fontString=item.fontString;
+        fontString="" + newBold + " " + item.size + "px Arial";
         newTextColor=item.fill;
         newTextWrap=item.wordWrap;
         newTextWidth=item.wordWrapWidth;
-        newTextSize = item.size;
     } else
     {
         fontString="" + newBold + " " + newTextSize + "px Arial";
+        item.size = newTextSize;
     }
     
     
     //build start coordinates; will change down below if we're running an applet
 
-    var newNumeratorRandomText = game.add.text(newTextSize/2.5, 0, newNumeratorRandom.toString(), {
+    var newNumeratorRandomText = game.add.text(item.size/2.5, 0, newNumeratorRandom.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
     console.log(newNumeratorRandomText.font)
-    var newDenominatorRandomText = game.add.text(newTextSize/2.5, newTextSize, newDenominatorRandom.toString(), {
+    var newDenominatorRandomText = game.add.text(item.size/2.5, item.size, newDenominatorRandom.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
     
-    var fractionBarText = game.add.text(-newTextSize/2.5, 0, "___", {
+    var fractionBarText = game.add.text(-item.size/2.5, 0, "___", {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
     
-    var boxLength = Number(newTextSize)
+    var boxLength = Number(item.size)
     var boxGraphic = game.add.graphics(0, 0);
     boxGraphic.lineStyle(2, 0x000000, 1)
     boxGraphic.drawCircle(0, -boxLength, 0.01);//these four dots keep the whole thing centered
@@ -3703,9 +3701,9 @@ function buildRandomFraction(item) {
     piece[piece.length-1].addChild(newNumeratorRandomText);
     piece[piece.length-1].addChild(newDenominatorRandomText);
     
-    piece[piece.length-1].scale.setTo(newTextSize/40, newTextSize/40);
+    piece[piece.length-1].scale.setTo(item.size/40, item.size/40);
     
-    piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
+    piece[piece.length-1].fontString="" + newBold + " " + item.size + "px Arial";
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].anchor.setTo(0.5, 0.5); 
     if(state != 'build')

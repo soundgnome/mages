@@ -409,7 +409,7 @@
                         ],
           "solution": ""
         },
-        { "summary": "testing - box",
+        { "summary": "testing - draggable textures",
           "problems": [
               {"appletID":"95","type":16,"expression":"getRandomInt%280%2C180%29"},
               {"appletID":"95","type":16,"expression":"180-hiddenNumber%5B0%5D"},
@@ -426,11 +426,11 @@
 ],
           "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
-        { "summary": "",
+        { "summary": "testing - fraction sizes",
           "problems": [
-            {"appletID":"96","type":16,"expression":"getRandomInt%280%2C1440%29"},
-            {"appletID":"96","type":21,"startX":20,"startY":20,"textureExpression":"drawClock(hiddenNumber[0] )","number":"hiddenNumber[0]","draggable":1},
-            {"appletID":"96","type":9,"startX":700,"startY":500,"userScaleX":2,"userScaleY":2}]
+              {"appletID":"96","type":3,"startX":160,"startY":140,"fill":"Red","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0},
+              {"appletID":"96","type":3,"startX":340,"startY":260,"fill":"Blue","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"72","draggable":1}
+               ]
         },
         { "summary": "",
           "problems": [
