@@ -439,9 +439,8 @@
         },
         { "summary": "testing - fraction sizes",
           "problems": [
-              {"appletID":"96","type":3,"startX":160,"startY":140,"fill":"Red","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0},
-              {"appletID":"96","type":3,"startX":340,"startY":260,"fill":"Blue","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"72","draggable":1}
-               ]
+{"appletID":"96","type":1,"startX":400,"startY":250,"newText":"New%20test.","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
+]
         },
         { "summary": "",
           "problems": [

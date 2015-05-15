@@ -307,7 +307,7 @@ function getRandomMixedNumberSettings() {
                     getMenuEntryString("Denominator Floor" , "denfloor", 1 ) +
                     getMenuEntryString("Denominator Ceiling" , "denceiling", 10 , null) +
                     getMenuEntryString("Color" , "color", newTextColor , null) +
-                    getMenuEntryString("Size" , "size", 72 , null) +
+                    getMenuEntryString("Size" , "size", 36 , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
                     getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
                     '</form> </div>  </div>',
