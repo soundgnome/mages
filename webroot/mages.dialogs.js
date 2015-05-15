@@ -573,6 +573,41 @@ function getDraggableNumbersSettings() {
     
 }
 
+function getClickBoxSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "HundredChart Settings",
+                message: 
+                getMenuEntryString("Scale:" , "scale", 1 , null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                           // newAppletID = Number(prompt("Enter new applet ID#:"));  
+	                        // appletDoneTest = new DoneTest(newAppletID, prompt("Enter new doneTest:"));
+                            
+                            var userScale = $('#scale').val();
+                            var staticValue = $('#staticvalue').val();
+                            state = 'build';
+                            var newObject = JSON.parse(JSON.stringify({
+                                "userScale":Number(userScale) ,
+                                "startX" : 400 , 
+                                "startY" : 300 
+                                })) ;
+                            buildClickBox(newObject);
+                            adjustNewPiece();
+                            
+                        }
+                    }
+                }
+            }
+        );
+}
+
+
 function getHundredChartSettings() {
     menuKeyPressed ==0;
     state = 'prompt';

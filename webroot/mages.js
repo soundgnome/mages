@@ -569,7 +569,7 @@ function onBuildMenuClick(item, pointer) {
         }
         switch(this.id) {
             case 0: //clickbox
-            buildClickBox();
+            getClickBoxSettings();
             break;
             
             case 1:  //text area
@@ -807,6 +807,7 @@ function printPieces(newAppletID, appletDoneTest) {
                 var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
+                        "userScale": piece[item].userScale, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y ,
                         });
@@ -3175,15 +3176,18 @@ function PieceConstructor(appletID, type, startX, startY, text, font, fill, word
 
 var boxesClicked=-1;
 function buildClickBox(item) {
-    piece[piece.length] = game.add.sprite(0, 0, 'whiteBox80');
+    if (typeof item.userScale === 'undefined') { item.userScale = 1; }
+    piece[piece.length] = game.add.sprite(0, 0, drawClickableBox(4*item.userScale, 0));
+    newTextureTemp.clear();
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type=0;
+    piece[piece.length-1].x = item.startX;
+    piece[piece.length-1].y = item.startY;
+    piece[piece.length-1].userScale = item.userScale;
     if(state!='build')
     {
         totalBoxes++;
         boxesClicked=0;
-        piece[piece.length-1].x = item.startX;
-        piece[piece.length-1].y = item.startY;
         piece[piece.length-1].clicked = 0;
         piece[piece.length-1].inputEnabled='true';
         piece[piece.length-1].events.onInputDown.add(clickBoxClick, this);
@@ -3196,12 +3200,14 @@ function clickBoxClick(item) {
     {
         item.clicked = 1;
         boxesClicked++;
-        item.loadTexture('grayBox80');
+        item.loadTexture(drawClickableBox(4*item.userScale, 1));
+        newTextureTemp.clear();
     } else
     {
         item.clicked = 0;
         boxesClicked--;
-        item.loadTexture('whiteBox80');
+        item.loadTexture(drawClickableBox(4*item.userScale, 0));
+        newTextureTemp.clear();
     }    
 }
 
@@ -3292,7 +3298,7 @@ function buildHundredChart(item) {
     {
         for(var j=0; j<10; j++)
         {
-            piece[piece.length-1].create((i-5)*20*item.userScale,(j-5)*20*item.userScale, drawHundredBoxOne(item.userScale, ( valueCountdown > 0 ? 1 : 0 ) ));
+            piece[piece.length-1].create((i-5)*20*item.userScale,(j-5)*20*item.userScale, drawClickableBox(item.userScale, ( valueCountdown > 0 ? 1 : 0 ) ));
             valueCountdown--
             newTextureTemp.clear();
         }
@@ -3335,7 +3341,7 @@ function buildHundredChart(item) {
     
 }
 
-function drawHundredBoxOne(scale, clicked){
+function drawClickableBox(scale, clicked){
     var hundredBoxOneGraphic = game.add.graphics(0, 0);
     hundredBoxOneGraphic.lineStyle(2, 0x000000, 1);
     (clicked == 0 ? hundredBoxOneGraphic.beginFill(0xFFFFFF)  : hundredBoxOneGraphic.beginFill(0xA8A8A8) ) ;
@@ -3357,13 +3363,13 @@ function hundredBoxClick(item) {
         {
             item.clicked = 1;
             hundredBoxesClicked++;
-            item.loadTexture(drawHundredBoxOne(item.userScale, 1));
+            item.loadTexture(drawClickableBox(item.userScale, 1));
             newTextureTemp.clear();
         } else
         {
             item.clicked = 0;
             hundredBoxesClicked--;
-            item.loadTexture(drawHundredBoxOne(item.userScale, 0));
+            item.loadTexture(drawClickableBox(item.userScale, 0));
             newTextureTemp.clear();
         }   
     }

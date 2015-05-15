@@ -434,12 +434,15 @@
               {"appletID":"95","type":1,"startX":100,"startY":540,"text":"Acute","newText":"Acute","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"95","type":5,"startX":400,"startY":480},
               {"appletID":"95","type":1,"startX":300,"startY":400,"text":"Drag%20each%20angle%20to%20the%20correct%20box.","newText":"Drag%20each%20angle%20to%20the%20correct%20box.","font":"","fontString":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","alignment":"left"}       
-],
+                      ],
           "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
-        { "summary": "testing - hundred chart",
+        { "summary": "testing - click boxes",
           "problems": [
-{"appletID":"96","type":4,"userScale":1,"staticValue":15,"startX":180,"startY":160}]
+              {"appletID":"96","type":0,"userScale":1,"startX":400,"startY":300},
+              {"appletID":"96","type":0,"userScale":2,"startX":540,"startY":340},
+              {"appletID":"96","type":0,"userScale":0.1,"startX":300,"startY":260}
+              ]
         },
         { "summary": "",
           "problems": [
