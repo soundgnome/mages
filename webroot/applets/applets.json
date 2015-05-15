@@ -26,7 +26,7 @@
               {"appletID":"2","type":1,"startX":100,"startY":260,"text":"____","newText":"____","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"2","type":1,"startX":118,"startY":262,"text":"%2B","newText":"%2B","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"2","type":8,"startX":40,"startY":380,"orientation":"v","clonable":"undefined","fill":"Black","size":"40"},
-              {"appletID":"2","type":4,"startX":580,"startY":220},
+              {"appletID":"2","type":4,"startX":580,"startY":180,"userScale":1.5,"staticValue":0},
               {"appletID":"2","type":5,"startX":580,"startY":400}
           ],
           "solution": "randomNumber[0]+randomNumber[1]==hundredBoxesClicked"
@@ -437,10 +437,9 @@
 ],
           "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
-        { "summary": "testing - fraction sizes",
+        { "summary": "testing - hundred chart",
           "problems": [
-{"appletID":"96","type":1,"startX":400,"startY":250,"newText":"New%20test.","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
-]
+{"appletID":"96","type":4,"userScale":1,"staticValue":15,"startX":180,"startY":160}]
         },
         { "summary": "",
           "problems": [

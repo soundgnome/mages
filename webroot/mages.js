@@ -585,7 +585,7 @@ function onBuildMenuClick(item, pointer) {
             break;
             
             case 4: //hundred chart
-            buildHundredChart();
+            getHundredChartSettings();
             break;
             
             case 5:  //done button
@@ -873,6 +873,8 @@ function printPieces(newAppletID, appletDoneTest) {
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
+                        "userScale": piece[item].userScale, 
+                        "staticValue": piece[item].staticValue,
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
                         });
@@ -3285,33 +3287,63 @@ function buildRandomNumber(item) {
 var hundredBoxesClicked=-1;
 function buildHundredChart(item) {
     piece[piece.length] = game.add.group();
+    var valueCountdown = item.staticValue;
     for(var i=0; i<10; i++)
     {
         for(var j=0; j<10; j++)
         {
-            piece[piece.length-1].create((i-5)*20,(j-5)*20,'whiteHundredBox');
+            piece[piece.length-1].create((i-5)*20*item.userScale,(j-5)*20*item.userScale, drawHundredBoxOne(item.userScale, ( valueCountdown > 0 ? 1 : 0 ) ));
+            valueCountdown--
+            newTextureTemp.clear();
         }
     }
-    piece[piece.length-1].forEach(function(item) {
-        item.inputEnabled='true';
-        item.events.onInputDown.add(buildGroupPieceClick, this);
-        item.events.onInputUp.add(onFinishDrag, draggingPiece);
-        item.clicked=0;
-        item.ParentPosition=piece.length-1;
+    piece[piece.length-1].forEach(function(subItem) {
+        if(item.staticValue > 0) //static value
+        {
+             
+            hundredBoxesClicked = item.staticValue
+        } else
+        {
+            hundredBoxesClicked=0;
+        }
+        subItem.inputEnabled='true';
+        subItem.events.onInputDown.add(buildGroupPieceClick, this);
+        subItem.events.onInputUp.add(onFinishDrag, draggingPiece);
+        subItem.clicked=0;  
+       
+        subItem.userScale = item.userScale;
+        subItem.ParentPosition=piece.length-1;
     });
+    piece[piece.length-1].x = item.startX;
+    piece[piece.length-1].y = item.startY;
     if(state!= 'build')
     {
-        piece[piece.length-1].x = item.startX;
-        piece[piece.length-1].y = item.startY;
-        piece[piece.length-1].forEach(function(item) {
-            item.inputEnabled='true';
-            item.events.onInputDown.add(hundredBoxClick, this);
-            item.parentNumber = piece.length-1;
+
+        piece[piece.length-1].forEach(function(subItem) {
+            if(item.staticValue == 0)
+            {
+                subItem.inputEnabled='true';
+                subItem.events.onInputDown.add(hundredBoxClick, this);
+            }
+            subItem.parentNumber = piece.length-1;
         });    
     }
+    piece[piece.length-1].userScale = item.userScale;
+    piece[piece.length-1].staticValue = item.staticValue;
     piece[piece.length-1].grouped=1;
     piece[piece.length-1].type=4; 
-    hundredBoxesClicked=0;
+    
+}
+
+function drawHundredBoxOne(scale, clicked){
+    var hundredBoxOneGraphic = game.add.graphics(0, 0);
+    hundredBoxOneGraphic.lineStyle(2, 0x000000, 1);
+    (clicked == 0 ? hundredBoxOneGraphic.beginFill(0xFFFFFF)  : hundredBoxOneGraphic.beginFill(0xA8A8A8) ) ;
+    hundredBoxOneGraphic.drawRect(0, 0, 20*scale, 20*scale); 
+    hundredBoxOneGraphic.endFill();
+    newTextureTemp = hundredBoxOneGraphic;
+    return hundredBoxOneGraphic.generateTexture();
+    
 }
 
 function hundredBoxClick(item) {
@@ -3325,12 +3357,14 @@ function hundredBoxClick(item) {
         {
             item.clicked = 1;
             hundredBoxesClicked++;
-            item.loadTexture('grayHundredBox');
+            item.loadTexture(drawHundredBoxOne(item.userScale, 1));
+            newTextureTemp.clear();
         } else
         {
             item.clicked = 0;
             hundredBoxesClicked--;
-            item.loadTexture('whiteHundredBox');
+            item.loadTexture(drawHundredBoxOne(item.userScale, 0));
+            newTextureTemp.clear();
         }   
     }
 }
