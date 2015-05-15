@@ -396,6 +396,22 @@
           ],
           "solution": "dragToBoxes[0].contents>dragToBoxes[1].contents&&dragToBoxes[2].contents"
         },
+        { "summary": "time elapsed",
+          "problems": [
+              {"appletID":"31","type":16,"expression":"getRandomInt%280%2C1320%29"},
+              {"appletID":"31","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%280%2C120%29"},
+              {"appletID":"31","type":21,"startX":200,"startY":60,"textureExpression":"drawClock(hiddenNumber[0])","number":829,"draggable":0},
+              {"appletID":"31","type":21,"startX":440,"startY":60,"textureExpression":"drawClock(hiddenNumber[1])","number":908,"draggable":0},
+              {"appletID":"31","type":1,"startX":265,"startY":40,"text":"START","newText":"START","font":"","fontString":"bold 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"31","type":1,"startX":520,"startY":40,"text":"END","newText":"END","font":"","fontString":"bold 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"31","type":1,"startX":200,"startY":280,"text":"How%20many%20minutes%20passed%20between%20the%20start%20and%20end%3F","newText":"How%20many%20minutes%20passed%20between%20the%20start%20and%20end%3F","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"31","type":14,"numberEntryX":180,"numberEntryY":400,"orientation":"h","displayX":320,"displayY":320,"displayDigits":3},
+              {"appletID":"31","type":1,"startX":456,"startY":347,"text":"minutes","newText":"minutes","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"31","type":5,"startX":700,"startY":540},
+              {"appletID":"31","type":99,"drawingBoxStartX":160,"drawingBoxStartY":23,"drawingBoxEndX":659,"drawingBoxEndY":463}
+                        ],
+          "solution": "hiddenNumber[1]-hiddenNumber[0]==numberEntryValue"
+        },
         { "summary": "",
           "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
@@ -403,11 +419,6 @@
               {"appletID":"42","type":5,"startX":360,"startY":500}
           ],
           "solution": "numberEntryValue==42"
-        },
-        { "summary": "",
-          "problems": [
-                        ],
-          "solution": ""
         },
         { "summary": "testing - draggable textures",
           "problems": [
