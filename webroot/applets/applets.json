@@ -149,7 +149,7 @@
               {"appletID":"10","type":8,"startX":700,"startY":240,"orientation":"v","clonable":"undefined","fill":"Black","size":"40"},
               {"appletID":"10","type":5,"startX":420,"startY":420}
           ],
-          "solution": "((randomNumerator[0]+randomNumerator[1])/7 == dragToBoxes[0].contents + (dragToBoxes[2].contents > 0 ? dragToBoxes[1].contents/dragToBoxes[2].contents : dragToBoxes[1].contents ))"
+          "solution": "(  ((randomNumerator[0]+randomNumerator[1])/7).toFixed(2) == (dragToBoxes[0].contents + (dragToBoxes[2].contents > 0 ? dragToBoxes[1].contents/dragToBoxes[2].contents : dragToBoxes[1].contents )).toFixed(2) )"
         },
         { "summary": "number of tens/hundreds in 4-digit number",
           "problems": [

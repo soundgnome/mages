@@ -664,7 +664,6 @@ function onBuildMenuClick(item, pointer) {
             case 21:  //texture area
             getTextureAreaSettings() //in mages.dialogs.js
             break;
-            
         }
         if(state != 'prompt')
         {
@@ -1108,7 +1107,7 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 19: //TTableConstructor(appletID, type, wordLabel, wordList, expressionLabel, expressionList, startX, startY) 
                     for(var itemCounter  = 0; itemCounter < piece[item].expressionList.length ; itemCounter++) {
-                            piece[item].expressionList[itemCounter] =fixedEncodeURIComponent(piece[item].expressionList[itemCounter]) 
+                            piece[item].expressionList[itemCounter] =fixedEncodeURIComponent(piece[item].expressionList[itemCounter]) ;
                     }
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
@@ -1166,7 +1165,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     break;
                     
                 case 99: //DrawBoxConstructor(appletID, type, drawingBoxStartX, drawingBoxStartY, drawingBoxEndX , drawingBoxEndY) 
-                    console.log("WRONG- " + piece[item])
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 

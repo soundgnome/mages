@@ -6,20 +6,24 @@ function getTextureAreaSettings(item) {
                 message: 
                     getMenuEntryString("Texture expression?" , "texture", "testTexture()" , null) +
                     getMenuEntryString("Texture value?" , "number", "1" , null) +
-                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") + 
+                    getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
+                    //getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") + 
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
                         label: "Save",
                         className: "btn-success",
                         callback: function () {
+                            console.log($("input[name='behavior']:checked").val() )
                             var newObject = JSON.parse(JSON.stringify({
                                 "type": 21, 
                                 "startX":100 ,
                                 "startY":10,
                                 "textureExpression": $('#texture').val(),
                                 "number": $('#number').val(),
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                             })) ;
                             buildTextureArea(newObject)
                             state = 'build';
@@ -28,7 +32,6 @@ function getTextureAreaSettings(item) {
                 }
             }
         );
-    
 }
 
 function getNumberLineSettings() {
@@ -257,7 +260,7 @@ function getRandomDecimalSettings() {
                     getMenuEntryString("Color" , "color", newTextColor , null) +
                     getMenuEntryString("Size" , "size", 72 , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
-                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
+                    getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -282,7 +285,9 @@ function getRandomDecimalSettings() {
                                 "randomCeiling":newRandomCeiling,
                                 "randomFloor":newRandomFloor,
                                 "randomDigits":newRandomDigits,
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
                             buildRandomDecimal(newObject);
                             adjustNewPiece();
@@ -309,7 +314,7 @@ function getRandomMixedNumberSettings() {
                     getMenuEntryString("Color" , "color", newTextColor , null) +
                     getMenuEntryString("Size" , "size", 36 , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
-                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
+                    getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -339,7 +344,9 @@ function getRandomMixedNumberSettings() {
                                 "numeratorRandomFloor":newNumeratorRandomFloor,
                                 "denominatorRandomCeiling":newDenominatorRandomCeiling,
                                 "denominatorRandomFloor":newDenominatorRandomFloor,
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
                             buildRandomMixedNumber(newObject);
                             adjustNewPiece();
@@ -364,7 +371,7 @@ function getRandomFractionSettings() {
                 getMenuEntryString("Color" , "color", newTextColor , null) +
                 getMenuEntryString("Size" , "size", 36 , null) +
                 getMenuYesNoString("Bold?", "bold", null) +
-                getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
+                getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -391,7 +398,9 @@ function getRandomFractionSettings() {
                                 "numeratorRandomFloor":newNumeratorRandomFloor,
                                 "denominatorRandomCeiling":newDenominatorRandomCeiling,
                                 "denominatorRandomFloor":newDenominatorRandomFloor,
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
                             buildRandomFraction(newObject);
                             adjustNewPiece();
@@ -414,7 +423,7 @@ function getRandomNumberSettings() {
                 getMenuEntryString("Color" , "color", newTextColor , null) +
                 getMenuEntryString("Size" , "size", 72 , null) +
                 getMenuYesNoString("Bold?", "bold", null) +
-                getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
+                getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -437,7 +446,9 @@ function getRandomNumberSettings() {
                             var newObject = JSON.parse(JSON.stringify({   
                                 "randomCeiling":newRandomCeiling,
                                 "randomFloor":newRandomFloor,
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
                             buildRandomNumber(newObject);
                             adjustNewPiece();
@@ -702,8 +713,7 @@ function getNumberEntrySettings() {
                                 "orientation":orientation , 
                                 "displayX":300, 
                                 "displayY":300, 
-                                "displayDigits":Number(digits),
-                                "draggable" : ($("input[name='draggable']:checked").val() == "Yes" ? 1 : 0)
+                                "displayDigits":Number(digits)
                                 })) ;
                             buildNumberEntry(newObject)
                             
@@ -753,7 +763,7 @@ function getEvaluatedExpressionSettings() {
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
                     getMenuYesNoString("Bold?", "bold", null) +
                     getMenuEntryString("Alighnment? l/c/r:" , "alignment", "r" , null) +
-                    getMenuYesNoString("Draggable?", "draggable", "Allow user to drag.") +
+                    getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -1193,5 +1203,23 @@ function getMenuYesNoString(label, key, help) {
             '</div> ' 
 }
 
+function getMenuStaticDraggagbleSelectableString(label, key, help) {
+    var helpString = '';
+    if(help != null)
+    {
+        helpString='<span class="help-block">' + help + '</span> </div> '
+    }
+    return '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="bold">' + label + '</label> ' +
+            '<div class="col-md-4"> <div class="radio"> <label for="bold-0"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-0" value="Static" checked="checked"> ' +
+            'Static </label> ' +
+            '</div><div class="radio"> <label for="' + key + '-1"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-1" value="Draggable"> Draggable </label> ' +
+            '</div><div class="radio"> <label for="' + key + '-1"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-1" value="Selectable"> Selectable </label> ' +
+            helpString +
+            '</div> ' 
+}
 
 
