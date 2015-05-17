@@ -420,7 +420,7 @@
           ],
           "solution": "numberEntryValue==42"
         },
-        { "summary": "testing - draggable textures",
+        { "summary": "draggable angles texture test",
           "problems": [
               {"appletID":"95","type":16,"expression":"getRandomInt%280%2C180%29"},
               {"appletID":"95","type":16,"expression":"180-hiddenNumber%5B0%5D"},
@@ -437,7 +437,7 @@
                       ],
           "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
-        { "summary": "testing - selectable",
+        { "summary": "multiple select test",
           "problems": [
               {"appletID":"96","type":1,"startX":60,"startY":80,"newText":"Select%20all%20numbers%20greater%20than%2010%3A","font":"","fontString":" 20px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"96","type":2,"startX":200,"startY":160,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B0%5D%3E10"},
