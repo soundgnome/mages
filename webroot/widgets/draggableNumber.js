@@ -1,4 +1,5 @@
 //this makes a copy of the original number that can now make a copy of itself
+var draggableNumbers = []
 function draggableNumbersClickClone(item) {
     var newClone = game.add.text(item.x, item.y, item.number.toString(), {
                     font: item.fontString,
