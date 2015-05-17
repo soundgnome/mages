@@ -439,12 +439,16 @@
         },
         { "summary": "testing - selectable",
           "problems": [
-              {"appletID":"96","type":21,"startX":180,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
-              {"appletID":"96","type":21,"startX":380,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
-              {"appletID":"96","type":21,"startX":180,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"},
-              {"appletID":"96","type":21,"startX":380,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"}
-
-              ]
+              {"appletID":"96","type":1,"startX":60,"startY":80,"newText":"Select%20all%20numbers%20greater%20than%2010%3A","font":"","fontString":" 20px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"96","type":2,"startX":200,"startY":160,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B0%5D%3E10"},
+              {"appletID":"96","type":2,"startX":460,"startY":160,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B1%5D%3E10"},
+              {"appletID":"96","type":2,"startX":660,"startY":160,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B2%5D%3E10"},
+              {"appletID":"96","type":2,"startX":200,"startY":360,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B3%5D%3E10"},
+              {"appletID":"96","type":2,"startX":440,"startY":360,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B4%5D%3E10"},
+              {"appletID":"96","type":2,"startX":680,"startY":360,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B5%5D%3E10"},
+              {"appletID":"96","type":5,"startX":440,"startY":540}
+              ],
+          "solution": "selectableScore()==1"
         },
         { "summary": "",
           "problems": [{"appletID":"97","type":2,"startX":160,"startY":100,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
