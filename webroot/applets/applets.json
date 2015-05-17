@@ -437,11 +437,13 @@
                       ],
           "solution": "dragToBoxes[1].contents<90 && dragToBoxes[0].contents>90"
         },
-        { "summary": "testing - click boxes",
+        { "summary": "testing - selectable",
           "problems": [
-              {"appletID":"96","type":0,"userScale":1,"startX":400,"startY":300},
-              {"appletID":"96","type":0,"userScale":2,"startX":540,"startY":340},
-              {"appletID":"96","type":0,"userScale":0.1,"startX":300,"startY":260}
+{"appletID":"96","type":21,"startX":180,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"96","type":21,"startX":380,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"96","type":21,"startX":180,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"},
+{"appletID":"96","type":21,"startX":380,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"}
+
               ]
         },
         { "summary": "",

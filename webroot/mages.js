@@ -1158,7 +1158,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startY":piece[item].y,
                         "textureExpression": piece[item].textureExpression,
                         "number": piece[item].number ,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -1203,6 +1205,8 @@ function getConstructorString(newObject) {
         /***********************************************************************
          *          PIECE CONSTRUCTORS AND FUNCTIONS
          * ********************************************************************/
+        
+
 var textureArea;
 function buildTextureArea(item) {
     var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression) )
@@ -1230,6 +1234,8 @@ function buildTextureArea(item) {
     piece[piece.length-1].textureExpression = item.textureExpression;
     piece[piece.length-1].type = item.type;
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
     if(state!='build')
     {
         piece[piece.length-1].number = eval(item.number);
@@ -1248,7 +1254,55 @@ function buildTextureArea(item) {
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
     }
+    if(state!='build' && item.selectable == 1)
+    {
+        
+        piece[piece.length-1].selectionSlot = multipleSelection.length
+        multipleSelection.push(piece[piece.length-1])
+        selectionBoxGraphics.push(null)
+        piece[piece.length-1].selected = 0;
+        piece[piece.length-1].inputEnabled='true';
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(clickSelectable, this);
+    }
+    if(state=='build' && item.selectable == 1) {getSelectionExpressionSettings(); }//in mages.dialogs.js 
     newTextureTemp.clear()
+}
+
+var selectionBoxGraphics = []
+function clickSelectable(item) {
+    console.log("selected")
+    if(item.selected == 0)
+    {
+        item.selected = true;
+        selectionBoxGraphics[item.selectionSlot] = game.add.graphics(item.x, item.y);   
+        selectionBoxGraphics[item.selectionSlot].lineStyle(2, 0x0000FF, 1);
+        selectionBoxGraphics[item.selectionSlot].drawRect(-10, -10, item.width+20, item.height+20);
+    } else
+    {
+        item.selected = false;
+        selectionBoxGraphics[item.selectionSlot].clear();
+    }
+}
+
+var multipleSelection = []; 
+function selectableScore() {
+    var score = 0;
+    if(multipleSelection.length > 0)
+    {
+        
+        for(var i = 0; i < multipleSelection.length; i++) {
+            if(multipleSelection[i].selected == eval(decodeURIComponent(multipleSelection[i].selectedExpression) ) )
+            {
+                score++
+            }
+        }
+        return score/multipleSelection.length 
+    } else
+    {
+        return null
+    }
+    
 }
 
 var newTextureTemp
@@ -3816,6 +3870,8 @@ function doneButtonClick(item) {
         /***********************************************************************
          *                  USEFUL FUNCTIONS
          * ********************************************************************/
+         
+
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

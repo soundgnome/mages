@@ -25,8 +25,9 @@ function getTextureAreaSettings(item) {
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                             })) ;
-                            buildTextureArea(newObject)
                             state = 'build';
+                            buildTextureArea(newObject)
+                            
                         }
                     }
                 }
@@ -1222,4 +1223,27 @@ function getMenuStaticDraggagbleSelectableString(label, key, help) {
             '</div> ' 
 }
 
+function getSelectionExpressionSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "Selectable expression setting",
+                message: 
+                getMenuEntryString("Selected expression:", "selectedExpression", true , "The expression's value will be evaluated as true or false to determine if the item should be clicked.") +
+                '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            piece[piece.length-1].selectedExpression = encodeURI($('#selectedExpression').val());
+                            state = 'build';
+                        }
+                    }
+                }
+            }
+        );
+
+    
+}
 
