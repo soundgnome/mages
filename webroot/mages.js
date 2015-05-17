@@ -3550,13 +3550,15 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].selectable = item.selectable;
     piece[piece.length-1].selectedExpression = item.selectedExpression;
+    piece[piece.length-1].dragOffsetX = 0
+    piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
         console.log(item.align)
-        piece[piece.length-1].dragOffsetX = 0
+        
         piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width/2
-        piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2
+        
         piece[piece.length-1].input.useHandCursor=true;
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
@@ -3681,7 +3683,8 @@ function buildRandomMixedNumber(item) {
     {
         piece[piece.length-1].x=item.startX;
         piece[piece.length-1].y=item.startY;
-        
+        piece[piece.length-1].dragOffsetX = piece[piece.length-1].width/2.8 ;
+        piece[piece.length-1].dragOffsetY = 0
         if(item.draggable == 1)
         {
             piece[piece.length-1].align = 'center'
@@ -3689,10 +3692,7 @@ function buildRandomMixedNumber(item) {
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
             piece[piece.length-1].number = newWholeNumberRandom+newNumeratorRandom/newDenominatorRandom;
-            
-            piece[piece.length-1].dragOffsetX = piece[piece.length-1].width/2.8 ;
             piece[piece.length-1].dragDoneOffsetX = 0
-            piece[piece.length-1].dragOffsetY = 0
         }
     }
     if(item.selectable == 1)
@@ -3839,6 +3839,8 @@ function buildRandomFraction(item) {
     {
         piece[piece.length-1].x=item.startX;
         piece[piece.length-1].y=item.startY;
+        piece[piece.length-1].dragOffsetX = 0
+        piece[piece.length-1].dragOffsetY = 0
         if(item.draggable == 1)
         {
             piece[piece.length-1].inputEnabled='true';
@@ -3846,9 +3848,7 @@ function buildRandomFraction(item) {
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
             piece[piece.length-1].number = newNumeratorRandom/newDenominatorRandom;
-            piece[piece.length-1].dragOffsetX = 0
             piece[piece.length-1].dragDoneOffsetX = 0
-            piece[piece.length-1].dragOffsetY = 0
         }
     } else
     {
