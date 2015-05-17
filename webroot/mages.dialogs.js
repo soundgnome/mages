@@ -290,6 +290,7 @@ function getRandomDecimalSettings() {
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
+                            state = 'build'
                             buildRandomDecimal(newObject);
                             adjustNewPiece();
                             

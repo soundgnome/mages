@@ -1271,7 +1271,6 @@ function buildTextureArea(item) {
 
 var selectionBoxGraphics = []
 function clickSelectable(item) {
-    console.log("selected")
     if(item.selected == 0)
     {
         item.selected = true;
@@ -1290,7 +1289,6 @@ function selectableScore() {
     var score = 0;
     if(multipleSelection.length > 0)
     {
-        
         for(var i = 0; i < multipleSelection.length; i++) {
             if(multipleSelection[i].selected == eval(decodeURIComponent(multipleSelection[i].selectedExpression) ) )
             {
@@ -1302,7 +1300,6 @@ function selectableScore() {
     {
         return null
     }
-    
 }
 
 var newTextureTemp
