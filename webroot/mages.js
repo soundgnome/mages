@@ -843,7 +843,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "fill":piece[item].fill ,
                         "randomCeiling":piece[item].randomCeiling,
                         "randomFloor":piece[item].randomFloor,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -863,7 +865,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomCeiling":piece[item].denominatorRandomCeiling,
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -906,7 +910,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "randomCeiling":piece[item].randomCeiling,
                         "randomFloor":piece[item].randomFloor,
                         "randomDigits":piece[item].randomDigits,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -926,7 +932,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "denominatorRandomCeiling":piece[item].denominatorRandomCeiling,
                         "denominatorRandomFloor":piece[item].denominatorRandomFloor,
                         "size":piece[item].size,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                    constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -1056,7 +1064,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "wordWrap":piece[item].wordWrap, 
                         "wordWrapWidth":piece[item].wordWrapWidth, 
                         "align":piece[item].align ,
-                        "draggable": piece[item].draggable
+                        "draggable": piece[item].draggable ,
+                        "selectable": piece[item].selectable ,
+                        "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
@@ -1243,7 +1253,6 @@ function buildTextureArea(item) {
     {
         piece[piece.length-1].number = item.number;
     }
-    console.log(item.draggable)
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
@@ -1254,18 +1263,12 @@ function buildTextureArea(item) {
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
     }
-    if(state!='build' && item.selectable == 1)
+    if(item.selectable == 1)
     {
-        
-        piece[piece.length-1].selectionSlot = multipleSelection.length
-        multipleSelection.push(piece[piece.length-1])
-        selectionBoxGraphics.push(null)
-        piece[piece.length-1].selected = 0;
-        piece[piece.length-1].inputEnabled='true';
-        piece[piece.length-1].input.useHandCursor=true;
-        piece[piece.length-1].events.onInputDown.add(clickSelectable, this);
+        addSelectionBehavior()   
     }
-    if(state=='build' && item.selectable == 1) {getSelectionExpressionSettings(); }//in mages.dialogs.js 
+    
+    
     newTextureTemp.clear()
 }
 
@@ -1300,6 +1303,21 @@ function selectableScore() {
     {
         return null
     }
+}
+
+function addSelectionBehavior() {
+    if(state!='build')
+    {
+        
+        piece[piece.length-1].selectionSlot = multipleSelection.length
+        multipleSelection.push(piece[piece.length-1])
+        selectionBoxGraphics.push(null)
+        piece[piece.length-1].selected = 0;
+        piece[piece.length-1].inputEnabled='true';
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(clickSelectable, this);
+    }
+    if(state=='build') {getSelectionExpressionSettings(); }//in mages.dialogs.js 
 }
 
 var newTextureTemp
@@ -3325,6 +3343,8 @@ function buildRandomNumber(item) {
     piece[piece.length-1].type=2;
     piece[piece.length-1].fontString=fontString; 
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
@@ -3524,6 +3544,8 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].fill=newTextColor;
     piece[piece.length-1].expression=item.expression;
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
@@ -3645,6 +3667,8 @@ function buildRandomMixedNumber(item) {
     piece[piece.length-1].inputEnabled='true';
     piece[piece.length-1].x=400;
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
     if(state != 'build')
     {
         piece[piece.length-1].x=item.startX;
@@ -3796,6 +3820,8 @@ function buildRandomFraction(item) {
     
     piece[piece.length-1].fontString="" + newBold + " " + item.size + "px Arial";
     piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
     piece[piece.length-1].anchor.setTo(0.5, 0.5); 
     if(state != 'build')
     {
