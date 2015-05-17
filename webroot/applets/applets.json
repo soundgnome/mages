@@ -447,9 +447,8 @@
               ]
         },
         { "summary": "",
-          "problems": [
-              {"appletID":"97","type":20,"startX":180,"startY":160,"lineOrientation":"h","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":400,"dotStartY":300,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true}
-          ]
+          "problems": [{"appletID":"97","type":2,"startX":400,"startY":250,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
+]
         },
         { "summary": "",
           "problems": [

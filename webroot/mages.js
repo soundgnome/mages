@@ -1253,12 +1253,12 @@ function buildTextureArea(item) {
     {
         piece[piece.length-1].number = item.number;
     }
+    piece[piece.length-1].dragOffsetX = 0
+    piece[piece.length-1].dragOffsetY = 0
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
-        piece[piece.length-1].dragOffsetX = 0
         piece[piece.length-1].dragDoneOffsetX = 0
-        piece[piece.length-1].dragOffsetY = 0
         piece[piece.length-1].input.useHandCursor=true;
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
@@ -1277,7 +1277,7 @@ function clickSelectable(item) {
     if(item.selected == 0)
     {
         item.selected = true;
-        selectionBoxGraphics[item.selectionSlot] = game.add.graphics(item.x, item.y);   
+        selectionBoxGraphics[item.selectionSlot] = game.add.graphics(item.x+item.dragOffsetX, item.y+item.dragOffsetY);   
         selectionBoxGraphics[item.selectionSlot].lineStyle(2, 0x0000FF, 1);
         selectionBoxGraphics[item.selectionSlot].drawRect(-10, -10, item.width+20, item.height+20);
     } else
@@ -3345,17 +3345,21 @@ function buildRandomNumber(item) {
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].selectable = item.selectable;
     piece[piece.length-1].selectedExpression = item.selectedExpression;
+    piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width
+    piece[piece.length-1].dragOffsetY = 0
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
-        piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width
-        piece[piece.length-1].dragOffsetY = 0
         piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width*2
         piece[piece.length-1].input.useHandCursor=true;
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
         piece[piece.length-1].number = newRandom;
         
+    }
+    if(item.selectable == 1)
+    {
+        addSelectionBehavior()   
     }
 }
 
@@ -3559,6 +3563,10 @@ function buildEvaluatedExpression(item) {
         piece[piece.length-1].number = evaluatedExpression[evaluatedExpression.length-1];
         
     }
+    if(item.selectable == 1)
+    {
+        addSelectionBehavior()   
+    }
 }
 
 //HIDDEN NUMBER
@@ -3686,6 +3694,10 @@ function buildRandomMixedNumber(item) {
             piece[piece.length-1].dragDoneOffsetX = 0
             piece[piece.length-1].dragOffsetY = 0
         }
+    }
+    if(item.selectable == 1)
+    {
+        addSelectionBehavior()   
     }
     
 
@@ -3856,6 +3868,10 @@ function buildRandomFraction(item) {
         piece[piece.length-1].size = newTextSize;
         piece[piece.length-1].grouped=1;
         piece[piece.length-1].type=3;
+    }
+    if(item.selectable == 1)
+    {
+        addSelectionBehavior()   
     }
 }
 
