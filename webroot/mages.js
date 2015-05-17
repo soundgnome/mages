@@ -1308,7 +1308,6 @@ function selectableScore() {
 function addSelectionBehavior() {
     if(state!='build')
     {
-        
         piece[piece.length-1].selectionSlot = multipleSelection.length
         multipleSelection.push(piece[piece.length-1])
         selectionBoxGraphics.push(null)
@@ -3497,6 +3496,29 @@ function buildRandomDecimal(item) {
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].anchor.setTo(0.5, 0.5);
     piece[piece.length-1].type=6;
+    piece[piece.length-1].draggable = item.draggable;
+    piece[piece.length-1].selectable = item.selectable;
+    piece[piece.length-1].selectedExpression = item.selectedExpression;
+    piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width/2
+    piece[piece.length-1].dragOffsetY = -piece[piece.length-1].height/2
+    if(state!='build' && item.draggable == 1)
+    {
+        piece[piece.length-1].inputEnabled='true';
+        console.log(item.align)
+        
+        piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width/2
+        
+        piece[piece.length-1].input.useHandCursor=true;
+        piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
+        piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
+        piece[piece.length-1].number = evaluatedExpression[evaluatedExpression.length-1];
+        
+    }
+    if(item.selectable == 1)
+    {
+        addSelectionBehavior() 
+    }
+    
     
 }
 
@@ -3550,8 +3572,8 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].selectable = item.selectable;
     piece[piece.length-1].selectedExpression = item.selectedExpression;
-    piece[piece.length-1].dragOffsetX = 0
-    piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2
+    piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width/2
+    piece[piece.length-1].dragOffsetY = -piece[piece.length-1].height/2
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
@@ -3567,7 +3589,7 @@ function buildEvaluatedExpression(item) {
     }
     if(item.selectable == 1)
     {
-        addSelectionBehavior()   
+        addSelectionBehavior() 
     }
 }
 
@@ -3683,7 +3705,7 @@ function buildRandomMixedNumber(item) {
     {
         piece[piece.length-1].x=item.startX;
         piece[piece.length-1].y=item.startY;
-        piece[piece.length-1].dragOffsetX = piece[piece.length-1].width/2.8 ;
+        piece[piece.length-1].dragOffsetX = -boxLength/2 ;
         piece[piece.length-1].dragOffsetY = 0
         if(item.draggable == 1)
         {
@@ -3692,7 +3714,7 @@ function buildRandomMixedNumber(item) {
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
             piece[piece.length-1].number = newWholeNumberRandom+newNumeratorRandom/newDenominatorRandom;
-            piece[piece.length-1].dragDoneOffsetX = 0
+            piece[piece.length-1].dragDoneOffsetX = boxLength
         }
     }
     if(item.selectable == 1)
@@ -3810,12 +3832,12 @@ function buildRandomFraction(item) {
             align: "center"
     });
     
-    var boxLength = Number(item.size)
+    var boxLength = Number(item.size)*1.4
     var boxGraphic = game.add.graphics(0, 0);
     boxGraphic.lineStyle(2, 0x000000, 1)
-    boxGraphic.drawCircle(0, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(0, -boxLength*.5, 0.01);//these four dots keep the whole thing centered
     boxGraphic.drawCircle(0, boxLength, 0.01);//these four dots keep the whole thing centered
-    boxGraphic.drawCircle(boxLength, -boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(boxLength, -boxLength*.5, 0.01);//these four dots keep the whole thing centered
     boxGraphic.drawCircle(boxLength, boxLength, 0.01);//these four dots keep the whole thing centered
     
     piece[piece.length] = game.add.sprite(0,0, boxGraphic.generateTexture());
@@ -3839,7 +3861,7 @@ function buildRandomFraction(item) {
     {
         piece[piece.length-1].x=item.startX;
         piece[piece.length-1].y=item.startY;
-        piece[piece.length-1].dragOffsetX = 0
+        piece[piece.length-1].dragOffsetX = -item.size/3
         piece[piece.length-1].dragOffsetY = 0
         if(item.draggable == 1)
         {
@@ -3848,7 +3870,7 @@ function buildRandomFraction(item) {
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
             piece[piece.length-1].number = newNumeratorRandom/newDenominatorRandom;
-            piece[piece.length-1].dragDoneOffsetX = 0
+            piece[piece.length-1].dragDoneOffsetX = boxLength*.4
         }
     } else
     {

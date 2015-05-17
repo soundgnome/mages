@@ -816,8 +816,12 @@ function getEvaluatedExpressionSettings() {
                                 "fill" : newTextColor, 
                                 "wordWrap" : newTextWrap, 
                                 "wordWrapWidth": newTextWidth, 
-                                "align": alignment
+                                "align": alignment,
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
+                            state = 'build'
                             buildEvaluatedExpression(newObject)
                             adjustNewPiece()
                         }

@@ -447,13 +447,19 @@
               ]
         },
         { "summary": "",
-          "problems": [{"appletID":"97","type":2,"startX":400,"startY":250,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
+          "problems": [{"appletID":"97","type":2,"startX":160,"startY":100,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"97","type":3,"startX":380,"startY":100,"fill":"Black","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"97","type":6,"startX":620,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"0","randomDigits":"2","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"97","type":7,"startX":140,"startY":380,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"97","type":15,"startX":420,"startY":400,"expression":"2%2B2","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"true"},
+{"appletID":"97","type":21,"startX":540,"startY":300,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
 ]
         },
         { "summary": "",
           "problems": [
-              {"appletID":"98","type":20,"startX":100,"startY":10,"lineOrientation":"v","lineLength":400,"min":0,"minLabel":true,"max":20,"maxLabel":true,"interval":2,"intervalLabel":true,"subDivide":2,"dotStartX":394,"dotStartY":271,"dotOrientation":"v","dotNumber":3,"staticDots":false ,"dotLabel":true,"dotSnapping":true}
-          ]
+              {"appletID":"98","type":7,"startX":340,"startY":140,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":1,"selectable":0},
+{"appletID":"98","type":9,"startX":440,"startY":440,"userScaleX":2,"userScaleY":1}
+]
         },
         { "summary": "4.4.OA.1 Missing factors - facts to 12",
           "problems": [
