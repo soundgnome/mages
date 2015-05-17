@@ -439,27 +439,27 @@
         },
         { "summary": "testing - selectable",
           "problems": [
-{"appletID":"96","type":21,"startX":180,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"96","type":21,"startX":380,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"96","type":21,"startX":180,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"},
-{"appletID":"96","type":21,"startX":380,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"}
+              {"appletID":"96","type":21,"startX":180,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"96","type":21,"startX":380,"startY":160,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"96","type":21,"startX":180,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"},
+              {"appletID":"96","type":21,"startX":380,"startY":360,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"false"}
 
               ]
         },
         { "summary": "",
           "problems": [{"appletID":"97","type":2,"startX":160,"startY":100,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":3,"startX":380,"startY":100,"fill":"Black","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":6,"startX":620,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"0","randomDigits":"2","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":7,"startX":140,"startY":380,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":15,"startX":420,"startY":400,"expression":"2%2B2","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":21,"startX":540,"startY":300,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
-]
+              {"appletID":"97","type":3,"startX":380,"startY":100,"fill":"Black","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"97","type":6,"startX":620,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"10","randomFloor":"0","randomDigits":"2","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"97","type":7,"startX":140,"startY":380,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"97","type":15,"startX":420,"startY":400,"expression":"2%2B2","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"true"},
+              {"appletID":"97","type":21,"startX":540,"startY":300,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
+              ]
         },
         { "summary": "",
           "problems": [
               {"appletID":"98","type":7,"startX":340,"startY":140,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":1,"selectable":0},
-{"appletID":"98","type":9,"startX":440,"startY":440,"userScaleX":2,"userScaleY":1}
-]
+              {"appletID":"98","type":9,"startX":440,"startY":440,"userScaleX":2,"userScaleY":1}
+              ]
         },
         { "summary": "4.4.OA.1 Missing factors - facts to 12",
           "problems": [
