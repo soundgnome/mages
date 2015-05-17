@@ -62,7 +62,8 @@ function buildProtractorAngle(item) {
     piece[piece.length-1].inputEnabled='true';
     piece[piece.length-1].input.useHandCursor=true; 
     piece[piece.length-1].events.onInputDown.add(startDraggingProtractor, this);
-    piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);    
+    piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);  
+    angleGraphic.clear()
 }
 
 function drawAngle(legLength, lowerAngle, upperAngle ) {
@@ -83,10 +84,13 @@ function drawAngle(legLength, lowerAngle, upperAngle ) {
     angleGraphic.lineStyle(1, 0x000000);
     angleGraphic.beginFill(0x000000, 1);
     angleGraphic.drawCircle(0, 0, 5);
+
     angleGraphic.drawCircle(legLength, legLength, 0.01);//these four dots keep the whole thing centered
     angleGraphic.drawCircle(-legLength, legLength, 0.01);
     angleGraphic.drawCircle(legLength, -legLength, 0.01);
-    angleGraphic.drawCircle(-legLength, -legLength, 0.01);
+    angleGraphic.drawCircle(-legLength, -legLength, 0.01);   
+
+    
     newTextureTemp = angleGraphic
     return angleGraphic.generateTexture()
 }
