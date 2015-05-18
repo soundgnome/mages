@@ -437,6 +437,20 @@
                       ],
           "solution": "selectableScore()==1"
         },
+        { "summary": "Compound angle with unkown angle on a straight line",
+          "problems": [
+              {"appletID":"33","type":16,"expression":"getRandomInt%28120%2C150%29"},
+              {"appletID":"33","type":21,"startX":240,"startY":40,"textureExpression":"drawAngle(140,90,hiddenNumber[0])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"33","type":1,"startX":242,"startY":143,"newText":"_______","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"33","type":15,"startX":430,"startY":173,"expression":"hiddenNumber%5B0%5D-90%20%2B%20%27%C2%B0%27","font":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"33","type":1,"startX":342,"startY":161,"newText":"%3F","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"33","type":1,"startX":100,"startY":340,"newText":"What%20is%20the%20measure%20of%20the%20unknown%20angle%20in%20degrees%3F","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"33","type":14,"numberEntryX":160,"numberEntryY":460,"orientation":"h","displayX":320,"displayY":380,"displayDigits":3},
+              {"appletID":"33","type":5,"startX":700,"startY":540},
+              {"appletID":"33","type":1,"startX":440,"startY":370,"newText":"%C2%B0","font":"","fontString":" 60px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
+                    ],
+          "solution": "180-(hiddenNumber[0]-90)==numberEntryValue"
+        },
         { "summary": "",
           "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
