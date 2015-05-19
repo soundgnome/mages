@@ -25,20 +25,21 @@ function drawBox() {
         }   
     } else
     {
-        var bufferspot
-        if(drawingBoxStartX > drawingBoxEndX ) {
-            bufferspot = drawingBoxStartX
-            drawingBoxStartX = drawingBoxEndX
-            drawingBoxEndX = bufferspot
-        }
-        if(drawingBoxStartY > drawingBoxEndY ) {
-            bufferspot = drawingBoxStartY
-            drawingBoxStartY = drawingBoxEndY
-            drawingBoxEndY = bufferspot
-        }
+        
         
         if(drawingBox==1)
         {//drawingBoxGraphic.generateTexture()
+            var bufferspot
+            if(drawingBoxStartX > drawingBoxEndX ) {
+                bufferspot = drawingBoxStartX
+                drawingBoxStartX = drawingBoxEndX
+                drawingBoxEndX = bufferspot
+            }
+            if(drawingBoxStartY > drawingBoxEndY ) {
+                bufferspot = drawingBoxStartY
+                drawingBoxStartY = drawingBoxEndY
+                drawingBoxEndY = bufferspot
+            }
             drawingBox = 0;
             drawingBoxGraphic.clear();
             drawingBoxGraphic.lineStyle(2, 0x000000, 1);

@@ -386,7 +386,12 @@ function loadApplet() {
             buildTextureArea(applet[i]);
             break;
             
-            case 99: //buildDrawBox(drawingBoxStartX, drawingBoxStartY, drawingBoxEndX , drawingBoxEndY) 
+            case 98: //draw line
+            buildDrawLine(applet[i]);
+            break;
+            
+            
+            case 99: //draw box
             buildDrawBox(applet[i]);
             break;
             
@@ -435,6 +440,7 @@ function build() {
     buildKeyScan();
     dragProtractor();
     drawBox();
+    drawLine();
 }
 
 //run at the beginning of build
@@ -1172,6 +1178,7 @@ function makeWordProblemSet(returnNumber) {
     setArray.push(new WordProblemSet("birds","in","flock","flocks") )
     return setArray[returnNumber]
 }
+
 
 //test
 

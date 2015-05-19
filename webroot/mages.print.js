@@ -30,7 +30,7 @@ function getPrintSettings() {
 
 
         /***********************************************************************
-         *                  CONSTRUCTOR PRINTER
+         *                  JSON STRING PRINTER
          * ********************************************************************/
 
 //this prints the constructor codes to an alert window
@@ -420,7 +420,20 @@ function printPieces(newAppletID, appletDoneTest) {
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
-                case 99: //DrawBoxConstructor(appletID, type, drawingBoxStartX, drawingBoxStartY, drawingBoxEndX , drawingBoxEndY) 
+                case 98: //draw line
+                    var newObject = JSON.stringify({    
+                        "appletID": newAppletID, 
+                        "type": piece[item].type, 
+                        "drawingLineStartX":piece[item].x , 
+                        "drawingLineStartY":piece[item].y , 
+                        "drawingLineEndX": piece[item].x+piece[item].drawingLineEndX-piece[item].drawingLineStartX,
+                        "drawingLineEndY": piece[item].y+piece[item].drawingLineEndY-piece[item].drawingLineStartY
+                        });
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
+                    
+                case 99: //draw box
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 

@@ -498,11 +498,19 @@
               {"appletID":"97","type":21,"startX":540,"startY":300,"textureExpression":"testTexture()","number":"1","draggable":0,"selectable":1,"selectedExpression":"true"}
               ]
         },
-        { "summary": "",
+        { "summary": "test - lines!",
           "problems": [
-              {"appletID":"98","type":7,"startX":340,"startY":140,"fill":"Black","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"10","numeratorRandomFloor":"1","denominatorRandomCeiling":"10","denominatorRandomFloor":"1","size":"36","draggable":1,"selectable":0},
-              {"appletID":"98","type":9,"startX":440,"startY":440,"userScaleX":2,"userScaleY":1}
-              ]
+              {"appletID":"98","type":98,"drawingLineStartX":20,"drawingLineStartY":20,"drawingLineEndX":780,"drawingLineEndY":20},
+              {"appletID":"98","type":98,"drawingLineStartX":20,"drawingLineStartY":580,"drawingLineEndX":780,"drawingLineEndY":580},
+              {"appletID":"98","type":98,"drawingLineStartX":20,"drawingLineStartY":20,"drawingLineEndX":20,"drawingLineEndY":580},
+              {"appletID":"98","type":98,"drawingLineStartX":778,"drawingLineStartY":20,"drawingLineEndX":776,"drawingLineEndY":579},
+              {"appletID":"98","type":98,"drawingLineStartX":20,"drawingLineStartY":140,"drawingLineEndX":780,"drawingLineEndY":140},
+              {"appletID":"98","type":98,"drawingLineStartX":400,"drawingLineStartY":20,"drawingLineEndX":400,"drawingLineEndY":140},
+              {"appletID":"98","type":98,"drawingLineStartX":20,"drawingLineStartY":320,"drawingLineEndX":780,"drawingLineEndY":320},
+              {"appletID":"98","type":98,"drawingLineStartX":400,"drawingLineStartY":320,"drawingLineEndX":400,"drawingLineEndY":580},
+              {"appletID":"98","type":98,"drawingLineStartX":400,"drawingLineStartY":320,"drawingLineEndX":780,"drawingLineEndY":580},
+              {"appletID":"98","type":98,"drawingLineStartX":400,"drawingLineStartY":320,"drawingLineEndX":20,"drawingLineEndY":580}
+        ]
         },
         { "summary": "4.4.OA.1 Missing factors - facts to 12",
           "problems": [
