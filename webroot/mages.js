@@ -521,6 +521,11 @@ var arrowRight;
 function menu() {
     if (menuShowing == 0)
     {
+        if (typeof colorSwatchHandle === 'undefined') 
+            { } else
+            {
+                colorSwatchHandle.destroy()  
+            }
         for (var i = 0; i < 6; i++)
         {
             menus[currentMenu][i].alpha=1;  //show
