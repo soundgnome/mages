@@ -20,7 +20,7 @@ function drawBox() {
             
             
             drawingBoxGraphic.clear();
-            drawingBoxGraphic.lineStyle(2, 0x000000, 1);
+            drawingBoxGraphic.lineStyle(2, lastLineColor, 1);
             drawingBoxGraphic.drawRect(drawingBoxStartX, drawingBoxStartY, drawingBoxEndX-drawingBoxStartX, drawingBoxEndY-drawingBoxStartY);
         }   
     } else
@@ -42,7 +42,7 @@ function drawBox() {
             }
             drawingBox = 0;
             drawingBoxGraphic.clear();
-            drawingBoxGraphic.lineStyle(2, 0x000000, 1);
+            drawingBoxGraphic.lineStyle(2, lastLineColor, 1);
             drawingBoxGraphic.drawRect(drawingBoxStartX, drawingBoxStartY, drawingBoxEndX-drawingBoxStartX, drawingBoxEndY-drawingBoxStartY);
             piece[piece.length] = game.add.sprite(drawingBoxStartX,drawingBoxStartY,drawingBoxGraphic.generateTexture());
             drawingBoxGraphic.clear();
@@ -57,6 +57,7 @@ function drawBox() {
             piece[piece.length-1].drawingBoxEndY=drawingBoxEndY;
             piece[piece.length-1].drawingBoxEndX=(piece[piece.length-1].x+Math.abs(piece[piece.length-1].drawingBoxStartX-piece[piece.length-1].drawingBoxEndX)) , 
             piece[piece.length-1].drawingBoxEndY=piece[piece.length-1].y+Math.abs(piece[piece.length-1].drawingBoxStartY-piece[piece.length-1].drawingBoxEndY)
+            piece[piece.length-1].color=lastLineColor
             colorSwatch();        
             
         }   
@@ -65,7 +66,7 @@ function drawBox() {
 
 function buildDrawBox(item) {
     drawingBoxGraphic = game.add.graphics(0, 0);
-    drawingBoxGraphic.lineStyle(2, 0x000000, 1);
+    drawingBoxGraphic.lineStyle(2, item.color, 1);
     drawingBoxGraphic.drawRect(item.drawingBoxStartX, item.drawingBoxStartY, item.drawingBoxEndX-item.drawingBoxStartX, item.drawingBoxEndY-item.drawingBoxStartY);
     piece[piece.length] = game.add.sprite(drawingBoxStartX,drawingBoxStartY,drawingBoxGraphic.generateTexture());
     drawingBoxGraphic.clear();

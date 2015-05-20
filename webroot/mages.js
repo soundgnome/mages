@@ -1249,6 +1249,7 @@ function colorSwatch() {
         });
 }
 
+var lastLineColor = 0x000000
 function colorSwatchColorClick(item) {
     switch(piece[piece.length-1].type) {
         case 99:
@@ -1267,6 +1268,8 @@ function colorSwatchColorClick(item) {
             drawingLineGraphic.clear();
             break;
     }
+    lastLineColor = item.color
+    piece[piece.length-1].color = item.color;
     colorSwatchHandle.destroy()
 
 }

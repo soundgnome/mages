@@ -424,6 +424,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
+                        "color": piece[item].color, 
                         "drawingLineStartX":piece[item].x , 
                         "drawingLineStartY":piece[item].y , 
                         "drawingLineEndX": piece[item].x+piece[item].drawingLineEndX-piece[item].drawingLineStartX,
@@ -437,6 +438,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
+                        "color": piece[item].color, 
                         "drawingBoxStartX":piece[item].x , 
                         "drawingBoxStartY":piece[item].y , 
                         "drawingBoxEndX": piece[item].drawingBoxEndX,

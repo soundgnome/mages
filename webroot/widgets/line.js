@@ -30,7 +30,7 @@ function drawLine() {
         }
             
             drawingLineGraphic.clear();
-            drawingLineGraphic.lineStyle(2, 0x000000, 1);
+            drawingLineGraphic.lineStyle(2, lastLineColor, 1);
             drawingLineGraphic.moveTo(drawingLineEndX, drawingLineEndY)
             drawingLineGraphic.lineTo(drawingLineStartX, drawingLineStartY)
         }   
@@ -43,7 +43,7 @@ function drawLine() {
             
             drawingLine = 0;
             drawingLineGraphic.clear();
-            drawingLineGraphic.lineStyle(2, 0x000000, 1);
+            drawingLineGraphic.lineStyle(2, lastLineColor, 1);
             drawingLineGraphic.moveTo(drawingLineEndX, drawingLineEndY)
             drawingLineGraphic.lineTo(drawingLineStartX, drawingLineStartY)
             //drawingLineGraphic.drawRect(drawingLineStartX, drawingLineStartY, drawingLineEndX-drawingLineStartX, drawingLineEndY-drawingLineStartY);
@@ -58,6 +58,7 @@ function drawLine() {
             piece[piece.length-1].drawingLineStartY=drawingLineStartY;
             piece[piece.length-1].drawingLineEndX=drawingLineEndX;
             piece[piece.length-1].drawingLineEndY=drawingLineEndY;
+            piece[piece.length-1].color=lastLineColor;
             colorSwatch();
         }   
     }
@@ -67,7 +68,7 @@ function buildDrawLine(item) {
     console.log("building")
     drawingLineGraphic = game.add.graphics(0, 0);
     drawingLineGraphic.clear();
-    drawingLineGraphic.lineStyle(2, 0x000000, 1);
+    drawingLineGraphic.lineStyle(2, item.color, 1);
     drawingLineGraphic.moveTo(item.drawingLineEndX, item.drawingLineEndY)
     drawingLineGraphic.lineTo(item.drawingLineStartX, item.drawingLineStartY)
     piece[piece.length] = game.add.sprite((item.drawingLineEndX<item.drawingLineStartX?item.drawingLineEndX:item.drawingLineStartX),(item.drawingLineEndY<item.drawingLineStartY?item.drawingLineEndY:item.drawingLineStartY),drawingLineGraphic.generateTexture());
