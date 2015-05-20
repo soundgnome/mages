@@ -1162,6 +1162,8 @@ var surnames = [ 'Smith' , 'Johnson' , 'Williams' , 'Jones' , 'Brown' ,
 'Foster' , 'Gonzales' , 'Bryant' , 'Alexander' , 'Russell' , 'Griffin' , 
 'Diaz' , 'Hayes'];
 
+var rainbow = [0xFF0000 , 0xFFA500 , 0xFFFF00 , 0x008000 , 0x0000FF , 0x4B0082 , 0xEE82EE]
+
 function WordProblemSet(name, preposition, group, groupPlural) { 
     this.name = name;
     this.group=group;
@@ -1188,3 +1190,78 @@ function fixedEncodeURIComponent (str) {
   });
 }
 
+var colorSwatchHandle
+function colorSwatch() {
+    if (typeof colorSwatchHandle === 'undefined') 
+    { } else
+    {
+      colorSwatchHandle.destroy()  
+    }
+    var boxX = 1
+    var boxY = 524
+    colorSwatchHandle = game.add.group();
+    var swatchBox = game.add.graphics(boxX, boxY);
+    swatchBox.beginFill(0xD0D0D0);
+    swatchBox.lineStyle(2, 0x000000, 1);
+    swatchBox.drawRect(0, 0, 514, 75);
+    swatchBox.endFill();
+    colorSwatchHandle.add(swatchBox)
+    //swatchBox.clear()
+    
+    var swatchColorBox
+    var swatchColorSprite
+    for(var i = 0; i<8 ; i++)
+    {
+        swatchColorBox = game.add.graphics(0, 0);
+        
+        if(i<7)
+        {
+            swatchColorBox.beginFill(rainbow[i]);    
+        } else
+        {
+            swatchColorBox.beginFill(0x000000)
+        }
+        swatchColorBox.lineStyle(2, 0x000000, 1);
+        swatchColorBox.drawRect(0, 0, 50, 50);
+        swatchColorSprite = game.add.sprite( boxX+12+(i*62),boxY+12,swatchColorBox.generateTexture() ) 
+        if(i<7)
+        {
+            swatchColorSprite.color = rainbow[i];    
+        } else
+        {
+            swatchColorSprite.color = 0x000000;
+        }
+        colorSwatchHandle.add(swatchColorSprite ) 
+        swatchColorBox.clear()
+    }
+    colorSwatchHandle.forEach(function(item) { 
+        if(item.color >= 0)
+        {
+          item.inputEnabled='true';
+            item.events.onInputDown.add(colorSwatchColorClick, this);  
+        }
+            
+        });
+}
+
+function colorSwatchColorClick(item) {
+    switch(piece[piece.length-1].type) {
+        case 99:
+            var drawingBoxGraphic = game.add.graphics(0, 0);
+            drawingBoxGraphic.lineStyle(2, item.color, 1);
+            drawingBoxGraphic.drawRect(piece[piece.length-1].drawingBoxStartX, piece[piece.length-1].drawingBoxStartY, piece[piece.length-1].drawingBoxEndX-piece[piece.length-1].drawingBoxStartX, piece[piece.length-1].drawingBoxEndY-piece[piece.length-1].drawingBoxStartY);
+            piece[piece.length-1].loadTexture(drawingBoxGraphic.generateTexture(), 0);
+            drawingBoxGraphic.clear();
+            break;
+        case 98:
+            var drawingLineGraphic = game.add.graphics(0, 0);
+            drawingLineGraphic.lineStyle(2, item.color, 1);
+            drawingLineGraphic.moveTo(piece[piece.length-1].drawingLineEndX, piece[piece.length-1].drawingLineEndY)
+            drawingLineGraphic.lineTo(piece[piece.length-1].drawingLineStartX, piece[piece.length-1].drawingLineStartY)
+            piece[piece.length-1].loadTexture(drawingLineGraphic.generateTexture());
+            drawingLineGraphic.clear();
+            break;
+    }
+    colorSwatchHandle.destroy()
+
+}

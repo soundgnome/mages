@@ -57,6 +57,8 @@ function drawBox() {
             piece[piece.length-1].drawingBoxEndY=drawingBoxEndY;
             piece[piece.length-1].drawingBoxEndX=(piece[piece.length-1].x+Math.abs(piece[piece.length-1].drawingBoxStartX-piece[piece.length-1].drawingBoxEndX)) , 
             piece[piece.length-1].drawingBoxEndY=piece[piece.length-1].y+Math.abs(piece[piece.length-1].drawingBoxStartY-piece[piece.length-1].drawingBoxEndY)
+            colorSwatch();        
+            
         }   
     }
 }

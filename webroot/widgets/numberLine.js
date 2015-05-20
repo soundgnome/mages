@@ -99,13 +99,13 @@ function buildNumberLine(item) {
     
     var dotGraphic = [];
     var dotSprite = [];
-    var dotColor = [0xFF0000 , 0xFFA500 , 0xFFFF00 , 0x008000 , 0x0000FF , 0x4B0082 , 0xEE82EE]
+    
     if(item.staticDots == true)
     {
        for(var i = 0; i < item.dotExpressions.length ; i++) 
        {
             dotGraphic.push(game.add.graphics(0, 0) );
-            dotGraphic[i].beginFill(dotColor[i], 1);
+            dotGraphic[i].beginFill(rainbow[i], 1);
             dotGraphic[i].drawCircle(0, 0, item.lineLength/600*15);
             numberLine.dotValue[i] = eval(item.dotExpressions[i])
             if(item.lineOrientation == 'h')
@@ -126,7 +126,7 @@ function buildNumberLine(item) {
         
         for(var i = 0; i < item.dotNumber ; i++) {
             dotGraphic.push(game.add.graphics(0, 0) );
-            dotGraphic[i].beginFill(dotColor[i], 1);
+            dotGraphic[i].beginFill(rainbow[i], 1);
             dotGraphic[i].drawCircle(0, 0, item.lineLength/600*15);
             dotSprite.push(game.add.sprite(0, 0, dotGraphic[i].generateTexture()) );
             dotGraphic[i].clear();

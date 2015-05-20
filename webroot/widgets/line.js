@@ -58,6 +58,7 @@ function drawLine() {
             piece[piece.length-1].drawingLineStartY=drawingLineStartY;
             piece[piece.length-1].drawingLineEndX=drawingLineEndX;
             piece[piece.length-1].drawingLineEndY=drawingLineEndY;
+            colorSwatch();
         }   
     }
 }
@@ -67,7 +68,6 @@ function buildDrawLine(item) {
     drawingLineGraphic = game.add.graphics(0, 0);
     drawingLineGraphic.clear();
     drawingLineGraphic.lineStyle(2, 0x000000, 1);
-    console.log(item.drawingLineEndX)
     drawingLineGraphic.moveTo(item.drawingLineEndX, item.drawingLineEndY)
     drawingLineGraphic.lineTo(item.drawingLineStartX, item.drawingLineStartY)
     piece[piece.length] = game.add.sprite((item.drawingLineEndX<item.drawingLineStartX?item.drawingLineEndX:item.drawingLineStartX),(item.drawingLineEndY<item.drawingLineStartY?item.drawingLineEndY:item.drawingLineStartY),drawingLineGraphic.generateTexture());
