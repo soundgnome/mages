@@ -1197,13 +1197,13 @@ function colorSwatch() {
     {
       colorSwatchHandle.destroy()  
     }
-    var boxX = 1
-    var boxY = 524
+    var boxX = 5
+    var boxY = 545
     colorSwatchHandle = game.add.group();
     var swatchBox = game.add.graphics(boxX, boxY);
     swatchBox.beginFill(0xD0D0D0);
     swatchBox.lineStyle(2, 0x000000, 1);
-    swatchBox.drawRect(0, 0, 514, 75);
+    swatchBox.drawRect(0, 0, 335, 50);
     swatchBox.endFill();
     colorSwatchHandle.add(swatchBox)
     //swatchBox.clear()
@@ -1222,8 +1222,8 @@ function colorSwatch() {
             swatchColorBox.beginFill(0x000000)
         }
         swatchColorBox.lineStyle(2, 0x000000, 1);
-        swatchColorBox.drawRect(0, 0, 50, 50);
-        swatchColorSprite = game.add.sprite( boxX+12+(i*62),boxY+12,swatchColorBox.generateTexture() ) 
+        swatchColorBox.drawRect(0, 0, 30, 30);
+        swatchColorSprite = game.add.sprite( boxX+10+(i*40),boxY+10,swatchColorBox.generateTexture() ) 
         if(i<7)
         {
             swatchColorSprite.color = rainbow[i];    
