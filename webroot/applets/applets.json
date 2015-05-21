@@ -490,7 +490,16 @@
           "solution": "selectableScore()==1"
         },
         { "summary": "",
-          "problems": [{"appletID":"97","type":99,"color":255,"drawingBoxStartX":250,"drawingBoxStartY":98,"drawingBoxEndX":582,"drawingBoxEndY":383}
+          "problems": [{"appletID":"97","type":99,"color":32768,"drawingBoxStartX":149,"drawingBoxStartY":81,"drawingBoxEndX":499,"drawingBoxEndY":334},
+{"appletID":"97","type":99,"color":32768,"drawingBoxStartX":256,"drawingBoxStartY":65,"drawingBoxEndX":396,"drawingBoxEndY":278},
+{"appletID":"97","type":99,"color":32768,"drawingBoxStartX":343,"drawingBoxStartY":106,"drawingBoxEndX":580,"drawingBoxEndY":397},
+{"appletID":"97","type":99,"color":255,"drawingBoxStartX":470,"drawingBoxStartY":185,"drawingBoxEndX":697,"drawingBoxEndY":463},
+{"appletID":"97","type":99,"color":255,"drawingBoxStartX":180,"drawingBoxStartY":316,"drawingBoxEndX":439,"drawingBoxEndY":509},
+{"appletID":"97","type":99,"color":255,"drawingBoxStartX":355,"drawingBoxStartY":240,"drawingBoxEndX":589,"drawingBoxEndY":454},
+{"appletID":"97","type":98,"color":255,"drawingLineStartX":266,"drawingLineStartY":124,"drawingLineEndX":-99,"drawingLineEndY":399},
+{"appletID":"97","type":98,"color":15631086,"drawingLineStartX":186,"drawingLineStartY":183,"drawingLineEndX":566,"drawingLineEndY":550},
+{"appletID":"97","type":98,"color":15631086,"drawingLineStartX":70,"drawingLineStartY":276,"drawingLineEndX":519,"drawingLineEndY":188},
+{"appletID":"97","type":98,"color":15631086,"drawingLineStartX":406,"drawingLineStartY":104,"drawingLineEndX":135,"drawingLineEndY":-295}
 ]
         },
         { "summary": "test - lines!",
