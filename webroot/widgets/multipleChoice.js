@@ -7,7 +7,7 @@ var multSpaceX;
 var multSpaceY;
 
 function buildMultipleChoiceNumbers(item) {
-    console.log(answers)
+   // console.log(answers)
     var StartX;
     var StartY;
     multSpaceX=item.spaceX;
@@ -41,8 +41,9 @@ function buildMultipleChoiceNumbers(item) {
     }
         
     answers = [piece[piece.length-1].correct, piece[piece.length-1].incorrect1, piece[piece.length-1].incorrect2, piece[piece.length-1].incorrect3];
-    answers = shuffleAnswers(answers);
     piece[piece.length-1].multiType='0'; //for number values
+    answers = shuffleAnswers(answers, piece[piece.length-1].multiType);
+    
     
     var newAnswerX;
     var newAnswerY;
@@ -126,6 +127,164 @@ function buildMultipleChoiceNumbers(item) {
     }
 }
 
+function buildMultipleChoiceFractions(item) {
+    //console.log(answers)
+    var StartX;
+    var StartY;
+    multSpaceX=item.spaceX;
+    multSpaceY=item.spaceY;
+    piece.forEach(function(item) {
+        if(item.type == 10)
+        {
+            item.deleted=true;
+            item.destroy(true);
+            multipleChoice = [];
+        }
+    });
+    if(state=='build')
+    {
+        piece[piece.length] = game.add.group();
+        piece[piece.length-1].correct=item.answers[0];
+        piece[piece.length-1].incorrect1=item.answers[1];
+        piece[piece.length-1].incorrect2=item.answers[2];
+        piece[piece.length-1].incorrect3=item.answers[3]; 
+        startX=400;
+        startY=300;
+    } else
+    {
+        piece[piece.length] = game.add.group();
+        piece[piece.length-1].correct=item.correct;
+        piece[piece.length-1].incorrect1=item.incorrect1;
+        piece[piece.length-1].incorrect2=item.incorrect2;
+        piece[piece.length-1].incorrect3=item.incorrect3; 
+        piece[piece.length-1].x = item.startX;
+        piece[piece.length-1].y = item.startY;
+    }
+    //console.log(piece[piece.length-1])
+        
+    answers = []
+    answers.push(piece[piece.length-1].correct)
+    answers.push(piece[piece.length-1].incorrect1)
+    answers.push(piece[piece.length-1].incorrect2)
+    answers.push(piece[piece.length-1].incorrect3)
+    
+    //console.log(answers)
+    piece[piece.length-1].multiType='1'; //for fraction values
+    answers = shuffleAnswers(answers, piece[piece.length-1].multiType);
+   // console.log(answers)
+    
+    
+    var newAnswerX;
+    var newAnswerY;
+    var newEvaluatedWhole= new Array(4);
+    var newEvaluatedDenominator= new Array(4);
+    var newEvaluatedNumerator= new Array(4);
+    var newEvaluatedAnswer = [];
+    for (var test = 0; test <4 ; test++) { newEvaluatedAnswer.push(null)}
+    var answerEvaluated = [0,1,2,3];
+    answerEvaluated.splice(multipleChoiceCorrectAnswer, 1);
+    newEvaluatedAnswer[multipleChoiceCorrectAnswer] = JSON.parse(JSON.stringify({    
+                                "whole": eval(answers[multipleChoiceCorrectAnswer].whole), 
+                                "numerator": eval(answers[multipleChoiceCorrectAnswer].numerator), 
+                                "denominator":eval(answers[multipleChoiceCorrectAnswer].denominator)  
+                                }));
+    rightAnswer=newEvaluatedWhole[multipleChoiceCorrectAnswer]+newEvaluatedNumerator[multipleChoiceCorrectAnswer]/newEvaluatedDenominator[multipleChoiceCorrectAnswer]; //this is used for doneStatements
+    
+    for(var iterator=0; iterator<3; iterator++)
+    {
+        //console.log(newEvaluatedAnswer)
+        newEvaluatedAnswer[answerEvaluated[0]] = findUniqueFraction(answers[answerEvaluated[0]] , newEvaluatedAnswer); 
+        answerEvaluated.splice(0, 1);
+        
+    }
+    //console.log(newEvaluatedAnswer)
+    if(newEvaluatedAnswer == null) {
+            piece[piece.length-1].destroy(true); 
+            bootbox.alert("Your answer definitions are too constrained!");
+            newEvaluatedAnswer = [];
+    }
+   console.log(newEvaluatedAnswer)
+    
+    for(var answer = 0 ; answer < 4; answer++)
+    {
+        switch(answer) {
+            case 0:
+                newAnswerX=0;
+                newAnswerY=0;
+                //newEvaluatedAnswer[0] = 'A. ';
+                break;
+            case 1:
+                newAnswerX=item.multipleChoiceFontSize*5;
+                newAnswerY=0;
+                //newEvaluatedAnswer[1] = 'B. ';
+                break;
+            case 2:
+                newAnswerX=0;
+                newAnswerY=item.multipleChoiceFontSize*2.5;;
+                //newEvaluatedAnswer[2] = 'C. ';
+                break;
+            case 3:
+                newAnswerX=item.multipleChoiceFontSize*5;
+                newAnswerY=item.multipleChoiceFontSize*2.5;;
+                //newEvaluatedAnswer[3] = 'D. ';
+                break;
+        }
+        newEvaluatedAnswers[answer]= game.add.text(newAnswerX, newAnswerY, ['A.','B.','C.','D.'][answer], {
+            font: item.multipleChoiceFontSize + 'px Arial',
+            fill: 'black',
+            align: "center",
+            wordWrap: false
+        });
+        newEvaluatedAnswers[answer].addChild(game.add.text(item.multipleChoiceFontSize*1.5-item.multipleChoiceFontSize/2.5, 0, '___', {
+            font: item.multipleChoiceFontSize + 'px Arial',
+            fill: 'black',
+            align: "center",
+            wordWrap: false
+        }))
+        newEvaluatedAnswers[answer].addChild(game.add.text((newEvaluatedAnswer[answer].numerator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, 0, newEvaluatedAnswer[answer].numerator.toString() , {
+            font: item.multipleChoiceFontSize + 'px Arial',
+            fill: 'black',
+            align: "center",
+            wordWrap: false
+        }))
+        newEvaluatedAnswers[answer].addChild(game.add.text((newEvaluatedAnswer[answer].denominator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, item.multipleChoiceFontSize, newEvaluatedAnswer[answer].denominator.toString() , {
+            font: item.multipleChoiceFontSize + 'px Arial',
+            fill: 'black',
+            align: "center",
+            wordWrap: false
+        }))
+        piece[piece.length-1].add(newEvaluatedAnswers[answer]);
+    }
+
+    piece[piece.length-1].forEach(function(item) {
+        item.inputEnabled='true';
+        item.events.onInputDown.add(buildGroupPieceClick, this);
+        item.events.onInputUp.add(onFinishDrag, draggingPiece);
+        item.clicked=0;
+        item.ParentPosition=piece.length-1;
+    });
+    
+    piece[piece.length-1].multipleChoiceFontSize = item.multipleChoiceFontSize;
+    piece[piece.length-1].spaceX = item.spaceX;
+    piece[piece.length-1].spaceY = item.spaceY;
+    piece[piece.length-1].type=10;  
+    if(state != 'build')
+    {
+        piece[piece.length-1].forEach(function(item) {
+        item.events.onInputDown.add(multipleChoiceClick, this);
+        item.parentNumber = piece.length-1;
+
+        });    
+          
+    } else
+    {
+            piece[piece.length-1].grouped=0;
+    
+    piece[piece.length-1].x=startX; 
+    piece[piece.length-1].y=startY; 
+    }
+}
+
 var multipleChoiceBox;
 function multipleChoiceClick(item) {
     if(multipleChoiceBox)
@@ -171,10 +330,50 @@ function findUniqueAnswer(testAnswer , answers) {
     return null; //too constrained
 }
 
+function findUniqueFraction(testAnswer , answers) {
+    var duplicateAnswer;
+    //console.log(answers)
+    for(var testIteration = 0 ; testIteration < 100 ; testIteration++)
+    {
+        duplicateAnswer = 0; //start with a fresh duplicate boolean
+        var evaluatedAnswerTestWhole = eval(testAnswer.whole);  //try a new evaluated answer
+        var evaluatedAnswerTestNumerator = eval(testAnswer.numerator);  //try a new evaluated answer
+        var evaluatedAnswerTestDenominator = eval(testAnswer.denominator);  //try a new evaluated answer
+        for(var testAgainstSlot = 0 ; testAgainstSlot < answers.length ; testAgainstSlot++)
+        {
+            //console.log(answers)
+            if (answers[testAgainstSlot] == null) { 
+                
+            } else
+            
+            {
+                if(evaluatedAnswerTestWhole + evaluatedAnswerTestNumerator/evaluatedAnswerTestDenominator == answers[testAgainstSlot].whole +answers[testAgainstSlot].numerator/answers[testAgainstSlot].denominator)
+                    {
+                        duplicateAnswer=1; //no good
+                    }  
+                 
+                
+            }
+            
+        }
+        if(duplicateAnswer == 0)
+        {
+        return JSON.parse(JSON.stringify({    
+                                "whole": evaluatedAnswerTestWhole, 
+                                "numerator": evaluatedAnswerTestNumerator, 
+                                "denominator":evaluatedAnswerTestDenominator  
+                                }));  //this is a good answer
+        }
+    }
+    return null; //too constrained
+}
+
 //this function take a set of 4 answers and returns the set randomnly shuffled
-function shuffleAnswers(answers) {
+function shuffleAnswers(answers, multiType) {
     var shuffledAnswers = [];
     var correctAnswerShuffled = 0;
+    var shuffledFractions = new Array(4);     
+//console.log(answers)
     for(var i = 0 ; i < 4 ; i++)
     {
         var shuffleSpot = getRandomInt(0,answers.length-1);
@@ -183,9 +382,28 @@ function shuffleAnswers(answers) {
             multipleChoiceCorrectAnswer=i;  
             correctAnswerShuffled=1;
         }
-        shuffledAnswers.push( answers.splice(shuffleSpot , 1).toString() );   
+        
+        if(multiType == 0){
+            shuffledAnswers.push( answers.splice(shuffleSpot , 1).toString() );  
+            
+        }
+        if(multiType == 1){
+            shuffledFractions[i] = answers[shuffleSpot]
+            answers.splice(shuffleSpot , 1) ;  
+            
+        }
+         
     }
-    return shuffledAnswers;
+    if(multiType == 0){
+            return shuffledAnswers; 
+            
+    }
+    if(multiType == 1){
+        return shuffledFractions;
+        
+    }
+    
+    
 }
 
 function getMultipleChoiceTypeSetting() {
@@ -201,7 +419,7 @@ function getMultipleChoiceTypeSetting() {
     
     '</div><div class="radio"> <label for="bold-0"> ' +
     '<input type="radio" name="type" id="bold-0" value="number" checked="checked"> ' +
-    'Number/Decimal Values </label> ' +
+    'Eavluated Expression </label> ' +
     
     '</div><div class="radio"> <label for="bold-1"> ' +
     '<input type="radio" name="type" id="bold-1" value="fraction"> Fraction Values </label> ' +
@@ -210,7 +428,7 @@ function getMultipleChoiceTypeSetting() {
     '<input type="radio" name="type" id="bold-1" value="mixed"> Mixed Number Values </label> ' +
     
     '</div><div class="radio"> <label for="bold-1"> ' +
-    '<input type="radio" name="type" id="bold-1" value="literal"> Literal Values (Strings) </label> ' +
+    '<input type="radio" name="type" id="bold-1" value="texture"> Texture </label> ' +
     
     '</div> '
     bootbox.alert({
@@ -222,18 +440,18 @@ function getMultipleChoiceTypeSetting() {
             var selection = $("input[name='type']:checked").val();
             switch(selection) {
                 case 'number':
-                    getMultipleChoiceNumberSettings()
+                    getMultipleChoiceNumberSettings();
                     break;
                     
                 case 'fraction':
-                    state='build'
+                    getMultipleChoiceFractionSettings();
                     break;
 
                 case 'number':
                     state='build'
                     break;
                     
-                case 'literal':
+                case 'texture':
                     state='build'
                     break;
             }
@@ -313,6 +531,121 @@ function getMultipleChoiceNumberSettings(startPrompt) {
                                 "multipleChoiceFontSize":multipleChoiceFontSize
                                 }));      
                             buildMultipleChoiceNumbers(newObject);
+                            newMultipleChoiceNumbers = [];
+                                }
+                            }
+                        }
+                    }
+                );
+                
+                
+            }
+        }
+    });
+}
+
+function getMultipleChoiceFractionSettings(startPrompt) {
+    
+    if(startPrompt == null)
+    {
+        startPrompt=0;
+    }
+    var multChoiceTitleString = new Array(5);
+    multChoiceTitleString[0]='Multiple Choice Fraction Settings: Correct Answer';
+    multChoiceTitleString[1]='Multiple Choice Fraction Settings: Incorrect Answer #1';
+    multChoiceTitleString[2]='Multiple Choice Fraction Settings: Incorrect Answer #2';
+    multChoiceTitleString[3]='Multiple Choice Fraction Settings: Incorrect Answer #3';
+    
+    var multChoiceNumeratorMessageString = new Array(5);
+    multChoiceNumeratorMessageString[0] = getMenuEntryString("Correct answer numerator expression:" , "correctnumerator", 1 , "Enter an expression that respresents the correct numerator.");
+    multChoiceNumeratorMessageString[1] = getMenuEntryString("Incorrect answer #1 numerator expression:" , "incorrect1numerator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect numerator. ");
+    multChoiceNumeratorMessageString[2] = getMenuEntryString("Incorrect answer #2 numerator expression:" , "incorrect2numerator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect numerator. ");
+    multChoiceNumeratorMessageString[3] = getMenuEntryString("Incorrect answer #3 numerator expression:" , "incorrect3numerator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect numerator. ");
+
+    var multChoiceDenominatorMessageString = new Array(5);
+    multChoiceDenominatorMessageString[0] = getMenuEntryString("Correct answer denominator expression:" , "correctdenominator", 1 , "Enter an expression that respresents the correct denominator.");
+    multChoiceDenominatorMessageString[1] = getMenuEntryString("Incorrect answer #1 denominator expression:" , "incorrect1denominator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect denominator. ");
+    multChoiceDenominatorMessageString[2] = getMenuEntryString("Incorrect answer #2 denominator expression:" , "incorrect2denominator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect denominator. ");
+    multChoiceDenominatorMessageString[3] = getMenuEntryString("Incorrect answer #3 denominator expression:" , "incorrect3denominator", "getRandomInt(0,10)" , "Enter an expression that respresents an incorrect denominator. ");
+    
+    var multChoiceWholeMessageString = new Array(5);
+    multChoiceWholeMessageString[0] = getMenuEntryString("Correct answer whole number expression:" , "correctwhole", null , "Enter an expression that respresents the correct whole. (null for a regular fraction.)");
+    multChoiceWholeMessageString[1] = getMenuEntryString("Incorrect answer #1 whole expression:" , "incorrect1whole", null , "Enter an expression that respresents an incorrect whole. (null for a regular fraction.)");
+    multChoiceWholeMessageString[2] = getMenuEntryString("Incorrect answer #2 whole expression:" , "incorrect2whole", null , "Enter an expression that respresents an incorrect whole. (null for a regular fraction.)");
+    multChoiceWholeMessageString[3] = getMenuEntryString("Incorrect answer #3 whole expression:" , "incorrect3whole", null , "Enter an expression that respresents an incorrect whole. (null for a regular fraction.)");
+
+    bootbox.alert({
+        size: 'large',
+        title: multChoiceTitleString[startPrompt],
+        message:    multChoiceWholeMessageString[startPrompt] +
+                    multChoiceNumeratorMessageString[startPrompt] +
+                    multChoiceDenominatorMessageString[startPrompt], 
+        callback: function()
+        { 
+            var fractionObject;
+            switch(startPrompt) 
+            {
+                case 0:
+                    fractionObject = JSON.parse(JSON.stringify({    
+                                "whole": $('#correctwhole').val(), 
+                                "numerator": $('#correctnumerator').val(), 
+                                "denominator":$('#correctdenominator').val()
+                                }));
+                    newMultipleChoiceNumbers.push( fractionObject ); 
+                    break;
+                case 1:
+                    fractionObject = JSON.parse(JSON.stringify({    
+                                "whole": $('#incorrect1whole').val(), 
+                                "numerator": $('#incorrect1numerator').val(), 
+                                "denominator":$('#incorrect1denominator').val()
+                                }));
+                    newMultipleChoiceNumbers.push( fractionObject ); 
+                    break;
+                case 2:
+                    fractionObject = JSON.parse(JSON.stringify({    
+                                "whole": $('#incorrect2whole').val(), 
+                                "numerator": $('#incorrect2numerator').val(), 
+                                "denominator":$('#incorrect2denominator').val()
+                                }));
+                    newMultipleChoiceNumbers.push( fractionObject ); 
+                    break;
+                case 3:
+                    fractionObject = JSON.parse(JSON.stringify({    
+                                "whole": $('#incorrect3whole').val(), 
+                                "numerator": $('#incorrect3numerator').val(), 
+                                "denominator":$('#incorrect3denominator').val()
+                                }));
+                    newMultipleChoiceNumbers.push( fractionObject ); 
+                    break;
+            }
+            if(startPrompt <3)
+            {
+                getMultipleChoiceFractionSettings(startPrompt+1);
+            } else
+            {
+                bootbox.dialog({
+                title: "Multiple Choice Fraction Settings",
+                message: 
+                getMenuEntryString("Font size:" , "fontsize", multipleChoiceFontSize ) +
+                getMenuEntryString("Horizontal Spacing:" , "spacex", 200 ) +
+                getMenuEntryString("Vertical Spacing:" , "spacey", 100 ) +
+                '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            spaceX = $('#spacex').val();
+                            spaceY = $('#spacey').val();
+                            multipleChoiceFontSize = $('#fontsize').val();
+                            state = 'build';
+                            var newObject = JSON.parse(JSON.stringify({    
+                                "answers": newMultipleChoiceNumbers, 
+                                "spaceX": spaceX, 
+                                "spaceY":spaceY , 
+                                "multipleChoiceFontSize":multipleChoiceFontSize
+                                }));      
+                            buildMultipleChoiceFractions(newObject);
                             newMultipleChoiceNumbers = [];
                                 }
                             }
