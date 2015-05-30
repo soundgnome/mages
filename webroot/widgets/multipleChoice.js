@@ -222,25 +222,44 @@ function buildMultipleChoiceFractions(item) {
                 //newEvaluatedAnswer[3] = 'D. ';
                 break;
         }
+        var wholeOffset = 0;
         newEvaluatedAnswers[answer]= game.add.text(newAnswerX, newAnswerY, ['A.','B.','C.','D.'][answer], {
             font: item.multipleChoiceFontSize + 'px Arial',
             fill: 'black',
             align: "center",
             wordWrap: false
         });
-        newEvaluatedAnswers[answer].addChild(game.add.text(item.multipleChoiceFontSize*1.5-item.multipleChoiceFontSize/2.5, 0, '___', {
+
+        
+        newEvaluatedAnswers[answer].addChild(game.add.text(item.multipleChoiceFontSize*1.5-item.multipleChoiceFontSize/2.5, 0, (newEvaluatedAnswer[answer].whole == null ? "" : newEvaluatedAnswer[answer].whole.toString() ) , {
+            font: item.multipleChoiceFontSize*2 + 'px Arial',
+            fill: 'black',
+            align: "center",
+            wordWrap: false
+        }))   
+        console.log(newEvaluatedAnswer[answer].whole)
+        if(newEvaluatedAnswer[answer].whole == null)
+        {
+           
+        } else
+        {
+            wholeOffset = item.multipleChoiceFontSize/12*15 
+        }
+        
+        
+        newEvaluatedAnswers[answer].addChild(game.add.text(wholeOffset+item.multipleChoiceFontSize*1.5-item.multipleChoiceFontSize/2.5, 0, '___', {
             font: item.multipleChoiceFontSize + 'px Arial',
             fill: 'black',
             align: "center",
             wordWrap: false
         }))
-        newEvaluatedAnswers[answer].addChild(game.add.text((newEvaluatedAnswer[answer].numerator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, 0, newEvaluatedAnswer[answer].numerator.toString() , {
+        newEvaluatedAnswers[answer].addChild(game.add.text(wholeOffset+(newEvaluatedAnswer[answer].numerator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, 0, newEvaluatedAnswer[answer].numerator.toString() , {
             font: item.multipleChoiceFontSize + 'px Arial',
             fill: 'black',
             align: "center",
             wordWrap: false
         }))
-        newEvaluatedAnswers[answer].addChild(game.add.text((newEvaluatedAnswer[answer].denominator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, item.multipleChoiceFontSize, newEvaluatedAnswer[answer].denominator.toString() , {
+        newEvaluatedAnswers[answer].addChild(game.add.text(wholeOffset+(newEvaluatedAnswer[answer].denominator>9? item.multipleChoiceFontSize*1.5 : item.multipleChoiceFontSize*1.8 )-item.multipleChoiceFontSize/5, item.multipleChoiceFontSize, newEvaluatedAnswer[answer].denominator.toString() , {
             font: item.multipleChoiceFontSize + 'px Arial',
             fill: 'black',
             align: "center",
@@ -296,7 +315,7 @@ function multipleChoiceClick(item) {
     console.log()
     if(piece[item.parentNumber].multiType == 1) //fraction
     {
-        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width*3.3, newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
+        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width*2+newEvaluatedAnswers[multipleChoiceSelected].children[1].width*.7, newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
     } else //number
     {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
@@ -421,10 +440,7 @@ function getMultipleChoiceTypeSetting() {
     'Eavluated Expression </label> ' +
     
     '</div><div class="radio"> <label for="bold-1"> ' +
-    '<input type="radio" name="type" id="bold-1" value="fraction"> Fraction Values </label> ' +
-    
-    '</div><div class="radio"> <label for="bold-1"> ' +
-    '<input type="radio" name="type" id="bold-1" value="mixed"> Mixed Number Values </label> ' +
+    '<input type="radio" name="type" id="bold-1" value="fraction"> Fraction/Mixed Number Values </label> ' +
     
     '</div><div class="radio"> <label for="bold-1"> ' +
     '<input type="radio" name="type" id="bold-1" value="texture"> Texture </label> ' +
@@ -444,10 +460,6 @@ function getMultipleChoiceTypeSetting() {
                     
                 case 'fraction':
                     getMultipleChoiceFractionSettings();
-                    break;
-
-                case 'number':
-                    state='build'
                     break;
                     
                 case 'texture':

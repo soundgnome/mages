@@ -490,7 +490,7 @@
           "solution": "selectableScore()==1"
         },
         { "summary": "",
-          "problems": [{"appletID":"97","type":10,"startX":240,"startY":180,"correct":{"whole":"null","numerator":"1","denominator":"1"},"incorrect1":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect2":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect3":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"100","multiType":"1"}
+          "problems": [{"appletID":"97","type":10,"startX":240,"startY":180,"correct":{"whole":"1","numerator":"1","denominator":"1"},"incorrect1":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect2":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect3":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"100","multiType":"1"}
 ]
         },
         { "summary": "test - lines!",
