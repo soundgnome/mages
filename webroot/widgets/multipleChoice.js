@@ -289,10 +289,11 @@ var multipleChoiceBox;
 function multipleChoiceClick(item) {
     if(multipleChoiceBox)
     {
-        multipleChoiceBox.destroy(true);
+        //multipleChoiceBox.destroy(true);
+        multipleChoiceBox.clear()
     }
-    
-    multipleChoiceBox = game.add.sprite(item.x+piece[item.parentNumber].x, item.y+piece[item.parentNumber].y, 'choiceBox');
+    multipleChoiceBox = game.add.graphics(item.x+piece[item.parentNumber].x, item.y+piece[item.parentNumber].y);
+    multipleChoiceBox.lineStyle(2, 0x0000FF, 1);
     
     
     //simplest way to determine which answer I am
@@ -300,8 +301,8 @@ function multipleChoiceClick(item) {
     if(item.x==multSpaceX  &&  item.y==0   ){multipleChoiceSelected = 1}
     if(item.x==0    &&  item.y==multSpaceY  ){multipleChoiceSelected = 2}
     if(item.x==multSpaceX  &&  item.y==multSpaceY  ){multipleChoiceSelected = 3}
-    multipleChoiceBox.anchor.setTo(0.02, 0);
-    multipleChoiceBox.scale.setTo(newEvaluatedAnswers[multipleChoiceSelected].width/260, newEvaluatedAnswers[multipleChoiceSelected].height/160);
+    
+    multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);
 }
 
 
