@@ -339,7 +339,13 @@ function loadApplet() {
             break;
             
             case 10: //multiple choice bierarchy
-            buildMultipleChoiceNumbers(applet[i]);
+            if(applet[i].multiType == 1)
+            {
+                buildMultipleChoiceFractions(applet[i]); 
+            } else
+            {
+                buildMultipleChoiceNumbers(applet[i]);    
+            }
             break;
             
             case 11: //protractor and angle

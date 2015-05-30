@@ -128,7 +128,6 @@ function buildMultipleChoiceNumbers(item) {
 }
 
 function buildMultipleChoiceFractions(item) {
-    //console.log(answers)
     var StartX;
     var StartY;
     multSpaceX=item.spaceX;
@@ -159,21 +158,18 @@ function buildMultipleChoiceFractions(item) {
         piece[piece.length-1].incorrect3=item.incorrect3; 
         piece[piece.length-1].x = item.startX;
         piece[piece.length-1].y = item.startY;
+
     }
-    //console.log(piece[piece.length-1])
-        
+
     answers = []
     answers.push(piece[piece.length-1].correct)
     answers.push(piece[piece.length-1].incorrect1)
     answers.push(piece[piece.length-1].incorrect2)
     answers.push(piece[piece.length-1].incorrect3)
-    
-    //console.log(answers)
+
     piece[piece.length-1].multiType='1'; //for fraction values
     answers = shuffleAnswers(answers, piece[piece.length-1].multiType);
-   // console.log(answers)
-    
-    
+
     var newAnswerX;
     var newAnswerY;
     var newEvaluatedWhole= new Array(4);
@@ -192,18 +188,15 @@ function buildMultipleChoiceFractions(item) {
     
     for(var iterator=0; iterator<3; iterator++)
     {
-        //console.log(newEvaluatedAnswer)
         newEvaluatedAnswer[answerEvaluated[0]] = findUniqueFraction(answers[answerEvaluated[0]] , newEvaluatedAnswer); 
         answerEvaluated.splice(0, 1);
         
     }
-    //console.log(newEvaluatedAnswer)
     if(newEvaluatedAnswer == null) {
             piece[piece.length-1].destroy(true); 
             bootbox.alert("Your answer definitions are too constrained!");
             newEvaluatedAnswer = [];
     }
-   console.log(newEvaluatedAnswer)
     
     for(var answer = 0 ; answer < 4; answer++)
     {
@@ -289,7 +282,6 @@ var multipleChoiceBox;
 function multipleChoiceClick(item) {
     if(multipleChoiceBox)
     {
-        //multipleChoiceBox.destroy(true);
         multipleChoiceBox.clear()
     }
     multipleChoiceBox = game.add.graphics(item.x+piece[item.parentNumber].x, item.y+piece[item.parentNumber].y);
@@ -301,8 +293,14 @@ function multipleChoiceClick(item) {
     if(item.x==multSpaceX  &&  item.y==0   ){multipleChoiceSelected = 1}
     if(item.x==0    &&  item.y==multSpaceY  ){multipleChoiceSelected = 2}
     if(item.x==multSpaceX  &&  item.y==multSpaceY  ){multipleChoiceSelected = 3}
-    
-    multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);
+    console.log()
+    if(piece[item.parentNumber].multiType == 1) //fraction
+    {
+        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width*3.3, newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
+    } else //number
+    {
+        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
+    }
 }
 
 

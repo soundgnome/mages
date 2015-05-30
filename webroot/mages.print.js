@@ -213,7 +213,7 @@ function printPieces(newAppletID, appletDoneTest) {
                      break;
                 
                 case 10: //multiple choice
-                    if(piece[item].multiType==0)
+                    if(piece[item].multiType==0 || piece[item].multiType==1)//main piece
                     { 
                         var newObject = JSON.stringify({    
                             "appletID": newAppletID, 
@@ -226,7 +226,8 @@ function printPieces(newAppletID, appletDoneTest) {
                             "incorrect3":piece[item].incorrect3,
                             "multipleChoiceFontSize":piece[item].multipleChoiceFontSize,
                             "spaceX":piece[item].spaceX,
-                            "spaceY":piece[item].spaceY
+                            "spaceY":piece[item].spaceY,
+                            "multiType":piece[item].multiType
                             });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
