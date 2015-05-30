@@ -130,8 +130,10 @@ function buildMultipleChoiceNumbers(item) {
 function buildMultipleChoiceFractions(item) {
     var StartX;
     var StartY;
-    multSpaceX=item.spaceX;
-    multSpaceY=item.spaceY;
+    var maxWidth = 0;
+    var newWidth
+    //multSpaceX=item.spaceX;
+    //multSpaceY=item.spaceY;
     piece.forEach(function(item) {
         if(item.type == 10)
         {
@@ -244,6 +246,11 @@ function buildMultipleChoiceFractions(item) {
         } else
         {
             wholeOffset = item.multipleChoiceFontSize/12*15 
+            if(newEvaluatedAnswer[answer].whole > 9)
+            {
+               wholeOffset = wholeOffset*2 
+            }
+            
         }
         
         
@@ -266,8 +273,39 @@ function buildMultipleChoiceFractions(item) {
             wordWrap: false
         }))
         piece[piece.length-1].add(newEvaluatedAnswers[answer]);
+        newWidth = newEvaluatedAnswers[answer].width + newEvaluatedAnswers[answer].children[0].width + newEvaluatedAnswers[answer].children[2].width
+        if(newWidth > maxWidth)
+        {
+            maxWidth = newWidth;
+        }
     }
-
+    
+    for(var answer = 0 ; answer < 4; answer++)
+    {
+        switch(answer) {
+            case 0:
+                newAnswerX=0;
+                newAnswerY=0;
+                break;
+            case 1:
+                newAnswerX=maxWidth*1.5;
+                newAnswerY=0;
+                break;
+            case 2:
+                newAnswerX=0;
+                newAnswerY=item.multipleChoiceFontSize*2.5;
+                break;
+            case 3:
+                newAnswerX=maxWidth*1.5;
+                newAnswerY=item.multipleChoiceFontSize*2.5;
+                break;
+        }
+        newEvaluatedAnswers[answer].x = newAnswerX
+        newEvaluatedAnswers[answer].y = newAnswerY
+    }
+    multSpaceX=maxWidth*1.5;
+    multSpaceY=item.multipleChoiceFontSize*2.5
+    
     piece[piece.length-1].forEach(function(item) {
         item.inputEnabled='true';
         item.events.onInputDown.add(buildGroupPieceClick, this);
@@ -306,16 +344,15 @@ function multipleChoiceClick(item) {
     multipleChoiceBox = game.add.graphics(item.x+piece[item.parentNumber].x, item.y+piece[item.parentNumber].y);
     multipleChoiceBox.lineStyle(2, 0x0000FF, 1);
     
-    
     //simplest way to determine which answer I am
     if(item.x==0    &&  item.y==0   ){multipleChoiceSelected = 0}
     if(item.x==multSpaceX  &&  item.y==0   ){multipleChoiceSelected = 1}
     if(item.x==0    &&  item.y==multSpaceY  ){multipleChoiceSelected = 2}
     if(item.x==multSpaceX  &&  item.y==multSpaceY  ){multipleChoiceSelected = 3}
-    console.log()
+
     if(piece[item.parentNumber].multiType == 1) //fraction
     {
-        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width*2+newEvaluatedAnswers[multipleChoiceSelected].children[1].width*.7, newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
+        multipleChoiceBox.drawRect(-5, 0, 1.5*(newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width+newEvaluatedAnswers[multipleChoiceSelected].children[2].width), newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
     } else //number
     {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
