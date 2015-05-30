@@ -21,7 +21,7 @@ function buildProtractorAngle(item) {
     var oldUpperAngle=item.upperAngle;
     
     angleGraphic = drawAngle(legLength, item.lowerAngle, item.upperAngle ) ;
-    
+
     item.lowerAngle = item.lowerAngle * Math.PI / 180;
     var lowerEndX   = legLength * Math.sin(item.lowerAngle);
     var lowerEndY   = legLength * Math.cos(item.lowerAngle);
@@ -63,7 +63,7 @@ function buildProtractorAngle(item) {
     piece[piece.length-1].input.useHandCursor=true; 
     piece[piece.length-1].events.onInputDown.add(startDraggingProtractor, this);
     piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);  
-    angleGraphic.clear()
+    //angleGraphic.clear()
 }
 
 function drawAngle(legLength, lowerAngle, upperAngle ) {
