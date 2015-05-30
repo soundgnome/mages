@@ -172,8 +172,8 @@ function buildMultipleChoiceFractions(item) {
     piece[piece.length-1].multiType='1'; //for fraction values
     answers = shuffleAnswers(answers, piece[piece.length-1].multiType);
 
-    var newAnswerX;
-    var newAnswerY;
+    var newAnswerX=0;
+    var newAnswerY=0;
     var newEvaluatedWhole= new Array(4);
     var newEvaluatedDenominator= new Array(4);
     var newEvaluatedNumerator= new Array(4);
@@ -202,28 +202,6 @@ function buildMultipleChoiceFractions(item) {
     
     for(var answer = 0 ; answer < 4; answer++)
     {
-        switch(answer) {
-            case 0:
-                newAnswerX=0;
-                newAnswerY=0;
-                //newEvaluatedAnswer[0] = 'A. ';
-                break;
-            case 1:
-                newAnswerX=item.multipleChoiceFontSize*5;
-                newAnswerY=0;
-                //newEvaluatedAnswer[1] = 'B. ';
-                break;
-            case 2:
-                newAnswerX=0;
-                newAnswerY=item.multipleChoiceFontSize*2.5;;
-                //newEvaluatedAnswer[2] = 'C. ';
-                break;
-            case 3:
-                newAnswerX=item.multipleChoiceFontSize*5;
-                newAnswerY=item.multipleChoiceFontSize*2.5;;
-                //newEvaluatedAnswer[3] = 'D. ';
-                break;
-        }
         var wholeOffset = 0;
         newEvaluatedAnswers[answer]= game.add.text(newAnswerX, newAnswerY, ['A.','B.','C.','D.'][answer], {
             font: item.multipleChoiceFontSize + 'px Arial',
@@ -239,7 +217,6 @@ function buildMultipleChoiceFractions(item) {
             align: "center",
             wordWrap: false
         }))   
-        console.log(newEvaluatedAnswer[answer].whole)
         if(newEvaluatedAnswer[answer].whole == null)
         {
            
@@ -288,7 +265,7 @@ function buildMultipleChoiceFractions(item) {
                 newAnswerY=0;
                 break;
             case 1:
-                newAnswerX=maxWidth*1.5;
+                newAnswerX=maxWidth*1.5+20;
                 newAnswerY=0;
                 break;
             case 2:
@@ -296,14 +273,14 @@ function buildMultipleChoiceFractions(item) {
                 newAnswerY=item.multipleChoiceFontSize*2.5;
                 break;
             case 3:
-                newAnswerX=maxWidth*1.5;
+                newAnswerX=maxWidth*1.5+20;
                 newAnswerY=item.multipleChoiceFontSize*2.5;
                 break;
         }
         newEvaluatedAnswers[answer].x = newAnswerX
         newEvaluatedAnswers[answer].y = newAnswerY
     }
-    multSpaceX=maxWidth*1.5;
+    multSpaceX=maxWidth*1.5+20;
     multSpaceY=item.multipleChoiceFontSize*2.5
     
     piece[piece.length-1].forEach(function(item) {
@@ -352,7 +329,7 @@ function multipleChoiceClick(item) {
 
     if(piece[item.parentNumber].multiType == 1) //fraction
     {
-        multipleChoiceBox.drawRect(-5, 0, 1.5*(newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width+newEvaluatedAnswers[multipleChoiceSelected].children[2].width), newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
+        multipleChoiceBox.drawRect(-5, 0, 20+1.5*(newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width+newEvaluatedAnswers[multipleChoiceSelected].children[2].width), newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
     } else //number
     {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    

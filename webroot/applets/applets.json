@@ -451,6 +451,30 @@
                     ],
           "solution": "180-(hiddenNumber[0]-90)==numberEntryValue"
         },
+        { "summary": "Addition of mixed numbers with multiple choice",
+          "problems": [
+              {"appletID":"34","type":16,"expression":"getRandomInt%284%2C10%29"},
+              {"appletID":"34","type":16,"expression":"getRandomInt%282%2C10%29"},
+              {"appletID":"34","type":16,"expression":"getRandomInt%282%2ChiddenNumber%5B0%5D%29"},
+              {"appletID":"34","type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D%29"},
+              {"appletID":"34","type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B2%5D%29"},
+              {"appletID":"34","type":15,"startX":260,"startY":100,"expression":"hiddenNumber%5B3%5D","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":15,"startX":420,"startY":100,"expression":"hiddenNumber%5B1%5D-hiddenNumber%5B3%5D","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":15,"startX":300,"startY":80,"expression":"hiddenNumber%5B4%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":99,"color":0,"drawingBoxStartX":215,"drawingBoxStartY":429,"drawingBoxEndX":215,"drawingBoxEndY":429},
+              {"appletID":"34","type":99,"color":0,"drawingBoxStartX":215,"drawingBoxStartY":429,"drawingBoxEndX":215,"drawingBoxEndY":429},
+              {"appletID":"34","type":15,"startX":460,"startY":80,"expression":"hiddenNumber%5B2%5D-hiddenNumber%5B4%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":15,"startX":300,"startY":120,"expression":"hiddenNumber%5B0%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":15,"startX":460,"startY":120,"expression":"hiddenNumber%5B0%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+              {"appletID":"34","type":1,"startX":340,"startY":80,"newText":"%2B","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"34","type":1,"startX":280,"startY":60,"newText":"__","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"34","type":1,"startX":440,"startY":60,"newText":"__","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"34","type":1,"startX":500,"startY":80,"newText":"%3D","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"appletID":"34","type":10,"startX":240,"startY":260,"correct":{"whole":"hiddenNumber[1]","numerator":"hiddenNumber[2]","denominator":"hiddenNumber[0]"},"incorrect1":{"whole":"hiddenNumber[0]","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect2":{"whole":"hiddenNumber[1]","numerator":"hiddenNumber[2]","denominator":"getRandomInt(0,10)"},"incorrect3":{"whole":"hiddenNumber[1]","numerator":"getRandomInt(0,10)","denominator":"hiddenNumber[0]"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"100","multiType":"1"},
+              {"appletID":"34","type":5,"startX":680,"startY":540}
+                          ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected "
+        },
         { "summary": "",
           "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
