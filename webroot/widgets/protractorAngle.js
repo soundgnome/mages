@@ -63,7 +63,6 @@ function buildProtractorAngle(item) {
     piece[piece.length-1].input.useHandCursor=true; 
     piece[piece.length-1].events.onInputDown.add(startDraggingProtractor, this);
     piece[piece.length-1].events.onInputUp.add(stopDraggingProtractor, this);  
-    //angleGraphic.clear()
 }
 
 function drawAngle(legLength, lowerAngle, upperAngle ) {
