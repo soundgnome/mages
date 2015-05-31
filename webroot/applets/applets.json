@@ -62,7 +62,7 @@
         { "summary": "identify parts of a mixed number",
           "problems" : [
               {"appletID":"5","type":1,"startX":40,"startY":40,"text":"Click%20the%20boxes%20to%20represent%20the%20value%20of%20the%20numerator.","newText":"Click%20the%20boxes%20to%20represent%20the%20value%20of%20the%20numerator.","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"left"},
-              {"appletID":"5","type":7,"startX":520,"startY":60,"font":" 2px Arial","fontString":" 2px Arial","fill":"Black","wholeNumberRandomCeiling":5,"wholeNumberRandomFloor":1,"numeratorRandomCeiling":6,"numeratorRandomFloor":1,"denominatorRandomCeiling":10,"denominatorRandomFloor":6,"size":72},
+              {"appletID":"5","type":3,"startX":520,"startY":60,"fill":"Black","wholeExpression":"getRandomInt(1,5)","numeratorExpression":"getRandomInt(1,6)","denominatorExpression":"getRandomInt(6,10)","size":"54","draggable":0,"selectable":0},
               {"appletID":"5","type":0,"startX":400,"startY":280},
               {"appletID":"5","type":0,"startX":480,"startY":280},
               {"appletID":"5","type":0,"startX":560,"startY":280},
@@ -75,7 +75,7 @@
               {"appletID":"5","type":0,"startX":720,"startY":360},
               {"appletID":"5","type":5,"startX":560,"startY":500}
           ],
-          "solution": "boxesClicked==randomMixedNumber[0].numerator"
+          "solution": "boxesClicked==evaluatedNumerator[0]"
         },
         { "summary": "addition of 4-digit numbers with dragTo numbers and multiple choice",
           "problems": [
@@ -355,14 +355,14 @@
           "problems": [
               {"appletID":"28","type":20,"startX":100,"startY":340,"lineOrientation":"h","lineLength":600,"min":0,"minLabel":true,"max":10,"maxLabel":true,"interval":1,"intervalLabel":true,"subDivide":4,"dotStartX":100,"dotStartY":260,"dotOrientation":"h","dotNumber":2,"dotLabel":true,"dotSnapping":true},
               {"appletID":"28","type":1,"startX":40,"startY":40,"text":"Drag%20the%20dots%20to%20the%20numbers%20indicated%3A","newText":"Drag%20the%20dots%20to%20the%20numbers%20indicated%3A","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"appletID":"28","type":7,"startX":280,"startY":145,"font":" 72px Arial","fontString":" 72px Arial","fill":"Red","wholeNumberRandomCeiling":"10","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"4","numeratorRandomFloor":"1","denominatorRandomCeiling":"4","denominatorRandomFloor":"4","size":"36"},
-              {"appletID":"28","type":7,"startX":460,"startY":145,"font":" 72px Arial","fontString":" 72px Arial","fill":"Orange","wholeNumberRandomCeiling":"9","wholeNumberRandomFloor":"1","numeratorRandomCeiling":"4","numeratorRandomFloor":"1","denominatorRandomCeiling":"4","denominatorRandomFloor":"4","size":"36"},
+              {"appletID":"28","type":3,"startX":280,"startY":145,"fill":"Red","wholeExpression":"getRandomInt(1,9)","numeratorExpression":"getRandomInt(1,4)","denominatorExpression":"4","size":"30","draggable":0,"selectable":0},
+              {"appletID":"28","type":3,"startX":460,"startY":145,"fill":"Orange","wholeExpression":"getRandomInt(1,9)","numeratorExpression":"getRandomInt(1,4)","denominatorExpression":"4","size":"30","draggable":0,"selectable":0},
               {"appletID":"28","type":1,"startX":420,"startY":120,"text":"B.","newText":"B.","font":"","fontString":" 24px Arial","fill":"Orange","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"28","type":1,"startX":240,"startY":120,"text":"A.","newText":"A.","font":"","fontString":" 24px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"28","type":5,"startX":400,"startY":460},
               {"appletID":"28","type":99,"drawingBoxStartX":21,"drawingBoxStartY":20,"drawingBoxEndX":780,"drawingBoxEndY":558}
           ],
-          "solution": "numberLine.dotValue[0]==randomMixedNumber[0].wholeNumber + (randomMixedNumber[0].numerator / randomMixedNumber[0].denominator)&&numberLine.dotValue[1]==randomMixedNumber[1].wholeNumber + (randomMixedNumber[1].numerator / randomMixedNumber[1].denominator)"
+          "solution": "numberLine.dotValue[0]==evaluatedWhole[0] + (evaluatedNumerator[0] / evaluatedDenominator[0]) && numberLine.dotValue[1] == evaluatedWhole[1] + (evaluatedNumerator[1] / evaluatedDenominator[1]) "
         },
         { "summary": "",
           "problems": [

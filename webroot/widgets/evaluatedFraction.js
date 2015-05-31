@@ -10,7 +10,7 @@ function buildEvaluatedFraction(item) {
     if(item.wholeExpression != null)
     {
         var newWholeEvaluated = eval(item.wholeExpression)   
-        evaluatedWhole.push(newNumeratorEvaluated);
+        evaluatedWhole.push(newWholeEvaluated);
     }
     
     evaluatedNumerator.push(newNumeratorEvaluated);
