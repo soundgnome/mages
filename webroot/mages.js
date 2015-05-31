@@ -63,7 +63,7 @@ function preload() {
     game.load.image('menuClickBox', 'assets/menuClickBox.png');
     game.load.image('menuTextArea', 'assets/menuTextArea.png');
     game.load.image('menuRandomNumber', 'assets/menuRandomNumber.png');
-    game.load.image('menuRandomFraction', 'assets/menuRandomFraction.png');
+    game.load.image('menuEvaluatedFraction', 'assets/menuEvaluatedFraction.png');
     game.load.image('menuHundredChart', 'assets/menuHundredChart.png');
     game.load.image('menuDoneButton', 'assets/menuDoneButton.png');
     game.load.image('menuRandomDecimal', 'assets/menuRandomDecimal.png');
@@ -311,7 +311,7 @@ function loadApplet() {
             break;
             
             case 3: //random fraction
-            buildRandomFraction(applet[i]);
+            buildEvaluatedFraction(applet[i]);
             break;
             
             case 4: //hundredChart
@@ -477,7 +477,7 @@ function defineMenu() {
         game.add.sprite(50 , 50, 'menuClickBox'),
         game.add.sprite(300, 50, 'menuTextArea'),
         game.add.sprite(550, 50, 'menuRandomNumber'),
-        game.add.sprite(50 , 300, 'menuRandomFraction'),
+        game.add.sprite(50 , 300, 'menuEvaluatedFraction'),
         game.add.sprite(300, 300, 'menuHundredChart'),
         game.add.sprite(550, 300, 'menuDoneButton'),
         ];

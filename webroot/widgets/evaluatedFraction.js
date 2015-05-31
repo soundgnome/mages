@@ -1,5 +1,5 @@
 
-function buildRandomFraction(item) {
+function buildEvaluatedFraction(item) {
     
     var fontString;
     if (typeof item.numeratorExpression === 'undefined') 
@@ -35,7 +35,6 @@ function buildRandomFraction(item) {
             fill: newTextColor,
             align: "center"
     });
-    console.log(newNumeratorRandomText.font)
     var newDenominatorRandomText = game.add.text(item.size/2.5, item.size, newDenominatorRandom.toString(), {
             font: fontString,
             fill: newTextColor,
@@ -152,7 +151,7 @@ function getEvaluatedFractionSettings() {
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
-                            buildRandomFraction(newObject);
+                            buildEvaluatedFraction(newObject);
                             adjustNewPiece();
                             
                         }
@@ -162,7 +161,7 @@ function getEvaluatedFractionSettings() {
         );
 }
 
-function getRandomFractionSettings() {
+function getEvaluatedFractionSettings() {
     menuKeyPressed ==0;
     state = 'prompt';
     bootbox.dialog({
@@ -206,7 +205,7 @@ function getRandomFractionSettings() {
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
-                            buildRandomFraction(newObject);
+                            buildEvaluatedFraction(newObject);
                             adjustNewPiece();
                             
                         }
