@@ -102,6 +102,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
                         "fill":piece[item].fill ,
+                        "wholeExpression":piece[item].wholeExpression,
                         "numeratorExpression":piece[item].numeratorExpression,
                         "denominatorExpression":piece[item].denominatorExpression,
                         "size":piece[item].size,

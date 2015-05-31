@@ -1,42 +1,57 @@
-
+var evaluatedNumerator = [];
+var evaluatedDenominator = [];
+var evaluatedWhole = [];
 function buildEvaluatedFraction(item) {
     
     var fontString;
 
     var newNumeratorEvaluated = eval(item.numeratorExpression)
     var newDenominatorEvaluated = eval(item.denominatorExpression) 
-
+    if(item.wholeExpression != null)
+    {
+        var newWholeEvaluated = eval(item.wholeExpression)   
+        evaluatedWhole.push(newNumeratorEvaluated);
+    }
     
-    
-    randomNumerator.push(newNumeratorEvaluated);
-    randomDenominator.push(newDenominatorEvaluated);
+    evaluatedNumerator.push(newNumeratorEvaluated);
+    evaluatedDenominator.push(newDenominatorEvaluated);
     if(state!='build')
     {
         fontString="" + newBold + " " + item.size + "px Arial";
+        wholeFontString = "" + newBold + " " + item.size*2 + "px Arial";
         newTextColor=item.fill;
         newTextWrap=item.wordWrap;
         newTextWidth=item.wordWrapWidth;
     } else
     {
         fontString="" + newBold + " " + newTextSize + "px Arial";
+        wholeFontString="" + newBold + " " + newTextSize*2 + "px Arial";
         item.size = newTextSize;
     }
     
-    
-    //build start coordinates; will change down below if we're running an applet
+    var wholeOffset = 0
+    if(item.wholeExpression != null)
+    {
+        var newWholeEvaluatedText = game.add.text(-item.size/2.5, 0, newWholeEvaluated.toString(), {
+            font: wholeFontString,
+            fill: newTextColor,
+            align: "center"
+        });
+        wholeOffset += newWholeEvaluatedText.width
+    }
 
-    var newNumeratorEvaluatedText = game.add.text(item.size/2.5, 0, newNumeratorEvaluated.toString(), {
+    var newNumeratorEvaluatedText = game.add.text(wholeOffset + item.size/2.5, 0, newNumeratorEvaluated.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
-    var newDenominatorEvaluatedText = game.add.text(item.size/2.5, item.size, newDenominatorEvaluated.toString(), {
+    var newDenominatorEvaluatedText = game.add.text(wholeOffset + item.size/2.5, item.size, newDenominatorEvaluated.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
     
-    var fractionBarText = game.add.text(-item.size/2.5, 0, "___", {
+    var fractionBarText = game.add.text(wholeOffset -item.size/2.5, 0, "___", {
             font: fontString,
             fill: newTextColor,
             align: "center"
@@ -47,8 +62,8 @@ function buildEvaluatedFraction(item) {
     boxGraphic.lineStyle(2, 0x000000, 1)
     boxGraphic.drawCircle(0, -boxLength*.5, 0.01);//these four dots keep the whole thing centered
     boxGraphic.drawCircle(0, boxLength, 0.01);//these four dots keep the whole thing centered
-    boxGraphic.drawCircle(boxLength, -boxLength*.5, 0.01);//these four dots keep the whole thing centered
-    boxGraphic.drawCircle(boxLength, boxLength, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(wholeOffset+boxLength, -boxLength*.5, 0.01);//these four dots keep the whole thing centered
+    boxGraphic.drawCircle(wholeOffset+boxLength, boxLength, 0.01);//these four dots keep the whole thing centered
     
     piece[piece.length] = game.add.sprite(0,0, boxGraphic.generateTexture());
     boxGraphic.clear();
@@ -59,6 +74,10 @@ function buildEvaluatedFraction(item) {
     piece[piece.length-1].addChild(fractionBarText);
     piece[piece.length-1].addChild(newNumeratorEvaluatedText);
     piece[piece.length-1].addChild(newDenominatorEvaluatedText);
+    if(item.wholeExpression != null)
+    {
+        piece[piece.length-1].addChild(newWholeEvaluatedText)
+    }
     
     piece[piece.length-1].scale.setTo(item.size/40, item.size/40);
     
@@ -92,10 +111,6 @@ function buildEvaluatedFraction(item) {
         piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
         piece[piece.length-1].clicked=0;
         piece[piece.length-1].ParentPosition=piece.length-1;
-        piece[piece.length-1].numeratorEvaluatedFloor = item.numeratorEvaluatedFloor;
-        piece[piece.length-1].numeratorEvaluatedCeiling = item.numeratorEvaluatedCeiling;
-        piece[piece.length-1].denominatorEvaluatedFloor = item.denominatorEvaluatedFloor;
-        piece[piece.length-1].denominatorEvaluatedCeiling = item.denominatorEvaluatedCeiling;
         piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
         piece[piece.length-1].fill = newTextColor;
         piece[piece.length-1].size = newTextSize;
@@ -104,7 +119,10 @@ function buildEvaluatedFraction(item) {
     }
     piece[piece.length-1].numeratorExpression = item.numeratorExpression;
     piece[piece.length-1].denominatorExpression = item.denominatorExpression;
-    
+    if(item.wholeExpression != null)
+    {
+        piece[piece.length-1].wholeExpression = item.wholeExpression;
+    }
     if(item.selectable == 1)
     {
         addSelectionBehavior()   
@@ -117,6 +135,7 @@ function getEvaluatedFractionSettings() {
     bootbox.dialog({
                 title: "Evaluated Fraction Settings",
                 message: 
+                getMenuEntryString("Whole number expression:" , "wholeExpression", null , "(null for a regular fraction.)") +
                 getMenuEntryString("Numerator Expression" , "numExpression", 1 ) +
                 getMenuEntryString("Denominator Expression" , "denExpression", "getRandomInt(1,10)" ) +
                 getMenuEntryString("Color" , "color", newTextColor , null) +
@@ -140,7 +159,8 @@ function getEvaluatedFractionSettings() {
                             newTextColor =  $('#color').val();
                             newTextSize = $('#size').val();
                             state = 'build';
-                            var newObject = JSON.parse(JSON.stringify({   
+                            var newObject = JSON.parse(JSON.stringify({ 
+                                "wholeExpression":$('#wholeExpression').val(),
                                 "numeratorExpression":$('#numExpression').val(),
                                 "denominatorExpression":$('#denExpression').val(),
                                 "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,

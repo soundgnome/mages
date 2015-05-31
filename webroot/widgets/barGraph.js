@@ -2,8 +2,8 @@ var totalBoxes=0;
 var randomNumber = [];
 var evaluatedExpression = [];
 var randomDecimal = [];
-var randomNumerator = [];
-var randomDenominator = [];
+var evaluatedNumerator = [];
+var evaluatedDenominator = [];
 var randomMixedNumber = [];
 var multipleChoiceSelected = null;
 
