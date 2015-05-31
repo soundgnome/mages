@@ -1,3 +1,4 @@
+var totalBoxes=0;
 var boxesClicked=-1;
 function buildClickBox(item) {
     if (typeof item.userScale === 'undefined') { item.userScale = 1; }

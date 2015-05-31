@@ -1,3 +1,4 @@
+var randomNumber = [];
 function buildRandomNumber(item) {
     var newRandom = getRandomInt(Number(item.randomFloor), Number(item.randomCeiling) );
     var startX;

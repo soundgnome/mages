@@ -1,32 +1,4 @@
-var totalBoxes=0;
-var randomNumber = [];
-var evaluatedExpression = [];
-var randomDecimal = [];
-var evaluatedNumerator = [];
-var evaluatedDenominator = [];
-var randomMixedNumber = [];
-var multipleChoiceSelected = null;
-
 //BAR GRAPH
-function BarGraphConstructor(appletID, type, titleText, min, max, interval, numberLabel, numberedAxis, itemList, itemLabel, itemValueList, startX, startY) {
-    this.appletID = appletID;
-    this.type = type;
-    this.titleText = titleText;
-    this.min = min;
-    this.max = max;
-    this.interval = interval;
-    this.numberLabel = numberLabel;
-    this.numberedAxis = numberedAxis;
-    this.itemList = itemList;
-    this.itemLabel = itemLabel;
-    this.itemValueList = itemValueList;
-    this.startX = startX;
-    this.startY = startY;
-    this.topValue = topBarGraphValue;
-    this.topSpot = topBarGraphSpot;
-    this.totalValue = totalBarGraphValue;
-}
-
 var barGraph;
 function buildBarGraph(item) {
     console.log(item.itemList)

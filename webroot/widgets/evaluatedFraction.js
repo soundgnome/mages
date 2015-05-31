@@ -9,10 +9,13 @@ function buildEvaluatedFraction(item) {
     var newDenominatorEvaluated = eval(item.denominatorExpression) 
     if(item.wholeExpression != null)
     {
-        var newWholeEvaluated = eval(item.wholeExpression)   
-        evaluatedWhole.push(newWholeEvaluated);
+        var newWholeEvaluated = eval(item.wholeExpression); 
+    } else
+    {
+        var newWholeEvaluated = 0;
     }
     
+    evaluatedWhole.push(newWholeEvaluated);
     evaluatedNumerator.push(newNumeratorEvaluated);
     evaluatedDenominator.push(newDenominatorEvaluated);
     if(state!='build')
@@ -99,7 +102,7 @@ function buildEvaluatedFraction(item) {
             piece[piece.length-1].input.useHandCursor=true;
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
-            piece[piece.length-1].number = newNumeratorEvaluated/newDenominatorEvaluated;
+            piece[piece.length-1].number = newWholeEvaluated+newNumeratorEvaluated/newDenominatorEvaluated;
             
         }
     } else

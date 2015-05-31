@@ -1,3 +1,4 @@
+var evaluatedExpression = [];
 function buildEvaluatedExpression(item) {
      item.expression=decodeURIComponent(item.expression);   
     

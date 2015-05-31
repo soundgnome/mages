@@ -5,7 +5,7 @@ var multipleChoiceCorrectAnswer;
 var rightAnswer;
 var multSpaceX;
 var multSpaceY;
-
+var multipleChoiceSelected = null;
 function buildMultipleChoiceNumbers(item) {
    // console.log(answers)
     var StartX;

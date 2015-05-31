@@ -1,3 +1,4 @@
+var randomDecimal = [];
 function buildRandomDecimal(item) {
     var startX;
     var startY;
