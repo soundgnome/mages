@@ -43,3 +43,7 @@ function drawClock(minutes) {
     newAMPMLabel.destroy();
     return returnTexture;
 }
+
+function getClockSettings() {
+    
+}

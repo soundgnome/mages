@@ -67,7 +67,7 @@ function preload() {
     game.load.image('menuHundredChart', 'assets/menuHundredChart.png');
     game.load.image('menuDoneButton', 'assets/menuDoneButton.png');
     game.load.image('menuRandomDecimal', 'assets/menuRandomDecimal.png');
-    game.load.image('menuRandomMixedNumber', 'assets/menuRandomMixedNumber.png');
+    game.load.image('menuClock', 'assets/menuClock.png');
     game.load.image('menuDraggableNumbers', 'assets/menuDraggableNumbers.png');
     game.load.image('menuDragToBox', 'assets/menuDragToBox.png');
     game.load.image('menuMultipleChoice', 'assets/menuMultipleChoice.png');
@@ -484,7 +484,7 @@ function defineMenu() {
 
     menu1=[//PAGE 2 
         game.add.sprite(50 , 50, 'menuRandomDecimal'),
-        game.add.sprite(300, 50, 'menuRandomMixedNumber'),
+        game.add.sprite(300, 50, 'menuClock'),
         game.add.sprite(550, 50, 'menuDraggableNumbers'),
         game.add.sprite(50 , 300, 'menuDragToBox'),
         game.add.sprite(300, 300, 'menuMultipleChoice'),
@@ -641,7 +641,7 @@ function onBuildMenuClick(item, pointer) {
             break;
             
             case 7:  //random mixed number
-            getRandomMixedNumberSettings(); //in mages.dialogs.js
+            getClockSettings(); 
             break;
             
             case 8:  //draggable numbers
@@ -971,7 +971,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    //game.debug.text("Mages Public Alpha.35 - Load applets 1-30 and 100-109 for examples.", 10, 20);
+    //game.debug.text("Mages Public Alpha.35 - Load applets 1-35 and 100-109 for examples.", 10, 20);
 }
 
 
