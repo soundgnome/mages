@@ -7,7 +7,7 @@ function buildEvaluatedFraction(item) {
 
     var newNumeratorEvaluated = eval(item.numeratorExpression)
     var newDenominatorEvaluated = eval(item.denominatorExpression) 
-    if(item.wholeExpression != null)
+    if(item.wholeExpression != "null")
     {
         var newWholeEvaluated = eval(item.wholeExpression); 
     } else
@@ -33,7 +33,8 @@ function buildEvaluatedFraction(item) {
     }
     
     var wholeOffset = 0
-    if(item.wholeExpression != null)
+    console.log(item.wholeExpression)
+    if(item.wholeExpression != "null")
     {
         var newWholeEvaluatedText = game.add.text(-item.size/2.5, 0, newWholeEvaluated.toString(), {
             font: wholeFontString,
@@ -77,7 +78,7 @@ function buildEvaluatedFraction(item) {
     piece[piece.length-1].addChild(fractionBarText);
     piece[piece.length-1].addChild(newNumeratorEvaluatedText);
     piece[piece.length-1].addChild(newDenominatorEvaluatedText);
-    if(item.wholeExpression != null)
+    if(item.wholeExpression != "null")
     {
         piece[piece.length-1].addChild(newWholeEvaluatedText)
     }
@@ -103,7 +104,6 @@ function buildEvaluatedFraction(item) {
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
             piece[piece.length-1].number = newWholeEvaluated+newNumeratorEvaluated/newDenominatorEvaluated;
-            
         }
     } else
     {
@@ -122,7 +122,7 @@ function buildEvaluatedFraction(item) {
     }
     piece[piece.length-1].numeratorExpression = item.numeratorExpression;
     piece[piece.length-1].denominatorExpression = item.denominatorExpression;
-    if(item.wholeExpression != null)
+    if(item.wholeExpression != "null")
     {
         piece[piece.length-1].wholeExpression = item.wholeExpression;
     }

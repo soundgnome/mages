@@ -201,6 +201,8 @@ function buildMultipleChoiceTextures(item) {
         });
         var newTextureGraphic = eval(answers[answer].toString()) ;
         newTexture[answer] = game.add.sprite(0 ,0 , newTextureGraphic  )
+        
+        //this bitmap data is used to calculate the sprite width for the selection box
         bmd[answer] = game.add.bitmapData(newTexture.width,newTexture.height);
         bmd[answer].ctx.beginPath();
         bmd[answer].ctx.rect(0,0,newTexture.width,newTexture.height);
@@ -221,7 +223,6 @@ function buildMultipleChoiceTextures(item) {
             maxHeight = newTexture[answer].height;
         }
     }
-    console.log(maxWidth)
     for(var answer = 0 ; answer < 4; answer++)
     {
         switch(answer) {
