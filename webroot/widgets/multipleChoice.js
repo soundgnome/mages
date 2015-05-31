@@ -487,12 +487,12 @@ function multipleChoiceClick(item) {
     if(piece[item.parentNumber].multiType == 1) //fraction
     {
         multipleChoiceBox.drawRect(-5, 0, 20+1.05*(newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width+newEvaluatedAnswers[multipleChoiceSelected].children[1].width), newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
-    } else if(piece[item.parentNumber].multiType == 2)
+    } else if(piece[item.parentNumber].multiType == 2) //texture
     {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].children[0].width-10, newEvaluatedAnswers[multipleChoiceSelected].children[0].height-10);
     } else //number
     {
-        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
+        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width+5, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
     }
 }
 

@@ -133,6 +133,7 @@ function stopDraggingBaseTenBlocks(item) {
      }
     if(draggingBlockHandle.occupying == 1)
     {
+        console.log("test")
         baseTenDragToContents += item.value;   
     }
 }
@@ -220,7 +221,13 @@ var dragToGraphic;
 var baseTenDragTo;
 
 function buildBaseTenDragTo(startX, startY, boxWidth, boxHeight) {
-    baseTenDragTo = (new BaseTenDragToConstructor(startX, startY, boxWidth, boxHeight));
+    //baseTenDragTo = (new BaseTenDragToConstructor(startX, startY, boxWidth, boxHeight));
+    baseTenDragTo = JSON.parse(JSON.stringify({    
+                        "startX": startX, 
+                        "startY": startY, 
+                        "width":boxWidth, 
+                        "height":boxHeight
+                        }));
     piece[piece.length] = game.add.sprite(0, 0, drawBaseTenDragTo(boxWidth, boxHeight).generateTexture());
     dragToGraphic.clear();
     piece[piece.length-1].grouped=0;
