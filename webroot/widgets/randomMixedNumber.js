@@ -1,3 +1,5 @@
+//DEPRECATED USE EVALUATED FRACTION INSTEAD OF THIS WIDGET
+
 function MixedNumberConstructor(wholeNumber , numerator , denominator) {
     this.wholeNumber = wholeNumber;
     this.numerator = numerator;
