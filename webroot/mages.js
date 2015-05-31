@@ -965,7 +965,7 @@ function pickRandomAnswer(answerArray) {
 
 //gets a random answer within proximity of given answer
 function getCloseAnswer(answer, proximity) {
-    return answer+getRandomInt(-proximity, proximity);
+    return getRandomIntExcluding(answer-proximity,answer+proximity,answer)
 }
 
 

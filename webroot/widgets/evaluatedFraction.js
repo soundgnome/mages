@@ -122,10 +122,9 @@ function buildEvaluatedFraction(item) {
     }
     piece[piece.length-1].numeratorExpression = item.numeratorExpression;
     piece[piece.length-1].denominatorExpression = item.denominatorExpression;
-    if(item.wholeExpression != "null")
-    {
-        piece[piece.length-1].wholeExpression = item.wholeExpression;
-    }
+
+    piece[piece.length-1].wholeExpression = item.wholeExpression;
+
     if(item.selectable == 1)
     {
         addSelectionBehavior()   

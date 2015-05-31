@@ -526,7 +526,8 @@
           "problems": [{"appletID":"97","type":3,"startX":160,"startY":80,"fill":"Black","wholeExpression":"1","numeratorExpression":"1","denominatorExpression":"getRandomInt(1,10)","size":"36","draggable":0,"selectable":0},
 {"appletID":"97","type":3,"startX":380,"startY":80,"fill":"Black","wholeExpression":"1","numeratorExpression":"1","denominatorExpression":"getRandomInt(1,10)","size":"36","draggable":1,"selectable":0},
 {"appletID":"97","type":3,"startX":600,"startY":80,"fill":"Black","wholeExpression":"1","numeratorExpression":"1","denominatorExpression":"getRandomInt(1,10)","size":"36","draggable":0,"selectable":1,"selectedExpression":"true"},
-{"appletID":"97","type":9,"startX":420,"startY":420,"userScaleX":2,"userScaleY":1}
+{"appletID":"97","type":9,"startX":420,"startY":420,"userScaleX":2,"userScaleY":1},
+{"appletID":"97","type":3,"startX":360,"startY":220,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"getRandomInt(1,10)","size":"36","draggable":1,"selectable":0}
 ]
         },
         { "summary": "test - lines!",
