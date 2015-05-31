@@ -127,6 +127,162 @@ function buildMultipleChoiceNumbers(item) {
     }
 }
 
+function buildMultipleChoiceTextures(item) {
+   // console.log(answers)
+    var StartX;
+    var StartY;
+    var maxWidth = 0;
+    var maxHeight = 0;
+    multSpaceX=item.spaceX;
+    multSpaceY=item.spaceY;
+    piece.forEach(function(item) {
+        if(item.type == 10)
+        {
+            item.deleted=true;
+            item.destroy(true);
+            multipleChoice = [];
+        }
+    });
+    if(state=='build')
+    {
+        piece[piece.length] = game.add.group();
+        piece[piece.length-1].correct=item.answers[0];
+        piece[piece.length-1].incorrect1=item.answers[1];
+        piece[piece.length-1].incorrect2=item.answers[2];
+        piece[piece.length-1].incorrect3=item.answers[3]; 
+        startX=400;
+        startY=300;
+    } else
+    {
+        piece[piece.length] = game.add.group();
+        piece[piece.length-1].correct=item.correct;
+        piece[piece.length-1].incorrect1=item.incorrect1;
+        piece[piece.length-1].incorrect2=item.incorrect2;
+        piece[piece.length-1].incorrect3=item.incorrect3; 
+        piece[piece.length-1].x = item.startX;
+        piece[piece.length-1].y = item.startY;
+    }
+        
+    answers = [piece[piece.length-1].correct, piece[piece.length-1].incorrect1, piece[piece.length-1].incorrect2, piece[piece.length-1].incorrect3];
+    piece[piece.length-1].multiType='2'; //for texture values
+    answers = shuffleAnswers(answers, piece[piece.length-1].multiType);
+    
+    
+    var newAnswerX;
+    var newAnswerY;
+    var newEvaluatedAnswer= new Array(4);//move down later
+    var newTexture= new Array(4);
+    var bmd= new Array(4);
+    var answerEvaluated = [0,1,2,3];
+  
+    answerEvaluated.splice(multipleChoiceCorrectAnswer, 1);
+    
+    for(var answer = 0 ; answer < 4; answer++)
+    {
+        switch(answer) {
+            case 0:
+                newEvaluatedAnswer[0] = 'A. ' ;
+                break;
+            case 1:
+                newEvaluatedAnswer[1] = 'B. ';
+                break;
+            case 2:
+                newEvaluatedAnswer[2] = 'C. ';
+                break;
+            case 3:
+                newEvaluatedAnswer[3] = 'D. ';
+                break;
+        }
+        newEvaluatedAnswers[answer]= game.add.text(0, 0, newEvaluatedAnswer[answer], {
+            font: '24px Arial',
+            fill: 'black',
+            align: "left",
+            wordWrap: false
+        });
+        var newTextureGraphic = eval(answers[answer].toString()) ;
+        newTexture[answer] = game.add.sprite(0 ,0 , newTextureGraphic  )
+        bmd[answer] = game.add.bitmapData(newTexture.width,newTexture.height);
+        bmd[answer].ctx.beginPath();
+        bmd[answer].ctx.rect(0,0,newTexture.width,newTexture.height);
+        bmd[answer].ctx.fillStyle = '#CCCCCC';
+        bmd[answer].ctx.fill();
+        
+        piece[piece.length-1].add(newEvaluatedAnswers[answer]);
+        newEvaluatedAnswers[answer].addChild(game.add.sprite(0, 0 , bmd[answer]))
+        
+        newEvaluatedAnswers[answer].addChild(newTexture[answer])
+        newTextureTemp.clear()
+        if(newTexture[answer].width > maxWidth)
+        {
+            maxWidth = newTexture[answer].width;
+        }
+        if(newTexture[answer].height > maxHeight)
+        {
+            maxHeight = newTexture[answer].height;
+        }
+    }
+    console.log(maxWidth)
+    for(var answer = 0 ; answer < 4; answer++)
+    {
+        switch(answer) {
+            case 0:
+                newAnswerX=0;
+                newAnswerY=0;
+                break;
+            case 1:
+                newAnswerX=maxWidth+50;
+                newAnswerY=0;
+                break;
+            case 2:
+                newAnswerX=0;
+                newAnswerY=maxHeight+50;
+                break;
+            case 3:
+                newAnswerX=maxWidth+50;
+                newAnswerY=maxHeight+50;
+                break;
+        }
+
+        newTexture[answer].x += 25
+        newTexture[answer].y += 25
+        newEvaluatedAnswers[answer].x = newAnswerX
+        newEvaluatedAnswers[answer].y = newAnswerY
+
+    }
+    multSpaceX=maxWidth+50;
+    multSpaceY=maxHeight+50
+    
+    piece[piece.length-1].forEach(function(item) {
+        item.inputEnabled='true';
+        item.events.onInputDown.add(buildGroupPieceClick, this);
+        item.events.onInputUp.add(onFinishDrag, draggingPiece);
+        item.clicked=0;
+        item.ParentPosition=piece.length-1;
+    });
+    
+    piece[piece.length-1].multipleChoiceFontSize = item.multipleChoiceFontSize;
+    piece[piece.length-1].spaceX = item.spaceX;
+    piece[piece.length-1].spaceY = item.spaceY;
+    piece[piece.length-1].type=10;  
+    if(state != 'build')
+    {
+        piece[piece.length-1].forEach(function(item) {
+        item.events.onInputDown.add(multipleChoiceClick, this);
+        item.parentNumber = piece.length-1;
+
+        });    
+          
+    } else
+    {
+    piece[piece.length-1].grouped=0;
+    
+    piece[piece.length-1].x=startX; 
+    piece[piece.length-1].y=startY; 
+    }
+}
+
+
+
 function buildMultipleChoiceFractions(item) {
     var StartX;
     var StartY;
@@ -330,6 +486,9 @@ function multipleChoiceClick(item) {
     if(piece[item.parentNumber].multiType == 1) //fraction
     {
         multipleChoiceBox.drawRect(-5, 0, 20+1.05*(newEvaluatedAnswers[multipleChoiceSelected].width+newEvaluatedAnswers[multipleChoiceSelected].children[0].width+newEvaluatedAnswers[multipleChoiceSelected].children[1].width), newEvaluatedAnswers[multipleChoiceSelected].height*1.7);    
+    } else if(piece[item.parentNumber].multiType == 2)
+    {
+        multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].children[0].width-10, newEvaluatedAnswers[multipleChoiceSelected].children[0].height-10);
     } else //number
     {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
@@ -404,7 +563,7 @@ function findUniqueFraction(testAnswer , answers) {
 function shuffleAnswers(answers, multiType) {
     var shuffledAnswers = [];
     var correctAnswerShuffled = 0;
-    var shuffledFractions = new Array(4);     
+    var shuffledFractions = new Array(4); 
 //console.log(answers)
     for(var i = 0 ; i < 4 ; i++)
     {
@@ -424,15 +583,19 @@ function shuffleAnswers(answers, multiType) {
             answers.splice(shuffleSpot , 1) ;  
             
         }
+        if(multiType == 2){
+            shuffledAnswers.push( answers.splice(shuffleSpot , 1) );   
+        }
          
     }
     if(multiType == 0){
             return shuffledAnswers; 
-            
     }
     if(multiType == 1){
         return shuffledFractions;
-        
+    }
+    if(multiType == 2){
+            return shuffledAnswers; 
     }
     
     
@@ -477,7 +640,7 @@ function getMultipleChoiceTypeSetting() {
                     break;
                     
                 case 'texture':
-                    state='build'
+                    getMultipleChoiceTextureSettings();
                     break;
             }
             
@@ -568,6 +731,63 @@ function getMultipleChoiceNumberSettings(startPrompt) {
         }
     });
 }
+
+function getMultipleChoiceTextureSettings(startPrompt) {
+    
+    if(startPrompt == null)
+    {
+        startPrompt=0;
+    }
+    var multChoiceTitleString = new Array(5);
+    multChoiceTitleString[0]='Multiple Choice Texture Settings: Correct Answer';
+    multChoiceTitleString[1]='Multiple Choice Texture Settings: Incorrect Answer #1';
+    multChoiceTitleString[2]='Multiple Choice Texture Settings: Incorrect Answer #2';
+    multChoiceTitleString[3]='Multiple Choice Texture Settings: Incorrect Answer #3';
+    
+    var multChoiceMessageString = new Array(5);
+    multChoiceMessageString[0] = getMenuEntryString("Correct texture expression:" , "correctExpression", "testTexture()" , "Enter an expression that respresents the correct answer.");
+    multChoiceMessageString[1] = getMenuEntryString("Inorrect texture #1 expression:" , "incorrect1Expression", "testTexture()" , "Enter an expression that respresents an incorrect answer. ");
+    multChoiceMessageString[2] = getMenuEntryString("Inorrect texture #2 expression:" , "incorrect2Expression", "testTexture()" , "Enter an expression that respresents an incorrect answer. ");
+    multChoiceMessageString[3] = getMenuEntryString("Inorrect texture #3 expression:" , "incorrect3Expression", "testTexture()" , "Enter an expression that respresents an incorrect answer. ");
+
+    bootbox.alert({
+        size: 'large',
+        title: multChoiceTitleString[startPrompt],
+        message: multChoiceMessageString[startPrompt], 
+        callback: function()
+        { 
+            
+            switch(startPrompt) 
+            {
+                case 0:
+                    newMultipleChoiceNumbers.push( $('#correctExpression').val() ); 
+                    break;
+                case 1:
+                    newMultipleChoiceNumbers.push( $('#incorrect1Expression').val() );
+                    break;
+                case 2:
+                    newMultipleChoiceNumbers.push( $('#incorrect2Expression').val() );
+                    break;
+                case 3:
+                    newMultipleChoiceNumbers.push( $('#incorrect3Expression').val() );
+                    break;
+            }
+            if(startPrompt <3)
+            {
+                getMultipleChoiceTextureSettings(startPrompt+1);
+            } else
+            {
+                state = 'build';
+                var newObject = JSON.parse(JSON.stringify({    
+                    "answers": newMultipleChoiceNumbers, 
+                    }));      
+                buildMultipleChoiceTextures(newObject);
+                newMultipleChoiceNumbers = [];
+            }
+        }
+    });
+}
+
 
 function getMultipleChoiceFractionSettings(startPrompt) {
     

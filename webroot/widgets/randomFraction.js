@@ -1,9 +1,18 @@
 
 function buildRandomFraction(item) {
+    
     var fontString;
-    //piece[piece.length] = game.add.group();
-    var newNumeratorRandom = getRandomInt(Number(item.numeratorRandomFloor), Number(item.numeratorRandomCeiling) );
-    var newDenominatorRandom = getRandomInt(Number(item.denominatorRandomFloor), Number(item.denominatorRandomCeiling) );
+    if (typeof item.numeratorExpression === 'undefined') 
+    {
+        var newNumeratorRandom = getRandomInt(Number(item.numeratorRandomFloor), Number(item.numeratorRandomCeiling) );
+        var newDenominatorRandom = getRandomInt(Number(item.denominatorRandomFloor), Number(item.denominatorRandomCeiling) );
+    } else
+    {
+        var newNumeratorRandom = eval(item.numeratorExpression)
+        var newDenominatorRandom = eval(item.denominatorExpression) 
+    }
+    
+    
     randomNumerator.push(newNumeratorRandom);
     randomDenominator.push(newDenominatorRandom);
     if(state!='build')
@@ -99,10 +108,58 @@ function buildRandomFraction(item) {
         piece[piece.length-1].grouped=1;
         piece[piece.length-1].type=3;
     }
+    piece[piece.length-1].numeratorExpression = item.numeratorExpression;
+    piece[piece.length-1].denominatorExpression = item.denominatorExpression;
+    
     if(item.selectable == 1)
     {
         addSelectionBehavior()   
     }
+}
+function getEvaluatedFractionSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "Evaluated Fraction Settings",
+                message: 
+                getMenuEntryString("Numerator Expression" , "numExpression", 1 ) +
+                getMenuEntryString("Denominator Expression" , "denExpression", "getRandomInt(1,10)" ) +
+                getMenuEntryString("Color" , "color", newTextColor , null) +
+                getMenuEntryString("Size" , "size", 36 , null) +
+                getMenuYesNoString("Bold?", "bold", null) +
+                getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            if($("input[name='bold']:checked").val() == "Yes")
+                            {
+                                newBold="bold";
+                            } else
+                            {
+                                newBold="";
+                            }
+                            
+                            newTextColor =  $('#color').val();
+                            newTextSize = $('#size').val();
+                            state = 'build';
+                            var newObject = JSON.parse(JSON.stringify({   
+                                "numeratorExpression":$('#numExpression').val(),
+                                "denominatorExpression":$('#denExpression').val(),
+                                "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
+                                "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
+                                })) ;
+                            buildRandomFraction(newObject);
+                            adjustNewPiece();
+                            
+                        }
+                    }
+                }
+            }
+        );
 }
 
 function getRandomFractionSettings() {

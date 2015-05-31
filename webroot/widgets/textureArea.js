@@ -1,6 +1,7 @@
 var textureArea;
 var newTextureTemp
 function buildTextureArea(item) {
+    console.log(item.textureExpression)
     var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression) )
     var bmd = game.add.bitmapData(newTexture.width,newTexture.height);
 

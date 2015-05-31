@@ -114,7 +114,7 @@ function getEvaluatedExpressionSettings() {
                                 "type" : 15, 
                                 "startX" : 400 , 
                                 "startY" : 300 , 
-                                "expression" : expression , 
+                                "expression" : fixedEncodeURIComponent(expression)  , 
                                 "fill" : newTextColor, 
                                 "wordWrap" : newTextWrap, 
                                 "wordWrapWidth": newTextWidth, 

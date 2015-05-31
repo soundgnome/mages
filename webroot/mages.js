@@ -342,8 +342,11 @@ function loadApplet() {
             if(applet[i].multiType == 1)
             {
                 buildMultipleChoiceFractions(applet[i]); 
-            } else
+            } else if(applet[i].multiType == 2)
             {
+                buildMultipleChoiceTextures(applet[i]); 
+            } else
+            { 
                 buildMultipleChoiceNumbers(applet[i]);    
             }
             break;
@@ -622,7 +625,7 @@ function onBuildMenuClick(item, pointer) {
             break;
             
             case 3:  //random fraction
-            getRandomFractionSettings(); //in mages.dialogs.js
+            getEvaluatedFractionSettings(); //in mages.dialogs.js
             break;
             
             case 4: //hundred chart
@@ -968,7 +971,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    //game.debug.text("Mages Public Alpha.33 - Load applets 1-30 and 100-109 for examples.", 10, 20);
+    //game.debug.text("Mages Public Alpha.34 - Load applets 1-30 and 100-109 for examples.", 10, 20);
 }
 
 

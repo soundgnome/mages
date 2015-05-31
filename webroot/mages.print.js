@@ -102,12 +102,8 @@ function printPieces(newAppletID, appletDoneTest) {
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
                         "fill":piece[item].fill ,
-                        "randomCeiling":piece[item].randomCeiling,
-                        "randomFloor":piece[item].randomFloor,
-                        "numeratorRandomCeiling":piece[item].numeratorRandomCeiling,
-                        "numeratorRandomFloor":piece[item].numeratorRandomFloor,
-                        "denominatorRandomCeiling":piece[item].denominatorRandomCeiling,
-                        "denominatorRandomFloor":piece[item].denominatorRandomFloor,
+                        "numeratorExpression":piece[item].numeratorExpression,
+                        "denominatorExpression":piece[item].denominatorExpression,
                         "size":piece[item].size,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
@@ -213,7 +209,7 @@ function printPieces(newAppletID, appletDoneTest) {
                      break;
                 
                 case 10: //multiple choice
-                    if(piece[item].multiType==0 || piece[item].multiType==1)//main piece
+                    if(piece[item].multiType==0 || piece[item].multiType==1 || piece[item].multiType==2)//main piece
                     { 
                         var newObject = JSON.stringify({    
                             "appletID": newAppletID, 

@@ -475,6 +475,15 @@
                           ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected "
         },
+        { "summary": "Telling time - clocks with multiple choice",
+          "problems": [
+            {"appletID":"35","type":16,"expression":"getRandomInt%280%2C1440%29"},
+            {"appletID":"35","type":15,"startX":300,"startY":40,"expression":"%27Which%20clock%20shows%20the%20time%20%27%20%2B%20Math.floor%28%28hiddenNumber%5B0%5D%2F60%29%2512%29%20%2B%20%27%3A%27%20%2B%20%28hiddenNumber%5B0%5D%2560%3C10%3F%270%27%3A%27%27%29%20%2B%20hiddenNumber%5B0%5D%2560%20%2B%20%27%20%27%20%2B%20%28hiddenNumber%5B0%5D%2F60%3E12%3F%22PM%22%3A%22AM%22%29%20%2B%20%27%3F%27","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"35","type":10,"startX":100,"startY":60,"correct":"drawClock(hiddenNumber[0])","incorrect1":"drawClock(getCloseAnswer(hiddenNumber[0],10))","incorrect2":"drawClock(getCloseAnswer(hiddenNumber[0],10))","incorrect3":"drawClock(getCloseAnswer(hiddenNumber[0],10))","multiType":"2"},
+            {"appletID":"35","type":5,"startX":700,"startY":540}
+            ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected "
+        },
         { "summary": "",
           "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
@@ -514,7 +523,7 @@
           "solution": "selectableScore()==1"
         },
         { "summary": "",
-          "problems": [{"appletID":"97","type":10,"startX":240,"startY":180,"correct":{"whole":"10","numerator":"1","denominator":"1"},"incorrect1":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect2":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"incorrect3":{"whole":"null","numerator":"getRandomInt(0,10)","denominator":"getRandomInt(0,10)"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"100","multiType":"1"}
+          "problems": [{"appletID":"97","type":10,"startX":120,"startY":60,"correct":"testTexture()","incorrect1":"testTexture()","incorrect2":"testTexture()","incorrect3":"testTexture()","multiType":"2"}
 ]
         },
         { "summary": "test - lines!",
