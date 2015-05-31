@@ -115,6 +115,7 @@ function buildEvaluatedFraction(item) {
         addSelectionBehavior()   
     }
 }
+
 function getEvaluatedFractionSettings() {
     menuKeyPressed ==0;
     state = 'prompt';
