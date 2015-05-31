@@ -2,19 +2,14 @@
 function buildEvaluatedFraction(item) {
     
     var fontString;
-    if (typeof item.numeratorExpression === 'undefined') 
-    {
-        var newNumeratorRandom = getRandomInt(Number(item.numeratorRandomFloor), Number(item.numeratorRandomCeiling) );
-        var newDenominatorRandom = getRandomInt(Number(item.denominatorRandomFloor), Number(item.denominatorRandomCeiling) );
-    } else
-    {
-        var newNumeratorRandom = eval(item.numeratorExpression)
-        var newDenominatorRandom = eval(item.denominatorExpression) 
-    }
+
+    var newNumeratorEvaluated = eval(item.numeratorExpression)
+    var newDenominatorEvaluated = eval(item.denominatorExpression) 
+
     
     
-    randomNumerator.push(newNumeratorRandom);
-    randomDenominator.push(newDenominatorRandom);
+    randomNumerator.push(newNumeratorEvaluated);
+    randomDenominator.push(newDenominatorEvaluated);
     if(state!='build')
     {
         fontString="" + newBold + " " + item.size + "px Arial";
@@ -30,12 +25,12 @@ function buildEvaluatedFraction(item) {
     
     //build start coordinates; will change down below if we're running an applet
 
-    var newNumeratorRandomText = game.add.text(item.size/2.5, 0, newNumeratorRandom.toString(), {
+    var newNumeratorEvaluatedText = game.add.text(item.size/2.5, 0, newNumeratorEvaluated.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
     });
-    var newDenominatorRandomText = game.add.text(item.size/2.5, item.size, newDenominatorRandom.toString(), {
+    var newDenominatorEvaluatedText = game.add.text(item.size/2.5, item.size, newDenominatorEvaluated.toString(), {
             font: fontString,
             fill: newTextColor,
             align: "center"
@@ -57,13 +52,13 @@ function buildEvaluatedFraction(item) {
     
     piece[piece.length] = game.add.sprite(0,0, boxGraphic.generateTexture());
     boxGraphic.clear();
-    newNumeratorRandomText.anchor.setTo(0.5,0)
-    newDenominatorRandomText.anchor.setTo(0.5,0)
+    newNumeratorEvaluatedText.anchor.setTo(0.5,0)
+    newDenominatorEvaluatedText.anchor.setTo(0.5,0)
     //piece[piece.length] = game.add.sprite(0,0,'fractionBar');
     piece[piece.length-1].anchor.setTo(0.2,0)
     piece[piece.length-1].addChild(fractionBarText);
-    piece[piece.length-1].addChild(newNumeratorRandomText);
-    piece[piece.length-1].addChild(newDenominatorRandomText);
+    piece[piece.length-1].addChild(newNumeratorEvaluatedText);
+    piece[piece.length-1].addChild(newDenominatorEvaluatedText);
     
     piece[piece.length-1].scale.setTo(item.size/40, item.size/40);
     
@@ -85,7 +80,7 @@ function buildEvaluatedFraction(item) {
             piece[piece.length-1].input.useHandCursor=true;
             piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
             piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
-            piece[piece.length-1].number = newNumeratorRandom/newDenominatorRandom;
+            piece[piece.length-1].number = newNumeratorEvaluated/newDenominatorEvaluated;
             
         }
     } else
@@ -97,10 +92,10 @@ function buildEvaluatedFraction(item) {
         piece[piece.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);
         piece[piece.length-1].clicked=0;
         piece[piece.length-1].ParentPosition=piece.length-1;
-        piece[piece.length-1].numeratorRandomFloor = item.numeratorRandomFloor;
-        piece[piece.length-1].numeratorRandomCeiling = item.numeratorRandomCeiling;
-        piece[piece.length-1].denominatorRandomFloor = item.denominatorRandomFloor;
-        piece[piece.length-1].denominatorRandomCeiling = item.denominatorRandomCeiling;
+        piece[piece.length-1].numeratorEvaluatedFloor = item.numeratorEvaluatedFloor;
+        piece[piece.length-1].numeratorEvaluatedCeiling = item.numeratorEvaluatedCeiling;
+        piece[piece.length-1].denominatorEvaluatedFloor = item.denominatorEvaluatedFloor;
+        piece[piece.length-1].denominatorEvaluatedCeiling = item.denominatorEvaluatedCeiling;
         piece[piece.length-1].fontString="" + newBold + " " + newTextSize + "px Arial";
         piece[piece.length-1].fill = newTextColor;
         piece[piece.length-1].size = newTextSize;
