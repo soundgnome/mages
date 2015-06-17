@@ -92,7 +92,7 @@ function inequalityEntryClick(item) {
         break;
     }
     inequalitEntryPanelText.text = inequalityEntryText;
-    inequality = inequalityEntryText;
+    inequality = (inequalityEntryText=='='?'==':inequalityEntryText);
 }
 
 function getInequalityEntrySettings() {

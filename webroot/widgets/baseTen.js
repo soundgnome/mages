@@ -133,7 +133,6 @@ function stopDraggingBaseTenBlocks(item) {
      }
     if(draggingBlockHandle.occupying == 1)
     {
-        console.log("test")
         baseTenDragToContents += item.value;   
     }
 }

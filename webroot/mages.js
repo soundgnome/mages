@@ -895,6 +895,7 @@ function startDraggingNumber(item) {
     //draggingNumberID++;  //new ID
     //item.draggingNumber=draggingNumberID;  //set it to the current ID
     item.events.onInputDown.remove(draggableNumbersClickClone, this); //we don't want it to clone over and over
+    item.events.onInputDown.remove(evaluatedExpressionClickClone, this);
     if (item.occupying != null && item.type!=52) //I'm in a box already
     {//clear the box
         dragToBoxes[item.occupying].occupied=0;  

@@ -28,6 +28,7 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].anchor.setTo(0.5, 0.5);
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type=15;
+    piece[piece.length-1].align=item.align;
     piece[piece.length-1].fontString=fontString;
     piece[piece.length-1].fill=newTextColor;
     piece[piece.length-1].expression=item.expression;
@@ -48,10 +49,11 @@ function buildEvaluatedExpression(item) {
     {
         piece[piece.length-1].inputEnabled='true';
         console.log(item.align)
-        
-        
-        
         piece[piece.length-1].input.useHandCursor=true;
+        if(item.clonable == "1") //"n" is default
+            {//clonable; add a cloning function
+                piece[piece.length-1].events.onInputDown.add(evaluatedExpressionClickClone, this); 
+            }  
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
         piece[piece.length-1].number = evaluatedExpression[evaluatedExpression.length-1];
@@ -61,6 +63,32 @@ function buildEvaluatedExpression(item) {
     {
         addSelectionBehavior() 
     }
+}
+
+function evaluatedExpressionClickClone(item) {
+    var newClone = game.add.text(item.x, item.y, item.number.toString(), {
+                    font: item.fontString,
+                    fill: item.fill,
+                    align: item.align
+                    }); 
+    newClone.inputEnabled='true';
+    newClone.events.onInputDown.add(evaluatedExpressionClickClone, this); 
+    newClone.events.onInputDown.add(startDraggingNumber, this); 
+    newClone.events.onInputUp.add(stopDraggingNumber, this); 
+    
+    newClone.number = item.number;
+    newClone.size = Number(item.size);
+    newClone.fontString = item.fontString;
+    newClone.fill = item.fill;
+    newClone.dragOffsetX = item.dragOffsetX;
+    newClone.dragDoneOffsetX = item.dragDoneOffsetX;
+    newClone.dragOffsetY = item.dragOffsetY;
+    newClone.anchor.setTo(0.5, 0.5);
+    
+   
+    newClone.x = item.x;
+    newClone.y = item.y;
+    evaluatedExpression.push(newClone);
 }
 
 function getEvaluatedExpressionSettings() {
