@@ -864,7 +864,7 @@
             {"appletID":"1-4","type":15,"startX":400,"startY":220,"expression":"%22A%20swimming%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20liters%20of%20water.%20%20Another%20nearby%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20liters%20of%20water.%20%20How%20many%20liters%20do%20the%20two%20pools%20hold%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
             {"appletID":"1-4","type":14,"numberEntryX":160,"numberEntryY":480,"orientation":"h","displayX":180,"displayY":380,"displayDigits":7},
             {"appletID":"1-4","type":1,"startX":506,"startY":404,"newText":"liters","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
-            {"appletID":"1-4","type":5,"startX":700,"startY":540}
+            {"appletID":"1-4","type":5,"startX":720,"startY":540}
             ],
           "solution": "numberEntryValue==hiddenNumber[0]+hiddenNumber[1]"
         },
@@ -889,9 +889,8 @@
               {"appletID":"1-6","type":15,"startX":240,"startY":180,"expression":"inWordForm%28hiddenNumber%5B0%5D%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"300","align":"center"},
               {"appletID":"1-6","type":1,"startX":120,"startY":100,"text":"Click%20the%20tally%20box%20buttons%20to%20represent%20the%20value.","newText":"Click%20the%20tally%20box%20buttons%20to%20represent%20the%20value.","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"1-6","type":99,"drawingBoxStartX":97,"drawingBoxStartY":79,"drawingBoxEndX":366,"drawingBoxEndY":269},
-              {"appletID":"1-6","type":5,"startX":240,"startY":380},
-              {"appletID":"1-6","type":99,"drawingBoxStartX":53,"drawingBoxStartY":43,"drawingBoxEndX":741,"drawingBoxEndY":545}
-          ],
+              {"appletID":"1-6","type":5,"startX":720,"startY":540}
+              ],
         "solution": "tallyTotal==hiddenNumber[0]"
         },
         { "summary": "Recognize equivalent forms of numbers",
@@ -913,7 +912,7 @@
               {"appletID":"1-8","type":15,"startX":400,"startY":260,"expression":"inWordForm(hiddenNumber[0])","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right"},
               {"appletID":"1-8","type":10,"startX":240,"startY":380,"correct":"hiddenNumber[0]","incorrect1":"getCloseAnswer(hiddenNumber[0],30)","incorrect2":"changeDigit(hiddenNumber[0],30)","incorrect3":"changeDigit(hiddenNumber[0],30)","multipleChoiceFontSize":40,"spaceX":200,"spaceY":40},
               {"appletID":"1-8","type":1,"startX":80,"startY":60,"text":"Choose%20the%20matching%20number.","newText":"Choose%20the%20matching%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
-              {"appletID":"1-8","type":5,"startX":700,"startY":520}
+              {"appletID":"1-8","type":5,"startX":720,"startY":540}
           ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
@@ -924,7 +923,7 @@
               {"appletID":"1-9","type":99,"drawingBoxStartX":360,"drawingBoxStartY":301,"drawingBoxEndX":360,"drawingBoxEndY":301},
               {"appletID":"1-9","type":14,"numberEntryX":180,"numberEntryY":240,"orientation":"h","displayX":300,"displayY":160,"displayDigits":5},
               {"appletID":"1-9","type":99,"drawingBoxStartX":14,"drawingBoxStartY":90,"drawingBoxEndX":787,"drawingBoxEndY":327},
-              {"appletID":"1-9","type":5,"startX":400,"startY":400},
+              {"appletID":"1-9","type":5,"startX":720,"startY":540},
               {"appletID":"1-9","type":1,"startX":20,"startY":20,"text":"Enter%20the%20number.","newText":"Enter%20the%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"}
           ],
           "solution": "numberEntryValue==hiddenNumber[0]"
@@ -934,7 +933,7 @@
               {"appletID":"1-10","type":2,"startX":500,"startY":120,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":9999,"randomFloor":1},
               {"appletID":"1-10","type":1,"startX":100,"startY":60,"text":"Click%20the%20matching%20number%20in%20word%20form.","newText":"Click%20the%20matching%20number%20in%20word%20form.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"1-10","type":10,"startX":60,"startY":300,"correct":"inWordForm(randomNumber[0])","incorrect1":"inWordForm(getCloseAnswer(randomNumber[0], 100))","incorrect2":"inWordForm(getCloseAnswer(randomNumber[0], 100))","incorrect3":"inWordForm(changeDigit(randomNumber[0]))","multipleChoiceFontSize":18,"spaceX":350,"spaceY":60},
-              {"appletID":"1-10","type":5,"startX":400,"startY":480}
+              {"appletID":"1-10","type":5,"startX":720,"startY":540}
           ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
@@ -943,7 +942,7 @@
               {"appletID":"1-11","type":2,"startX":540,"startY":100,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":999999,"randomFloor":1},
               {"appletID":"1-11","type":1,"startX":40,"startY":40,"text":"Click%20the%20matching%20number%20in%20expanded%20form.","newText":"Click%20the%20matching%20number%20in%20expanded%20form.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"1-11","type":10,"startX":30,"startY":320,"correct":"inExpandedForm(randomNumber[0])","incorrect1":"inExpandedForm(changeDigit(randomNumber[0]))","incorrect2":"inExpandedForm(changeDigit(randomNumber[0]))","incorrect3":"inExpandedForm(getCloseAnswer(randomNumber[0], 100))","multipleChoiceFontSize":18,"spaceX":400,"spaceY":60},
-              {"appletID":"1-11","type":5,"startX":420,"startY":500}
+              {"appletID":"1-11","type":5,"startX":720,"startY":540}
           ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
@@ -952,10 +951,8 @@
               {"appletID":"1-12","type":16,"expression":"getRandomInt(1000,100000)"},
               {"appletID":"1-12","type":15,"startX":420,"startY":180,"expression":"%22What%20is%20%22%20%2B%20inExpandedForm%28hiddenNumber%5B0%5D%29%20%2B%20%22%20in%20standard%20form%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"300","align":"left"},
               {"appletID":"1-12","type":10,"startX":180,"startY":300,"correct":"addCommas(hiddenNumber[0])","incorrect1":"addCommas(changeDigit(hiddenNumber[0]))","incorrect2":"addCommas(changeDigit(hiddenNumber[0]))","incorrect3":"addCommas(changeDigit(hiddenNumber[0]))","multipleChoiceFontSize":40,"spaceX":250,"spaceY":60},
-              {"appletID":"1-12","type":5,"startX":400,"startY":500},
-              {"appletID":"1-12","type":99,"drawingBoxStartX":140,"drawingBoxStartY":280,"drawingBoxEndX":662,"drawingBoxEndY":573},
-              {"appletID":"1-12","type":99,"drawingBoxStartX":103,"drawingBoxStartY":20,"drawingBoxEndX":698,"drawingBoxEndY":589}
-          ],
+              {"appletID":"1-12","type":5,"startX":720,"startY":540}
+              ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
         { "summary": "expanded to word form: multiple choice",
@@ -965,7 +962,7 @@
               {"appletID":"1-13","type":10,"startX":140,"startY":280,"correct":"inWordForm(hiddenNumber[0])","incorrect1":"inWordForm(getCloseAnswer(hiddenNumber[0] , 50))","incorrect2":"inWordForm(changeDigit(hiddenNumber[0]))","incorrect3":"inWordForm(changeDigit(hiddenNumber[0]))","multipleChoiceFontSize":24,"spaceX":300,"spaceY":80},
               {"appletID":"1-13","type":1,"startX":80,"startY":20,"text":"Choose%20the%20matching%20number%20in%20word%20form.","newText":"Choose%20the%20matching%20number%20in%20word%20form.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":650,"alignment":"left"},
               {"appletID":"1-13","type":99,"drawingBoxStartX":92,"drawingBoxStartY":196,"drawingBoxEndX":722,"drawingBoxEndY":471},
-              {"appletID":"1-13","type":5,"startX":400,"startY":540}
+              {"appletID":"1-13","type":5,"startX":720,"startY":540}
           ],
           "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
         },
@@ -1060,8 +1057,8 @@
         
         { "summary": "Addition of 6-digit numbers with dragToBoxes",
           "problems": [
-            {"appletID":"1-19","type":16,"expression":"getRandomInt%281000%2C900000%29"},
-            {"appletID":"1-19","type":16,"expression":"getRandomInt%281000%2C900000%29"},
+            {"appletID":"1-19","type":16,"expression":"getRandomInt%28100000%2C900000%29"},
+            {"appletID":"1-19","type":16,"expression":"getRandomInt%28100000%2C900000%29"},
             {"appletID":"1-19","type":9,"startX":560,"startY":380,"userScaleX":0.5,"userScaleY":0.5},
             {"appletID":"1-19","type":15,"startX":449,"startY":251,"expression":"addCommas%28hiddenNumber%5B0%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
             {"appletID":"1-19","type":15,"startX":449,"startY":318,"expression":"addCommas%28hiddenNumber%5B1%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
@@ -1147,7 +1144,7 @@
             {"appletID":"1-22","type":99,"color":0,"drawingBoxStartX":418,"drawingBoxStartY":332,"drawingBoxEndX":601,"drawingBoxEndY":394},
             {"appletID":"1-22","type":5,"startX":720,"startY":540}
             ],
-          "solution": "numberEntryValue==eval( dragToBoxes[0].contents.replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.replace(',','') )"
+          "solution": "dragToBoxes[0].contents>0&&numberEntryValue==eval( dragToBoxes[0].contents.replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.replace(',','') )"
         },
         
         { "summary": "Missing added with dragToBoxes",

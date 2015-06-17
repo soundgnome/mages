@@ -88,7 +88,7 @@ function evaluatedExpressionClickClone(item) {
    
     newClone.x = item.x;
     newClone.y = item.y;
-    evaluatedExpression.push(newClone);
+    draggableNumbers.push(newClone);
 }
 
 function getEvaluatedExpressionSettings() {

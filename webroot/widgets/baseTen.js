@@ -2,6 +2,7 @@ var hundredBlock;
 var tenBlock;
 var oneBlock;
 var baseTenDragToContents = 0;
+var baseTenBlocks = []
 
 function buildBaseTenBlocks(item) {
     buildBaseTenDragTo(item.dragX,item.dragY, item.dragWidth, item.dragHeight);
@@ -86,10 +87,13 @@ function fixBaseTenBlocks(item, startX, startY) {
     newClone.events.onInputUp.add(stopDraggingBaseTenBlocks, this); 
     newClone.startX = startX;
     newClone.startY = startY;
+    baseTenBlocks.push(newClone);
     item.destroy(true);
     
     
 }
+
+
 function baseTenBlocksClickClone(item) {
     var newClone = game.add.group();
     switch(item.value) {
@@ -124,6 +128,7 @@ function baseTenBlocksClickClone(item) {
     newClone.startX = item.startX;
     newClone.startY = item.startY;
     newClone.ParentPosition = item.ParentPosition;
+    baseTenBlocks.push(newClone);
 }
 
 function stopDraggingBaseTenBlocks(item) {

@@ -112,6 +112,11 @@ function update() {
         //call up an applet by ID
         appletSelection();
         break;
+    
+    case 'threadSelection':
+        //call up an applet by ID
+        threadSelection();
+        break;
         
     case 'applet':
         //run the applet
@@ -252,6 +257,7 @@ function defineApplets() {
 
         console.log("applets ready");
     });
+    loadThreads();
 }
 
 /*******************************************************************************
@@ -264,6 +270,14 @@ function appletSelection() {
     titleText.destroy(true);
     loadButton.destroy(true);
     appletIDPrompt();  //this is in mages.dialogs.js
+}
+
+function threadSelection() {
+    helpButton.destroy(true);
+    buildButton.destroy(true);
+    titleText.destroy(true);
+    loadButton.destroy(true);
+    threadPrompt();  //this is in mages.dialogs.js
 }
 
 var appletInitiated = 0;
@@ -412,19 +426,40 @@ function loadApplet() {
 
 function clearCurrentApplet()
 {
+    dragToBoxes.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    dragToBoxes = [];
+    
     piece.forEach(function(item){
         
         item.destroy(true); 
     });
+    piece = [];
+    
     draggableNumbers.forEach(function(item){
         
         item.destroy(true); 
     });
-    piece = [];
     draggableNumbers = [];
+    
+    baseTenBlocks.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    baseTenBlocks = [];
+    
+    selectionBoxGraphics.forEach(function(item){
+        if (item != null) { item.destroy(true); }
+    });
+    selectionBoxGraphics = [];
+    
+    evaluatedExpression = [];
+    
     randomNumber = [];
     draggablePieces = [];
-    evaluatedExpression = [];
+    
     evaluatedNumerator = [];
     evaluatedDenominator = [];
     evaluatedWhole = [];
@@ -435,8 +470,37 @@ function clearCurrentApplet()
     randomDecimal = [];
     randomMixedNumber = [];
     randomNumber = [];
-    dragToBoxes = [];
-    appletIDPrompt();
+    
+    numberEntryValue = 0;
+    
+    if (typeof numberEntryPanelText !== 'undefined') {numberEntryPanelText.destroy(true)}
+    if (typeof inequalityEntryPanelText !== 'undefined') {inequalityEntryPanelText.destroy(true)}
+    if (typeof multipleChoiceBox !== 'undefined') {multipleChoiceBox.destroy(true)}
+
+    if(threadMode == 0)
+    {
+        appletIDPrompt(); 
+    } else
+    {
+        if(threadPoint < thread[threadNumber-1].length)
+        {
+            threadPoint++;
+            loadAppletID=threadNumber+"-"+threadPoint;
+            appletInitiated=0; 
+        } else
+        {
+            var threadTotal = 0;  // Variable to hold your total
+            
+            for(var i = 0, len = threadRecord.length; i < len; i++) 
+            {
+                threadTotal += threadRecord[i];
+            }
+            bootbox.alert("Your score: " + Math.round((threadTotal/threadRecord.length)*100) + "%" );
+            console.log(threadTotal/threadRecord.length)
+        }
+        
+    }
+    
 }
 
 

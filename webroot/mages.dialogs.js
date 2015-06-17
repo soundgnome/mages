@@ -21,6 +21,9 @@ function appletIDPrompt() {
 }
 
 
+
+
+
 function getMenuEntryString(label, key, defaultValue, help) {
     var helpString = '';
     if(help != null)

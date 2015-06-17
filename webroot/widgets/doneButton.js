@@ -19,10 +19,24 @@ function buildDoneButton(item) {
 
 //this tests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
-    if(eval(tests[loadAppletID]))
+    if(threadMode == 0)
     {
-        item.alpha=0;
+        if(eval(tests[loadAppletID]))
+        {
+            clearCurrentApplet();
+        } 
+    } else
+    {
+        if(eval(tests[loadAppletID]))
+        {
+            threadRecord.push(1);
+            console.log("correct:" + loadAppletID)
+        } else
+        {
+            threadRecord.push(0);
+        }
         clearCurrentApplet();
-    } 
+    }
+    
     
 }

@@ -1,6 +1,6 @@
-var inequality='||';
+var inequality='==';
 var inequalityEntryText='';
-var inequalitEntryPanelText;
+var inequalityEntryPanelText;
 function buildInequalityEntry(item) {
     piece.forEach(function(item) {
         if(item.type == 17 || item.type == '17b')
@@ -71,7 +71,7 @@ function buildInequalityEntry(item) {
             item.ParentPosition=piece.length-1;
         });
         //new text over entry panel 
-        inequalitEntryPanelText = game.add.text(item.displayX+23 , item.displayY-10, inequalityEntryText.toString() , {
+        inequalityEntryPanelText = game.add.text(item.displayX+23 , item.displayY-10, inequalityEntryText.toString() , {
             font: "72px Arial",
             fill: "black",
             align: "center"
@@ -91,7 +91,7 @@ function inequalityEntryClick(item) {
         inequalityEntryText='>'
         break;
     }
-    inequalitEntryPanelText.text = inequalityEntryText;
+    inequalityEntryPanelText.text = inequalityEntryText;
     inequality = (inequalityEntryText=='='?'==':inequalityEntryText);
 }
 
