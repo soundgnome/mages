@@ -35,8 +35,15 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].selectable = item.selectable;
     piece[piece.length-1].selectedExpression = item.selectedExpression;
     piece[piece.length-1].dragOffsetX = -piece[piece.length-1].width/2
-    piece[piece.length-1].dragOffsetY = -piece[piece.length-1].height/2
-    piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width/2
+    if(item.draggable == 1)
+    {
+        piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2  //this was changes to accomodate 1-5   
+    }
+    if(item.selectable == 1)
+    {
+        piece[piece.length-1].dragOffsetY = -piece[piece.length-1].height/2  //this was changes to accomodate 1-5   
+    }
+    piece[piece.length-1].dragDoneOffsetX = piece[piece.length-1].width //this was changes to accomodate 1-5
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';

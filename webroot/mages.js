@@ -245,7 +245,7 @@ function defineApplets() {
                 applet.push(data.applets[i].problems[j]);
                 if ("solution" in data.applets[i]) {
                     var applet_id = data.applets[i].problems[0].appletID;
-                    tests[applet_id] = data.applets[i].solution;
+                    tests[applet_id] = decodeURIComponent(data.applets[i].solution);
                 }
             }
         }
@@ -1125,6 +1125,11 @@ function getRandomIntExcluding(min, max, exclude) {
         }
     }
     return returnValue;
+}
+
+function shuffle(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 }
 
 var girlNames = [ 'Sophia' , 'Emma' , 'Olivia' , 'Ava' , 'Isabella' , 'Mia' , 

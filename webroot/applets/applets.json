@@ -849,32 +849,93 @@
           "solution": "hiddenNumber[0]/100 == valueDragToBoxes()"
         },
         
-        { "summary": "Name",
+        { "summary": "Addition of 6-digit numbers in word problem",
           "problems": [
-            
+            {"appletID":"1-4","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
+            {"appletID":"1-4","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
+            {"appletID":"1-4","type":15,"startX":400,"startY":220,"expression":"%22A%20swimming%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20liters%20of%20water.%20%20Another%20nearby%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20liters%20of%20water.%20%20How%20many%20liters%20do%20the%20two%20pools%20hold%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
+            {"appletID":"1-4","type":14,"numberEntryX":160,"numberEntryY":480,"orientation":"h","displayX":180,"displayY":380,"displayDigits":7},
+            {"appletID":"1-4","type":1,"startX":506,"startY":404,"newText":"liters","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
+            {"appletID":"1-4","type":5,"startX":700,"startY":540}
             ],
-          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+          "solution": "numberEntryValue==hiddenNumber[0]+hiddenNumber[1]"
         },
         
         { "summary": "Name",
           "problems": [
-            
+            {"appletID":"1-5","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
+            {"appletID":"1-5","type":16,"expression":"getCloseAnswer%28hiddenNumber%5B0%5D%2C30000%29"},
+            {"appletID":"1-5","type":15,"startX":400,"startY":180,"expression":"%22The%20downtown%20location%20of%20Jordan%20Nguyen%27s%20Garden%20Gnomes%20earned%20%24%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20last%20year.%20%20The%20store%27s%20beachfront%20location%20earned%20%24%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22.%20%20The%20store%20with%20the%20greater%20earnings%20gets%20an%20award.%20%20Drag%20the%20store%20that%20received%20an%20award%20into%20the%20box.%22","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
+            {"appletID":"1-5","type":15,"startX":220,"startY":380,"expression":"%22Downtown%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-5","type":15,"startX":540,"startY":380,"expression":"%22Beachfront%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-5","type":9,"startX":380,"startY":480,"userScaleX":2.5,"userScaleY":0.5},
+            {"appletID":"1-5","type":1,"startX":308,"startY":506,"newText":"The%20Winning%20Store","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
+            {"appletID":"1-5","type":5,"startX":720,"startY":540}
             ],
-          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+          "solution": "dragToBoxes%5B0%5D.contents%3D%3D%28hiddenNumber%5B0%5D%3EhiddenNumber%5B1%5D%3F%22Downtown%22%3A%22Beachfront%22%29"
         },
         
         { "summary": "Name",
           "problems": [
-            
+            {"appletID":"1-6","type":16,"expression":"getRandomInt%2810000%2C99999%29"},
+            {"appletID":"1-6","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-6","type":15,"startX":420,"startY":80,"expression":"%22Select%20all%20other%20forms%20of%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20by%20clicking%20the%20expressions%20below.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
+            {"appletID":"1-6","type":15,"startX":240,"startY":260,"expression":"%28%27%27%2BhiddenNumber%5B0%5D%29%5B0%5D%20%2B%20%22%20%2B%20%22%20%2B%20%28%27%27%2BhiddenNumber%5B0%5D%29%5B1%5D%20%2B%20%22%20%2B%20%22%20%2B%20%28%27%27%2BhiddenNumber%5B0%5D%29%5B2%5D%20%2B%20%22%20%2B%20%22%20%2B%20%28%27%27%2BhiddenNumber%5B0%5D%29%5B3%5D%20%2B%20%22%20%2B%20%22%20%2B%20%28%27%27%2BhiddenNumber%5B0%5D%29%5B4%5D%20","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"right","draggable":0,"selectable":1,"selectedExpression":"false"},
+            {"appletID":"1-6","type":15,"startX":560,"startY":260,"expression":"%28hiddenNumber%5B1%5D%3D%3D0%3FinWordForm%28hiddenNumber%5B0%5D%29%3AinWordForm%28changeDigit%28hiddenNumber%5B0%5D%29%29%29","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"250","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B1%5D==0?true:false)"},
+            {"appletID":"1-6","type":15,"startX":220,"startY":400,"expression":"inExpandedForm%28hiddenNumber%5B0%5D%29","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"250","align":"left","draggable":0,"selectable":1,"selectedExpression":"true"},
+            {"appletID":"1-6","type":15,"startX":560,"startY":400,"expression":"inWordForm%28changeDigit%28hiddenNumber%5B0%5D%29%29","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"250","align":"left","draggable":0,"selectable":1,"selectedExpression":"false"},
+            {"appletID":"1-6","type":5,"startX":720,"startY":540}
             ],
-          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+          "solution": "selectableScore()==1"
         },
         
         { "summary": "Name",
           "problems": [
-            
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%28200000%2C900000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":180,"startY":160,"expression":"addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B1%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B0%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B0%5D%2F1000%29%2a1000%3EhiddenNumber%5B0%5D%3FMath.round%28hiddenNumber%5B0%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B0%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"250","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B1%5D==1?true:false)"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%282000%2C9000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":160,"startY":300,"expression":"addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B3%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B2%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B2%5D%2F1000%29%2a1000%3EhiddenNumber%5B2%5D%3FMath.round%28hiddenNumber%5B2%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B2%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B3%5D==1?true:false)"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%2820000%2C90000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":160,"startY":420,"expression":"addCommas%28hiddenNumber%5B4%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B5%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B4%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B4%5D%2F1000%29%2a1000%3EhiddenNumber%5B4%5D%3FMath.round%28hiddenNumber%5B4%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B4%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B5%5D==1?true:false)"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%28200000%2C900000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":540,"startY":160,"expression":"addCommas%28hiddenNumber%5B6%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B7%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B6%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B6%5D%2F1000%29%2a1000%3EhiddenNumber%5B6%5D%3FMath.round%28hiddenNumber%5B6%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B6%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B7%5D==1?true:false)"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%2820000%2C90000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":540,"startY":300,"expression":"addCommas%28hiddenNumber%5B8%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B9%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B8%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B8%5D%2F1000%29%2a1000%3EhiddenNumber%5B8%5D%3FMath.round%28hiddenNumber%5B8%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B8%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B9%5D==1?true:false)"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%282000%2C9000%29"},
+            {"appletID":"1-7","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"1-7","type":15,"startX":540,"startY":420,"expression":"addCommas%28hiddenNumber%5B10%5D%29%20%2B%20%22%20%22%20%2B%20addCommas%28%20hiddenNumber%5B11%5D%3D%3D1%20%3F%20Math.round%28hiddenNumber%5B10%5D%2F1000%29%2a1000%20%3A%28Math.round%28hiddenNumber%5B10%5D%2F1000%29%2a1000%3EhiddenNumber%5B10%5D%3FMath.round%28hiddenNumber%5B10%5D%2F1000%29%2a1000-1000%3AMath.round%28hiddenNumber%5B10%5D%2F1000%29%2a1000%2B1000%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"200","align":"left","draggable":0,"selectable":1,"selectedExpression":"(hiddenNumber%5B11%5D==1?true:false)"},
+            {"appletID":"1-7","type":5,"startX":720,"startY":540},
+            {"appletID":"1-7","type":1,"startX":120,"startY":20,"newText":"Select%20the%20numbers%20that%20are%20rounded%20correctly%20to%20the%20nearest%20thousand.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"}
             ],
-          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+          "solution": "selectableScore()==1"
+        },
+         { "summary": "Ordering numbers in dragToBoxes",
+          "problems": [
+           {"appletID":"1-15","type":16,"expression":"getRandomInt%282000%2C6000%29"},
+            {"appletID":"1-15","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%2810%2C400%29"},
+            {"appletID":"1-15","type":16,"expression":"hiddenNumber%5B1%5D%2BgetRandomInt%2810%2C400%29"},
+            {"appletID":"1-15","type":16,"expression":"hiddenNumber%5B2%5D%2BgetRandomInt%2810%2C400%29"},
+            {"appletID":"1-15","type":16,"expression":"hiddenNumber%5B3%5D%2BgetRandomInt%2810%2C400%29"},
+            {"appletID":"1-15","type":16,"expression":"shuffle%28hiddenNumber%29"},
+            {"appletID":"1-15","type":15,"startX":80,"startY":260,"expression":"addCommas%28hiddenNumber%5B5%5D%5B0%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-15","type":15,"startX":240,"startY":260,"expression":"addCommas%28hiddenNumber%5B5%5D%5B1%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-15","type":15,"startX":400,"startY":260,"expression":"addCommas%28hiddenNumber%5B5%5D%5B2%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-15","type":15,"startX":560,"startY":260,"expression":"addCommas%28hiddenNumber%5B5%5D%5B3%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-15","type":15,"startX":720,"startY":260,"expression":"addCommas%28hiddenNumber%5B5%5D%5B4%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+            {"appletID":"1-15","type":9,"startX":80,"startY":380,"userScaleX":1.5,"userScaleY":0.5},
+            {"appletID":"1-15","type":9,"startX":240,"startY":380,"userScaleX":1.5,"userScaleY":0.5},
+            {"appletID":"1-15","type":9,"startX":400,"startY":380,"userScaleX":1.5,"userScaleY":0.5},
+            {"appletID":"1-15","type":9,"startX":560,"startY":380,"userScaleX":1.5,"userScaleY":0.5},
+            {"appletID":"1-15","type":9,"startX":720,"startY":380,"userScaleX":1.5,"userScaleY":0.5},
+            {"appletID":"1-15","type":5,"startX":720,"startY":540},
+            {"appletID":"1-15","type":1,"startX":100,"startY":80,"newText":"Order%20the%20numbers%20from%20least%20to%20greatest%20by%20dragging%20the%20numbers%20into%20the%20boxes.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"}
+           ],
+          "solution": "parseFloat(dragToBoxes[0].contents.replace(',',''))<parseFloat(dragToBoxes[1].contents.replace(',',''))<parseFloat(dragToBoxes[2].contents.replace(',',''))<parseFloat(dragToBoxes[3].contents.replace(',',''))<parseFloat(dragToBoxes[4].contents.replace(',',''))"
         }
         
     ]
