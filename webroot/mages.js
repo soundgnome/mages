@@ -32,6 +32,7 @@ function preload() {
     game.load.image('buildButton', 'assets/buildButton.png');
     game.load.image('helpButton', 'assets/helpButton.png');
     game.load.image('loadButton', 'assets/loadButton.png');
+    game.load.image('threadButton', 'assets/threadButton.png');
     game.load.image('helpScreen1', 'assets/helpScreen1.png');
     game.load.image('helpScreen2', 'assets/helpScreen2.png');
     game.load.image('helpScreen3', 'assets/helpScreen3.png');
@@ -139,8 +140,10 @@ function update() {
  * ****************************************************************************/
 var titleInitiated=0;
 var loadButton;
+var threadButton;
 var buildButton;
 var helpButton;
+var threadButton;
 var titleText;
 function title() {
     if(titleInitiated==0)
@@ -154,21 +157,28 @@ function title() {
         game.add.tween(titleText).from( { y: -200 }, 2000, Phaser.Easing.Bounce.Out, true);
         
         loadButton = game.add.sprite(0, 0, 'loadButton');
-        loadButton.x = 200;
+        loadButton.x = 100;
         loadButton.y = 400;
         loadButton.inputEnabled='true';
         loadButton.events.onInputDown.add(loadButtonClick, this);
         loadButton.anchor.setTo(0.5, 0.5);
         
+        threadButton = game.add.sprite(0, 0, 'threadButton');
+        threadButton.x = 300;
+        threadButton.y = 400;
+        threadButton.inputEnabled='true';
+        threadButton.events.onInputDown.add(threadButtonClick, this);
+        threadButton.anchor.setTo(0.5, 0.5);
+        
         buildButton = game.add.sprite(0, 0, 'buildButton');
-        buildButton.x = 400;
+        buildButton.x = 500;
         buildButton.y = 400;
         buildButton.inputEnabled='true';
         buildButton.events.onInputDown.add(buildButtonClick, this);
         buildButton.anchor.setTo(0.5, 0.5);
         
         helpButton = game.add.sprite(0, 0, 'helpButton');
-        helpButton.x = 600;
+        helpButton.x = 700;
         helpButton.y = 400;
         helpButton.inputEnabled='true';
         helpButton.events.onInputDown.add(helpButtonClick, this);
@@ -180,6 +190,11 @@ function title() {
 function loadButtonClick() {
     state='appletSelection';
 }
+
+function threadButtonClick() {
+    state='threadSelection';
+}
+
 
 function helpButtonClick() {
     helpSprite = game.add.sprite(0, 0, 'helpScreen1');
@@ -269,6 +284,7 @@ function appletSelection() {
     buildButton.destroy(true);
     titleText.destroy(true);
     loadButton.destroy(true);
+    threadButton.destroy(true);
     appletIDPrompt();  //this is in mages.dialogs.js
 }
 
@@ -277,6 +293,7 @@ function threadSelection() {
     buildButton.destroy(true);
     titleText.destroy(true);
     loadButton.destroy(true);
+    threadButton.destroy(true);
     threadPrompt();  //this is in mages.dialogs.js
 }
 
