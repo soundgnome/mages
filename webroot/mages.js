@@ -7,7 +7,7 @@ var state='title';
 var gridSize = 20;
 var titleBack;
 
-
+ 
 function preload() {
     //debug text
     result = 'Math Applet Generator for Elementary School - Basic Architecture - Build Test';
@@ -244,7 +244,7 @@ function defineApplets() {
             for (var j=0; j<problem_count; j++) {
                 applet.push(data.applets[i].problems[j]);
                 if ("solution" in data.applets[i]) {
-                    var applet_id = parseInt(data.applets[i].problems[0].appletID);
+                    var applet_id = data.applets[i].problems[0].appletID;
                     tests[applet_id] = data.applets[i].solution;
                 }
             }
@@ -267,7 +267,7 @@ function appletSelection() {
 }
 
 var appletInitiated = 0;
-var tests = new Array(1000);
+var tests = {};
 function runApplet() {
     if(appletInitiated==0)
     {
