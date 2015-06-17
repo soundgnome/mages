@@ -1144,7 +1144,7 @@
             {"appletID":"1-22","type":99,"color":0,"drawingBoxStartX":418,"drawingBoxStartY":332,"drawingBoxEndX":601,"drawingBoxEndY":394},
             {"appletID":"1-22","type":5,"startX":720,"startY":540}
             ],
-          "solution": "dragToBoxes[0].contents>0&&numberEntryValue==eval( dragToBoxes[0].contents.replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.replace(',','') )"
+          "solution": "dragToBoxes[0].contents!=0&&numberEntryValue==eval( dragToBoxes[0].contents.replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.replace(',','') )"
         },
         
         { "summary": "Missing added with dragToBoxes",
