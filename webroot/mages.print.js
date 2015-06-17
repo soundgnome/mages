@@ -95,7 +95,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                 
-                case 3: //random fraction constructor
+                case 3: //evaluate fraction constructor
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 
                         "type": piece[item].type, 
