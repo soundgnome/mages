@@ -10,6 +10,7 @@ function appletIDPrompt() {
                 //Example.show("Prompt dismissed");
             } else 
             {
+                appletInitiated=0;
                 loadAppletID=result;
                 state = 'applet';
                 titleBack.destroy(true);

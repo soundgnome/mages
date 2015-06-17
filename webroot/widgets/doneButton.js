@@ -22,6 +22,7 @@ function doneButtonClick(item) {
     if(eval(tests[loadAppletID]))
     {
         item.alpha=0;
+        clearCurrentApplet();
     } 
     
 }

@@ -410,6 +410,36 @@ function loadApplet() {
     
 }
 
+function clearCurrentApplet()
+{
+    piece.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    draggableNumbers.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    piece = [];
+    draggableNumbers = [];
+    randomNumber = [];
+    draggablePieces = [];
+    evaluatedExpression = [];
+    evaluatedNumerator = [];
+    evaluatedDenominator = [];
+    evaluatedWhole = [];
+    hiddenNumber = [];
+    newEvaluatedAnswers = [];
+    multipleChoice = [];
+    newMultipleChoiceNumbers = [];
+    randomDecimal = [];
+    randomMixedNumber = [];
+    randomNumber = [];
+    dragToBoxes = [];
+    appletIDPrompt();
+}
+
+
 /*******************************************************************************
  *                               BUILD SECTION
  * ****************************************************************************/
