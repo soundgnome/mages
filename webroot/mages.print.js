@@ -286,8 +286,9 @@ function printPieces(newAppletID, appletDoneTest) {
                         "numberEntryX":piece[item].x , 
                         "numberEntryY":piece[item].y , 
                         "orientation":piece[item].orientation , 
-                        "displayX":piece[item+1].x, 
-                        "displayY":piece[item+1].y, 
+                        "displayX":entryPanelCoordinates("x"), 
+                        "displayY":entryPanelCoordinates("y"), 
+                        "panelQuantity":piece[item].panelQuantity,
                         "displayDigits":piece[item].displayDigits
                         });
                     constructorString = getConstructorString(newObject);

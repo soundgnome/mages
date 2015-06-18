@@ -204,7 +204,7 @@
               {"appletID":"15","type":2,"startX":440,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":99,"randomFloor":1},
               {"appletID":"15","type":1,"startX":280,"startY":140,"text":"____","newText":"____","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"15","type":1,"startX":310,"startY":140,"text":"x","newText":"x","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
-              {"appletID":"15","type":14,"numberEntryX":140,"numberEntryY":300,"orientation":"h","displayX":260,"displayY":220,"displayDigits":4},
+              {"appletID":"15","type":14,"numberEntryX":140,"numberEntryY":300,"orientation":"h","displayX":[260],"displayY":[220],"displayDigits":4},
               {"appletID":"15","type":5,"startX":680,"startY":500}
           ],
           "solution": "numberEntryValue==randomNumber[0]*randomNumber[1]"
@@ -246,7 +246,7 @@
           "problems": [
               {"appletID":"19","type":2,"startX":320,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":9999,"randomFloor":1000},
               {"appletID":"19","type":2,"startX":640,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":9999,"randomFloor":1000},
-              {"appletID":"19","type":17,"inequalityEntryX":220,"inequalityEntryY":240,"displayX":339,"displayY":151},
+              {"appletID":"19","type":17,"inequalityEntryX":220,"inequalityEntryY":240,"displayX":[339],"displayY":[151]},
               {"appletID":"19","type":99,"drawingBoxStartX":125,"drawingBoxStartY":130,"drawingBoxEndX":652,"drawingBoxEndY":320},
               {"appletID":"19","type":1,"startX":160,"startY":80,"text":"Click%20the%20button%20to%20make%20the%20inequality%20true.","newText":"Click%20the%20button%20to%20make%20the%20inequality%20true.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"19","type":5,"startX":380,"startY":420}
@@ -258,7 +258,7 @@
               {"appletID":"20","type":16,"expression":"getRandomInt(1000,10000)"},
               {"appletID":"20","type":15,"startX":400,"startY":140,"expression":"inWordForm%28hiddenNumber%5B0%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"center"},
               {"appletID":"20","type":99,"drawingBoxStartX":360,"drawingBoxStartY":301,"drawingBoxEndX":360,"drawingBoxEndY":301},
-              {"appletID":"20","type":14,"numberEntryX":180,"numberEntryY":240,"orientation":"h","displayX":300,"displayY":160,"displayDigits":5},
+              {"appletID":"20","type":14,"numberEntryX":180,"numberEntryY":240,"orientation":"h","displayX":[300],"displayY":[160],"displayDigits":5},
               {"appletID":"20","type":99,"drawingBoxStartX":14,"drawingBoxStartY":90,"drawingBoxEndX":787,"drawingBoxEndY":327},
               {"appletID":"20","type":5,"startX":400,"startY":400},
               {"appletID":"20","type":1,"startX":20,"startY":20,"text":"Enter%20the%20number.","newText":"Enter%20the%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"}
@@ -282,7 +282,7 @@
               {"appletID":"22","type":16,"expression":"getRandomInt(3,9)"},
               {"appletID":"22","type":16,"expression":"getRandomInt(15,99)"},
               {"appletID":"22","type":15,"startX":380,"startY":140,"expression":"girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20needs%20to%20get%20plywood%20to%20build%20her%20flatbead%20trailer.%20The%20flatbed%20is%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20feet%20by%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20feet.%20What%20is%20the%20area%20of%20the%20flatbed%20%22%20%2B%20girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20needs%20to%20cover%20with%20plywood%3F%22","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"22","type":14,"numberEntryX":600,"numberEntryY":60,"orientation":"v","displayX":240,"displayY":240,"displayDigits":4},
+              {"appletID":"22","type":14,"numberEntryX":600,"numberEntryY":60,"orientation":"v","displayX":[240],"displayY":[240],"displayDigits":4},
               {"appletID":"22","type":1,"startX":440,"startY":260,"text":"sq.%20ft.","newText":"sq.%20ft.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":400,"alignment":"left"},
               {"appletID":"22","type":99,"drawingBoxStartX":152,"drawingBoxStartY":46,"drawingBoxEndX":658,"drawingBoxEndY":536},
               {"appletID":"22","type":5,"startX":380,"startY":420}
@@ -295,7 +295,7 @@
               {"appletID":"23","type":16,"expression":"getRandomInt(100,999)"},
               {"appletID":"23","type":16,"expression":"getRandomInt(3,9)"},
               {"appletID":"23","type":15,"startX":380,"startY":200,"expression":"%22Mrs.%20%22%20%2B%20surnames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20has%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20photographs%20in%20her%20collection.%20She%20places%20the%20photos%20in%20an%20album%20with%20exactly%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20photos%20on%20each%20page.%20How%20many%20pages%20does%20Mrs.%20%22%20%2B%20surnames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20fill%20in%20her%20photo%20album%3F%22","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"23","type":14,"numberEntryX":160,"numberEntryY":400,"orientation":"h","displayX":240,"displayY":320,"displayDigits":3},
+              {"appletID":"23","type":14,"numberEntryX":160,"numberEntryY":400,"orientation":"h","displayX":[240],"displayY":[320],"displayDigits":3},
               {"appletID":"23","type":1,"startX":380,"startY":340,"text":"pages","newText":"pages","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":400,"alignment":"left"},
               {"appletID":"23","type":5,"startX":360,"startY":500},
               {"appletID":"23","type":99,"drawingBoxStartX":138,"drawingBoxStartY":67,"drawingBoxEndX":638,"drawingBoxEndY":564}
@@ -323,7 +323,7 @@
               {"appletID":"25","type":99,"drawingBoxStartX":645,"drawingBoxStartY":185,"drawingBoxEndX":645,"drawingBoxEndY":185},
               {"appletID":"25","type":15,"startX":600,"startY":180,"expression":"%22How%20many%20%22%20%2B%20%28barGraph.value%5BhiddenNumber%5B0%5D%20%5D%20%3C%20barGraph.value%5BhiddenNumber%5B1%5D%20%5D%20%3F%20%22fewer%20%22%20%3A%20%22more%20%22%20%29%20%2B%20%22inches%20of%20snow%20were%20recorded%20in%20%22%20%2B%20barGraph.itemList%5B%20hiddenNumber%5B0%5D%20%5D%20%2B%20%22%20than%20were%20recorded%20in%20%22%20%2B%20barGraph.itemList%5B%20hiddenNumber%5B1%5D%20%5D%20%2B%20%22%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"350","align":"left"},
               {"appletID":"25","type":99,"drawingBoxStartX":594,"drawingBoxStartY":430,"drawingBoxEndX":594,"drawingBoxEndY":430},
-              {"appletID":"25","type":14,"numberEntryX":320,"numberEntryY":400,"orientation":"h","displayX":460,"displayY":320,"displayDigits":3},
+              {"appletID":"25","type":14,"numberEntryX":320,"numberEntryY":400,"orientation":"h","displayX":[460],"displayY":[320],"displayDigits":3},
               {"appletID":"25","type":1,"startX":600,"startY":340,"text":"inches","newText":"inches","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"25","type":5,"startX":520,"startY":520},
               {"appletID":"25","type":99,"drawingBoxStartX":8,"drawingBoxStartY":10,"drawingBoxEndX":784,"drawingBoxEndY":579}
@@ -335,7 +335,7 @@
               {"appletID":"26","type":16,"expression":"getRandomInt(2,9)"},
               {"appletID":"26","type":18,"startX":400,"startY":80,"titleText":"Snowfall Last Winter","min":0,"max":28,"interval":4,"numberLabel":"Inches","numberedAxis":"x","itemList":["Nov.","Dec.","Jan.","Feb.","Mar."],"itemLabel":"Month","itemValueList":["getRandomInt(0,14)*2","getRandomInt(0,14)*2","getRandomInt(0,14)*2","getRandomInt(0,14)*2"," ( hiddenNumber[0] > barGraph.totalValue() ? hiddenNumber[0] - barGraph.totalValue() : hiddenNumber[0] - ( barGraph.totalValue()%hiddenNumber[0] ) ) "]},
               {"appletID":"26","type":15,"startX":208,"startY":229,"expression":"%22The%20total%20amount%20of%20snow%20shown%20in%20the%20graph%20is%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20times%20as%20much%20snow%20as%20was%20recorded%20during%20the%20winter%20of%202014.%20How%20much%20snow%20was%20recorded%20during%20the%20winter%20of%202014%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"350","align":"left"},
-              {"appletID":"26","type":14,"numberEntryX":20,"numberEntryY":540,"orientation":"h","displayX":40,"displayY":460,"displayDigits":3},
+              {"appletID":"26","type":14,"numberEntryX":20,"numberEntryY":540,"orientation":"h","displayX":[40],"displayY":[460],"displayDigits":3},
               {"appletID":"26","type":1,"startX":180,"startY":480,"text":"inches","newText":"inches","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":350,"alignment":"left"},
               {"appletID":"26","type":5,"startX":640,"startY":540}
           ],
@@ -406,7 +406,7 @@
               {"appletID":"31","type":1,"startX":265,"startY":40,"text":"START","newText":"START","font":"","fontString":"bold 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"31","type":1,"startX":520,"startY":40,"text":"END","newText":"END","font":"","fontString":"bold 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"31","type":1,"startX":200,"startY":280,"text":"How%20many%20minutes%20passed%20between%20the%20start%20and%20end%3F","newText":"How%20many%20minutes%20passed%20between%20the%20start%20and%20end%3F","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"appletID":"31","type":14,"numberEntryX":180,"numberEntryY":400,"orientation":"h","displayX":320,"displayY":320,"displayDigits":3},
+              {"appletID":"31","type":14,"numberEntryX":180,"numberEntryY":400,"orientation":"h","displayX":[320],"displayY":[320],"displayDigits":3},
               {"appletID":"31","type":1,"startX":456,"startY":347,"text":"minutes","newText":"minutes","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"31","type":5,"startX":700,"startY":540},
               {"appletID":"31","type":99,"drawingBoxStartX":160,"drawingBoxStartY":23,"drawingBoxEndX":659,"drawingBoxEndY":463}
@@ -446,7 +446,7 @@
               {"appletID":"33","type":15,"startX":430,"startY":173,"expression":"hiddenNumber%5B0%5D-90%20%2B%20%27%C2%B0%27","font":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
               {"appletID":"33","type":1,"startX":342,"startY":161,"newText":"%3F","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"33","type":1,"startX":100,"startY":340,"newText":"What%20is%20the%20measure%20of%20the%20unknown%20angle%20in%20degrees%3F","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"appletID":"33","type":14,"numberEntryX":160,"numberEntryY":460,"orientation":"h","displayX":320,"displayY":380,"displayDigits":3},
+              {"appletID":"33","type":14,"numberEntryX":160,"numberEntryY":460,"orientation":"h","displayX":[320],"displayY":[380],"displayDigits":3},
               {"appletID":"33","type":5,"startX":700,"startY":540},
               {"appletID":"33","type":1,"startX":440,"startY":370,"newText":"%C2%B0","font":"","fontString":" 60px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
                     ],
@@ -488,9 +488,15 @@
         { "summary": "",
           "problems": [
               {"appletID":"42","type":1,"startX":240,"startY":40,"text":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","newText":"What%20is%20the%20answer%20to%20the%20ultimate%20question%20of%20life%2C%20the%20universe%2C%20and%20everything%3F","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":300,"alignment":"center"},
-              {"appletID":"42","type":14,"numberEntryX":160,"numberEntryY":400,"orientation":"h","displayX":100,"displayY":320,"displayDigits":12},
+              {"appletID":"42","type":14,"numberEntryX":160,"numberEntryY":400,"orientation":"h","displayX":[100],"displayY":[320],"displayDigits":12},
               {"appletID":"42","type":5,"startX":360,"startY":500}
           ],
+          "solution": "numberEntryValue==42"
+        },
+        { "summary": "",
+          "problems": [
+            {"appletID":"93","type":14,"numberEntryX":0,"numberEntryY":0,"orientation":"h","displayX":[100,100,500,360],"displayY":[100,480,100,300],"panelQuantity":4,"displayDigits":6}
+            ],
           "solution": "numberEntryValue==42"
         },
         { "summary": "clonable expression test",
@@ -666,7 +672,7 @@
               {"appletID":"100","type":16,"expression":"getRandomInt%281%2C12%29"},
               {"appletID":"100","type":16,"expression":"hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D"},
               {"appletID":"100","type":15,"startX":480,"startY":220,"expression":"%22x%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%3D%20%22%20%2B%20hiddenNumber%5B2%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left"},
-              {"appletID":"100","type":14,"numberEntryX":200,"numberEntryY":260,"orientation":"h","displayX":320,"displayY":180,"displayDigits":2},
+              {"appletID":"100","type":14,"numberEntryX":200,"numberEntryY":260,"orientation":"h","displayX":[320],"displayY":[180],"displayDigits":2},
               {"appletID":"100","type":5,"startX":420,"startY":400},
               {"appletID":"100","type":99,"drawingBoxStartX":20,"drawingBoxStartY":19,"drawingBoxEndX":780,"drawingBoxEndY":583}
           ],
@@ -704,7 +710,7 @@
               {"appletID":"103","type":99,"drawingBoxStartX":410,"drawingBoxStartY":276,"drawingBoxEndX":410,"drawingBoxEndY":276},
               {"appletID":"103","type":15,"startX":400,"startY":200,"expression":"%22There%20were%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%22%20%2B%20makeWordProblemSet%28hiddenNumber%5B0%5D%29.groupPlural%20%2B%20%22%20of%20%22%20%2B%20makeWordProblemSet%28hiddenNumber%5B0%5D%29.name%20%2B%20%22.%20Each%20%22%20%2B%20makeWordProblemSet%28hiddenNumber%5B0%5D%29.group%20%2B%20%22%20contained%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20%22%20%2B%20makeWordProblemSet%28hiddenNumber%5B0%5D%29.name%20%2B%20%22.%20How%20many%20%22%20%2B%20makeWordProblemSet%28hiddenNumber%5B0%5D%29.name%20%2B%20%22%20were%20there%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
               {"appletID":"103","type":15,"startX":520,"startY":380,"expression":"makeWordProblemSet%28hiddenNumber%5B0%5D%29.name","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"103","type":14,"numberEntryX":140,"numberEntryY":60,"orientation":"v","displayX":240,"displayY":340,"displayDigits":5},
+              {"appletID":"103","type":14,"numberEntryX":140,"numberEntryY":60,"orientation":"v","displayX":[240],"displayY":[340],"displayDigits":5},
               {"appletID":"103","type":99,"drawingBoxStartX":19,"drawingBoxStartY":21,"drawingBoxEndX":778,"drawingBoxEndY":581},
               {"appletID":"103","type":5,"startX":600,"startY":480}
           ],
@@ -716,7 +722,7 @@
               {"appletID":"104","type":16,"expression":"getRandomInt%2811%2C99%29"},
               {"appletID":"104","type":16,"expression":"getRandomInt%28111%2C999%29"},
               {"appletID":"104","type":15,"startX":460,"startY":180,"expression":"%22A%20salesperson%20sold%20%22%2BhiddenNumber%5B1%5D%2B%22%20%22%2B%20%5B%22cars%22%20%2C%20%22computers%22%20%2C%20%22cell%20phones%22%20%2C%20%22necklaces%22%20%2C%20%22televisions%22%20%2C%20%22microscopes%22%20%2C%20%22telescopes%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22.%20The%20%22%2B%5B%22circus%20tents%22%20%2C%20%22computers%22%20%2C%20%22cell%20phones%22%20%2C%20%22necklaces%22%20%2C%20%22televisions%22%20%2C%20%22microscopes%22%20%2C%20%22telescopes%22%5D%5BhiddenNumber%5B0%5D%20%5D%2B%22%20cost%20%24%22%2BhiddenNumber%5B2%5D%2B%22%20each.%20What%20was%20the%20total%20price%20of%20the%20%22%2B%5B%22circus%20tents%22%20%2C%20%22computers%22%20%2C%20%22cell%20phones%22%20%2C%20%22necklaces%22%20%2C%20%22televisions%22%20%2C%20%22microscopes%22%20%2C%20%22telescopes%22%5D%5BhiddenNumber%5B0%5D%20%5D%2B%22%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left"},
-              {"appletID":"104","type":14,"numberEntryX":140,"numberEntryY":60,"orientation":"v","displayX":240,"displayY":270,"displayDigits":6},
+              {"appletID":"104","type":14,"numberEntryX":140,"numberEntryY":60,"orientation":"v","displayX":[240],"displayY":[270],"displayDigits":6},
               {"appletID":"104","type":1,"startX":520,"startY":280,"text":"dollars","newText":"dollars","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":500,"alignment":"left"},
               {"appletID":"104","type":5,"startX":540,"startY":440},
               {"appletID":"104","type":99,"drawingBoxStartX":23,"drawingBoxStartY":23,"drawingBoxEndX":769,"drawingBoxEndY":584}
@@ -729,7 +735,7 @@
               {"appletID":"105","type":16,"expression":"getRandomInt%282%2C9%29%2aMath.pow%2810%2C%20getRandomInt%280%2C3%29%29"},
               {"appletID":"105","type":16,"expression":"getRandomInt%282%2C9%29%2aMath.pow%2810%2C%20getRandomInt%280%2C3%29%29"},
               {"appletID":"105","type":15,"startX":400,"startY":200,"expression":"%22A%22%20%2B%20%5B%22n%20university%20library%22%2C%20%22%20boatmaker%22%2C%20%22%20computer%20manufacturer%22%2C%20%22%20truck%20company%20%22%2C%20%22%20toy%20store%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20ordered%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20shipments%20of%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20%22%20%2B%20%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22.%20How%20many%20%22%20%2B%20%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20were%20ordered%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"105","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":220,"displayY":360,"displayDigits":7},
+              {"appletID":"105","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":[220],"displayY":[360],"displayDigits":7},
               {"appletID":"105","type":5,"startX":380,"startY":480},
               {"appletID":"105","type":99,"drawingBoxStartX":20,"drawingBoxStartY":18,"drawingBoxEndX":777,"drawingBoxEndY":581}
           ],
@@ -741,7 +747,7 @@
               {"appletID":"106","type":16,"expression":"getRandomInt%282%2C9%29%2aMath.pow%2810%2C%20getRandomInt%280%2C3%29%29"},
               {"appletID":"106","type":16,"expression":"getRandomInt%282%2C9%29%2aMath.pow%2810%2C%20getRandomInt%280%2C3%29%29"},
               {"appletID":"106","type":15,"startX":400,"startY":200,"expression":"%22A%22%20%2B%20%5B%22n%20university%20library%22%2C%20%22%20boatmaker%22%2C%20%22%20computer%20manufacturer%22%2C%20%22%20truck%20company%20%22%2C%20%22%20toy%20store%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20ordered%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20shipments%20of%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20%22%20%2B%20%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22.%20How%20many%20%22%20%2B%20%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20were%20ordered%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"106","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":220,"displayY":360,"displayDigits":7},
+              {"appletID":"106","type":14,"numberEntryX":120,"numberEntryY":40,"orientation":"v","displayX":[220],"displayY":[360],"displayDigits":7},
               {"appletID":"106","type":5,"startX":380,"startY":480},
               {"appletID":"106","type":99,"drawingBoxStartX":20,"drawingBoxStartY":18,"drawingBoxEndX":777,"drawingBoxEndY":581}
           ],
@@ -753,7 +759,7 @@
               {"appletID":"107","type":16,"expression":"getRandomInt%282%2C12%29"},
               {"appletID":"107","type":16,"expression":"hiddenNumber%5B1%5D%2agetRandomInt%28101%2C199%29"},
               {"appletID":"107","type":15,"startX":400,"startY":200,"expression":"%22A%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20has%20%24%22%20%2B%20addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20to%20spend%20on%20%22%20%2B%20%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22.%20If%20each%20of%20the%20%22%20%2B%20%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20costs%20%24%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%2C%20how%20many%20%22%20%2B%20%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20will%20the%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20be%20able%20to%20buy%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"107","type":14,"numberEntryX":120,"numberEntryY":60,"orientation":"v","displayX":220,"displayY":380,"displayDigits":3},
+              {"appletID":"107","type":14,"numberEntryX":120,"numberEntryY":60,"orientation":"v","displayX":[220],"displayY":[380],"displayDigits":3},
               {"appletID":"107","type":15,"startX":460,"startY":420,"expression":"%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"400","align":"left"},
               {"appletID":"107","type":5,"startX":380,"startY":500},
               {"appletID":"107","type":99,"drawingBoxStartX":23,"drawingBoxStartY":17,"drawingBoxEndX":778,"drawingBoxEndY":583}
@@ -766,7 +772,7 @@
               {"appletID":"108","type":16,"expression":"getRandomInt%282%2C12%29%2aMath.pow%2810%2CgetRandomInt%281%2C3%29%20%29"},
               {"appletID":"108","type":16,"expression":"getRandomInt%282%2C12%29%2aMath.pow%2810%2CgetRandomInt%281%2C3%29%20%29"},
               {"appletID":"108","type":15,"startX":400,"startY":240,"expression":"%22A%22%20%2B%20%5B%22n%20university%20library%22%2C%20%22%20boatmaker%22%2C%20%22%20computer%20manufacturer%22%2C%20%22%20truck%20company%22%2C%20%22%20toy%20store%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20needs%20to%20prepare%20an%20order%20of%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%2ahiddenNumber%5B2%5D%29%20%2B%20%22%20%22%20%2B%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22.%20If%20each%20container%20can%20hold%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20%22%20%2B%20%5B%22textbooks%22%20%2C%20%22bolts%20of%20canvas%20fabric%22%20%2C%20%22components%22%20%2C%20%22barrels%20of%20gasoline%22%20%2C%20%22boxes%20of%20toys%22%20%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%2C%20how%20many%20containers%20will%20the%22%20%2B%20%5B%22%20library%22%2C%20%22%20boatmaker%22%2C%20%22%20computer%20manufacturer%22%2C%20%22%20truck%20company%22%2C%20%22%20toy%20store%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20need%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"400","align":"left"},
-              {"appletID":"108","type":14,"numberEntryX":120,"numberEntryY":60,"orientation":"v","displayX":200,"displayY":460,"displayDigits":7},
+              {"appletID":"108","type":14,"numberEntryX":120,"numberEntryY":60,"orientation":"v","displayX":[200],"displayY":[460],"displayDigits":7},
               {"appletID":"108","type":5,"startX":620,"startY":480},
               {"appletID":"108","type":99,"drawingBoxStartX":21,"drawingBoxStartY":21,"drawingBoxEndX":782,"drawingBoxEndY":580}
           ],
@@ -780,7 +786,7 @@
               {"appletID":"109","type":16,"expression":"getRandomInt%280%2C9%29"},
               {"appletID":"109","type":16,"expression":"getRandomInt%280%2C1%29"},
               {"appletID":"109","type":15,"startX":400,"startY":180,"expression":"%22A%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20has%20%24%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%2ahiddenNumber%5B2%5D%2BhiddenNumber%5B3%5D%29%20%2B%20%22%20to%20spend%20on%20%22%20%2B%20%5B%22packs%20of%20baseball%20cards%22%20%2C%20%22test%20tubes%22%20%2C%20%22soccer%20balls%22%20%2C%20%22sacks%20of%20flour%22%20%2C%20%22bolts%20of%20cloth%22%20%2C%20%22cuts%20of%20meat%22%20%2C%20%22bags%20of%20seed%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22.%20If%20each%20of%20the%20%22%20%2B%20%5B%22packs%22%20%2C%20%22tubes%22%20%2C%20%22balls%22%20%2C%20%22sacks%22%20%2C%20%22bolts%22%20%2C%20%22cuts%22%20%2C%20%22bags%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20costs%20%24%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%2C%20%22%20%2B%20%28hiddenNumber%5B4%5D%3D%3D0%20%3F%20%22after%20buying%20as%20many%20%22%20%2B%20%5B%22packs%22%20%2C%20%22tubes%22%20%2C%20%22balls%22%20%2C%20%22sacks%22%20%2C%20%22bolts%22%20%2C%20%22cuts%22%20%2C%20%22bags%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20as%20the%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20can%20afford%2C%20how%20much%20money%20will%20the%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20have%20left%3F%22%20%3A%20%22how%20many%20%22%20%2B%20%5B%22packs%22%20%2C%20%22tubes%22%20%2C%20%22balls%22%20%2C%20%22sacks%22%20%2C%20%22bolts%22%20%2C%20%22cuts%22%20%2C%20%22bags%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20can%20the%20%22%20%2B%20%5B%22boy%22%20%2C%20%22scientist%22%20%2C%20%22coach%22%20%2C%20%22baker%22%20%2C%20%22tailor%22%20%2C%20%22butcher%22%20%2C%20%22farmer%22%5D%5BhiddenNumber%5B0%5D%20%5D%20%2B%20%22%20afford%3F%22%20%29","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left"},
-              {"appletID":"109","type":14,"numberEntryX":160,"numberEntryY":380,"orientation":"h","displayX":300,"displayY":300,"displayDigits":2},
+              {"appletID":"109","type":14,"numberEntryX":160,"numberEntryY":380,"orientation":"h","displayX":[300],"displayY":[300],"displayDigits":2},
               {"appletID":"109","type":15,"startX":435,"startY":345,"expression":"%28hiddenNumber%5B4%5D%20%3D%3D%201%20%3F%20%5B%22packs%22%20%2C%20%22tubes%22%20%2C%20%22balls%22%20%2C%20%22sacks%22%20%2C%20%22bolts%22%20%2C%20%22cuts%22%20%2C%20%22bags%22%5D%5BhiddenNumber%5B0%5D%5D%20%3A%20%22%22%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"left"},
               {"appletID":"109","type":15,"startX":280,"startY":335,"expression":"%28hiddenNumber%5B4%5D%20%3D%3D%201%20%3F%20%22%22%20%3A%20%22%24%22%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","align":"right"},
               {"appletID":"109","type":5,"startX":400,"startY":480},
@@ -810,7 +816,7 @@
               {"appletID":"110","type":16,"expression":"getRandomInt(0,4)"},
               {"appletID":"110","type":16,"expression":"getRandomInt(2,12)"},
               {"appletID":"110","type":15,"startX":340,"startY":340,"expression":"%22What%20is%20the%20cost%20of%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%22%20%2B%20%5B%22dolls%22%20%2C%20%22video%20games%22%20%2C%20%22trucks%22%20%2C%20%22boomergangs%22%20%2C%20%22racketball%20sets%22%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","align":"center"},
-              {"appletID":"110","type":14,"numberEntryX":100,"numberEntryY":460,"orientation":"h","displayX":280,"displayY":380,"displayDigits":3},
+              {"appletID":"110","type":14,"numberEntryX":100,"numberEntryY":460,"orientation":"h","displayX":[280],"displayY":[380],"displayDigits":3},
               {"appletID":"110","type":1,"startX":240,"startY":380,"text":"%24","newText":"%24","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":600,"alignment":"left"},
               {"appletID":"110","type":5,"startX":680,"startY":520},
               {"appletID":"110","type":99,"drawingBoxStartX":20,"drawingBoxStartY":21,"drawingBoxEndX":782,"drawingBoxEndY":581}
@@ -824,7 +830,7 @@
             {"appletID":"1-1","type":16,"expression":"getRandomInt%28100%2C999%29"},
             {"appletID":"1-1","type":16,"expression":"getRandomInt%280%2C99%29"},
             {"appletID":"1-1","type":15,"startX":400,"startY":200,"expression":"boyNames%5B%20hiddenNumber%5B2%5D%20%5D%20%2B%20%22%27s%20family%20flies%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20miles%20on%20a%20trip%20to%20visit%20an%20aunt.%20%20Then%20they%20fly%20another%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20miles%20to%20visit%20a%20family%20friend.%20%20How%20far%20does%20%22%20%2B%20boyNames%5B%20hiddenNumber%5B2%5D%20%5D%20%2B%20%22%27s%20family%20drive%20in%20all%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
-            {"appletID":"1-1","type":14,"numberEntryX":160,"numberEntryY":440,"orientation":"h","displayX":240,"displayY":360,"displayDigits":4},
+            {"appletID":"1-1","type":14,"numberEntryX":160,"numberEntryY":440,"orientation":"h","displayX":[240],"displayY":[360],"displayDigits":4},
             {"appletID":"1-1","type":1,"startX":430,"startY":384,"newText":"miles","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
             {"appletID":"1-1","type":5,"startX":720,"startY":540}
             ],
@@ -837,7 +843,7 @@
             {"appletID":"1-2","type":16,"expression":"Math.floor%28getRandomDecimal%280.4%2C0.6%2C2%29%2ahiddenNumber%5B0%5D%29"},
             {"appletID":"1-2","type":16,"expression":"Math.floor%28getRandomDecimal%280.4%2C0.6%2C2%29%2ahiddenNumber%5B1%5D%29"},
             {"appletID":"1-2","type":15,"startX":380,"startY":200,"expression":"%22A%20baker%20has%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20milliliters%20of%20milk%20in%20a%20measuring%20cup.%20%20She%20pours%20%22%20%2B%20%20addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20of%20the%20milk%20into%20a%20mixing%20bowl.%20%20If%20the%20measuring%20cup%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20milliliters%2C%20how%20much%20milk%20is%20needed%20to%20fill%20the%20measuring%20cup%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
-            {"appletID":"1-2","type":14,"numberEntryX":140,"numberEntryY":480,"orientation":"h","displayX":220,"displayY":380,"displayDigits":4},
+            {"appletID":"1-2","type":14,"numberEntryX":140,"numberEntryY":480,"orientation":"h","displayX":[220],"displayY":[380],"displayDigits":4},
             {"appletID":"1-2","type":1,"startX":409,"startY":404,"newText":"milliliters","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
             {"appletID":"1-2","type":5,"startX":720,"startY":540}
             ],
@@ -862,7 +868,7 @@
             {"appletID":"1-4","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
             {"appletID":"1-4","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
             {"appletID":"1-4","type":15,"startX":400,"startY":220,"expression":"%22A%20swimming%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%29%20%2B%20%22%20liters%20of%20water.%20%20Another%20nearby%20pool%20holds%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20liters%20of%20water.%20%20How%20many%20liters%20do%20the%20two%20pools%20hold%20in%20total%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","align":"left","draggable":0,"selectable":0},
-            {"appletID":"1-4","type":14,"numberEntryX":160,"numberEntryY":480,"orientation":"h","displayX":180,"displayY":380,"displayDigits":7},
+            {"appletID":"1-4","type":14,"numberEntryX":160,"numberEntryY":480,"orientation":"h","displayX":[180],"displayY":[380],"displayDigits":7},
             {"appletID":"1-4","type":1,"startX":506,"startY":404,"newText":"liters","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"},
             {"appletID":"1-4","type":5,"startX":720,"startY":540}
             ],
@@ -921,7 +927,7 @@
               {"appletID":"1-9","type":16,"expression":"getRandomInt(1000,10000)"},
               {"appletID":"1-9","type":15,"startX":400,"startY":140,"expression":"inWordForm%28hiddenNumber%5B0%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"center"},
               {"appletID":"1-9","type":99,"drawingBoxStartX":360,"drawingBoxStartY":301,"drawingBoxEndX":360,"drawingBoxEndY":301},
-              {"appletID":"1-9","type":14,"numberEntryX":180,"numberEntryY":240,"orientation":"h","displayX":300,"displayY":160,"displayDigits":5},
+              {"appletID":"1-9","type":14,"numberEntryX":180,"numberEntryY":240,"orientation":"h","displayX":[300],"displayY":[160],"displayDigits":5},
               {"appletID":"1-9","type":99,"drawingBoxStartX":14,"drawingBoxStartY":90,"drawingBoxEndX":787,"drawingBoxEndY":327},
               {"appletID":"1-9","type":5,"startX":720,"startY":540},
               {"appletID":"1-9","type":1,"startX":20,"startY":20,"text":"Enter%20the%20number.","newText":"Enter%20the%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"}
@@ -998,7 +1004,7 @@
             {"appletID":"1-15","type":16,"expression":"getRandomInt%28Math.pow%2810%2ChiddenNumber%5B0%5D%2B1%29%2CMath.pow%2810%2ChiddenNumber%5B0%5D%2B1%29%2a9%29"},
             {"appletID":"1-15","type":15,"startX":200,"startY":260,"expression":"addCommas%28hiddenNumber%5B1%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
             {"appletID":"1-15","type":16,"expression":"getRandomInt%28hiddenNumber%5B1%5D-Math.pow%2810%2ChiddenNumber%5B0%5D%29%2ChiddenNumber%5B1%5D%2BMath.pow%2810%2ChiddenNumber%5B0%5D%29%29"},
-            {"appletID":"1-15","type":17,"inequalityEntryX":226,"inequalityEntryY":330,"displayX":345,"displayY":228},
+            {"appletID":"1-15","type":17,"inequalityEntryX":226,"inequalityEntryY":330,"displayX":[345],"displayY":[228]},
             {"appletID":"1-15","type":15,"startX":580,"startY":260,"expression":"addCommas%28hiddenNumber%5B2%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
             {"appletID":"1-15","type":5,"startX":720,"startY":540},
             {"appletID":"1-15","type":1,"startX":180,"startY":60,"newText":"Select%20the%20correct%20symbol%20to%20make%20the%20statement%20true.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","alignment":"left"}
@@ -1138,7 +1144,7 @@
             {"appletID":"1-22","type":9,"startX":200,"startY":360,"userScaleX":0.5,"userScaleY":0.5},
             {"appletID":"1-22","type":9,"startX":300,"startY":360,"userScaleX":1.5,"userScaleY":0.5},
             {"appletID":"1-22","type":1,"startX":380,"startY":340,"newText":"%3D","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
-            {"appletID":"1-22","type":14,"numberEntryX":140,"numberEntryY":420,"orientation":"h","displayX":420,"displayY":333,"displayDigits":4},
+            {"appletID":"1-22","type":14,"numberEntryX":140,"numberEntryY":420,"orientation":"h","displayX":[420],"displayY":[333],"displayDigits":4},
             {"appletID":"1-22","type":1,"startX":80,"startY":480,"newText":"Then%20enter%20the%20number%20of%20tickets%20using%20the%20buttons.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
             {"appletID":"1-22","type":1,"startX":620,"startY":340,"newText":"tickets","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
             {"appletID":"1-22","type":99,"color":0,"drawingBoxStartX":418,"drawingBoxStartY":332,"drawingBoxEndX":601,"drawingBoxEndY":394},

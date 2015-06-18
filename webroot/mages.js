@@ -472,6 +472,19 @@ function clearCurrentApplet()
     });
     selectionBoxGraphics = [];
     
+    numberEntryPanelText.forEach(function(item){
+        item.destroy(true); 
+    });
+    numberEntryPanelText = [];
+    
+    numberEntryPanels.forEach(function(item){
+        item.destroy(true); 
+    });
+    numberEntryPanels = [];
+
+    activeEntryPanel = 0;
+    numberEntryValue=[];
+
     evaluatedExpression = [];
     
     randomNumber = [];
@@ -487,10 +500,8 @@ function clearCurrentApplet()
     randomDecimal = [];
     randomMixedNumber = [];
     randomNumber = [];
+
     
-    numberEntryValue = 0;
-    
-    if (typeof numberEntryPanelText !== 'undefined') {numberEntryPanelText.destroy(true)}
     if (typeof inequalityEntryPanelText !== 'undefined') {inequalityEntryPanelText.destroy(true)}
     if (typeof multipleChoiceBox !== 'undefined') {multipleChoiceBox.destroy(true)}
 
