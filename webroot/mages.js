@@ -294,7 +294,7 @@ function threadSelection() {
     titleText.destroy(true);
     loadButton.destroy(true);
     threadButton.destroy(true);
-    threadPrompt();  //this is in mages.dialogs.js
+    threadPrompt(); 
 }
 
 var appletInitiated = 0;
@@ -504,6 +504,7 @@ function clearCurrentApplet()
     
     if (typeof inequalityEntryPanelText !== 'undefined') {inequalityEntryPanelText.destroy(true)}
     if (typeof multipleChoiceBox !== 'undefined') {multipleChoiceBox.destroy(true)}
+    if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.destroy(true)}
 
     if(threadMode == 0)
     {
@@ -581,6 +582,7 @@ function setupCanvas() {
     buildButton.destroy(true);
     titleText.destroy(true);
     loadButton.destroy(true);
+    threadButton.destroy(true);
     var background = game.add.sprite(0, 0, 'grid');
     defineMenu();
     buildState='';

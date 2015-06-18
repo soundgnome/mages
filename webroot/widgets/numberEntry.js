@@ -49,7 +49,8 @@ function buildNumberEntry(item) {
     piece[piece.length-1].displayX = item.displayX; 
     piece[piece.length-1].displayY = item.displayY;
     piece[piece.length-1].displayDigits = item.displayDigits;
-    piece[piece.length-1].panelQuantity = item.panelQuantity
+    piece[piece.length-1].panelQuantity = item.panelQuantity;
+    piece[piece.length-1].hideInitialValue = item.hideInitialValue;
     
     piece[piece.length-1].forEach(function(item) {
         item.inputEnabled='true';
@@ -68,6 +69,7 @@ function buildNumberEntry(item) {
     panelGraphic.endFill();
     for(var i = 0; i<item.panelQuantity ; i++)
     {
+        
         game.add.sprite(i*newTextSize/20,(i+1)*newTextSize/40*-4,'fractionBar');
         numberEntryPanels[numberEntryPanels.length]=game.add.sprite(item.displayX[i],item.displayY[i],panelGraphic.generateTexture());
         numberEntryPanels[numberEntryPanels.length-1].panelNumber = i;
@@ -80,11 +82,19 @@ function buildNumberEntry(item) {
         numberEntryValue.push(0)
         if(state!='build')
         {
-            numberEntryPanelText[numberEntryPanelText.length] = game.add.text(item.displayX[i] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3) *20, item.displayY[i]-9, numberEntryValue[i].toString(), {
+            
+            numberEntryPanelText[numberEntryPanelText.length] = game.add.text(item.displayX[i] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3) *20, item.displayY[i]-9, (item.hideInitialValue=="Yes"?"":numberEntryValue[i].toString() ), {
                 font: "72px Arial",
                 fill: "black",
                 align: "right"
             });    
+            if(item.panelQuantity>1 && i==0)
+            {
+                numberEntryPanelBox = game.add.graphics(numberEntryPanels[numberEntryPanels.length-1].x, numberEntryPanels[numberEntryPanels.length-1].y);   
+                numberEntryPanelBox.lineStyle(2, 0x0000FF, 1);
+                numberEntryPanelBox.drawRect(-2, -2, numberEntryPanels[numberEntryPanels.length-1].width+4, numberEntryPanels[numberEntryPanels.length-1].height+4); 
+            }
+        
         }
         
     }
@@ -106,17 +116,21 @@ function buildNumberEntry(item) {
     }
 }
 
-var entryPanelBox 
+var numberEntryPanelBox 
 function entryPanelClick(item)
 {
     if(state!='build')
     {
-         if (typeof entryPanelBox !== 'undefined') {entryPanelBox.clear()}
+         if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.clear()}
         
         activeEntryPanel = item.panelNumber;
-        entryPanelBox = game.add.graphics(item.x, item.y);   
-        entryPanelBox.lineStyle(2, 0x0000FF, 1);
-        entryPanelBox.drawRect(-2, -2, item.width+4, item.height+4);
+        if(numberEntryPanels.length>1)
+        {
+            numberEntryPanelBox = game.add.graphics(item.x, item.y);   
+            numberEntryPanelBox.lineStyle(2, 0x0000FF, 1);
+            numberEntryPanelBox.drawRect(-2, -2, item.width+4, item.height+4); 
+        }
+        
     }
 }
 
@@ -137,12 +151,21 @@ function numberEntryClick (item) {
         }
     } else
     {
-        numberEntryValue[activeEntryPanel] = 0;
-        numberEntryPanelText[activeEntryPanel].x = item.displayX[activeEntryPanel] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3)*20
-        numberEntryPanelText[activeEntryPanel].text = numberEntryValue[activeEntryPanel].toString();
+        if(item.value<10 && item.displayDigits == 1)
+        {
+            numberEntryValue[activeEntryPanel] = item.value;
+            numberEntryPanelText[activeEntryPanel].text = numberEntryValue[activeEntryPanel].toString();
+        } else
+        {
+            numberEntryValue[activeEntryPanel] = 0;
+            numberEntryPanelText[activeEntryPanel].x = item.displayX[activeEntryPanel] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3)*20
+            numberEntryPanelText[activeEntryPanel].text = numberEntryValue[activeEntryPanel].toString(); 
+        }
+        
     }
 }
 
+//TO DO: add hide initial value?
 function getNumberEntrySettings() {
     menuKeyPressed ==0;
     state = 'prompt';
@@ -152,6 +175,7 @@ function getNumberEntrySettings() {
                 getMenuEntryString("Max digits:" , "digits", 6 , null) +
                 getMenuEntryString("Number of panels:" , "panels", 1 , null) +
                 getMenuEntryString("Orientation? h/v:" , "orientation", "h" , null) +
+                getMenuYesNoString("Hide initial value?:", "hideinitial", null) +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -160,6 +184,7 @@ function getNumberEntrySettings() {
                         callback: function () {
                             var digits = $('#digits').val();
                             var orientation = $('#orientation').val();
+                            var hideInitial = $("input[name='hideinitial']:checked").val() ;
                             var panels = $('#panels').val();
                             state = 'build';
                             var spacing = digits*40;
@@ -186,7 +211,8 @@ function getNumberEntrySettings() {
                                 "displayX":newPanelsX, 
                                 "displayY":newPanelsY, 
                                 "panelQuantity":panels,
-                                "displayDigits":Number(digits)
+                                "displayDigits":Number(digits),
+                                "hideInitialValue":hideInitial
                                 })) ;
                             buildNumberEntry(newObject)
                             

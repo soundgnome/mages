@@ -91,6 +91,7 @@ function evaluatedExpressionClickClone(item) {
     draggableNumbers.push(newClone);
 }
 
+//TO DO: add clonable when draggable is selected
 function getEvaluatedExpressionSettings() {
     menuKeyPressed ==0;
     state = 'prompt';

@@ -288,6 +288,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "orientation":piece[item].orientation , 
                         "displayX":entryPanelCoordinates("x"), 
                         "displayY":entryPanelCoordinates("y"), 
+                        "hideInitialValue":piece[item].hideInitialValue,
                         "panelQuantity":piece[item].panelQuantity,
                         "displayDigits":piece[item].displayDigits
                         });
