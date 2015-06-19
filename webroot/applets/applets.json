@@ -246,7 +246,7 @@
           "problems": [
               {"appletID":"19","type":2,"startX":320,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":9999,"randomFloor":1000},
               {"appletID":"19","type":2,"startX":640,"startY":140,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":9999,"randomFloor":1000},
-              {"appletID":"19","type":17,"inequalityEntryX":220,"inequalityEntryY":240,"displayX":[339],"displayY":[151]},
+              {"appletID":"19","type":17,"inequalityEntryX":220,"inequalityEntryY":240,"displayX":339,"displayY":151},
               {"appletID":"19","type":99,"drawingBoxStartX":125,"drawingBoxStartY":130,"drawingBoxEndX":652,"drawingBoxEndY":320},
               {"appletID":"19","type":1,"startX":160,"startY":80,"text":"Click%20the%20button%20to%20make%20the%20inequality%20true.","newText":"Click%20the%20button%20to%20make%20the%20inequality%20true.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":300,"alignment":"left"},
               {"appletID":"19","type":5,"startX":380,"startY":420}
@@ -1100,7 +1100,7 @@
             {"appletID":"1-15","type":16,"expression":"getRandomInt%28Math.pow%2810%2ChiddenNumber%5B0%5D%2B1%29%2CMath.pow%2810%2ChiddenNumber%5B0%5D%2B1%29%2a9%29"},
             {"appletID":"1-15","type":15,"startX":200,"startY":260,"expression":"addCommas%28hiddenNumber%5B1%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
             {"appletID":"1-15","type":16,"expression":"getRandomInt%28hiddenNumber%5B1%5D-Math.pow%2810%2ChiddenNumber%5B0%5D%29%2ChiddenNumber%5B1%5D%2BMath.pow%2810%2ChiddenNumber%5B0%5D%29%29"},
-            {"appletID":"1-15","type":17,"inequalityEntryX":226,"inequalityEntryY":330,"displayX":[345],"displayY":[228]},
+            {"appletID":"1-15","type":17,"inequalityEntryX":226,"inequalityEntryY":330,"displayX":345,"displayY":228},
             {"appletID":"1-15","type":15,"startX":580,"startY":260,"expression":"addCommas%28hiddenNumber%5B2%5D%29","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
             {"appletID":"1-15","type":5,"startX":720,"startY":540},
             {"appletID":"1-15","type":1,"startX":180,"startY":60,"newText":"Select%20the%20correct%20symbol%20to%20make%20the%20statement%20true.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","alignment":"left"}
