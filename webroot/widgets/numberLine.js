@@ -1,11 +1,20 @@
 var numberLine
+var numberLineDots = [];
 function buildNumberLine(item) {
+    console.log(item.min)
+    item.minExpression = item.min
+    item.maxExpression = item.max
+    item.intervalExpression = item.interval;
+    item.min = eval(item.min)
+    item.max = eval(item.max)
+    item.interval = eval(item.interval)
+    
     piece[piece.length] = game.add.group();
     
     item.intervalSpacing = item.lineLength/( (item.max-item.min) / (item.interval/item.subDivide ))
-    console.log(item.intervalSpacing)
     numberLine = piece[piece.length-1];
     numberLine.dotValue = new Array(7);
+    numberLine.range = item.max-item.min;
     var newGraphic = game.add.graphics(0, 0);
     newGraphic.lineStyle(2, 0x000000, 1);
     if(item.lineOrientation == 'h')
@@ -62,9 +71,10 @@ function buildNumberLine(item) {
     
     
     if(item.intervalLabel == true) {
-        for(var i = item.min + 1 ; i <= (item.max-item.min)/item.interval - 1 ; i++ )
+        for(var i = 1 ; i <= (item.max-item.min)/item.interval - 1 ; i++ )
         {
-            newLabel = game.add.text((item.lineOrientation == 'h' ?  i*item.lineLength/( (item.max-item.min) / item.interval) : 0), (item.lineOrientation == 'h' ?  0 : i*item.lineLength/( (item.max-item.min) / item.interval))+20 , (i*item.interval).toString(), {
+             
+            newLabel = game.add.text((item.lineOrientation == 'h' ?  i*item.lineLength/( (item.max-item.min) / item.interval) : 0), (item.lineOrientation == 'h' ?  0 : i*item.lineLength/( (item.max-item.min) / item.interval))+20 , (item.min+i*item.interval).toString(), {
             font: labelFontSize+"px Arial",
             fill: "black",
             align: 'left'}); 
@@ -118,6 +128,7 @@ function buildNumberLine(item) {
             dotGraphic[i].clear(); 
             dotSprite[i].number = i
             piece[piece.length-1].addChild(dotSprite[i])
+            numberLineDots.push(dotSprite[i])
        }
        piece[piece.length] = null
     } else
@@ -141,6 +152,7 @@ function buildNumberLine(item) {
             dotSprite[i].y = (item.dotOrientation == 'v' ? i*40 : 0)
             dotSprite[i].number = i
             numberLine.dotValue[i] = null
+            numberLineDots.push(dotSprite[i])
         }
      
         piece[piece.length] = game.add.group();
@@ -190,11 +202,11 @@ function buildNumberLine(item) {
         piece[piece.length-2].startY=piece[piece.length-2].y
         piece[piece.length-2].lineOrientation=item.lineOrientation
         piece[piece.length-2].lineLength=item.lineLength
-        piece[piece.length-2].min=item.min
+        piece[piece.length-2].min=item.minExpression
         piece[piece.length-2].minLabel=item.minLabel
-        piece[piece.length-2].max=item.max
+        piece[piece.length-2].max=item.maxExpression
         piece[piece.length-2].maxLabel=item.maxLabel
-        piece[piece.length-2].interval=item.interval
+        piece[piece.length-2].interval=item.intervalExpression
         piece[piece.length-2].intervalLabel=item.intervalLabel
         piece[piece.length-2].subDivide=item.subDivide
         piece[piece.length-2].dotOrientation=item.dotOrientation
@@ -202,6 +214,10 @@ function buildNumberLine(item) {
         piece[piece.length-2].dotLabel=item.dotLabel
         piece[piece.length-2].dotSnapping=item.dotSnapping    
     }
+    //reset the min to the actual expression for cleanup purposes
+    item.min = item.minExpression
+    item.max = item.maxExpression
+    item.interval = item.intervalExpression
 }
 
 var draggingNumberLineDot = 0
@@ -247,12 +263,11 @@ function dragNumberLineDot(item) {
     
                 if(draggingDotHandle.dotSnapping == 1) {
                    draggingDotHandle.x = parseInt(draggingDotHandle.x/draggingDotHandle.intervalSpacing)*draggingDotHandle.intervalSpacing+(numberLine.x%draggingDotHandle.intervalSpacing)-5
-                   numberLine.dotValue[draggingDotHandle.number] = (draggingDotHandle.x+5 - numberLine.x) / draggingDotHandle.intervalSpacing * draggingDotHandle.interval/draggingDotHandle.subDivide
                 } else
                 {
-                    numberLine.dotValue[draggingDotHandle.number] =  ( (draggingDotHandle.x+draggingDotHandle.lineLength/600*5 - numberLine.x) /  draggingDotHandle.lineLength ) * draggingDotHandle.max-draggingDotHandle.min
                 }
-                
+                numberLine.dotValue[draggingDotHandle.number] = draggingDotHandle.min+(draggingDotHandle.x+5 - numberLine.x) / draggingDotHandle.intervalSpacing * draggingDotHandle.interval/draggingDotHandle.subDivide
+               
             }   
         } else
         {
@@ -261,10 +276,11 @@ function dragNumberLineDot(item) {
                 draggingDotHandle.x=numberLine.x+14;
                 if(draggingDotHandle.dotSnapping == true) {
                    draggingDotHandle.y = parseInt(draggingDotHandle.y/draggingDotHandle.intervalSpacing)*draggingDotHandle.intervalSpacing+(numberLine.y%draggingDotHandle.intervalSpacing)+12
-                   numberLine.dotValue[draggingDotHandle.number] = (draggingDotHandle.y-12 - numberLine.y) / draggingDotHandle.intervalSpacing * draggingDotHandle.interval/draggingDotHandle.subDivide
+                   numberLine.dotValue[draggingDotHandle.number] = draggingDotHandle.min+(draggingDotHandle.y-12 - numberLine.y) / draggingDotHandle.intervalSpacing * draggingDotHandle.interval/draggingDotHandle.subDivide
                 } else
                 {
-                    numberLine.dotValue[draggingDotHandle.number] =  ( (draggingDotHandle.x+draggingDotHandle.lineLength/600*5 - numberLine.x) /  draggingDotHandle.lineLength ) * draggingDotHandle.max-draggingDotHandle.min
+                   
+                    numberLine.dotValue[draggingDotHandle.number] =  draggingDotHandle.min+( (draggingDotHandle.x+draggingDotHandle.lineLength/600*5 - numberLine.x) /  draggingDotHandle.lineLength ) * draggingDotHandle.max-draggingDotHandle.min
                 }
             }
         }

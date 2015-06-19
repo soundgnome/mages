@@ -314,6 +314,7 @@ function runApplet() {
         dragProtractor();
         dragBaseTenBlock();
         dragNumberLineDot();
+        advanceTimer();
     }
 }
 
@@ -426,6 +427,10 @@ function loadApplet() {
             buildTextureArea(applet[i]);
             break;
             
+            case 22: //texture Area
+            buildTimer(applet[i]);
+            break;
+            
             case 98: //draw line
             buildDrawLine(applet[i]);
             break;
@@ -448,6 +453,13 @@ function clearCurrentApplet()
         item.destroy(true); 
     });
     dragToBoxes = [];
+    if (typeof numberLine !== 'undefined') {numberLine.destroy(true)}
+    
+    numberLineDots.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    numberLineDots = [];
     
     piece.forEach(function(item){
         
@@ -476,6 +488,9 @@ function clearCurrentApplet()
         item.destroy(true); 
     });
     numberEntryPanelText = [];
+    inequality='==';
+    
+    inequalityEntryText='';
     
     numberEntryPanels.forEach(function(item){
         item.destroy(true); 
@@ -485,6 +500,8 @@ function clearCurrentApplet()
     activeEntryPanel = 0;
     numberEntryValue=[];
 
+
+    
     evaluatedExpression = [];
     
     randomNumber = [];
@@ -505,6 +522,9 @@ function clearCurrentApplet()
     if (typeof inequalityEntryPanelText !== 'undefined') {inequalityEntryPanelText.destroy(true)}
     if (typeof multipleChoiceBox !== 'undefined') {multipleChoiceBox.destroy(true)}
     if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.destroy(true)}
+    
+    timedApplet = 0;
+
 
     if(threadMode == 0)
     {
@@ -514,7 +534,7 @@ function clearCurrentApplet()
         if(threadPoint < thread[threadNumber-1].length)
         {
             threadPoint++;
-            loadAppletID=threadNumber+"-"+threadPoint;
+            loadAppletID=thread[threadNumber-1][threadPoint-1];
             appletInitiated=0; 
         } else
         {

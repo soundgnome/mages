@@ -19,6 +19,7 @@ function buildDoneButton(item) {
 
 //this tests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
+    timerRunning = 0;
     if(threadMode == 0)
     {
         if(eval(tests[loadAppletID]))

@@ -495,9 +495,12 @@
         },
         { "summary": "",
           "problems": [
-            {"appletID":"92","type":14,"numberEntryX":160,"numberEntryY":280,"orientation":"h","displayX":[200,400,200,400],"displayY":[100,100,200,200],"hideInitialValue":"No","panelQuantity":"4","displayDigits":4}
-            ],
-          "solution": "(''+hiddenNumber[0])[0]==numberEntryValue[0] && (''+hiddenNumber[1])[2]==numberEntryValue[1] && (''+(hiddenNumber[0]+hiddenNumber[1]))[3]==numberEntryValue[2]"
+{"appletID":"92","type":16,"expression":"getRandomInt%282%2C12%29"},
+{"appletID":"92","type":16,"expression":"getRandomInt%282%2C12%29"},
+{"appletID":"92","type":20,"startX":40,"startY":220,"lineOrientation":"h","lineLength":"700","min":"0","minLabel":true,"max":"hiddenNumber[0]*hiddenNumber[1]","maxLabel":true,"interval":"hiddenNumber[0]","intervalLabel":false,"subDivide":"1","dotStartX":120,"dotStartY":300,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":false}
+
+],
+          "solution": "numberEntryValue[0]==hiddenNumber[0]*hiddenNumber[1]"
         },
         { "summary": "",
           "problems": [
@@ -876,7 +879,86 @@
             ],
           "solution": "hiddenNumber[0]/100 == valueDragToBoxes()"
         },
-        
+        { "summary": "Place number betweeen even thousands on number line",
+          "problems": [
+            {"appletID":"1-3.1","type":16,"expression":"getRandomInt%282%2C8%29%2a1000"},
+            {"appletID":"1-3.1","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+1000","maxLabel":true,"interval":"100","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.1","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C9%29%2a100"},
+            {"appletID":"1-3.1","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.1","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+        { "summary": "Place number betweeen thousands on number line",
+          "problems": [
+            {"appletID":"1-3.2","type":16,"expression":"getRandomInt%2820%2C80%29%2a100"},
+            {"appletID":"1-3.2","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+1000","maxLabel":true,"interval":"100","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.2","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C9%29%2a100"},
+            {"appletID":"1-3.2","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.2","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+         { "summary": "Place number betweeen even two thousands on number line",
+          "problems": [
+            {"appletID":"1-3.3","type":16,"expression":"getRandomInt%282%2C8%29%2a1000"},
+            {"appletID":"1-3.3","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+2000","maxLabel":true,"interval":"1000","intervalLabel":true,"subDivide":"10","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.3","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C19%29%2a100"},
+            {"appletID":"1-3.3","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.3","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+        { "summary": "Place number betweeen two thousands on number line",
+          "problems": [
+            {"appletID":"1-3.4","type":16,"expression":"getRandomInt%2820%2C80%29%2a100"},
+            {"appletID":"1-3.4","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+2000","maxLabel":true,"interval":"1000","intervalLabel":false,"subDivide":"10","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.4","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C19%29%2a100"},
+            {"appletID":"1-3.4","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.4","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+        { "summary": "Place number betweeen ten-thousands on number line",
+          "problems": [
+            {"appletID":"1-3.5","type":16,"expression":"getRandomInt%2820%2C80%29%2a1000"},
+            {"appletID":"1-3.5","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+10000","maxLabel":true,"interval":"1000","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.5","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C9%29%2a1000"},
+            {"appletID":"1-3.5","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.5","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+        { "summary": "Place number betweeen hundred-thousands on number line",
+          "problems": [
+            {"appletID":"1-3.6","type":16,"expression":"getRandomInt%2820%2C80%29%2a10000"},
+            {"appletID":"1-3.6","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+100000","maxLabel":true,"interval":"10000","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"1-3.6","type":16,"expression":"hiddenNumber%5B0%5D%2BgetRandomInt%281%2C9%29%2a10000"},
+            {"appletID":"1-3.6","type":15,"startX":380,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.6","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberLine.dotValue[0]==hiddenNumber[1]"
+        },
+        { "summary": "Slide number betweeen even thousands on number line",
+          "problems": [
+            {"appletID":"1-3.7","type":16,"expression":"getRandomInt%282%2C8%29%2a1000"},
+            {"appletID":"1-3.7","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+1000","maxLabel":true,"interval":"100","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":false},
+            {"appletID":"1-3.7","type":16,"expression":"hiddenNumber[0]+getRandomInt(100,900)"},
+            {"appletID":"1-3.7","type":15,"startX":395,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20approximately%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.7","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "Math.abs(numberLine.dotValue[0]-hiddenNumber[1])/numberLine.range<.05"
+        },
+        { "summary": "Slide number betweeen even ten thousands on number line",
+          "problems": [
+            {"appletID":"1-3.8","type":16,"expression":"getRandomInt%282%2C8%29%2a10000"},
+            {"appletID":"1-3.8","type":20,"startX":40,"startY":300,"lineOrientation":"h","lineLength":"700","min":"hiddenNumber[0]","minLabel":true,"max":"hiddenNumber[0]+10000","maxLabel":true,"interval":"1000","intervalLabel":false,"subDivide":"1","dotStartX":380,"dotStartY":200,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":false},
+            {"appletID":"1-3.8","type":16,"expression":"hiddenNumber[0]+getRandomInt(1000,9000)"},
+            {"appletID":"1-3.8","type":15,"startX":400,"startY":100,"expression":"%22Drag%20the%20dot%20to%20show%20approximately%20where%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20is%20on%20the%20number%20line.%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"1-3.8","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "Math.abs(numberLine.dotValue[0]-hiddenNumber[1])/numberLine.range<.05"
+        },
         { "summary": "Addition of 6-digit numbers in word problem",
           "problems": [
             {"appletID":"1-4","type":16,"expression":"getRandomInt%28100000%2C200000%29"},
@@ -1271,6 +1353,82 @@
             {"appletID":"1-27","type":1,"startX":100,"startY":80,"newText":"Order%20the%20numbers%20from%20least%20to%20greatest%20by%20dragging%20the%20numbers%20into%20the%20boxes.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"}
            ],
           "solution": "parseFloat(dragToBoxes[0].contents.replace(',',''))<parseFloat(dragToBoxes[1].contents.replace(',',''))<parseFloat(dragToBoxes[2].contents.replace(',',''))<parseFloat(dragToBoxes[3].contents.replace(',',''))<parseFloat(dragToBoxes[4].contents.replace(',',''))"
+        },
+        { "summary": "Timed multiplication 2-12",
+          "problems": [
+            {"appletID":"2-1","type":16,"expression":"getRandomInt%282%2C12%29"},
+            {"appletID":"2-1","type":16,"expression":"getRandomInt%282%2C12%29"},
+            {"appletID":"2-1","type":15,"startX":320,"startY":300,"expression":"hiddenNumber%5B0%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%3D%22","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-1","type":14,"numberEntryX":180,"numberEntryY":340,"orientation":"h","displayX":[459],"displayY":[268],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":3},
+            {"appletID":"2-1","type":99,"color":0,"drawingBoxStartX":170,"drawingBoxStartY":253,"drawingBoxEndX":643,"drawingBoxEndY":390},
+            {"appletID":"2-1","type":15,"startX":110,"startY":160,"expression":"%28threadMode%3D%3D1%3FthreadPoint%2B%22%2F10%22%3A%22%22%29","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
+            {"appletID":"2-1","type":22,"startX":80,"startY":20,"timeLimit":"5","size":"96"},
+            {"appletID":"2-1","type":99,"color":16711680,"drawingBoxStartX":34,"drawingBoxStartY":18,"drawingBoxEndX":179,"drawingBoxEndY":183},
+            {"appletID":"2-1","type":1,"startX":191,"startY":397,"newText":"TIME%20TRIAL!","font":"","fontString":"bold 72px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"appletID":"2-1","type":15,"startX":110,"startY":200,"expression":"%28threadMode%3D%3D1%3F%28typeof%20threadRecord%5BthreadPoint-2%5D%20%21%3D%3D%20%27undefined%27%3F%20%22Last%20problem%3A%20%22%20%2B%20%28threadRecord%5BthreadPoint-2%5D%3D%3D0%3F%20%22incorrect%22%20%3A%20%22correct%22%29%20%3A%20%22%22%29%3A%22%22%29","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
+
+            ],
+          "solution": "numberEntryValue==hiddenNumber[0]*hiddenNumber[1]"
+        },
+        { "summary": "Distributive property in expression",
+          "problems": [
+            {"appletID":"2-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"2-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"2-2","type":15,"startX":460,"startY":160,"expression":"hiddenNumber%5B0%5D%2a10%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B1%5D%2a10%20%2B%20%22%20%3D%20%28%20%20%20%20%20%20x%2010%29%20x%20%28%20%20%20%20%20%20x%2010%29%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":518,"startY":240,"expression":"%22%3D%20%28%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%29%20x%20%28%20%20%20%20%20%20x%20%20%20%20%20%20%29%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":410,"startY":318,"expression":"%22%3D%20%20%20%20%20%20x%20100%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":311,"startY":383,"expression":"%22%3D%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-2","type":9,"startX":394,"startY":160,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":9,"startX":646,"startY":160,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":9,"startX":579,"startY":241,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":9,"startX":685,"startY":242,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":9,"startX":366,"startY":316,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":9,"startX":365,"startY":379,"userScaleX":0.9,"userScaleY":0.5},
+            {"appletID":"2-2","type":15,"startX":40,"startY":420,"expression":"hiddenNumber%5B0%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":120,"startY":420,"expression":"hiddenNumber%5B1%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":200,"startY":420,"expression":"hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":40,"startY":480,"expression":"hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":120,"startY":480,"expression":"10","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":200,"startY":480,"expression":"hiddenNumber%5B0%5D%2a10","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":80,"startY":540,"expression":"%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%2a100%29","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":160,"startY":540,"expression":"%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%2a100%29","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"clonable":1,"selectable":0},
+            {"appletID":"2-2","type":15,"startX":380,"startY":60,"expression":"%22Drag%20the%20numbers%20from%20the%20blue%20box%20to%20complete%20the%20steps%20to%20find%20%22%20%2B%20hiddenNumber%5B0%5D%2a10%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B1%5D%2a10%20%2B%20%22%20by%20factoring%20the%20tens.%22","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"2-2","type":99,"color":255,"drawingBoxStartX":4,"drawingBoxStartY":379,"drawingBoxEndX":243,"drawingBoxEndY":561},
+            {"appletID":"2-2","type":5,"startX":720,"startY":540}
+                        ],
+          "solution": "hiddenNumber[0]*hiddenNumber[1]==dragToBoxes[0].contents*dragToBoxes[1].contents&&100==dragToBoxes[2].contents*dragToBoxes[3].contents&&hiddenNumber[0]*hiddenNumber[1]==dragToBoxes[4].contents&&hiddenNumber[0]*hiddenNumber[1]*100==dragToBoxes[5].contents"
+        },
+        { "summary": "Expression equivalent to 2x2 digit multiplication",
+          "problems": [
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%282%2C9%29%2a10"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%282%2C9%29%2a10"},
+            {"appletID":"2-3","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"2-3","type":15,"startX":380,"startY":180,"expression":"%28hiddenNumber%5B0%5D%3D%3D0%3FhiddenNumber%5B5%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B8%5D%3AhiddenNumber%5B5%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%29","font":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"false"},
+            {"appletID":"2-3","type":15,"startX":380,"startY":250,"expression":"%28hiddenNumber%5B1%5D%3D%3D1%3F%22%28%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%22%3A%22%28%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%29%20x%20%28%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%20x%20%28%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%29%20x%20%28%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%22%29","font":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B1%5D==1"},
+            {"appletID":"2-3","type":15,"startX":400,"startY":320,"expression":"%28hiddenNumber%5B2%5D%3D%3D1%3F%22%28%22%20%2BhiddenNumber%5B8%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B5%5D%2F10%20%2B%20%22%20tens%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B7%5D%2F10%20%2B%20%22%20tens%20x%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%29%20%2B%20%28%22%20%2B%20hiddenNumber%5B7%5D%2F10%20%2B%20%22%20tens%20x%20%22%20%2B%20hiddenNumber%5B5%5D%2F10%20%2B%20%22%20tens%29%22%3A%22%28%22%20%2BhiddenNumber%5B8%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%29%20x%20%28%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B5%5D%2F10%20%2B%20%22%20tens%29%20x%20%28%22%20%2B%20hiddenNumber%5B7%5D%2F10%20%2B%20%22%20tens%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%29%20x%20%28%22%20%2B%20hiddenNumber%5B7%5D%2F10%20%2B%20%22%20tens%20%2B%20%22%20%2B%20hiddenNumber%5B5%5D%2F10%20%2B%20%22%20tens%29%22%29","font":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B2%5D==1"},
+            {"appletID":"2-3","type":15,"startX":380,"startY":390,"expression":"%28hiddenNumber%5B3%5D%3D%3D1%3FhiddenNumber%5B5%5D%20%2B%20%22%20x%20%28%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%20x%20%28%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%22%3AhiddenNumber%5B5%5D%20%2B%20%22%20x%20%28%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%29%20%2B%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20x%20%28%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%29%22%29","font":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B3%5D==1"},
+            {"appletID":"2-3","type":15,"startX":380,"startY":460,"expression":"%28hiddenNumber%5B4%5D%3D%3D1%3FhiddenNumber%5B5%5D%2ahiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B5%5D%2ahiddenNumber%5B8%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%2ahiddenNumber%5B7%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B6%5D%2ahiddenNumber%5B8%5D%3AgetRandomInt%28200%2C500%29%20%2B%20%22%20%2B%20%22%20%2B%20getRandomInt%28200%2C500%29%20%2B%20%22%20%2B%20%22%20%2B%20getRandomInt%282%2C50%29%20%2B%20%22%20%2B%20%22%20%2B%20getRandomInt%282%2C50%29%29","font":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B4%5D==1"},
+            {"appletID":"2-3","type":15,"startX":400,"startY":80,"expression":"%22Select%20all%20expressions%20that%20are%20equal%20to%20%22%20%2B%20%28hiddenNumber%5B5%5D%2BhiddenNumber%5B6%5D%29%20%2B%20%22%20x%20%22%20%2B%20%28hiddenNumber%5B7%5D%20%2B%20hiddenNumber%5B8%5D%29%20%2B%20%22.%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"2-3","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "selectableScore()==1"
+        },
+        { "summary": "Divide numbers ending in zeroes by numbers ending in zeroes: word problems",
+          "problems": [
+            {"appletID":"2-4","type":16,"expression":"getRandomInt%285%2C12%29"},
+            {"appletID":"2-4","type":16,"expression":"getRandomInt%285%2C12%29"},
+            {"appletID":"2-4","type":20,"startX":40,"startY":320,"lineOrientation":"h","lineLength":"700","min":"0","minLabel":true,"max":"hiddenNumber[0]*hiddenNumber[1]","maxLabel":true,"interval":"hiddenNumber[0]","intervalLabel":false,"subDivide":"1","dotStartX":400,"dotStartY":450,"dotOrientation":"h","dotNumber":"1","dotLabel":false,"dotSnapping":true},
+            {"appletID":"2-4","type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D-1%29%2ahiddenNumber%5B0%5D"},
+            {"appletID":"2-4","type":15,"startX":400,"startY":120,"expression":"%22Show%20where%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20is%20on%20the%20number%20line%20below%20by%20dragging%20the%20dot%20into%20place.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"2-4","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "Math.round(numberLine.dotValue[0])==hiddenNumber[2]"
         }
         
     ]

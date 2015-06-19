@@ -420,6 +420,19 @@ function printPieces(newAppletID, appletDoneTest) {
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
+                case 22: //Texture Area
+                    var newObject = JSON.stringify({  
+                        "appletID": newAppletID, 
+                        "type": piece[item].type, 
+                        "startX":piece[item].x,
+                        "startY":piece[item].y,
+                        "timeLimit": piece[item].timeLimit,
+                        "size":piece[item].size
+                        });
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
+                    
                 case 98: //draw line
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID, 

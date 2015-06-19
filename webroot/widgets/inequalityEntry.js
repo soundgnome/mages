@@ -42,20 +42,20 @@ function buildInequalityEntry(item) {
     
     piece[piece.length-1].inequalityEntryX = item.inequalityEntryX;
     piece[piece.length-1].inequalityEntryY = item.inequalityEntryY;
-    piece[piece.length-1].displayX = item.displayX;
-    piece[piece.length-1].displayY = item.displayY;
+    piece[piece.length-1].displayX = item.displayX[length-1];
+    piece[piece.length-1].displayY = item.displayY[length-1];
     
     piece[piece.length-1].forEach(function(subitem) {
         subitem.inputEnabled='true';
         subitem.events.onInputDown.add(buildGroupPieceClick, this);
         subitem.events.onInputUp.add(onFinishDrag, draggingPiece);  
         subitem.ParentPosition=piece.length-1;
-        subitem.displayX = item.displayX;
-        subitem.displayY = item.displayY;
+        subitem.displayX = item.displayX[length-1];
+        subitem.displayY = item.displayY[length-1];
     });
     
     //displayPanel
-    piece[piece.length]= game.add.sprite(item.displayX,item.displayY,'numberEntryDisplay');
+    piece[piece.length]= game.add.sprite(item.displayX[length-1],item.displayY[length-1],'numberEntryDisplay');
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type='17b';
     piece[piece.length-1].inputEnabled='true';
@@ -71,7 +71,8 @@ function buildInequalityEntry(item) {
             item.ParentPosition=piece.length-1;
         });
         //new text over entry panel 
-        inequalityEntryPanelText = game.add.text(item.displayX+23 , item.displayY-10, inequalityEntryText.toString() , {
+        console.log(item.displayX+23 )
+        inequalityEntryPanelText = game.add.text(item.displayX[length-1]+23 , item.displayY[length-1]-10, inequalityEntryText.toString() , {
             font: "72px Arial",
             fill: "black",
             align: "center"
