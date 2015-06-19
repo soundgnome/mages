@@ -1,8 +1,9 @@
 var evaluatedExpression = [];
 function buildEvaluatedExpression(item) {
-     item.expression=decodeURIComponent(item.expression);   
+    item.expression=decodeURIComponent(item.expression);   
     
     evaluatedExpression.push(eval(item.expression));
+    
     if(state!='build')
     {
         fontString=item.font;
@@ -17,6 +18,7 @@ function buildEvaluatedExpression(item) {
         startY=250;
         fontString="" + newBold + " " + newTextSize + "px Arial";
     }
+    
     piece[piece.length] = game.add.text(startX, startY, evaluatedExpression[evaluatedExpression.length-1].toString(), {
             font: fontString,
             fill: newTextColor,
@@ -31,7 +33,15 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].align=item.align;
     piece[piece.length-1].fontString=fontString;
     piece[piece.length-1].fill=newTextColor;
-    piece[piece.length-1].expression=item.expression;
+    piece[piece.length-1].expression=item.expression; 
+    if(state == 'build') 
+    {
+       
+    } else //re-URIencode the unevaluated expression so it can load again
+    {
+      item.expression=fixedEncodeURIComponent(item.expression)
+    }
+    
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].selectable = item.selectable;
     piece[piece.length-1].selectedExpression = item.selectedExpression;
@@ -40,6 +50,8 @@ function buildEvaluatedExpression(item) {
     {
         piece[piece.length-1].dragOffsetY = piece[piece.length-1].height/2  //this was changes to accomodate 1-5   
     }
+    
+    
     if(item.selectable == 1)
     {
         piece[piece.length-1].dragOffsetY = -piece[piece.length-1].height/2  //this was changes to accomodate 1-5   
@@ -63,6 +75,7 @@ function buildEvaluatedExpression(item) {
     {
         addSelectionBehavior() 
     }
+    
 }
 
 function evaluatedExpressionClickClone(item) {

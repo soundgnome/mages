@@ -471,11 +471,13 @@ function buildMultipleChoiceFractions(item) {
 
 var multipleChoiceBox;
 function multipleChoiceClick(item) {
+    
     if(multipleChoiceBox)
     {
         multipleChoiceBox.clear()
     }
-    multipleChoiceBox = game.add.graphics(item.x+piece[item.parentNumber].x, item.y+piece[item.parentNumber].y);
+    //these parseInts keep the x/y values from getting concatenated together as strings
+    multipleChoiceBox = game.add.graphics((parseInt(item.x,10)+parseInt(piece[item.parentNumber].x,10)), (parseInt(item.y,10)+parseInt(piece[item.parentNumber].y,10)));
     multipleChoiceBox.lineStyle(2, 0x0000FF, 1);
     
     //simplest way to determine which answer I am
@@ -492,6 +494,7 @@ function multipleChoiceClick(item) {
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].children[0].width-10, newEvaluatedAnswers[multipleChoiceSelected].children[0].height-10);
     } else //number
     {
+        
         multipleChoiceBox.drawRect(-5, 0, newEvaluatedAnswers[multipleChoiceSelected].width+5, newEvaluatedAnswers[multipleChoiceSelected].height*.9);    
     }
 }

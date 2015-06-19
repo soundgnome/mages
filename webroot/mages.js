@@ -328,6 +328,7 @@ function loadApplet() {
     {
         if(applet[i].appletID == loadAppletID)
         {
+            
             switch(applet[i].type) {
                 
             case 0: //click box
@@ -441,6 +442,7 @@ function loadApplet() {
             break;
             
             } 
+        
         }
     }
     
@@ -1116,7 +1118,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    //game.debug.text("Mages Public Alpha.36 - Load applets 1-35 and 100-109 for examples.", 10, 20);
+    //game.debug.text("Mages Public Alpha.38 - Threads 1 and 2 are mostly working.", 10, 20);
 }
 
 
@@ -1347,6 +1349,10 @@ function makeWordProblemSet(returnNumber) {
 
 
 //test
+function modulus(dividend, divisor)
+{
+    return(dividend%divisor)
+}
 
 function fixedEncodeURIComponent (str) {
   return encodeURIComponent(str).replace(/[!'()*"+]/g, function(c) {
