@@ -4,6 +4,10 @@ Created by Jeffrey Gordon using Javascript and [the Phaser open source HTML5 gam
 
 Published under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
+This demo video shows how Mages is used to build math applets.  In it, Mages creator Jeffrey Gordon, walks through the steps to create three math applets: an addition applet, a bar graph applet, and a number line applet.
+
+[![Click to watch the Mages demo build video.](http://img.youtube.com/vi/zOboDzJOdY8/0.jpg)](http://www.youtube.com/watch?v=zOboDzJOdY8)
+
 Check out the [demo video](https://youtu.be/zOboDzJOdY8).
 
 Near current version hosted [here](https://phaser-jgordon510.c9.io/MagesPublic/).

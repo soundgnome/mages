@@ -420,7 +420,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     printString = printString + openTag + constructorString + closeTag;
                     break;
                     
-                case 22: //Texture Area
+                case 22: //Timer
                     var newObject = JSON.stringify({  
                         "appletID": newAppletID, 
                         "type": piece[item].type, 

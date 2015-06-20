@@ -1,15 +1,14 @@
 var tTable;
 function buildtTable(item) {
-    
+    tTable = item;
     for(var i = 0 ; i < item.expressionList.length ; i ++)
     {
         item.expressionList[i] = decodeURIComponent(item.expressionList[i])
         console.log(item.expressionList[i].toString())
     }
     //item.newText=decodeURIComponent(item.expressionList);
-    
     piece[piece.length] = game.add.group();
-    tTable = item;
+    
     var chartBottom = item.wordList.length * 40
     var maxWordLength = item.wordLabel.length
     for (var i = 0 ; i < item.wordList.length; i++)

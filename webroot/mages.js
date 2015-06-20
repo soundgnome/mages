@@ -343,7 +343,7 @@ function loadApplet() {
             buildRandomNumber(applet[i]);
             break;
             
-            case 3: //random fraction
+            case 3: //evaluated fraction
             buildEvaluatedFraction(applet[i]);
             break;
             
@@ -428,7 +428,7 @@ function loadApplet() {
             buildTextureArea(applet[i]);
             break;
             
-            case 22: //texture Area
+            case 22: //timer
             buildTimer(applet[i]);
             break;
             
@@ -516,11 +516,13 @@ function clearCurrentApplet()
     newEvaluatedAnswers = [];
     multipleChoice = [];
     newMultipleChoiceNumbers = [];
+    multipleChoiceSelected = null;
     randomDecimal = [];
     randomMixedNumber = [];
     randomNumber = [];
 
-    
+    totalBoxes=0;
+    boxesClicked=-1;
     if (typeof inequalityEntryPanelText !== 'undefined') {inequalityEntryPanelText.destroy(true)}
     if (typeof multipleChoiceBox !== 'undefined') {multipleChoiceBox.destroy(true)}
     if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.destroy(true)}
