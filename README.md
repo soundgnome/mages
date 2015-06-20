@@ -8,8 +8,6 @@ This demo video shows how Mages is used to build math applets.  In it, Mages cre
 
 [![Click to watch the Mages demo build video.](http://img.youtube.com/vi/zOboDzJOdY8/0.jpg)](http://www.youtube.com/watch?v=zOboDzJOdY8)
 
-Check out the [demo video](https://youtu.be/zOboDzJOdY8).
-
 Near current version hosted [here](https://phaser-jgordon510.c9.io/MagesPublic/).
 
 Mages is designed to be used as a general canvas to build math applets for HTML5-based educational software.  The current goal is to develop the widgets necessary to build a 4th grade curriculum.  Mages is currently in an alpha state, and no support for its use is offered by the author, Jeffrey Gordon.  Use it at your own risk.
