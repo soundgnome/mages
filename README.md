@@ -12,3 +12,5 @@ This demo video shows how Mages is used to build math applets.  In it, Mages cre
 
 Near current version hosted [here](https://phaser-jgordon510.c9.io/MagesPublic/).
 
+.
+
