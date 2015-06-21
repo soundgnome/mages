@@ -483,3 +483,5 @@ function getConstructorString(newObject) {
     }
     return "              " + json + ",";
 }
+
+//test
