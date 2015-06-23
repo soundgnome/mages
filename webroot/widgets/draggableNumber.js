@@ -90,7 +90,7 @@ function buildDraggableNumbers(item) {
             draggableNumbers[slot].dragOffsetX = 0;
             draggableNumbers[slot].dragDoneOffsetX = 0;
             draggableNumbers[slot].dragOffsetY = 0
-            if(item.clonable != "n") //"n" is default
+            if(item.clonable != "No") //"n" is default
             {//clonable; add a cloning function
                 draggableNumbers[slot].events.onInputDown.add(draggableNumbersClickClone, this); 
             }  

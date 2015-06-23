@@ -611,6 +611,12 @@ function setupCanvas() {
     defineMenu();
     buildState='';
 }
+
+function buildOnApplet() {
+    defineMenu();
+    buildState='';
+    state='build'
+}
         /***********************************************************************
          *                          MENU SECTION
          * ********************************************************************/
@@ -1238,6 +1244,11 @@ function addCommas( num ) {
         }
     }
     return returnString;
+}
+
+function quotientWithRemainder(dividend,divisor) 
+{
+    return addCommas(Math.floor(dividend/divisor)) + ' R' + (dividend%divisor)
 }
 
 function changeDigit( num ) {

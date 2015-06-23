@@ -1695,7 +1695,217 @@
             {"appletID":"2-19","type":5,"startX":720,"startY":540} 
             ],
           "solution": "dragToBoxes[0].contents==hiddenNumber[0] && dragToBoxes[1].contents==hiddenNumber[2] && dragToBoxes[2].contents+dragToBoxes[3].contents==hiddenNumber[1]+hiddenNumber[2] && dragToBoxes[4].contents==hiddenNumber[0]*hiddenNumber[1] && dragToBoxes[5].contents==hiddenNumber[0]*(hiddenNumber[1]+hiddenNumber[2])"
+        },
+        { "summary": "Timed division 2-12",
+          "problems": [
+            {"appletID":"3-1","type":16,"expression":"getRandomInt%282%2C12%29"},
+            {"appletID":"3-1","type":16,"expression":"getRandomInt%282%2C12%29"},
+            {"appletID":"3-1","type":15,"startX":350,"startY":300,"expression":"hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%20%2B%20%27%20%C3%B7%20%27%20%20%2B%20hiddenNumber%5B0%5D%20%2B%20%27%20%3D%20%27","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"3-1","type":14,"numberEntryX":180,"numberEntryY":340,"orientation":"h","displayX":[510],"displayY":[268],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":3},
+            {"appletID":"3-1","type":99,"color":0,"drawingBoxStartX":170,"drawingBoxStartY":253,"drawingBoxEndX":643,"drawingBoxEndY":390},
+            {"appletID":"3-1","type":15,"startX":110,"startY":160,"expression":"%28threadMode%3D%3D1%3FthreadPoint%2B%22%2F10%22%3A%22%22%29","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-1","type":22,"startX":80,"startY":20,"timeLimit":"5","size":"96"},
+            {"appletID":"3-1","type":99,"color":16711680,"drawingBoxStartX":34,"drawingBoxStartY":18,"drawingBoxEndX":179,"drawingBoxEndY":183},
+            {"appletID":"3-1","type":1,"startX":191,"startY":397,"newText":"TIME%20TRIAL!","font":"","fontString":"bold 72px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"appletID":"3-1","type":15,"startX":110,"startY":200,"expression":"%28threadMode%3D%3D1%3F%28typeof%20threadRecord%5BthreadPoint-2%5D%20%21%3D%3D%20%27undefined%27%3F%20%22Last%20problem%3A%20%22%20%2B%20%28threadRecord%5BthreadPoint-2%5D%3D%3D0%3F%20%22incorrect%22%20%3A%20%22correct%22%29%20%3A%20%22%22%29%3A%22%22%29","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
+            ],
+          "solution": "numberEntryValue==hiddenNumber[1]"
+        },
+        { "summary": "",
+          "problems": [
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"3-2","type":16,"expression":"%28getRandomInt%2811%2ahiddenNumber%5B1%5D%2C1000%2FhiddenNumber%5B1%5D-5%29%2ahiddenNumber%5B1%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B1%5D-1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"3-2","type":16,"expression":"%28getRandomInt%2811%2ahiddenNumber%5B4%5D%2C1000%2FhiddenNumber%5B4%5D-5%29%2ahiddenNumber%5B4%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B4%5D-1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"3-2","type":16,"expression":"%28getRandomInt%2811%2ahiddenNumber%5B7%5D%2C1000%2FhiddenNumber%5B7%5D-5%29%2ahiddenNumber%5B7%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B7%5D-1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-2","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"3-2","type":16,"expression":"%28getRandomInt%2811%2ahiddenNumber%5B10%5D%2C1000%2FhiddenNumber%5B10%5D-5%29%2ahiddenNumber%5B10%5D%29"},
+            {"appletID":"3-2","type":15,"startX":400,"startY":200,"expression":"%28hiddenNumber%5B0%5D%3D%3D1%3FhiddenNumber%5B2%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B1%5D%20%2B%20%27%20%3D%20%27%20%2B%20quotientWithRemainder%28hiddenNumber%5B2%5D%2C%20hiddenNumber%5B1%5D%29%3AhiddenNumber%5B2%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B1%5D%20%2B%20%27%20%3D%20%27%20%2B%20Math.ceil%28hiddenNumber%5B2%5D%2FhiddenNumber%5B1%5D%29%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B0%5D==1"},
+            {"appletID":"3-2","type":15,"startX":400,"startY":280,"expression":"%28hiddenNumber%5B3%5D%3D%3D1%3FhiddenNumber%5B5%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B4%5D%20%2B%20%27%20%3D%20%27%20%2B%20quotientWithRemainder%28hiddenNumber%5B5%5D%2C%20hiddenNumber%5B4%5D%29%3AhiddenNumber%5B5%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B4%5D%20%2B%20%27%20%3D%20%27%20%2B%20Math.floor%28hiddenNumber%5B5%5D%2FhiddenNumber%5B4%5D%29%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B3%5D==1"},
+            {"appletID":"3-2","type":15,"startX":400,"startY":360,"expression":"%28hiddenNumber%5B6%5D%3D%3D1%3FhiddenNumber%5B8%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B7%5D%20%2B%20%27%20%3D%20%27%20%2B%20quotientWithRemainder%28hiddenNumber%5B8%5D%2ChiddenNumber%5B7%5D%29%3AhiddenNumber%5B8%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B7%5D%20%2B%20%27%20%3D%20%27%20%2B%20%28Math.floor%28hiddenNumber%5B8%5D%2FhiddenNumber%5B7%5D%29-1%29%20%2B%20%27%20R%27%20%2B%20hiddenNumber%5B7%5D%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B6%5D==1"},
+            {"appletID":"3-2","type":15,"startX":400,"startY":440,"expression":"%28hiddenNumber%5B9%5D%3D%3D1%3FhiddenNumber%5B11%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B10%5D%20%2B%20%27%20%3D%20%27%20%2B%20%28hiddenNumber%5B11%5D%2FhiddenNumber%5B10%5D%29%3AhiddenNumber%5B11%5D%20%2B%20%27%20%C3%B7%20%27%20%2B%20hiddenNumber%5B10%5D%20%2B%20%27%20%3D%20%27%20%2B%20%28hiddenNumber%5B11%5D%2FhiddenNumber%5B10%5D%29%20%2B%20%27%20R%27%20%2B%20getRandomInt%281%2ChiddenNumber%5B10%5D%29%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B9%5D==1"},
+            {"appletID":"3-2","type":5,"startX":720,"startY":540},
+            {"appletID":"3-2","type":1,"startX":80,"startY":60,"newText":"Select%20all%20the%20true%20statements.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
+            ],
+          "solution": "selectableScore()==1"
+        },
+        { "summary": "Even division of 3 digit by 1 in word problem",
+          "problems": [
+            {"appletID":"3-3","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-3","type":16,"expression":"hiddenNumber%5B0%5D%2agetRandomInt%2831%2C%28Math.round%281000%2FhiddenNumber%5B0%5D%29-5%29%29"},
+            {"appletID":"3-3","type":15,"startX":400,"startY":180,"expression":"%22A%20train%20has%20a%20total%20of%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20seats%20in%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20cars.%20%20Each%20train%20car%20has%20the%20same%20number%20of%20seats.%20%20How%20many%20seats%20does%20each%20train%20car%20have%3F%22","font":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-3","type":14,"numberEntryX":160,"numberEntryY":420,"orientation":"h","displayX":[266],"displayY":[348],"hideInitialValue":"No","panelQuantity":"1","displayDigits":3},
+            {"appletID":"3-3","type":1,"startX":400,"startY":360,"newText":"seats","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"appletID":"3-3","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberEntryValue==hiddenNumber[1]/hiddenNumber[0]"
+        },
+        { "summary": "",
+          "problems": [
+            {"appletID":"3-4","type":16,"expression":"getRandomInt%280%2C99%29"},
+            {"appletID":"3-4","type":16,"expression":"getRandomInt%284%2C9%29"},
+            {"appletID":"3-4","type":16,"expression":"getRandomInt%28101%2CMath.round%281000%2FhiddenNumber%5B1%5D%29-5%29%2ahiddenNumber%5B1%5D%2B%28getRandomInt%280%2ChiddenNumber%5B1%5D%29%29"},
+            {"appletID":"3-4","type":16,"expression":"getRandomInt%2825%2C50%29"},
+            {"appletID":"3-4","type":15,"startX":400,"startY":180,"expression":"girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20has%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20small%20candles.%20%20How%20many%20boxes%20can%20she%20fill%3F%22","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-4","type":15,"startX":409,"startY":320,"expression":"girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20has%20enough%20tall%20candles%20to%20fill%20%22%20%2B%20hiddenNumber%5B3%5D%20%2B%20%22%20gift%20boxes.%20%20At%20least%20how%20many%20tall%20candles%20does%20she%20have%3F%22","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-4","type":15,"startX":390,"startY":465,"expression":"%22How%20many%20candles%20did%20%22%20%2B%20girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20put%20in%20gift%20boxes%20to%20sell%20at%20her%20candle%20stand%3F%22","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-4","type":15,"startX":400,"startY":60,"expression":"girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20puts%20together%20gift%20boxes%20of%20candles%20to%20sell%20at%20her%20candle%20stand.%20%20She%20places%20exactly%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20candles%20in%20each%20box%2C%20and%20she%20only%20sells%20full%20boxes%20of%20candles.%22","font":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-4","type":14,"numberEntryX":40,"numberEntryY":140,"orientation":"v","displayX":[400,270,270],"displayY":[180,340,500],"hideInitialValue":"No","panelQuantity":"3","displayDigits":4},
+            {"appletID":"3-4","type":1,"startX":591,"startY":211,"newText":"boxes","font":"","fontString":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"appletID":"3-4","type":1,"startX":460,"startY":372,"newText":"tall%20candles","font":"","fontString":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"appletID":"3-4","type":1,"startX":460,"startY":531,"newText":"total%20candles","font":"","fontString":" 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"appletID":"3-4","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberEntryValue[0]==Math.floor(hiddenNumber[2]/hiddenNumber[1]) &&  numberEntryValue[0]==Math.floor(hiddenNumber[2]/hiddenNumber[1]) && numberEntryValue[2]==hiddenNumber[2]+hiddenNumber[3]*hiddenNumber[1]"
+        },
+        { "summary": "estimating quotients in word problems",
+          "problems": [
+            {"appletID":"3-5","type":16,"expression":"getRandomInt%280%2C99%29"},
+            {"appletID":"3-5","type":16,"expression":"getRandomInt%284%2C9%29"},
+            {"appletID":"3-5","type":16,"expression":"%28%28Math.round%28getRandomInt%28120%2C180%29%2FhiddenNumber%5B1%5D%29%29%2ahiddenNumber%5B1%5D%29%2B1"},
+            {"appletID":"3-5","type":15,"startX":389,"startY":94,"expression":"%22A%20storage%20shelf%20where%20%22%20%2B%20girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20works%20can%20hold%20about%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20kilograms.%20%20The%20storage%20shelf%20can%20hold%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20filing%20boxes.%20%20About%20how%20many%20kilograms%20does%20each%20box%20weight%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-5","type":1,"startX":60,"startY":340,"newText":"Does%20this%20problem%20require%20an%20estimated%20or%20exact%20answer%3F%20%20Drag%20the%20correct%20choice%20into%20the%20box.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"},
+            {"appletID":"3-5","type":15,"startX":180,"startY":513,"expression":"%22estimate%22","font":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","align":"right","draggable":1,"selectable":0},
+            {"appletID":"3-5","type":15,"startX":459,"startY":510,"expression":"%22exact%20answer%22","font":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","align":"right","draggable":1,"selectable":0},
+            {"appletID":"3-5","type":9,"startX":345,"startY":572,"userScaleX":3,"userScaleY":0.5},
+            {"appletID":"3-5","type":5,"startX":720,"startY":540},
+            {"appletID":"3-5","type":14,"numberEntryX":140,"numberEntryY":280,"orientation":"h","displayX":[280],"displayY":[200],"hideInitialValue":"No","panelQuantity":"1","displayDigits":2},
+            {"appletID":"3-5","type":1,"startX":370,"startY":224,"newText":"kilograms","font":"","fontString":" 36px Arial","fill":"black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
+            {"appletID":"3-5","type":99,"color":255,"drawingBoxStartX":90,"drawingBoxStartY":481,"drawingBoxEndX":601,"drawingBoxEndY":539}
+            ],
+          "solution": "dragToBoxes[0].contents=='estimate' && numberEntryValue==Math.floor(hiddenNumber[2]/hiddenNumber[1])"
+        },
+        { "summary": "3-digit by 1-digit division with mulitple choice, no remainders",
+          "problems": [
+            {"appletID":"3-6","type":16,"expression":"getRandomInt%282%2C9%29"},
+            {"appletID":"3-6","type":16,"expression":"%28getRandomInt%28100%2C%28Math.round%281000%2FhiddenNumber%5B0%5D%29-5%29%29%29%2ahiddenNumber%5B0%5D"},
+            {"appletID":"3-6","type":15,"startX":400,"startY":160,"expression":"%22What%20is%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%3F%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"3-6","type":10,"startX":213,"startY":241,"correct":"hiddenNumber[1]/hiddenNumber[0]","incorrect1":"getCloseAnswer(hiddenNumber[1]/hiddenNumber[0],2)","incorrect2":"getCloseAnswer(hiddenNumber[1]/hiddenNumber[0],2)","incorrect3":"getCloseAnswer(hiddenNumber[1]/hiddenNumber[0],2)","multipleChoiceFontSize":"40","spaceX":"250","spaceY":"60","multiType":"0"},
+            {"appletID":"3-6","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+        },
+        { "summary": "4-digit number divided by 2, no remainders",
+          "problems": [
+            {"appletID":"3-7","type":16,"expression":"getRandomInt%282000%2C3000%29"},
+            {"appletID":"3-7","type":15,"startX":400,"startY":180,"expression":"%22Divide%20%22%20%2B%20addCommas%28hiddenNumber%5B0%5D%2a2%29%20%2B%20%22%20by%202.%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"3-7","type":14,"numberEntryX":180,"numberEntryY":320,"orientation":"h","displayX":[320],"displayY":[240],"hideInitialValue":"No","panelQuantity":"1","displayDigits":4},
+            {"appletID":"3-7","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "numberEntryValue==hiddenNumber[0]"
+        },
+        { "summary": "recognize multiplication",
+          "problems": [
+            {"appletID":"3-8","type":16,"expression":"getRandomInt%2840%2C90%29"},
+            {"appletID":"3-8","type":16,"expression":"getRandomInt%2820%2C30%29"},
+            {"appletID":"3-8","type":16,"expression":"getRandomInt%280%2C99%29"},
+            {"appletID":"3-8","type":15,"startX":400,"startY":100,"expression":"boyNames%5BhiddenNumber%5B2%5D%5D%20%2B%20%22%20carries%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20rocks%20to%20build%20a%20rock%20wall.%20%20Each%20rock%20weighs%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20pounds.%20%20How%20many%20pounds%20of%20rocks%20does%20%22%20%2B%20boyNames%5BhiddenNumber%5B2%5D%5D%20%2B%20%22%20use%20to%20build%20the%20wall%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"650","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-8","type":15,"startX":160,"startY":420,"expression":"%22%C3%B7%22","font":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"650","align":"right","draggable":1,"selectable":0},
+            {"appletID":"3-8","type":15,"startX":120,"startY":420,"expression":"%22x%22","font":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"650","align":"right","draggable":1,"selectable":0},
+            {"appletID":"3-8","type":14,"numberEntryX":320,"numberEntryY":400,"orientation":"h","displayX":[20,260,485,40],"displayY":[320,320,320,500],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":4},
+            {"appletID":"3-8","type":9,"startX":230,"startY":352,"userScaleX":0.5,"userScaleY":0.5},
+            {"appletID":"3-8","type":1,"startX":450,"startY":331,"newText":"%3D","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"650","alignment":"left"},
+            {"appletID":"3-8","type":1,"startX":60,"startY":220,"newText":"Drag%20the%20correct%20operation%20into%20the%20box%20and%20use%20the%20number%20entry%20buttons%20to%20complete%20the%20equation%20needed%20to%20solve%20this%20problem.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"650","alignment":"left"},
+            {"appletID":"3-8","type":99,"color":255,"drawingBoxStartX":99,"drawingBoxStartY":397,"drawingBoxEndX":182,"drawingBoxEndY":436},
+            {"appletID":"3-8","type":5,"startX":720,"startY":540},
+            {"appletID":"3-8","type":1,"startX":670,"startY":350,"newText":"pounds","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
+            ],
+          "solution": "eval(numberEntryValue[0] + (dragToBoxes[0].contents=='x'?'*':'/') + numberEntryValue[1])==hiddenNumber[0]*hiddenNumber[1] && numberEntryValue[2]==hiddenNumber[0]*hiddenNumber[1] "
+        },
+        { "summary": "Interpreting remainders",
+          "problems": [
+            {"appletID":"3-9","type":16,"expression":"getRandomInt%28100%2C140%29"},
+            {"appletID":"3-9","type":16,"expression":"getRandomInt%28100%2C140%29"},
+            {"appletID":"3-9","type":16,"expression":"getRandomInt%285%2C9%29"},
+            {"appletID":"3-9","type":15,"startX":380,"startY":140,"expression":"%22There%20are%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20boys%20and%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20girls%20signed%20up%20for%20a%20dodgeball%20league.%20%20The%20coaches%20first%20make%20teams%20of%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20players%20and%20then%20assign%20any%20remaining%20players%20to%20make%20some%20of%20the%20teams%20have%20%22%20%2B%20%28hiddenNumber%5B2%5D%2B1%29%20%2B%20%22%20players.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-9","type":15,"startX":360,"startY":320,"expression":"%22A.%20How%20many%20teams%20of%20%22%20%2B%20%28hiddenNumber%5B2%5D%2B1%29%20%2B%20%22%20players%20will%20there%20be%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"650","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-9","type":15,"startX":360,"startY":480,"expression":"%22B.%20How%20many%20teams%20of%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20players%20will%20there%20be%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"650","align":"left","draggable":0,"selectable":0},
+            {"appletID":"3-9","type":14,"numberEntryX":60,"numberEntryY":550,"orientation":"h","displayX":[240,240],"displayY":[480,320],"hideInitialValue":"No","panelQuantity":"2","displayDigits":2},
+            {"appletID":"3-9","type":1,"startX":331,"startY":340,"newText":"teams","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
+            {"appletID":"3-9","type":1,"startX":334,"startY":503,"newText":"teams","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
+            {"appletID":"3-9","type":5,"startX":720,"startY":540}
+
+            ],
+          "solution": "numberEntryValue%5B0%5D%3D%3DMath.floor%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%2FhiddenNumber%5B2%5D%29%20%26%26%20numberEntryValue%5B1%5D%3D%3D%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%25hiddenNumber%5B2%5D%29"
+        },
+        { "summary": "4-digit by 1-digit",
+          "problems": [
+            {"appletID":"3-10","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-10","type":16,"expression":"getRandomInt%281000%2CMath.floor%289999%2FhiddenNumber%5B0%5D%29%2ahiddenNumber%5B0%5D%29"},
+            {"appletID":"3-10","type":15,"startX":400,"startY":60,"expression":"%22Divide%20%22%20%2B%20addCommas%28hiddenNumber%5B1%5D%29%20%2B%20%22%20by%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22.%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
+            {"appletID":"3-10","type":14,"numberEntryX":180,"numberEntryY":320,"orientation":"h","displayX":[240],"displayY":[200],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":4},
+            {"appletID":"3-10","type":8,"startX":420,"startY":380,"orientation":"h","clonable":"No","fill":"Black","size":"40"},
+            {"appletID":"3-10","type":1,"startX":440,"startY":220,"newText":"R","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"appletID":"3-10","type":9,"startX":508,"startY":231,"userScaleX":0.75,"userScaleY":0.75},
+            {"appletID":"3-10","type":99,"color":0,"drawingBoxStartX":200,"drawingBoxStartY":164,"drawingBoxEndX":593,"drawingBoxEndY":296},
+            {"appletID":"3-10","type":1,"startX":100,"startY":120,"newText":"Enter%20the%20quotient%20and%20drag%20the%20remainder%20into%20the%20box.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"650","alignment":"center"},
+            {"appletID":"3-10","type":99,"color":0,"drawingBoxStartX":239,"drawingBoxStartY":200,"drawingBoxEndX":421,"drawingBoxEndY":261},
+            {"appletID":"3-10","type":99,"color":255,"drawingBoxStartX":275,"drawingBoxStartY":375,"drawingBoxEndX":560,"drawingBoxEndY":433},
+            {"appletID":"3-10","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "dragToBoxes%5B0%5D.contents%3D%3DhiddenNumber%5B1%5D%25hiddenNumber%5B0%5D%20%26%26%20numberEntryValue%3D%3DMath.floor%28hiddenNumber%5B1%5D%2FhiddenNumber%5B0%5D%29"
+        },
+        { "summary": "Reasonable quotients",
+          "problems": [
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%28200%2C9999%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%28200%2C9999%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%28200%2C9999%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%283%2C9%29"},
+            {"appletID":"3-11","type":16,"expression":"getRandomInt%28200%2C9999%29"},
+            {"appletID":"3-11","type":15,"startX":400,"startY":200,"expression":"%28hiddenNumber%5B0%5D%3D%3D1%20%3F%20addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B1%5D%20%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28hiddenNumber%5B2%5D%20%2ChiddenNumber%5B1%5D%29%20%20%3A%20addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B1%5D%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28Math.round%28hiddenNumber%5B2%5D%2a10%29%2ChiddenNumber%5B1%5D%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B0%5D==1"},
+            {"appletID":"3-11","type":15,"startX":400,"startY":280,"expression":"%28hiddenNumber%5B3%5D%3D%3D1%20%3F%20addCommas%28hiddenNumber%5B5%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B4%5D%20%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28hiddenNumber%5B5%5D%20%2ChiddenNumber%5B4%5D%29%20%20%3A%20addCommas%28hiddenNumber%5B5%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B4%5D%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28Math.round%28hiddenNumber%5B5%5D%2a.7%29%2ChiddenNumber%5B4%5D%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B3%5D==1"},
+            {"appletID":"3-11","type":15,"startX":400,"startY":360,"expression":"%28hiddenNumber%5B6%5D%3D%3D1%20%3F%20addCommas%28hiddenNumber%5B8%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B7%5D%20%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28hiddenNumber%5B8%5D%20%2ChiddenNumber%5B7%5D%29%20%20%3A%20addCommas%28hiddenNumber%5B8%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20%20hiddenNumber%5B7%5D%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28Math.round%28hiddenNumber%5B8%5D%2a1.3%29%2ChiddenNumber%5B7%5D%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B6%5D==1"},
+            {"appletID":"3-11","type":15,"startX":400,"startY":440,"expression":"%28hiddenNumber%5B9%5D%3D%3D1%20%3F%20addCommas%28hiddenNumber%5B11%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B10%5D%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28hiddenNumber%5B11%5D%2ChiddenNumber%5B10%5D%29%20%3A%20addCommas%28hiddenNumber%5B11%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B10%5D%20%2B%20%22%20%3D%20%22%20%2B%20quotientWithRemainder%28Math.round%28hiddenNumber%5B11%5D%2a.1%29%2ChiddenNumber%5B10%5D%29%20%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B9%5D==1"},
+            {"appletID":"3-11","type":1,"startX":20,"startY":60,"newText":"Select%20all%20the%20reasonable%20quotients.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"appletID":"3-11","type":5,"startX":720,"startY":540}
+            ],
+          "solution": "selectableScore()==1"
+        },
+        { "summary": "",
+          "problems": [
+            {"appletID":"3-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%283%2C9%29"},
+{"appletID":"3-12","type":16,"expression":"%28hiddenNumber%5B0%5D%3D%3D1%3FgetRandomInt%28200%2C6000%2FhiddenNumber%5B1%5D%29%2ahiddenNumber%5B1%5D%3A%28getRandomInt%28200%2C6000%2FhiddenNumber%5B1%5D%29%2ahiddenNumber%5B1%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B1%5D-1%29%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%283%2C9%29"},
+{"appletID":"3-12","type":16,"expression":"%28hiddenNumber%5B3%5D%3D%3D1%3FgetRandomInt%28200%2C6000%2FhiddenNumber%5B4%5D%29%2ahiddenNumber%5B4%5D%3A%28getRandomInt%28200%2C6000%2FhiddenNumber%5B4%5D%29%2ahiddenNumber%5B4%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B4%5D-1%29%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%283%2C9%29"},
+{"appletID":"3-12","type":16,"expression":"%28hiddenNumber%5B6%5D%3D%3D1%3FgetRandomInt%28200%2C6000%2FhiddenNumber%5B7%5D%29%2ahiddenNumber%5B7%5D%3A%28getRandomInt%28200%2C6000%2FhiddenNumber%5B7%5D%29%2ahiddenNumber%5B7%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B7%5D-1%29%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+{"appletID":"3-12","type":16,"expression":"getRandomInt%283%2C9%29"},
+{"appletID":"3-12","type":16,"expression":"%28hiddenNumber%5B9%5D%3D%3D1%3FgetRandomInt%28200%2C6000%2FhiddenNumber%5B10%5D%29%2ahiddenNumber%5B10%5D%3A%28getRandomInt%28200%2C6000%2FhiddenNumber%5B10%5D%29%2ahiddenNumber%5B10%5D%29%2BgetRandomInt%281%2ChiddenNumber%5B10%5D-1%29%29"},
+{"appletID":"3-12","type":15,"startX":240,"startY":60,"expression":"addCommas%28hiddenNumber%5B2%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B1%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+{"appletID":"3-12","type":15,"startX":540,"startY":60,"expression":"addCommas%28hiddenNumber%5B5%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B4%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+{"appletID":"3-12","type":15,"startX":240,"startY":140,"expression":"addCommas%28hiddenNumber%5B8%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B7%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+{"appletID":"3-12","type":15,"startX":540,"startY":140,"expression":"addCommas%28hiddenNumber%5B11%5D%29%20%2B%20%22%20%C3%B7%20%22%20%2B%20hiddenNumber%5B10%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":1,"selectable":0},
+{"appletID":"3-12","type":98,"drawingLineStartX":40,"drawingLineStartY":180,"drawingLineEndX":760,"drawingLineEndY":180},
+{"appletID":"3-12","type":98,"drawingLineStartX":42,"drawingLineStartY":230,"drawingLineEndX":762,"drawingLineEndY":230},
+{"appletID":"3-12","type":1,"startX":100,"startY":180,"newText":"Remainder","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+{"appletID":"3-12","type":1,"startX":420,"startY":180,"newText":"No%20Remainder","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+{"appletID":"3-12","type":5,"startX":720,"startY":540},
+{"appletID":"3-12","type":98,"drawingLineStartX":40,"drawingLineStartY":180,"drawingLineEndX":40,"drawingLineEndY":480},
+{"appletID":"3-12","type":98,"drawingLineStartX":40,"drawingLineStartY":480,"drawingLineEndX":760,"drawingLineEndY":480},
+{"appletID":"3-12","type":98,"drawingLineStartX":760,"drawingLineStartY":180,"drawingLineEndX":760,"drawingLineEndY":480},
+{"appletID":"3-12","type":98,"drawingLineStartX":400,"drawingLineStartY":180,"drawingLineEndX":400,"drawingLineEndY":480},
+{"appletID":"3-12","type":1,"startX":36,"startY":489,"newText":"Drag%20the%20expressions%20from%20above%20into%20the%20correct%20box.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"},
+{"appletID":"3-12","type":99,"color":255,"drawingBoxStartX":118,"drawingBoxStartY":30,"drawingBoxEndX":676,"drawingBoxEndY":165}
+],
+          "solution": "(hiddenNumber[0]==1?piece[12].x>400:piece[12].x<400) && (hiddenNumber[3]==1?piece[13].x>400:piece[13].x<400) && (hiddenNumber[6]==1?piece[14].x>400:piece[14].x<400) && (hiddenNumber[9]==1?piece[15].x>400:piece[15].x<400)"
         }
+        
         
         
     ]
