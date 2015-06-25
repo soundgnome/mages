@@ -58,6 +58,7 @@ function getRandomNumberSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Random Number Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Whole Number Floor" , "floor", 1, null ) +
                 getMenuEntryString("Whole Number Ceiling" , "ceiling", 10 , null) +

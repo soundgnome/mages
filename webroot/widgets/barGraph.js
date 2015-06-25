@@ -157,6 +157,7 @@ function getBarGraphSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Bar Graph Entry Box Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Graph title:" , "graphtitle", 'Bar Graph' , null) +
                 getMenuEntryString("Numbered Axis x/y:" , "numaxis", 'y' , null) +

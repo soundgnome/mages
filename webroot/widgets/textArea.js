@@ -35,6 +35,7 @@ function getTextAreaSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Text Area Settings",
+                closeButton: false,
                 message: 
                     getMenuEntryString("Text:" , "newtext", "Hello.", null ) +
                     getMenuEntryString("Color:" , "color", newTextColor , null) +

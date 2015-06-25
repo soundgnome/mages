@@ -77,6 +77,7 @@ function getHundredChartSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "HundredChart Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Scale:" , "scale", 1 , null) +
                 getMenuEntryString("Static value:" , "staticvalue", 0 , "0 for clickable chart.") +
@@ -88,7 +89,6 @@ function getHundredChartSettings() {
                         callback: function () {
                            // newAppletID = Number(prompt("Enter new applet ID#:"));  
 	                        // appletDoneTest = new DoneTest(newAppletID, prompt("Enter new doneTest:"));
-                            
                             var userScale = $('#scale').val();
                             var staticValue = $('#staticvalue').val();
                             state = 'build';

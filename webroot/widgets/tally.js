@@ -98,6 +98,7 @@ function getTallySettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Tally Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Initial value:" , "initial", 0 , null) +
                     '</form> </div>  </div>',

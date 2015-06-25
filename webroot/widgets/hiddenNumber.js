@@ -12,6 +12,7 @@ function getHiddenNumberSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Hidden Number #" + hiddenNumber.length + " Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Expression:" , "expression", '2+2' , null) +
                     '</form> </div>  </div>',

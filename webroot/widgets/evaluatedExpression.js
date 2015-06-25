@@ -110,6 +110,7 @@ function getEvaluatedExpressionSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Evaluated Expression Settings",
+                closeButton: false,
                 message: 
                     getMenuEntryString("Expression:" , "expression", '2+2' , null) +
                     getMenuEntryString("Color" , "color", newTextColor , null) +

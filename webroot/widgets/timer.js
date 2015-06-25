@@ -69,6 +69,7 @@ function getTimerSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Timer Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("TimeLimit:" , "limit", 5, null ) +
                 getMenuEntryString("Size:" , "size", 96 , null) +

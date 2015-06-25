@@ -132,6 +132,7 @@ function getDraggableNumbersSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Draggable Number Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Orientation? h/v:" , "orientation", "h" , null) +
                 getMenuEntryString("Color:" , "color", newTextColor , null) +

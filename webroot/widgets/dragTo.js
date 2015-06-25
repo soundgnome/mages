@@ -54,6 +54,7 @@ function getDragToBoxSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "DragTo Box Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("ScaleX:" , "scalex", 0.5 , null) +
                 getMenuEntryString("ScaleY:" , "scaley", 0.5 , null) +

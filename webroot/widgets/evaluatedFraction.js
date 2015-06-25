@@ -136,6 +136,7 @@ function getEvaluatedFractionSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Evaluated Fraction Settings",
+                closeButton: false,
                 message: 
                 getMenuEntryString("Whole number expression:" , "wholeExpression", null , "(null for a regular fraction.)") +
                 getMenuEntryString("Numerator Expression" , "numExpression", 1 ) +

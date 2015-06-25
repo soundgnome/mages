@@ -111,6 +111,7 @@ function gettTableSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "TTable Settings",
+                closeButton: false,
                 message: 
                     getMenuEntryString("Label for Items:" , "wordlabel", "Items" , null) +
                     getMenuEntryString("Label for Values:" , "expressionlabel", "Values" , null) +
@@ -146,6 +147,7 @@ function gettTableItem(numItems, item) {
     console.log(item.numItems-numItems)
     bootbox.dialog({
                 title: 'TTable item: ' + (item.numItems-numItems) ,
+                closeButton: false,
                 message: 
                     getMenuEntryString("Label:" , "label", "Name" , null) +
                     '</form> </div>  </div>',
@@ -172,6 +174,7 @@ function gettTableItem(numItems, item) {
 function gettTableValue(numItems, item) {
     bootbox.dialog({
                 title: 'TTable value: ' + (item.numItems-numItems),
+                closeButton: false,
                 message: 
                     getMenuEntryString("Value:" , "label", 1 , null) +
                     '</form> </div>  </div>',

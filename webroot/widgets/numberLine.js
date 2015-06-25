@@ -292,6 +292,7 @@ function getNumberLineSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Number Line Settings",
+                closeButton: false,
                 message: 
                     getMenuEntryString("Line orientation:" , "lineOrientation", "h" , null) +
                     getMenuEntryString("Line length (pixels):" , "lineLength", "500" , null) +
@@ -346,6 +347,7 @@ function getNumberLineSettings() {
 function getNumberLineMovableDotSettings(item) {
     bootbox.dialog({
                 title: "Number Line Static Dots",
+                closeButton: false,
                 message: 
                     getMenuEntryString("Dot orientation:" , "dotOrientation", "h" , null) +
                     getMenuYesNoString("Label dots?", "dotLabel", null) + 
@@ -372,6 +374,7 @@ function getNumberLineMovableDotSettings(item) {
 function getNumberLineStaticDotSettings(numItems, item) {
     bootbox.dialog({
                 title: 'Number Line Movable Dot: ' + (item.dotNumber-numItems) ,
+                closeButton: false,
                 message: 
                     getMenuEntryString("Value:" , "label", 1 , null) +
                     '</form> </div>  </div>',
