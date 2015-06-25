@@ -89,6 +89,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "randomFloor":piece[item].randomFloor,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
+                        "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
@@ -108,6 +109,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "size":piece[item].size,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
+                        "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
@@ -153,6 +155,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "randomDigits":piece[item].randomDigits,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
+                        "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
@@ -310,6 +313,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "align":piece[item].align ,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
+                        "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);
@@ -414,6 +418,7 @@ function printPieces(newAppletID, appletDoneTest) {
                         "number": piece[item].number ,
                         "draggable": piece[item].draggable ,
                         "selectable": piece[item].selectable ,
+                        "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression
                         });
                     constructorString = getConstructorString(newObject);

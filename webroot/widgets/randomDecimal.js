@@ -106,6 +106,7 @@ function getRandomDecimalSettings() {
                             state = 'build'
                             buildRandomDecimal(newObject);
                             adjustNewPiece();
+                            if(newObject.draggable == 1) {getClonableSettings()}
                             
                         }
                     }

@@ -172,7 +172,7 @@ function getEvaluatedFractionSettings() {
                                 })) ;
                             buildEvaluatedFraction(newObject);
                             adjustNewPiece();
-                            
+                            if(newObject.draggable == 1) {getClonableSettings()}
                         }
                     }
                 }

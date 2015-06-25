@@ -20,7 +20,31 @@ function appletIDPrompt() {
     });
 }
 
-
+function getClonableSettings() {
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "Draggable Clone Settings",
+                onEscape: function() {state='build'},
+                message: 
+                getMenuYesNoString("Clonable?", "clonable", null) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                           // newAppletID = Number(prompt("Enter new applet ID#:"));  
+	                        // appletDoneTest = new DoneTest(newAppletID, prompt("Enter new doneTest:"));
+                            piece[piece.length-1].clonable = ($("input[name='clonable']:checked").val() == "Yes" ? 1 : 0);
+                            state = 'build';
+                            
+                        }
+                    }
+                }
+            }
+        );
+}
 
 
 

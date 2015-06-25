@@ -105,7 +105,7 @@ function getTextureAreaSettings(item) {
                             })) ;
                             state = 'build';
                             buildTextureArea(newObject)
-                            
+                            if(newObject.draggable == 1) {getClonableSettings()}
                         }
                     }
                 }

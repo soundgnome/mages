@@ -94,6 +94,7 @@ function getRandomNumberSettings() {
                                 })) ;
                             buildRandomNumber(newObject);
                             adjustNewPiece();
+                            if(newObject.draggable == 1) {getClonableSettings()}
                            
                         }
                     }

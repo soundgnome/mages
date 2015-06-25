@@ -175,8 +175,10 @@ function getEvaluatedExpressionSettings() {
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
                                 })) ;
                             state = 'build'
-                            buildEvaluatedExpression(newObject)
+                            buildEvaluatedExpression(newObject);
                             adjustNewPiece()
+                            if(newObject.draggable == 1) {getClonableSettings()}
+                            
                         }
                     }
                 }
