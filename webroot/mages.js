@@ -908,6 +908,10 @@ function buildDragging() {
     {//delete the piece
         draggingPiece.destroy(true);
         draggingPiece.deleted=true;
+        buildState="";
+        dragging=0 ;
+        menuKeyPressed =0;
+        
     }
 }
 
