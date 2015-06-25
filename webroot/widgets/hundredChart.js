@@ -77,7 +77,7 @@ function getHundredChartSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "HundredChart Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                 getMenuEntryString("Scale:" , "scale", 1 , null) +
                 getMenuEntryString("Static value:" , "staticvalue", 0 , "0 for clickable chart.") +

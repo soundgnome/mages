@@ -35,14 +35,14 @@ function getTextAreaSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Text Area Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
-                    getMenuEntryString("Text:" , "newtext", "Hello.", null ) +
+                    getMenuEntryString("Text:" , "newtext", "Hello world.", null ) +
                     getMenuEntryString("Color:" , "color", newTextColor , null) +
                     getMenuEntryString("Size:" , "size", newTextSize , null) +
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
+                    getMenuEntryString("Alignment? l/c/r:" , "alignment", "l" , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
-                    getMenuEntryString("Alighnment? l/c/r:" , "alignment", "l" , null) +
                     '</form> </div>  </div>',
                 buttons: {
                     success: {

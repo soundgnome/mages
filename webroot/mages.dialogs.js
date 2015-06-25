@@ -56,7 +56,7 @@ function getMenuYesNoString(label, key, help) {
             '</div><div class="radio"> <label for="' + key + '-1"> ' +
             '<input type="radio" name="' + key + '" id="' + key + '-1" value="Yes"> Yes </label> ' +
             helpString +
-            '</div> ' 
+            '</div></div></div>' 
 }
 
 function getMenuStaticDraggagbleSelectableString(label, key, help) {
@@ -65,7 +65,7 @@ function getMenuStaticDraggagbleSelectableString(label, key, help) {
     {
         helpString='<span class="help-block">' + help + '</span> </div> '
     }
-    return '<div class="form-group"> ' +
+    return  '<div class="form-group"> ' +
             '<label class="col-md-4 control-label" for="bold">' + label + '</label> ' +
             '<div class="col-md-4"> <div class="radio"> <label for="bold-0"> ' +
             '<input type="radio" name="' + key + '" id="' + key + '-0" value="Static" checked="checked"> ' +

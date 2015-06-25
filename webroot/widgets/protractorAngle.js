@@ -140,7 +140,7 @@ function getProtractorAngleSetting() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Protractor and Angle Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                 getMenuEntryString("Enter start leg in degrees:" , "start", 270, null ) +
                 getMenuEntryString("Enter end leg in degrees:" , "end", "getRandomInt(90,270)" , "0:d 90:r 180:u 270:l") +

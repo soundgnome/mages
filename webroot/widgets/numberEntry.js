@@ -171,7 +171,7 @@ function getNumberEntrySettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Number Entry Box Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                 getMenuEntryString("Max digits:" , "digits", 6 , null) +
                 getMenuEntryString("Number of panels:" , "panels", 1 , null) +

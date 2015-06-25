@@ -110,14 +110,14 @@ function getEvaluatedExpressionSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Evaluated Expression Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                     getMenuEntryString("Expression:" , "expression", '2+2' , null) +
                     getMenuEntryString("Color" , "color", newTextColor , null) +
                     getMenuEntryString("Size" , "size", 72 , null) +
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
+                    getMenuEntryString("Alignment? l/c/r:" , "alignment", "l" , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
-                    getMenuEntryString("Alighnment? l/c/r:" , "alignment", "r" , null) +
                     getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {

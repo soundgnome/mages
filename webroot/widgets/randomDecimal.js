@@ -66,7 +66,7 @@ function getRandomDecimalSettings() {
     state = 'prompt';
     bootbox.dialog({
                 title: "Random Decimal Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                     getMenuEntryString("Floor" , "floor", 0 , null) +
                     getMenuEntryString("Ceiling" , "ceiling", 10 , null) +

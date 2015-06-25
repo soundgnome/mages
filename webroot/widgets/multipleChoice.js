@@ -630,7 +630,7 @@ function getMultipleChoiceTypeSetting() {
     bootbox.alert({
         size: 'large',
         title: "Multiple Choice",
-        closeButton: false,
+        onEscape: function() {state='build'},
         message: multChoiceString[0], //this is now possibly quite long
         callback: function()
         { 
@@ -703,7 +703,7 @@ function getMultipleChoiceNumberSettings(startPrompt) {
             {
                 bootbox.dialog({
                 title: "Multiple Choice Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                 getMenuEntryString("Font size:" , "fontsize", multipleChoiceFontSize ) +
                 getMenuEntryString("Horizontal Spacing:" , "spacex", 200 ) +
@@ -876,7 +876,7 @@ function getMultipleChoiceFractionSettings(startPrompt) {
             {
                 bootbox.dialog({
                 title: "Multiple Choice Fraction Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                 getMenuEntryString("Font size:" , "fontsize", multipleChoiceFontSize ) +
                 getMenuEntryString("Horizontal Spacing:" , "spacex", 200 ) +

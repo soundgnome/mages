@@ -80,7 +80,7 @@ function getTextureAreaSettings(item) {
     state = 'prompt';
     bootbox.dialog({
                 title: "Teture Area Settings",
-                closeButton: false,
+                onEscape: function() {state='build'},
                 message: 
                     getMenuEntryString("Texture expression?" , "texture", "testTexture()" , null) +
                     getMenuEntryString("Texture value?" , "number", "1" , null) +
