@@ -2066,7 +2066,7 @@
             ],
           "solution": "eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[2]==hiddenNumber[1]+hiddenNumber[2]&&eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[3]==hiddenNumber[1]+hiddenNumber[2]"
         },
-        { "summary": "",
+        { "summary": "Multiplication equation from word problem",
           "problems": [
             {"appletID":"4-3","type":16,"expression":"getRandomInt%28100%2C300%29"},
             {"appletID":"4-3","type":16,"expression":"getRandomInt%282%2C9%29"},
