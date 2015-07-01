@@ -1058,6 +1058,7 @@ function startDraggingNumber(item) {
     {//clear the box
         dragToBoxes[item.occupying].occupied=0;  
         dragToBoxes[item.occupying].contents= null;
+        dragToBoxes[item.occupying].contentsID = null;
         item.occupying = null  ;
     }
     draggingNumberHandle=item;
@@ -1075,6 +1076,7 @@ function stopDraggingNumber(item) {
             item.occupying = i;  
             dragToBoxes[i].occupied=1;
             dragToBoxes[i].contents=item.number;
+            dragToBoxes[i].contentsID = item.contentsID;
         } 
     }
 }
@@ -1283,10 +1285,46 @@ function getRandomIntExcluding(min, max, exclude) {
     var returnValue = getRandomInt(min,max);
     for(var i = 1 ; i < 100 ; i++)
     {
-        if(returnValue == exclude)
+        if(exclude.toString().length == 1)
         {
-            returnValue = getRandomInt(min,max);   
+            if(returnValue == exclude)
+            {
+            returnValue = getRandomInt(min,max); 
+            }    
+        } else
+        {
+            exclude.forEach(function(item) { 
+            if(returnValue == item)
+            {
+                returnValue = getRandomInt(min,max); 
+            }
+            });   
         }
+        
+    }
+    return returnValue;
+}
+
+function getFunctionExcluding(outputFunction, args, exclude) {
+    var returnValue = outputFunction(args);
+    for(var i = 1 ; i < 100 ; i++)
+    {
+        if(exclude.toString().length == 1)
+        {
+            if(returnValue == exclude)
+            {
+            returnValue = outputFunction(args);   
+            }    
+        } else
+        {
+            exclude.forEach(function(item) { 
+            if(returnValue == item)
+            {
+                returnValue = outputFunction(args);   
+            }
+            });   
+        }
+        
     }
     return returnValue;
 }
@@ -1344,6 +1382,35 @@ var surnames = [ 'Smith' , 'Johnson' , 'Williams' , 'Jones' , 'Brown' ,
 'Patterson' , 'Hughes' , 'Flores' , 'Washington' , 'Butler' , 'Simmons' , 
 'Foster' , 'Gonzales' , 'Bryant' , 'Alexander' , 'Russell' , 'Griffin' , 
 'Diaz' , 'Hayes'];
+
+function randomName () {
+    return (getRandomInt(0,1)==0?boyNames[getRandomInt(0,99)] : girlNames[getRandomInt(0,99)])
+}
+
+function getPrimeComposite(prime) {
+    var returnValue;
+    
+    if(prime == 1)
+    {
+        returnValue = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97][getRandomInt(0,24)]
+    } else
+    {
+        returnValue = [4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 92, 93, 94, 95, 96, 98, 99 , 100][getRandomInt(0,73)] 
+    }
+    return returnValue;
+}
+
+
+function isPrime(value) {
+    for(var i = 2; i < value; i++) {
+        if(value % i === 0) {
+            return false;
+        }
+    }
+    return value > 1;
+}
+
+var treeTypes = ['Ash', 'Birch' , 'Cherry' , 'Elm' , 'Fir' , 'Hickory' , 'Larch' , 'Locus' , 'Maple' , 'Oak' , 'Pine' , 'Spruce' , 'Willow']
 
 var rainbow = [0xFF0000 , 0xFFA500 , 0xFFFF00 , 0x008000 , 0x0000FF , 0x4B0082 , 0xEE82EE]
 

@@ -69,6 +69,7 @@ function buildEvaluatedExpression(item) {
         piece[piece.length-1].events.onInputDown.add(startDraggingNumber, this);
         piece[piece.length-1].events.onInputUp.add(stopDraggingNumber, this);   
         piece[piece.length-1].number = evaluatedExpression[evaluatedExpression.length-1];
+        piece[piece.length-1].contentsID = evaluatedExpression.length-1;
         
     }
     if(item.selectable == 1)
