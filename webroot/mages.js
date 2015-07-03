@@ -266,6 +266,7 @@ function defineApplets() {
                 if ("solution" in data.applets[i]) {
                     var applet_id = data.applets[i].problems[0].appletID;
                     tests[applet_id] = decodeURIComponent(data.applets[i].solution);
+                    //make a solutions array here
                 }
             }
         }
@@ -551,9 +552,7 @@ function clearCurrentApplet()
             bootbox.alert("Your score: " + Math.round((threadTotal/threadRecord.length)*100) + "%" );
             console.log(threadTotal/threadRecord.length)
         }
-        
     }
-    
 }
 
 
@@ -1291,7 +1290,7 @@ function getRandomIntExcluding(min, max, exclude) {
             {
             returnValue = getRandomInt(min,max); 
             }    
-        } else
+        } else if (exclude.isArray)
         {
             exclude.forEach(function(item) { 
             if(returnValue == item)
