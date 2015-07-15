@@ -84,10 +84,13 @@ function preload() {
     game.load.image('menuTTable', 'assets/menuTTable.png');
     game.load.image('menuTextureArea', 'assets/menuTextureArea.png');
     
+    //applet images
+    game.load.image('dogPawPrint', 'assets/dogPawPrint.png');
 }
 
 function create() {
     titleBack = game.add.sprite(0, 0, 'titleBack');
+    game.canvas.oncontextmenu = function (e) { e.preventDefault(); }
 }
 
 /*******************************************************************************
@@ -925,9 +928,16 @@ function onFinishDrag(item, pointer) {
 }
 
 function buildRedragPiece(item, pointer){
-    draggingPiece = item;
-    buildState = 'dragging';
-    dragging=1;
+    if(game.input.mouse.button==0)
+    {
+        draggingPiece = item;
+        buildState = 'dragging';
+        dragging=1;   
+    } else if (game.input.mouse.button==2)
+    {
+        console.log(item);
+        
+    }
 }
 
 //group pieces have to register their parent as the dragging pieces
@@ -1281,27 +1291,37 @@ function listString(list) {
 }
 
 function getRandomIntExcluding(min, max, exclude) {
-    var returnValue = getRandomInt(min,max);
-    for(var i = 1 ; i < 100 ; i++)
-    {
-        if(exclude.toString().length == 1)
+        var returnValue = getRandomInt(min,max);
+        if($.isArray(exclude))
+        {
+            var matched = 0;
+            exclude.forEach(function(item) { 
+                if(returnValue == item)
+                {
+                    matched = 1;
+                } 
+            }); 
+            
+            if(matched == 0)
+                {
+                  return returnValue;  
+                } else
+                {
+                  return getRandomIntExcluding(min, max, exclude) 
+                }
+        } else
         {
             if(returnValue == exclude)
             {
-            returnValue = getRandomInt(min,max); 
-            }    
-        } else if (exclude.isArray)
-        {
-            exclude.forEach(function(item) { 
-            if(returnValue == item)
+                return getRandomIntExcluding(min, max, exclude)
+            } else
             {
-                returnValue = getRandomInt(min,max); 
+                return returnValue;  
             }
-            });   
+            
         }
         
-    }
-    return returnValue;
+    
 }
 
 function getFunctionExcluding(outputFunction, args, exclude) {

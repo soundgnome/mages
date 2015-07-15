@@ -1,7 +1,7 @@
 var hiddenNumber = [];
 function buildHiddenNumber(item) {
-    item.expression = decodeURIComponent(item.expression)
-    hiddenNumber.push(eval(item.expression));
+    //item.expression = decodeURIComponent(item.expression)
+    hiddenNumber.push(eval(decodeURIComponent(item.expression)));
     piece[piece.length] = game.add.sprite(0,0);
     piece[piece.length-1].expression = item.expression;
     piece[piece.length-1].type=16;

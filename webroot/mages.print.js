@@ -324,7 +324,7 @@ function printPieces(newAppletID, appletDoneTest) {
                     var newObject = JSON.stringify({    
                         "appletID": newAppletID,
                         "type": piece[item].type, 
-                        "expression": fixedEncodeURIComponent(piece[item].expression)
+                        "expression": piece[item].expression
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;

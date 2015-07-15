@@ -201,9 +201,9 @@ function buildMultipleChoiceTextures(item) {
         });
         var newTextureGraphic = eval(answers[answer].toString()) ;
         newTexture[answer] = game.add.sprite(0 ,0 , newTextureGraphic  )
-        
+        console.log(newTexture)
         //this bitmap data is used to calculate the sprite width for the selection box
-        bmd[answer] = game.add.bitmapData(newTexture.width,newTexture.height);
+        bmd[answer] = game.add.bitmapData(newTexture[answer].width+48,newTexture[answer].height+48);
         bmd[answer].ctx.beginPath();
         bmd[answer].ctx.rect(0,0,newTexture.width,newTexture.height);
         bmd[answer].ctx.fillStyle = '#CCCCCC';

@@ -37,7 +37,7 @@ function getTextAreaSettings() {
                 title: "Text Area Settings",
                 onEscape: function() {state='build'},
                 message: 
-                    getMenuEntryString("Text:" , "newtext", "Hello world.", null ) +
+                    getMenuEntryString("Text:" , "newtext", "The five boxing wizards jump quickly.", null ) +
                     getMenuEntryString("Color:" , "color", newTextColor , null) +
                     getMenuEntryString("Size:" , "size", newTextSize , null) +
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +

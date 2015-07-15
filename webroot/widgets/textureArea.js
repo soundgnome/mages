@@ -1,14 +1,13 @@
 var textureArea;
 var newTextureTemp
 function buildTextureArea(item) {
-    console.log(item.textureExpression)
     var newTexture = game.add.sprite(0 ,0 ,  eval(item.textureExpression) )
     var bmd = game.add.bitmapData(newTexture.width,newTexture.height);
 
     // draw to the canvas context like normal
     bmd.ctx.beginPath();
     bmd.ctx.rect(0,0,newTexture.width,newTexture.height);
-    bmd.ctx.fillStyle = '#CCCCCC';
+    bmd.ctx.fillStyle = '#DDDDDD';
     bmd.ctx.fill();
     
     piece[piece.length] = game.add.sprite(0, 0 , bmd)
@@ -23,7 +22,6 @@ function buildTextureArea(item) {
     piece[piece.length-1].events.onInputDown.add(buildRedragPiece, this);
     piece[piece.length-1].events.onInputUp.add(onFinishDrag, this);
     piece[piece.length-1].inputEnabled='true';
-    console.log(item.textureExpression)
     piece[piece.length-1].textureExpression = item.textureExpression;
     piece[piece.length-1].type = item.type;
     piece[piece.length-1].draggable = item.draggable;
@@ -52,8 +50,12 @@ function buildTextureArea(item) {
         addSelectionBehavior()   
     }
     
+    if (typeof newTextureTemp === 'undefined') 
+            { } else
+            {
+                newTextureTemp.clear()
+            }
     
-    newTextureTemp.clear()
 }
 
 
@@ -74,6 +76,71 @@ function testTexture() {
     newTextureTemp = newGraphic
     return newGraphic.generateTexture();
 }
+
+function imageArrayTexture(textureImage, quantity, orientation) {
+    var image = game.add.group();
+    var offSet = 0;
+    for(var i = 0 ; i < quantity ; i++)
+    {
+        if(orientation == 'v')
+        {
+            image.create(0, image.height+offSet, textureImage);  
+        } else
+        {
+            image.create(image.width+offSet, 0, textureImage); 
+        }
+        
+        if(offSet == 0) {offSet = 5};
+    }
+    var newGraphic = image.generateTexture();
+    image.destroy();
+    return newGraphic;
+}
+
+
+
+function blockPattern(activeDirections, lengths) {
+    var newGraphic = game.add.graphics(0, 0);
+    newGraphic.lineStyle(3, 0x000000, 1);
+    newGraphic.beginFill(0xFFFFFF);
+    newGraphic.drawRect(0, 0, 10, 10);
+   
+    
+    for(var directionI = 0; directionI < activeDirections.length ; directionI++)
+    {
+        var blockX = 0;
+        var blockY = 0;
+        for(var i=0 ; i<lengths[directionI] ; i++) 
+        {
+            switch(activeDirections[directionI]) {
+            case 1:
+            blockX += 10;
+            blockY += 0;
+            break;
+            
+            case 2:
+            blockX += 0;
+            blockY += 10;
+            break;
+            
+            case 3:
+            blockX += -10;
+            blockY += 0;
+            break;
+            
+            default: //extend up only
+            blockX += 0;
+            blockY += -10;
+            }
+            newGraphic.drawRect(blockX, blockY, 10, 10);
+        }    
+    }
+    
+    newGraphic.endFill();
+    newTextureTemp = newGraphic
+    return newGraphic.generateTexture();
+}
+
 
 function getTextureAreaSettings(item) {
     menuKeyPressed ==0;
