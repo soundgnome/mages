@@ -77,6 +77,36 @@ function testTexture() {
     return newGraphic.generateTexture();
 }
 
+function rectangleFigureTexture(width, height, red, green, blue, label, scale) {
+    if (typeof scale === 'undefined') {scale = 1};
+    var newGraphic = game.add.graphics(0, 0);
+    newGraphic.lineStyle(2, 0x000000, 1);
+    var decColor = red + 256 * green + 65536 * blue;
+    newGraphic.beginFill(decColor, 1);
+    newGraphic.drawRect(0, 0, width*scale, height*scale);
+    var image = game.add.group();
+    image.add(newGraphic);
+
+    width = width + " " + label
+    height = height + " " + label
+    
+    newLabel = game.add.text(newGraphic.width/2-(width.toString().length*5),-21, width.toString(), {
+        font: "18px Arial",
+        fill: "black",
+        align: 'left'}); 
+    image.add(newLabel);
+    
+    newLabel = game.add.text(0,newGraphic.height/2-10, height.toString(), {
+        font: "18px Arial",
+        fill: "black",
+        align: 'left'}); 
+    image.add(newLabel);
+    newLabel.x = -(newLabel.width+2)
+    var newGraphic = image.generateTexture();
+    image.destroy();
+    return newGraphic;
+}
+
 function imageArrayTexture(textureImage, quantity, orientation) {
     var image = game.add.group();
     var offSet = 0;

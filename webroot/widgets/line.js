@@ -65,7 +65,6 @@ function drawLine() {
 }
 
 function buildDrawLine(item) {
-    console.log("building")
     drawingLineGraphic = game.add.graphics(0, 0);
     drawingLineGraphic.clear();
     drawingLineGraphic.lineStyle(2, item.color, 1);

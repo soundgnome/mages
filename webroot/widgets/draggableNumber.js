@@ -120,7 +120,6 @@ function buildDraggableNumbers(item) {
     }
     piece[piece.length-1].type=8;
     piece[piece.length-1].orientation = item.orientation;
-    console.log(item.clonable)
     piece[piece.length-1].clonable = item.clonable;
     piece[piece.length-1].size = item.size;
     piece[piece.length-1].fill = item.fill;

@@ -1,7 +1,6 @@
 var numberLine
 var numberLineDots = [];
 function buildNumberLine(item) {
-    console.log(item.min)
     item.minExpression = item.min
     item.maxExpression = item.max
     item.intervalExpression = item.interval;
@@ -48,7 +47,6 @@ function buildNumberLine(item) {
             newGraphic.lineTo(-3, i*item.lineLength/( (item.max-item.min) / (item.interval/item.subDivide ) ))        
         }     
     }
-    console.log(item.max.toString().length)
     var labelFontSize
     if(item.max.toString().length > 3) {
         labelFontSize = 12

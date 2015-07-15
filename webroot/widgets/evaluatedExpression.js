@@ -26,14 +26,25 @@ function buildEvaluatedExpression(item) {
             wordWrap: newTextWrap,
             wordWrapWidth: newTextWidth
     });
+    piece[piece.length-1].anchor.setTo(0.5, 0.5); 
     
-    piece[piece.length-1].anchor.setTo(0.5, 0.5);
+    if (typeof item.originalWidth === 'undefined') { item.originalWidth = piece[piece.length-1].width } ;
+    
+    if(item.spriteAnchor == 2)
+    {
+        piece[piece.length-1].x -= (piece[piece.length-1].width-item.originalWidth)/2;
+    } else if(item.spriteAnchor == 1)
+    {
+        piece[piece.length-1].x += (piece[piece.length-1].width-item.originalWidth)/2;
+    }
+    
     piece[piece.length-1].grouped=0;
     piece[piece.length-1].type=15;
     piece[piece.length-1].align=item.align;
     piece[piece.length-1].fontString=fontString;
     piece[piece.length-1].fill=newTextColor;
     piece[piece.length-1].expression=item.expression; 
+    piece[piece.length-1].spriteAnchor=item.spriteAnchor;
     if(state == 'build') 
     {
        
@@ -60,7 +71,6 @@ function buildEvaluatedExpression(item) {
     if(state!='build' && item.draggable == 1)
     {
         piece[piece.length-1].inputEnabled='true';
-        console.log(item.align)
         piece[piece.length-1].input.useHandCursor=true;
         if(item.clonable == "1") //"n" is default
             {//clonable; add a cloning function
@@ -119,6 +129,7 @@ function getEvaluatedExpressionSettings() {
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
                     getMenuEntryString("Alignment? l/c/r:" , "alignment", "l" , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
+                    getMenuAnchor("Sprite anchor:", "anchor", "This will anchor the sprite to one side.") +
                     getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
@@ -135,6 +146,7 @@ function getEvaluatedExpressionSettings() {
                             {
                                 newBold="";
                             }
+                            
                             if($('#wrapWidth').val() > 0)
                             {
                                 newTextWrap=true;
@@ -160,8 +172,8 @@ function getEvaluatedExpressionSettings() {
                             newTextColor =  $('#color').val();
                             newTextSize = $('#size').val();
                             var expression = $('#expression').val();
-                            console.log(expression)
                             state = 'build';
+                            console.log($("input[name='anchor']:checked").val())
                             var newObject = JSON.parse(JSON.stringify({   
                                 "type" : 15, 
                                 "startX" : 400 , 
@@ -173,7 +185,8 @@ function getEvaluatedExpressionSettings() {
                                 "align": alignment,
                                 "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
-                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0)
+                                "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0),
+                                "spriteAnchor" : $("input[name='anchor']:checked").val()
                                 })) ;
                             state = 'build'
                             buildEvaluatedExpression(newObject);
