@@ -12,13 +12,12 @@ function buildTextureArea(item) {
     
     piece[piece.length] = game.add.sprite(0, 0 , bmd)
 
-    //textureArea.push(piece[piece.length-1]);
-    //lastTexture.clear()
     piece[piece.length-1].x=item.startX
     piece[piece.length-1].y=item.startY
     
     
     piece[piece.length-1].addChild(newTexture)
+    
     piece[piece.length-1].events.onInputDown.add(buildRedragPiece, this);
     piece[piece.length-1].events.onInputUp.add(onFinishDrag, this);
     piece[piece.length-1].inputEnabled='true';
@@ -77,6 +76,18 @@ function testTexture() {
     return newGraphic.generateTexture();
 }
 
+
+function dotTexture(diameter) {
+    var newGraphic = game.add.graphics(0, 0);
+    newGraphic.lineStyle(0, 0x000000, 1);
+   
+    newGraphic.beginFill(0x000000, 1);
+    newGraphic.drawCircle(0, 0, diameter);
+    newTextureTemp = newGraphic
+    return newGraphic.generateTexture();
+}
+
+
 function rectangleFigureTexture(width, height, red, green, blue, label, scale) {
     if (typeof scale === 'undefined') {scale = 1};
     var newGraphic = game.add.graphics(0, 0);
@@ -101,7 +112,7 @@ function rectangleFigureTexture(width, height, red, green, blue, label, scale) {
         fill: "black",
         align: 'left'}); 
     image.add(newLabel);
-    newLabel.x = -(newLabel.width+2)
+    newLabel.x = -(newLabel.width+3)
     var newGraphic = image.generateTexture();
     image.destroy();
     return newGraphic;

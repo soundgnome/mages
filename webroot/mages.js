@@ -86,6 +86,13 @@ function preload() {
     
     //applet images
     game.load.image('dogPawPrint', 'assets/dogPawPrint.png');
+    
+    //animation assets
+    game.load.image('phaser', 'assets/phaser.png');
+    game.load.image('yellowStar', 'assets/starYellow50pix.png');
+    game.load.image('correctTitle', 'assets/correctTitle.png');
+    game.load.image('incorrectTitle', 'assets/incorrectTitle.png');
+    game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
 }
 
 function create() {

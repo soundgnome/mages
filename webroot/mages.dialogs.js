@@ -102,7 +102,7 @@ function getMenuStaticDraggagbleSelectableString(label, key, help) {
             '</div> ' 
 }
 
-function getMenuAnchor(label, key, help) {
+function getMenuAnchorX(label, key, help) {
     var helpString = '';
     if(help != null)
     {
@@ -117,6 +117,24 @@ function getMenuAnchor(label, key, help) {
             '<input type="radio" name="' + key + '" id="' + key + '-1" value="1"> Left </label> ' +
             '</div><div class="radio"> <label for="' + key + '-1"> ' +
             '<input type="radio" name="' + key + '" id="' + key + '-1" value="2"> Right </label> ' +
+            helpString 
+}
+
+function getMenuAnchorY(label, key, help) {
+    var helpString = '';
+    if(help != null)
+    {
+        helpString='<span class="help-block">' + help + '</span> </div> '
+    }
+    return  '<div class="form-group"> ' +
+            '<label class="col-md-4 control-label" for="bold">' + label + '</label> ' +
+            '<div class="col-md-4"> <div class="radio"> <label for="bold-0"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-0" value="0" checked="checked"> ' +
+            'Center </label> ' +
+            '</div><div class="radio"> <label for="' + key + '-1"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-1" value="1"> Top </label> ' +
+            '</div><div class="radio"> <label for="' + key + '-1"> ' +
+            '<input type="radio" name="' + key + '" id="' + key + '-1" value="2"> Bottom </label> ' +
             helpString 
 }
 

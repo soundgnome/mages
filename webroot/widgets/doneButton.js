@@ -28,15 +28,33 @@ function doneButtonClick(item) {
         } 
     } else
     {
+        var correct;
         if(eval(tests[loadAppletID]))
         {
             threadRecord.push(1);
             console.log("correct:" + loadAppletID)
+            correct = 1;
         } else
         {
             threadRecord.push(0);
+            correct = 0;
         }
-        clearCurrentApplet();
+        //insert animation
+        //clearCurrentApplet();
+        var timerExists = 0;
+        piece.forEach(function(item){
+            if( item.type == 22 ){ timerExists=1};
+            console.log(item.type)
+        });
+        
+        if(timerExists==1)
+        {
+            clearCurrentApplet();
+        } else
+        {
+            appletTransition(correct);   
+        }
+        
     }
     
     

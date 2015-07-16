@@ -28,14 +28,23 @@ function buildEvaluatedExpression(item) {
     });
     piece[piece.length-1].anchor.setTo(0.5, 0.5); 
     
+    //this compares the sprite's width and height to the original width and height and offsets the x and y in the direction appropriate for the anchor setting
     if (typeof item.originalWidth === 'undefined') { item.originalWidth = piece[piece.length-1].width } ;
-    
-    if(item.spriteAnchor == 2)
+    if(item.spriteAnchorX == 2) //right 
     {
         piece[piece.length-1].x -= (piece[piece.length-1].width-item.originalWidth)/2;
-    } else if(item.spriteAnchor == 1)
+    } else if(item.spriteAnchorX == 1) //left
     {
         piece[piece.length-1].x += (piece[piece.length-1].width-item.originalWidth)/2;
+    }
+    
+    if (typeof item.originalHeight === 'undefined') { item.originalHeight = piece[piece.length-1].height } ;
+    if(item.spriteAnchorY == 2) //bottom 
+    {
+        piece[piece.length-1].y -= (piece[piece.length-1].height-item.originalHeight)/2;
+    } else if(item.spriteAnchorY == 1) //top
+    {
+        piece[piece.length-1].y += (piece[piece.length-1].height-item.originalHeight)/2;
     }
     
     piece[piece.length-1].grouped=0;
@@ -44,7 +53,8 @@ function buildEvaluatedExpression(item) {
     piece[piece.length-1].fontString=fontString;
     piece[piece.length-1].fill=newTextColor;
     piece[piece.length-1].expression=item.expression; 
-    piece[piece.length-1].spriteAnchor=item.spriteAnchor;
+    piece[piece.length-1].spriteAnchorX=item.spriteAnchorX;
+    piece[piece.length-1].spriteAnchorY=item.spriteAnchorY;
     if(state == 'build') 
     {
        
@@ -129,7 +139,8 @@ function getEvaluatedExpressionSettings() {
                     getMenuEntryString("Word wrap width:" , "wrapWidth", 0 , "Enter 0 to turn off wrap.") +
                     getMenuEntryString("Alignment? l/c/r:" , "alignment", "l" , null) +
                     getMenuYesNoString("Bold?", "bold", null) +
-                    getMenuAnchor("Sprite anchor:", "anchor", "This will anchor the sprite to one side.") +
+                    getMenuAnchorX("Sprite anchor X:", "anchorX", null) +
+                    getMenuAnchorY("Sprite anchor Y:", "anchorY", null) +
                     getMenuStaticDraggagbleSelectableString("Applet behavior: ", "behavior", "This describes the behavior at applet runtime.") +
                     '</form> </div>  </div>',
                 buttons: {
@@ -186,7 +197,8 @@ function getEvaluatedExpressionSettings() {
                                 "static" : ($("input[name='behavior']:checked").val() == "Static" ? 1 : 0) ,
                                 "draggable" : ($("input[name='behavior']:checked").val() == "Draggable" ? 1 : 0) ,
                                 "selectable" : ($("input[name='behavior']:checked").val() == "Selectable" ? 1 : 0),
-                                "spriteAnchor" : $("input[name='anchor']:checked").val()
+                                "spriteAnchorX" : $("input[name='anchorX']:checked").val(),
+                                "spriteAnchorY" : $("input[name='anchorY']:checked").val()
                                 })) ;
                             state = 'build'
                             buildEvaluatedExpression(newObject);

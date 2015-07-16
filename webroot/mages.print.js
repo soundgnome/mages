@@ -315,8 +315,10 @@ function printPieces(newAppletID, appletDoneTest) {
                         "selectable": piece[item].selectable ,
                         "clonable": piece[item].clonable ,
                         "selectedExpression": piece[item].selectedExpression,
-                        "spriteAnchor": piece[item].spriteAnchor,
-                        "originalWidth": piece[item].width
+                        "spriteAnchorX": piece[item].spriteAnchorX,
+                        "spriteAnchorY": piece[item].spriteAnchorY,
+                        "originalWidth": piece[item].width,
+                        "originalHeight": piece[item].height
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
