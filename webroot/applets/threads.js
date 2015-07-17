@@ -77,7 +77,7 @@ function appletTransition(correct) {
     var direction = getRandomInt(0,1);
     
     //leave outside the if statement so we have something to destroy
-    var emitter = game.add.emitter((direction==0 ? -100 : game.world.width+100), game.world.centerY*1.5, 200);
+    var emitter = game.add.emitter((direction==0 ? -100 : game.world.width+100), game.world.centerY*1.6, 200);
     
     if(correct == 1) //show the spaceship and emitter
     {
@@ -91,7 +91,21 @@ function appletTransition(correct) {
         game.add.tween(emitter).from( { y: 100 }, 2000, Phaser.Easing.Cubic.In, true);
         game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
         
-        var spaceship = game.add.sprite((direction==0 ? -100 : game.world.width+100), game.world.centerY, 'spaceship');
+        var shipTexture;
+        switch(getRandomInt(0,2)) 
+        {
+            case 0:
+                shipTexture = 'spaceship1'
+                break;
+            case 1:
+                shipTexture = 'spaceship2'
+                break;
+            case 2:
+                shipTexture = 'spaceship3'
+                break;
+            
+        }
+        var spaceship = game.add.sprite((direction==0 ? -100 : game.world.width+100), game.world.centerY, shipTexture);
         if (direction == 1)
         {
             spaceship.angle=30   

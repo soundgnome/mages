@@ -100,7 +100,9 @@ function preload() {
     game.load.image('dogPawPrint', 'assets/dogPawPrint.png');
     
     //animation assets
-    game.load.image('spaceship', 'assets/nightraiderfixed.png');
+    game.load.image('spaceship1', 'assets/warrior1_0.png');
+    game.load.image('spaceship2', 'assets/warrior2_0.png');
+    game.load.image('spaceship3', 'assets/nightraiderfixed.png');
             //cc3.0 credit dravenx on opengameart for spaceship
     game.load.image('yellowStar', 'assets/starYellow50pix.png');
     game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
