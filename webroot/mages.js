@@ -7,7 +7,19 @@ var state='title';
 var gridSize = 20;
 var titleBack;
 
- 
+var WebFontConfig = {
+
+        //  'active' means all requested fonts have finished loading
+        //  We set a 1 second delay before calling 'createText'.
+        //  For some reason if we don't the browser cannot render the text the first time it's created.
+
+        //  The Google Fonts we want to load (specify as many as you like in the array)
+        google: {
+          families: ['Revalia','Orbitron']
+        }
+
+    };
+    
 function preload() {
     //debug text
     result = 'Math Applet Generator for Elementary School - Basic Architecture - Build Test';
@@ -88,11 +100,15 @@ function preload() {
     game.load.image('dogPawPrint', 'assets/dogPawPrint.png');
     
     //animation assets
-    game.load.image('phaser', 'assets/phaser.png');
+    game.load.image('spaceship', 'assets/nightraiderfixed.png');
+            //cc3.0 credit dravenx on opengameart for spaceship
     game.load.image('yellowStar', 'assets/starYellow50pix.png');
-    game.load.image('correctTitle', 'assets/correctTitle.png');
-    game.load.image('incorrectTitle', 'assets/incorrectTitle.png');
     game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
+        
+    //  Load the Google WebFont Loader script
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+    
+
 }
 
 function create() {
@@ -553,18 +569,21 @@ function clearCurrentApplet()
             appletInitiated=0; 
         } else
         {
-            var threadTotal = 0;  // Variable to hold your total
+            bootbox.alert("Your score: " + calculateThreadPercent() + "%" );
+        }
+    }
+}
+
+function calculateThreadPercent() {
+    var threadTotal = 0;  // Variable to hold your total
             
             for(var i = 0, len = threadRecord.length; i < len; i++) 
             {
                 threadTotal += threadRecord[i];
             }
-            bootbox.alert("Your score: " + Math.round((threadTotal/threadRecord.length)*100) + "%" );
-            console.log(threadTotal/threadRecord.length)
-        }
-    }
-}
+    return Math.round((threadTotal/threadRecord.length)*100)
 
+}
 
 /*******************************************************************************
  *                               BUILD SECTION

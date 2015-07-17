@@ -19,43 +19,45 @@ function buildDoneButton(item) {
 
 //this tests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
-    timerRunning = 0;
-    if(threadMode == 0)
+    if(inTransition == 0)
     {
-        if(eval(tests[loadAppletID]))
+        timerRunning = 0;
+        if(threadMode == 0)
         {
-            clearCurrentApplet();
-        } 
-    } else
-    {
-        var correct;
-        if(eval(tests[loadAppletID]))
-        {
-            threadRecord.push(1);
-            console.log("correct:" + loadAppletID)
-            correct = 1;
+            if(eval(tests[loadAppletID]))
+            {
+                clearCurrentApplet();
+            } 
         } else
         {
-            threadRecord.push(0);
-            correct = 0;
-        }
-        //insert animation
-        //clearCurrentApplet();
-        var timerExists = 0;
-        piece.forEach(function(item){
-            if( item.type == 22 ){ timerExists=1};
-            console.log(item.type)
-        });
-        
-        if(timerExists==1)
-        {
-            clearCurrentApplet();
-        } else
-        {
-            appletTransition(correct);   
-        }
-        
+            var correct;
+            if(eval(tests[loadAppletID]))
+            {
+                threadRecord.push(1);
+                correct = 1;
+            } else
+            {
+                threadRecord.push(0);
+                correct = 0;
+            }
+            //insert animation
+            //clearCurrentApplet();
+            var timerExists = 0;
+            piece.forEach(function(item){
+                if( item.type == 22 ){ timerExists=1};
+            });
+            
+            if(timerExists==1)
+            {
+                clearCurrentApplet();
+            } else
+            {
+                appletTransition(correct);   
+            }
+            
+        }    
     }
+    
     
     
 }
