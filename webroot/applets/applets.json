@@ -1831,7 +1831,7 @@
             {"appletID":"3-9","type":5,"startX":720,"startY":540}
 
             ],
-          "solution": "numberEntryValue%5B0%5D%3D%3DMath.floor%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%2FhiddenNumber%5B2%5D%29%20%26%26%20numberEntryValue%5B1%5D%3D%3D%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%25hiddenNumber%5B2%5D%29"
+          "solution": "numberEntryValue%5B0%5D%3D%3DMath.floor%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%2FhiddenNumber%5B2%5D%29-%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%25hiddenNumber%5B2%5D%29%20%26%26%20numberEntryValue%5B1%5D%3D%3D%28%28hiddenNumber%5B0%5D%2BhiddenNumber%5B1%5D%29%25hiddenNumber%5B2%5D%29"
         },
         { "summary": "4-digit by 1-digit",
           "problems": [
@@ -2042,7 +2042,7 @@
             {"appletID":"4-1","type":1,"startX":340,"startY":540,"newText":"Equation","font":"","fontString":"bold 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
             {"appletID":"4-1","type":5,"startX":720,"startY":540}
             ],
-          "solution": "(dragToBoxes[0].contentsID==3&&dragToBoxes[1].contentsID==6)||(dragToBoxes[0].contentsID==4&&dragToBoxes[1].contentsID==5)"
+          "solution": "(dragToBoxes[0].contentsID==3&&dragToBoxes[1].contentsID==6)||(dragToBoxes[0].contentsID==6&&dragToBoxes[1].contentsID==3)||(dragToBoxes[0].contentsID==4&&dragToBoxes[1].contentsID==5)||(dragToBoxes[0].contentsID==5&&dragToBoxes[1].contentsID==4)"
         },
         { "summary": "Build equation to represent situation",
           "problems": [

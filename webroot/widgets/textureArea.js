@@ -221,3 +221,42 @@ function getTextureAreaSettings(item) {
         );
 }
 
+function buildShip(scale, ship)
+{
+    if (typeof ship === 'undefined') 
+    { 
+        ship =  { 
+                part:
+                    {
+                    bottomWings:    { label:'bottomWingsDefault',    exists:true, offset: -300, texture: 'bottomWings'},
+                    tailSpires:     { label:'tailSpiresDefault',     exists:true, offset: -300, texture: 'tailSpires'},
+                    gunners:        { label:'gunnersDefault',        exists:true, offset: -200, texture: 'gunners'}, 
+                    frontSpire:     { label:'frontSpireDefault',     exists:true, offset:  100, texture: 'frontSpire'}, 
+                    hull:           { label:'hullDefault',           exists:true, offset: -200, texture: 'hull'}, 
+                    wingGuns:       { label:'wingGunsDefault',       exists:true, offset: -280, texture: 'wingGuns'}, 
+                    wings:          { label:'wingsDefault',          exists:true, offset: -250, texture: 'wings'}, 
+                    topGunner:      { label:'topGunnerDefault',      exists:true, offset: -200, texture: 'topGunner'}, 
+                    windScreen:     { label:'windScreenDefault',     exists:true, offset:  -90, texture: 'windScreen'}
+                    }
+                }   
+    }
+    var shipGraphic = game.add.group();
+    
+    $.each(ship.part, function(part, partSettings) {
+        buildPart(partSettings);
+    });
+    
+    var returnTexture = shipGraphic.generateTexture();
+    returnTexture.angleOffset = 90;
+    returnTexture.scaleOffset = scale;
+    shipGraphic.destroy();
+    return returnTexture;
+    
+    function buildPart(part)
+    {
+        if(part.exists==true)
+        {
+            shipGraphic.create( 0 , -part.offset , part.texture ).anchor.setTo(0.5,0.5);
+        }
+    }
+}

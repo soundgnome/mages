@@ -106,7 +106,21 @@ function preload() {
             //cc3.0 credit dravenx on opengameart for spaceship
     game.load.image('yellowStar', 'assets/starYellow50pix.png');
     game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
-        
+    
+    //ship parts
+    game.load.image('bottomWings', 'assets/shipParts/bottomWings.png');
+    game.load.image('tailSpires', 'assets/shipParts/tailSpires.png');
+    game.load.image('gunners', 'assets/shipParts/gunners.png');
+    game.load.image('frontSpire', 'assets/shipParts/frontSpire.png');
+    game.load.image('hull', 'assets/shipParts/hull.png');
+    game.load.image('wingGuns', 'assets/shipParts/wingGuns.png');
+    game.load.image('wings', 'assets/shipParts/wings.png');
+    game.load.image('topGunner', 'assets/shipParts/topGunner.png');
+    game.load.image('windScreen', 'assets/shipParts/windScreen.png');
+
+
+
+    
     //  Load the Google WebFont Loader script
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     

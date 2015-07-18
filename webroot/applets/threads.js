@@ -42,6 +42,7 @@ function threadPrompt() {
 
 var inTransition = 0;
 function appletTransition(correct) {
+    console.log("Applet " + loadAppletID + (correct==1?" - Correct":" - Incorrect"));
     inTransition = 1;
     
     var backGroundImage = game.add.tileSprite(0, 0, 800, 600, 'starfield');
@@ -92,34 +93,54 @@ function appletTransition(correct) {
         game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
         
         var shipTexture;
-        switch(getRandomInt(0,2)) 
+        switch(getRandomInt(3,3)) 
         {
             case 0:
-                shipTexture = 'spaceship1'
+                shipTexture = 'spaceship1';
                 break;
             case 1:
-                shipTexture = 'spaceship2'
+                shipTexture = 'spaceship2';
                 break;
             case 2:
-                shipTexture = 'spaceship3'
+                shipTexture = 'spaceship3';
+                break;
+            case 3:
+                shipTexture = buildShip(0.25);
                 break;
             
         }
-        var spaceship = game.add.sprite((direction==0 ? -100 : game.world.width+100), game.world.centerY, shipTexture);
+        var spaceship = game.add.sprite((direction==0 ? -130 : game.world.width+130), game.world.centerY+170, shipTexture);
+        spaceship.anchor.setTo(0.5,0.5)
         if (direction == 1)
         {
-            spaceship.angle=30   
+            spaceship.angle=30; //was 30  
         } else
         {
-            spaceship.angle=330 
+            spaceship.angle=330-180; 
+        }
+        if (typeof shipTexture.angleOffset === 'undefined')
+        {
+            
+        } else
+        {
+            spaceship.angle += shipTexture.angleOffset
+            console.log(spaceship.angle + "new")
+        }
+        
+        if (typeof shipTexture.scaleOffset === 'undefined')
+        {
+            shipTexture.scaleOffset = 1;
+        } else
+        {
+            spaceship.scale.setTo(shipTexture.scaleOffset, shipTexture.scaleOffset); 
         }
 
-
-        var shipTween = game.add.tween(spaceship).from( { y: 100 }, 2000, Phaser.Easing.Cubic.In, true);
+        var shipTween = game.add.tween(spaceship).from( { y: 120 }, 2000, Phaser.Easing.Cubic.In, true);
         spaceship.scale.setTo(0,0)
         game.add.tween(spaceship).from( { x:(direction==1 ? 100 : game.world.width-100)  }, 2000, Phaser.Easing.Cubic.In, true);
         //game.add.tween(spaceship).to( { scale:{ x: 2, y: 2}  }, 2000, Phaser.Easing.Cubic.In, true);
-        game.add.tween(spaceship.scale).to((direction==1?{ x: 2, y: 2}:{ x: -2, y: 2}) , 2000, Phaser.Easing.Cubic.In, true);
+        console.log(2*shipTexture.scaleOffset)
+        game.add.tween(spaceship.scale).to((direction==1?{ x: 2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}:{ x: -2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}) , 2000, Phaser.Easing.Cubic.In, true);
         shipTween.onComplete.add(destroyShip, this);
     }
     var item;
@@ -177,6 +198,7 @@ function appletTransition(correct) {
     }
     
     function destroyShip() {
+        console.log(spaceship.scale)
         spaceship.destroy();
     }
     
