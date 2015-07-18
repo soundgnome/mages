@@ -221,8 +221,11 @@ function getTextureAreaSettings(item) {
         );
 }
 
-function buildShip(scale, ship)
+function buildShip(scale, ship, angleOffset)
 {
+    var shipGraphic = game.add.group();
+
+    
     if (typeof ship === 'undefined') 
     { 
         ship =  { 
@@ -238,17 +241,23 @@ function buildShip(scale, ship)
                     topGunner:      { label:'topGunnerDefault',      exists:true, offset: -200, texture: 'topGunner'}, 
                     windScreen:     { label:'windScreenDefault',     exists:true, offset:  -90, texture: 'windScreen'}
                     }
-                }   
+                };
     }
-    var shipGraphic = game.add.group();
+
     
     $.each(ship.part, function(part, partSettings) {
         buildPart(partSettings);
     });
     
     var returnTexture = shipGraphic.generateTexture();
-    returnTexture.angleOffset = 90;
     returnTexture.scaleOffset = scale;
+    if (typeof angleOffset === 'undefined')
+    {
+        returnTexture.angleOffset = 90;
+    } else
+    {
+        returnTexture.angleOffset=angleOffset;
+    }
     shipGraphic.destroy();
     return returnTexture;
     

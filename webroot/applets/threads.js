@@ -93,16 +93,16 @@ function appletTransition(correct) {
         game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
         
         var shipTexture;
-        switch(getRandomInt(3,3)) 
+        switch(getRandomInt(0,3)) 
         {
             case 0:
-                shipTexture = 'spaceship1';
+                shipTexture = buildShip(1, { part: { hull: { label:'ogaSpaceship1', exists:true, offset: 0, texture: 'spaceship1'}}} , 0 );
                 break;
             case 1:
-                shipTexture = 'spaceship2';
+                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship2', exists:true, offset: 0, texture: 'spaceship2'}}} , 0 );
                 break;
             case 2:
-                shipTexture = 'spaceship3';
+                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship3', exists:true, offset: 0, texture: 'spaceship3'}}} , 0 );
                 break;
             case 3:
                 shipTexture = buildShip(0.25);
