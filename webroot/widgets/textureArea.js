@@ -200,7 +200,6 @@ function getTextureAreaSettings(item) {
                         label: "Save",
                         className: "btn-success",
                         callback: function () {
-                            console.log($("input[name='behavior']:checked").val() )
                             var newObject = JSON.parse(JSON.stringify({
                                 "type": 21, 
                                 "startX":100 ,
@@ -228,7 +227,6 @@ function buildShip(scale, tint, ship, angleOffset)
                 tint = [0,0,0]
             }
             else {
-                console.log(tint)
             }
     var shipGraphic = game.add.group();
     
@@ -237,11 +235,11 @@ function buildShip(scale, tint, ship, angleOffset)
         ship =  { 
                 part:
                     {
-                    bottomWings:    { label:'bottomWingsDefault',    exists:true,   offsetX: 40,    offsetY: -20,   mirror:true,        texture: 'alienBottomWings'+getRandomInt(1,5)},
+                    bottomWings:    { label:'bottomWingsDefault',    exists:true,   offsetX: getRandomInt(20,40),    offsetY: -getRandomInt(0,20),   mirror:true,        texture: 'alienBottomWings'+getRandomInt(1,5)},
                     tailSpires:     { label:'tailSpiresDefault',     exists:true,   offsetX: getRandomInt(20,50),    offsetY: -95,   mirror:true,        texture: 'alienTailSpire'+getRandomInt(1,2)},
                     gunners:        { label:'gunnersDefault',        exists:false,  offsetX: 0,    offsetY: -200,   mirror:true,        texture: 'gunners'}, 
                     frontSpire:     { label:'frontSpireDefault',     exists:true,   offsetX: 0,    offsetY:  50,   mirror:false,       texture: 'alienFrontSpire'+getRandomInt(1,4)}, 
-                    hull:           { label:'hullDefault',           exists:true,   offsetX: 0,    offsetY: 0,      mirror:false,       texture: 'alienHull'+getRandomInt(1,2)}, 
+                    hull:           { label:'hullDefault',           exists:true,   offsetX: 0,    offsetY: getRandomInt(-100,-100),      mirror:false,       texture: 'alienHull'+getRandomInt(1,2)}, 
                     wings:          { label:'wingsDefault',          exists:true,   offsetX: getRandomInt(30,90),   offsetY: 0,      mirror:true,        texture: 'alienWings'+getRandomInt(1,4)}, 
                     wingGuns:       { label:'wingGunsDefault',       exists:true,   offsetX: 60,    offsetY: -30,   mirror:true,        texture: 'alienWingGuns'+getRandomInt(1,6)}, 
                     topGunner:      { label:'topGunnerDefault',      exists:true,  offsetX: 0,    offsetY: -50,   mirror:false,       texture: 'alienTopGunner'+getRandomInt(1,5)}, 

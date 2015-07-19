@@ -80,7 +80,7 @@ function buildNumberEntry(item) {
         numberEntryPanels[numberEntryPanels.length-1].events.onInputDown.add(entryPanelClick, this);
         numberEntryPanels[numberEntryPanels.length-1].events.onInputUp.add(onFinishDrag, draggingPiece);  
         numberEntryValue.push(0)
-        if(state!='build')
+        if(state=='applet')
         {
             
             numberEntryPanelText[numberEntryPanelText.length] = game.add.text(item.displayX[i] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3) *20, item.displayY[i]-9, (item.hideInitialValue=="Yes"?"":numberEntryValue[i].toString() ), {
@@ -119,7 +119,7 @@ function buildNumberEntry(item) {
 var numberEntryPanelBox 
 function entryPanelClick(item)
 {
-    if(state!='build')
+    if(state=='applet')
     {
          if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.clear()}
         

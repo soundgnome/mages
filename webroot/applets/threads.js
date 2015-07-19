@@ -42,7 +42,7 @@ function threadPrompt() {
 
 var inTransition = 0;
 function appletTransition(correct) {
-    console.log("Applet " + loadAppletID + (correct==1?" - Correct":" - Incorrect"));
+    state = 'transition'
     inTransition = 1;
     
     //var backGroundImage = game.add.tileSprite(0, 0, 800, 600, 'starfield');
@@ -173,7 +173,6 @@ function appletTransition(correct) {
         } else
         {
             spaceship.angle += shipTexture.angleOffset
-            console.log(spaceship.angle + "new")
         }
         
         if (typeof shipTexture.scaleOffset === 'undefined')
@@ -189,7 +188,6 @@ function appletTransition(correct) {
         spaceship.scale.setTo(0,0)
         game.add.tween(spaceship).from( { x:(direction==1 ? 100 : game.world.width-100)  }, 2000, Phaser.Easing.Cubic.In, true);
         //game.add.tween(spaceship).to( { scale:{ x: 2, y: 2}  }, 2000, Phaser.Easing.Cubic.In, true);
-        console.log(2*shipTexture.scaleOffset)
         game.add.tween(spaceship.scale).to((direction==1?{ x: 2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}:{ x: -2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}) , 2000, Phaser.Easing.Cubic.In, true);
         shipTween.onComplete.add(destroyShip, this);
     }
@@ -208,7 +206,6 @@ function appletTransition(correct) {
     }
     
     function destroyShip() {
-        console.log(spaceship.scale)
         spaceship.destroy();
     }
     
@@ -223,6 +220,7 @@ function appletTransition(correct) {
         backGroundImage.destroy();
         game.world.remove(scoreText);
         inTransition = 0;
+        state = 'applet'
         if(correct==1){spaceship.destroy()}
     }
 }

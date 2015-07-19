@@ -4,6 +4,7 @@ var loadScreen1;
 var loadScreen2;
 var result;
 var state='title';
+var lastState;
 var gridSize = 20;
 var titleBack;
 
@@ -153,7 +154,7 @@ function preload() {
 }
 
 function create() {
-    titleBack = game.add.sprite(0, 0, 'titleBack');
+    titleBack = game.add.sprite(0, 0, 'starfield');
     game.canvas.oncontextmenu = function (e) { e.preventDefault(); }
 }
 
@@ -161,6 +162,12 @@ function create() {
  *                                  MAIN LOOP
  * ****************************************************************************/
 function update() {
+    if(lastState != state)
+    {
+        lastState = state;
+        console.log('state change: ' , state , ' at ' + this.game.time.totalElapsedSeconds() );
+    }
+    
     switch(state) {
     case 'loading':
         //function probaly not necessary because we're not loading much sound, but will do anyway
@@ -195,14 +202,13 @@ function update() {
         //build a new applet and print code to console
         build();
         break;
-    
     case 'prompt':
         //do nothing until the user is done inputting
         break;
-    }
-    if (typeof galaxyFilter !== 'undefined')
-    {
+    case 'transition':
+        //update the galaxy filter to animate it
         galaxyFilter.update(game.input.mousePointer);
+        break;
     }
 }
 
