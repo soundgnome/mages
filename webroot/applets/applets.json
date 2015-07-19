@@ -816,7 +816,14 @@
         },
         
         { "summary": "Estimate differences: word problems",
-          "problems": []
+          "problems": [
+              {"appletID":"ships","type":21,"startX":540,"startY":20,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"ships","type":21,"startX":320,"startY":40,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"ships","type":21,"startX":60,"startY":40,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"ships","type":21,"startX":520,"startY":320,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"ships","type":21,"startX":300,"startY":340,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0},
+              {"appletID":"ships","type":21,"startX":60,"startY":340,"textureExpression":"buildShip(0.5,[getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)])","number":"1","draggable":0,"selectable":0}
+              ]
         },
         { "summary": "Price lists with multiplication ",
           "problems": [

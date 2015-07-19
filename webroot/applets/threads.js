@@ -45,8 +45,8 @@ function appletTransition(correct) {
     console.log("Applet " + loadAppletID + (correct==1?" - Correct":" - Incorrect"));
     inTransition = 1;
     
-    var backGroundImage = game.add.tileSprite(0, 0, 800, 600, 'starfield');
-    
+    //var backGroundImage = game.add.tileSprite(0, 0, 800, 600, 'starfield');
+    var backGroundImage = getAnimatedGalaxy();
     //this is the text at the bottom that tells your percentage
     var scoreText = game.add.text(game.world.centerX, game.world.centerY+250, "Your score: " + calculateThreadPercent() + "%");
     scoreText.anchor.setTo(0.5,0.5);
@@ -72,76 +72,6 @@ function appletTransition(correct) {
     {
         spriteImage = 'incorrectTitle';
         var letterSequence = ["I","N","C","O","R","R","E","C","T","!"]; //i-n-c-o-r-r-e-c-t-!
-    }
-    
-    //this is the emitter that goes across the screen
-    var direction = getRandomInt(0,1);
-    
-    //leave outside the if statement so we have something to destroy
-    var emitter = game.add.emitter((direction==0 ? -100 : game.world.width+100), game.world.centerY*1.6, 200);
-    
-    if(correct == 1) //show the spaceship and emitter
-    {
-        emitter.makeParticles('yellowStar');
-        emitter.gravity = -50;
-        //  The first parameter sets the effect to "explode" which means all particles are emitted at once
-        //  The second gives each particle a 2000ms lifespan
-        //  The third is ignored when using burst/explode mode
-        //  The final parameter (10) is how many particles will be emitted in this single burst
-        emitter.start(false, 2000, 1, 120);
-        game.add.tween(emitter).from( { y: 100 }, 2000, Phaser.Easing.Cubic.In, true);
-        game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
-        
-        var shipTexture;
-        switch(getRandomInt(0,3)) 
-        {
-            case 0:
-                shipTexture = buildShip(1, { part: { hull: { label:'ogaSpaceship1', exists:true, offset: 0, texture: 'spaceship1'}}} , 0 );
-                break;
-            case 1:
-                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship2', exists:true, offset: 0, texture: 'spaceship2'}}} , 0 );
-                break;
-            case 2:
-                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship3', exists:true, offset: 0, texture: 'spaceship3'}}} , 0 );
-                break;
-            case 3:
-                shipTexture = buildShip(0.25);
-                break;
-            
-        }
-        var spaceship = game.add.sprite((direction==0 ? -130 : game.world.width+130), game.world.centerY+170, shipTexture);
-        spaceship.anchor.setTo(0.5,0.5)
-        if (direction == 1)
-        {
-            spaceship.angle=30; //was 30  
-        } else
-        {
-            spaceship.angle=330-180; 
-        }
-        if (typeof shipTexture.angleOffset === 'undefined')
-        {
-            
-        } else
-        {
-            spaceship.angle += shipTexture.angleOffset
-            console.log(spaceship.angle + "new")
-        }
-        
-        if (typeof shipTexture.scaleOffset === 'undefined')
-        {
-            shipTexture.scaleOffset = 1;
-        } else
-        {
-            spaceship.scale.setTo(shipTexture.scaleOffset, shipTexture.scaleOffset); 
-        }
-
-        var shipTween = game.add.tween(spaceship).from( { y: 120 }, 2000, Phaser.Easing.Cubic.In, true);
-        spaceship.scale.setTo(0,0)
-        game.add.tween(spaceship).from( { x:(direction==1 ? 100 : game.world.width-100)  }, 2000, Phaser.Easing.Cubic.In, true);
-        //game.add.tween(spaceship).to( { scale:{ x: 2, y: 2}  }, 2000, Phaser.Easing.Cubic.In, true);
-        console.log(2*shipTexture.scaleOffset)
-        game.add.tween(spaceship.scale).to((direction==1?{ x: 2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}:{ x: -2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}) , 2000, Phaser.Easing.Cubic.In, true);
-        shipTween.onComplete.add(destroyShip, this);
     }
     var item;
     var tween;
@@ -184,6 +114,86 @@ function appletTransition(correct) {
     
 
 	tween.onComplete.add(fadeOut, this);
+    //this is the emitter that goes across the screen
+    var direction = getRandomInt(0,1);
+    
+    //leave outside the if statement so we have something to destroy
+    var emitter = game.add.emitter((direction==0 ? -100 : game.world.width+120), game.world.centerY+140, 200);
+    
+    if(correct == 1) //show the spaceship and emitter
+    {
+        var shipTint = [getRandomInt(0,255),getRandomInt(0,255),getRandomInt(0,255)];
+        //emitter.makeParticles(['smokeParticle','flameParticle1','flameParticle2','flameParticle3','flameParticle4']);
+        emitter.makeParticles(['smokeParticle','nebulaTrail1','nebulaTrail2','nebulaTrail1','nebulaTrail2']);
+
+        emitter.minParticleScale = 0.2;
+        emitter.maxParticleScale = 0.7;
+        emitter.gravity = -50;
+        
+        emitter.forEach(function(trailParticle){
+            if(trailParticle.key.substr(0, 11) == 'nebulaTrail') {trailParticle.tint = shipTint[0] + 256 * shipTint[1] + 65536 * shipTint[1]}
+        });
+        //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+        //  The second gives each particle a 2000ms lifespan
+        //  The third is ignored when using burst/explode mode
+        //  The final parameter (10) is how many particles will be emitted in this single burst
+        emitter.start(false, 2000, 1, 120);
+        game.add.tween(emitter).from( { y: 100 }, 2000, Phaser.Easing.Cubic.In, true);
+        game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
+        
+        var shipTexture;
+        switch(getRandomInt(3,3)) 
+        {
+            case 0:
+                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship1', exists:true, offset: 0, texture: 'spaceship1'}}} , 0 );
+                break;
+            case 1:
+                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship2', exists:true, offset: 0, texture: 'spaceship2'}}} , 0 );
+                break;
+            case 2:
+                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship3', exists:true, offset: 0, texture: 'spaceship3'}}} , 0 );
+                break;
+            case 3:
+                shipTexture = buildShip(1,shipTint);  //default ship
+                break;
+            
+        }
+        var spaceship = game.add.sprite((direction==0 ? -130 : game.world.width+130), game.world.centerY+170, shipTexture);
+        spaceship.anchor.setTo(0.5,0.5)
+        if (direction == 1)
+        {
+            spaceship.angle=30; //was 30  
+        } else
+        {
+            spaceship.angle=330-180; 
+        }
+        if (typeof shipTexture.angleOffset === 'undefined')
+        {
+            
+        } else
+        {
+            spaceship.angle += shipTexture.angleOffset
+            console.log(spaceship.angle + "new")
+        }
+        
+        if (typeof shipTexture.scaleOffset === 'undefined')
+        {
+            shipTexture.scaleOffset = 1;
+        } else
+        {
+            spaceship.scale.setTo(shipTexture.scaleOffset, shipTexture.scaleOffset); 
+        }
+
+        var shipTween = game.add.tween(spaceship).from( { y: 120 }, 2000, Phaser.Easing.Cubic.In, true);
+        game.add.tween(spaceship).to( { angle: (direction==0?spaceship.angle+10:spaceship.angle-10) }, 2000, Phaser.Easing.Cubic.In, true);
+        spaceship.scale.setTo(0,0)
+        game.add.tween(spaceship).from( { x:(direction==1 ? 100 : game.world.width-100)  }, 2000, Phaser.Easing.Cubic.In, true);
+        //game.add.tween(spaceship).to( { scale:{ x: 2, y: 2}  }, 2000, Phaser.Easing.Cubic.In, true);
+        console.log(2*shipTexture.scaleOffset)
+        game.add.tween(spaceship.scale).to((direction==1?{ x: 2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}:{ x: -2*shipTexture.scaleOffset, y: 2*shipTexture.scaleOffset}) , 2000, Phaser.Easing.Cubic.In, true);
+        shipTween.onComplete.add(destroyShip, this);
+    }
+    
     
     function fadeOut () {
         for (var i = 0; i < letterSequence.length; i++)
@@ -217,11 +227,3 @@ function appletTransition(correct) {
     }
 }
 
-
-function testTest() {
-    var text = game.add.text(game.world.centerX, game.world.centerY, "- phaser -\nrocking with\ngoogle web fonts");
-    text.anchor.setTo(0.5);
-
-    text.font = 'Revalia';
-    text.fontSize = 60;
-}
