@@ -436,7 +436,7 @@
               {"appletID":"32","type":1,"startX":40,"startY":520,"newText":"Select%20all%20the%20obtuse%20angles.","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"appletID":"32","type":5,"startX":680,"startY":540}
                       ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Compound angle with unkown angle on a straight line",
           "problems": [
@@ -543,7 +543,7 @@
               {"appletID":"96","type":2,"startX":680,"startY":360,"font":" 72px Arial","fontString":" 72px Arial","fill":"Black","randomCeiling":"20","randomFloor":"1","draggable":0,"selectable":1,"selectedExpression":"randomNumber%5B5%5D%3E10"},
               {"appletID":"96","type":5,"startX":440,"startY":540}
               ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "",
           "problems": [{"appletID":"97","type":3,"startX":160,"startY":80,"fill":"Black","wholeExpression":"1","numeratorExpression":"1","denominatorExpression":"getRandomInt(1,10)","size":"36","draggable":0,"selectable":0},
@@ -1007,7 +1007,7 @@
               {"appletID":"1-7","type":15,"startX":380,"startY":60,"expression":"%22Select%20all%20other%20forms%20of%20%22%20%2B%20addCommas%28hiddenNumber%5B4%5D%29%20%2B%20%22.%22","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
               {"appletID":"1-7","type":5,"startX":720,"startY":540}
         ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "word to number form: multiple choice",
           "problems": [
@@ -1092,7 +1092,7 @@
             {"appletID":"1-14","type":5,"startX":720,"startY":540},
             {"appletID":"1-14","type":1,"startX":120,"startY":20,"newText":"Select%20the%20numbers%20that%20are%20rounded%20correctly%20to%20the%20nearest%20thousand.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         
         { "summary": "Compare 3-6 digit numbers",
@@ -1418,7 +1418,7 @@
             {"appletID":"2-3","type":15,"startX":400,"startY":80,"expression":"%22Select%20all%20expressions%20that%20are%20equal%20to%20%22%20%2B%20%28hiddenNumber%5B5%5D%2BhiddenNumber%5B6%5D%29%20%2B%20%22%20x%20%22%20%2B%20%28hiddenNumber%5B7%5D%20%2B%20hiddenNumber%5B8%5D%29%20%2B%20%22.%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
             {"appletID":"2-3","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Divide numbers ending in zeroes by numbers ending in zeroes: word problems",
           "problems": [
@@ -1476,7 +1476,7 @@
             {"appletID":"2-7","type":5,"startX":720,"startY":540},
             {"appletID":"2-7","type":1,"startX":60,"startY":20,"newText":"Select%20all%20the%20equations%20that%20are%20true.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"center"}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "single by double digit multiplication",
           "problems": [
@@ -1550,7 +1550,7 @@
             {"appletID":"2-11","type":1,"startX":100,"startY":60,"newText":"Select%20all%20the%20true%20statements.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
             {"appletID":"2-11","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "estimating and exact products - 1x4 digits",
           "problems": [
@@ -1649,7 +1649,7 @@
             {"appletID":"2-17","type":15,"startX":400,"startY":460,"expression":"%28hiddenNumber%5B6%5D%3D%3D1%20%3F%20hiddenNumber%5B1%5D%20%2B%20%220%20x%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%220%22%20%3A%20%22%28%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%2B%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%29%20x%20%28100%20%2B%201%29%22%29","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"right","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B6%5D==1"},
             {"appletID":"2-17","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "2-part multiplication word problem (a*b)+(c*d) with extra info identification multiple select",
           "problems": [
@@ -1672,7 +1672,7 @@
             {"appletID":"2-18","type":5,"startX":720,"startY":540},
             {"appletID":"2-18","type":1,"startX":452,"startY":402,"newText":"Select%20any%20extra%20or%20unnecessary%20information%20from%20the%20box%20before%20clicking%20done.","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"350","alignment":"left"}
             ],
-          "solution": "numberEntryValue==hiddenNumber[2]*hiddenNumber[3]+hiddenNumber[4]*hiddenNumber[5]&&selectableScore()==1"
+          "solution": "numberEntryValue==hiddenNumber[2]*hiddenNumber[3]+hiddenNumber[4]*hiddenNumber[5]&&selectableScore()"
         },
         { "summary": "evaluating expressions - 1x2 digit multiplication with draggable numbers",
           "problems": [
@@ -1739,7 +1739,7 @@
             {"appletID":"3-2","type":5,"startX":720,"startY":540},
             {"appletID":"3-2","type":1,"startX":80,"startY":60,"newText":"Select%20all%20the%20true%20statements.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Even division of 3 digit by 1 in word problem",
           "problems": [
@@ -1878,7 +1878,7 @@
             {"appletID":"3-11","type":1,"startX":20,"startY":60,"newText":"Select%20all%20the%20reasonable%20quotients.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
             {"appletID":"3-11","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Remainder/No Remainder - dragging expressions",
           "problems": [
@@ -1986,7 +1986,7 @@
             {"appletID":"3-16","type":5,"startX":720,"startY":540},
             {"appletID":"3-16","type":99,"color":0,"drawingBoxStartX":247,"drawingBoxStartY":170,"drawingBoxEndX":569,"drawingBoxEndY":516}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Multi-step division word problem",
           "problems": [
@@ -2071,7 +2071,7 @@
             {"appletID":"4-2","type":1,"startX":292,"startY":464,"newText":"Total%20pints%3A","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
             {"appletID":"4-2","type":5,"startX":720,"startY":540}
             ],
-          "solution": "eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[2]==hiddenNumber[1]+hiddenNumber[2]&&eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[3]==hiddenNumber[1]+hiddenNumber[2]"
+          "solution": "['eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[2]>0','numberEntryValue[2]==hiddenNumber[1]+hiddenNumber[2]'  ,  'eval(numberEntryValue[0]+dragToBoxes[0].contents+numberEntryValue[1])==numberEntryValue[2]&&numberEntryValue[2]>0'  ,  'numberEntryValue[3]==hiddenNumber[1]+hiddenNumber[2]']"
         },
         { "summary": "Multiplication equation from word problem",
           "problems": [
@@ -2144,7 +2144,7 @@
             {"appletID":"4-5","type":1,"startX":460,"startY":420,"newText":"players","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
             {"appletID":"4-5","type":5,"startX":720,"startY":540}
             ],
-          "solution": "dragToBoxes[0].contentsID==1&&dragToBoxes[1].contentsID==4&&dragToBoxes[2].contents==hiddenNumber[0]&&numberEntryValue==hiddenNumber[2]"
+          "solution": "['dragToBoxes[0].contentsID==1' , 'dragToBoxes[1].contentsID==4' , 'dragToBoxes[2].contents==hiddenNumber[0]' ,  'numberEntryValue==hiddenNumber[2]']"
         },
         { "summary": "2-step word problem with equation and parentheses",
           "problems": [
@@ -2173,7 +2173,7 @@
             {"appletID":"4-6","type":14,"numberEntryX":186,"numberEntryY":543,"orientation":"h","displayX":[256],"displayY":[454],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":3},
             {"appletID":"4-6","type":5,"startX":720,"startY":540}
             ],
-          "solution": "dragToBoxes[0].contents-(dragToBoxes[1].contents+dragToBoxes[2].contents)==hiddenNumber[2]&&numberEntryValue==hiddenNumber[2]"
+          "solution": "['dragToBoxes[0].contents-(dragToBoxes[1].contents+dragToBoxes[2].contents)==hiddenNumber[2]','numberEntryValue==hiddenNumber[2]' ]"
         },
         { "summary": "matching factor pairs",
           "problems": [
@@ -2190,7 +2190,7 @@
             {"appletID":"4-7","type":15,"startX":620,"startY":360,"expression":"%28hiddenNumber%5B2%5D%3D%3D1%20%3F%20hiddenNumber%5B0%5D%5B2%5D%20%3A%20%229%2C%22%20%2B%20%28Math.floor%28hiddenNumber%5B0%5D%5B0%5D%2F9%29%2B1%29%20%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B2%5D==1%20"},
             {"appletID":"4-7","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "identifying primes and composites",
           "problems": [
@@ -2212,7 +2212,7 @@
           {"appletID":"4-8","type":15,"startX":600,"startY":360,"expression":"hiddenNumber%5B8%5D","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B0%5D==1"},
           {"appletID":"4-8","type":5,"startX":720,"startY":540}
           ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "divisibility of 2,3, and 5",
           "problems": [
@@ -2262,7 +2262,7 @@
             {"appletID":"4-9","type":15,"startX":600,"startY":540,"expression":"5","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5%5D%255==0"},
             {"appletID":"4-9","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Patterns with a rule: 4 operations",
           "problems": [
@@ -2331,7 +2331,7 @@
             {"appletID":"4-12","type":98,"color":0,"drawingLineStartX":100,"drawingLineStartY":300,"drawingLineEndX":100,"drawingLineEndY":100},
             {"appletID":"4-12","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Solving two-step equation from word problem",
           "problems": [
@@ -2356,7 +2356,7 @@
           {"appletID":"4-13","type":1,"startX":280,"startY":480,"newText":"c%20%3D","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
           {"appletID":"4-13","type":5,"startX":720,"startY":540}
             ],
-          "solution": "%28dragToBoxes%5B0%5D.contents%3D%3D%22c%22%7C%7CdragToBoxes%5B1%5D.contents%3D%3D%22c%22%29%26%26%28dragToBoxes%5B0%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%7C%7CdragToBoxes%5B1%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%29%26%26dragToBoxes%5B2%5D.contents%3D%3DaddCommas%28hiddenNumber%5B3%5D%29%26%26dragToBoxes%5B3%5D.contents%3D%3DaddCommas%28hiddenNumber%5B3%5D%29%26%26dragToBoxes%5B4%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%26%26numberEntryValue%3D%3DhiddenNumber%5B1%5D"
+          "solution": "%5B%27%28dragToBoxes%5B0%5D.contents%3D%3D%22c%22%7C%7CdragToBoxes%5B1%5D.contents%3D%3D%22c%22%29%26%26%28dragToBoxes%5B0%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%7C%7CdragToBoxes%5B1%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%29%26%26dragToBoxes%5B2%5D.contents%3D%3DaddCommas%28hiddenNumber%5B3%5D%29%26%26dragToBoxes%5B3%5D.contents%3D%3DaddCommas%28hiddenNumber%5B3%5D%29%26%26dragToBoxes%5B4%5D.contents%3D%3DaddCommas%28hiddenNumber%5B2%5D%29%27%20%2C%20%27numberEntryValue%3D%3DhiddenNumber%5B1%5D%27%5D"
         },
         { "summary": "identify true equations",
           "problems": [
@@ -2391,7 +2391,7 @@
             {"appletID":"4-14","type":1,"startX":160,"startY":40,"newText":"Select%20all%20of%20the%20true%20equations.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
             {"appletID":"4-14","type":5,"startX":720,"startY":540}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Comparing quantities on pictogram",
           "problems": [
@@ -2497,7 +2497,7 @@
           {"appletID":"4-17","type":5,"startX":80,"startY":540},
           {"appletID":"4-17","type":15,"startX":386,"startY":361,"expression":"%22%28%20%20%20%20%20x%20%20%20%20%20%29%20%20%2B%20%20%28%20%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%20x%20%20%20%20%20%29%20%20%3D%20%20c%22","font":" 64px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0}
             ],
-          "solution": "dragToBoxes[0].contents*dragToBoxes[1].contents==hiddenNumber[0]*hiddenNumber[2] && dragToBoxes[2].contents==hiddenNumber[3] && numberEntryValue[0]+numberEntryValue[1]==(hiddenNumber[0]*hiddenNumber[2])+(hiddenNumber[1]*hiddenNumber[3]) && numberEntryValue[2]==(hiddenNumber[0]*hiddenNumber[2])+(hiddenNumber[1]*hiddenNumber[3])"
+          "solution": "['dragToBoxes[0].contents*dragToBoxes[1].contents==hiddenNumber[0]*hiddenNumber[2]' , 'dragToBoxes[2].contents==hiddenNumber[3]' , 'numberEntryValue[0]+numberEntryValue[1]==(hiddenNumber[0]*hiddenNumber[2])+(hiddenNumber[1]*hiddenNumber[3])' , 'numberEntryValue[2]==(hiddenNumber[0]*hiddenNumber[2])+(hiddenNumber[1]*hiddenNumber[3])]"
         },
         { "summary": "centimers to millimeters in word problem",
           "problems": [
@@ -2534,7 +2534,7 @@
           {"appletID":"5-2","type":98,"color":0,"drawingLineStartX":140,"drawingLineStartY":420,"drawingLineEndX":600,"drawingLineEndY":420},
           {"appletID":"5-2","type":5,"startX":720,"startY":540}
             ],
-          "solution": "numberEntryValue[0]==hiddenNumber[0]*100 &&numberEntryValue[1]==(hiddenNumber[0]+1)*100 &&  numberEntryValue[2]==(hiddenNumber[0]+3)*100"
+          "solution": "['numberEntryValue[0]==hiddenNumber[0]*100' , 'numberEntryValue[1]==(hiddenNumber[0]+1)*100' , 'numberEntryValue[2]==(hiddenNumber[0]+3)*100']"
         },
         { "summary": "",
           "problems": [
@@ -2573,7 +2573,7 @@
             {"appletID":"5-4","type":98,"color":255,"drawingLineStartX":180,"drawingLineStartY":20,"drawingLineEndX":180,"drawingLineEndY":180},
             {"appletID":"5-4","type":1,"startX":40,"startY":500,"newText":"Classify%20each%20conversion%20by%20dragging%20it%20into%20the%20correct%20box.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"500","alignment":"left"}
             ],
-          "solution": "dragToBoxes[0].contentsID==1 && dragToBoxes[1].contentsID==2 && dragToBoxes[2].contentsID==0"
+          "solution": "['dragToBoxes[0].contentsID==1','dragToBoxes[1].contentsID==2','dragToBoxes[2].contentsID==0']"
         },
         { "summary": "",
           "problems": [
@@ -2595,7 +2595,7 @@
             {"appletID":"5-5","type":1,"startX":60,"startY":20,"newText":"Enter%20the%20length%2C%20width%2C%20and%20perimeter%20of%20the%20rectangle%20below.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
 
             ],
-          "solution": "numberEntryValue[0] == hiddenNumber[1] && numberEntryValue[1] == hiddenNumber[0] && numberEntryValue[2] == hiddenNumber[1]*2 + hiddenNumber[0]*2"
+          "solution": "['numberEntryValue[0] == hiddenNumber[1]' , 'numberEntryValue[1] == hiddenNumber[0]' , 'numberEntryValue[2] == hiddenNumber[1]*2 + hiddenNumber[0]*2']"
         },
         { "summary": "time conversion - min/sec and sec/min",
           "problems": [
@@ -2618,7 +2618,7 @@
             {"appletID":"5-6","type":1,"startX":60,"startY":20,"newText":"Enter%20the%20conversion.%20%20Then%20drag%20the%20correct%20operation%20from%20the%20blue%20box%20to%20complete%20the%20equation%20to%20show%20how%20you%20found%20your%20answer.","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
 
             ],
-          "solution": "(hiddenNumber[0] == 0 ? numberEntryValue[0] == hiddenNumber[1]*60 && numberEntryValue[1] == hiddenNumber[1]*60 && dragToBoxes[0].contentsID == 2 : numberEntryValue[0] == hiddenNumber[1] && numberEntryValue[1] == hiddenNumber[1] && dragToBoxes[0].contentsID == 3 )"
+          "solution": "(hiddenNumber[0] == 0 ? ['numberEntryValue[0] == hiddenNumber[1]*60' , 'numberEntryValue[1] == hiddenNumber[1]*60' , 'dragToBoxes[0].contentsID == 2'] : ['numberEntryValue[0] == hiddenNumber[1]' , 'numberEntryValue[1] == hiddenNumber[1]' , 'dragToBoxes[0].contentsID == 3'] )"
         },
         { "summary": "time conversion - hour/day and day/hour",
           "problems": [
@@ -2641,7 +2641,7 @@
             {"appletID":"5-7","type":5,"startX":720,"startY":540},
             {"appletID":"5-7","type":1,"startX":60,"startY":20,"newText":"Enter%20the%20conversion.%20%20Then%20drag%20the%20correct%20operation%20from%20the%20blue%20box%20to%20complete%20the%20equation%20to%20show%20how%20you%20found%20your%20answer.","font":"","fontString":" 18px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
             ],
-          "solution": "(hiddenNumber[0] == 0 ? numberEntryValue[0] == hiddenNumber[1]*24 && numberEntryValue[1] == hiddenNumber[1]*24 && dragToBoxes[0].contentsID == 5 : numberEntryValue[0] == hiddenNumber[1] && numberEntryValue[1] == hiddenNumber[1] && dragToBoxes[0].contentsID == 6 )"
+          "solution": "(hiddenNumber[0] == 0 ? ['numberEntryValue[0] == hiddenNumber[1]*24' , 'numberEntryValue[1] == hiddenNumber[1]*24' , 'dragToBoxes[0].contentsID == 5'] : ['numberEntryValue[0] == hiddenNumber[1]' , 'numberEntryValue[1] == hiddenNumber[1]' , 'dragToBoxes[0].contentsID == 6'] )"
         },
         { "summary": "Metric unit conversions - shuffled multiple selection",
           "problems": [
@@ -2664,7 +2664,7 @@
             {"appletID":"5-8","type":5,"startX":720,"startY":540},
             {"appletID":"5-8","type":1,"startX":60,"startY":40,"newText":"Select%20all%20the%20correct%20metric%20unit%20conversions%3A","font":"","fontString":"bold 30px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"500","alignment":"left"}
             ],
-          "solution": "selectableScore()==1"
+          "solution": "selectableScore()"
         },
         { "summary": "Perimeter and area of a rectangle",
           "problems": [
@@ -2685,7 +2685,7 @@
           {"appletID":"5-9","type":15,"startX":689,"startY":351,"expression":"%22square%20%22%20%2B%20hiddenNumber%5B2%5D%5BhiddenNumber%5B4%5D%5D","font":" 18px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"1","originalWidth":115},
           {"appletID":"5-9","type":5,"startX":720,"startY":540}           
             ],
-          "solution": "hiddenNumber[0]*2+hiddenNumber[1]*2==numberEntryValue[0] && hiddenNumber[0]*hiddenNumber[1]==numberEntryValue[1]"
+          "solution": "['hiddenNumber[0]*2+hiddenNumber[1]*2==numberEntryValue[0]' , 'hiddenNumber[0]*hiddenNumber[1]==numberEntryValue[1]']"
         },
         { "summary": "Standard weight conversion in word problem",
           "problems": [
@@ -2700,7 +2700,7 @@
           {"appletID":"5-10","type":5,"startX":720,"startY":540}
                      
             ],
-          "solution": "numberEntryValue[0]==hiddenNumber[0] && numberEntryValue[1]==hiddenNumber[1]-hiddenNumber[0]"
+          "solution": "['numberEntryValue[0]==hiddenNumber[0]' , 'numberEntryValue[1]==hiddenNumber[1]-hiddenNumber[0]']"
         },
         { "summary": "Line plot - identifying how many pieces of data are represented",
           "problems": [

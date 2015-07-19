@@ -19,40 +19,70 @@ function buildDoneButton(item) {
 
 //this tests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
-    if(inTransition == 0)
+    if(state != 'transition')
     {
+        var correct = 0;
         timerRunning = 0;
         if(threadMode == 0)
         {
-            if(eval(tests[loadAppletID]))
+            
+            if($.isArray(eval(tests[loadAppletID])))  //partial credit problem
+            {
+                for(var test = 0 ; test < eval(tests[loadAppletID]).length ; test++ )
+                {
+                    {
+                        correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
+                    }    
+                }
+                threadRecord.push(correct);
+            } else //singular question
+            { 
+                if(+eval(tests[loadAppletID])==1)  //implicitly convert true to 1; also handles selectableScore()
+                {
+                    correct = 1;
+                } 
+            }
+            if(correct == 1)
             {
                 clearCurrentApplet();
-            } 
+            }
+            
+            
         } else
         {
-            var correct;
-            if(eval(tests[loadAppletID]))
+            if($.isArray(eval(tests[loadAppletID]))) //partial credit problem
             {
-                threadRecord.push(1);
-                correct = 1;
-            } else
-            {
-                threadRecord.push(0);
-                correct = 0;
+                for(var test = 0 ; test < eval(tests[loadAppletID]).length ; test++ )
+                {
+                    {
+                        correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
+                    }    
+                }
+                threadRecord.push(correct);
+            } else //singular question
+            { 
+                if(+eval(tests[loadAppletID])>0)
+                {
+                    threadRecord.push(+eval(tests[loadAppletID])); //implicitly convert true to 1; also handles selectableScore()
+                    correct = +eval(tests[loadAppletID]);
+                } else
+                {
+                    threadRecord.push(0);
+                    correct = 0;
+                }    
             }
-            //insert animation
-            //clearCurrentApplet();
+            
             var timerExists = 0;
             piece.forEach(function(item){
                 if( item.type == 22 ){ timerExists=1};
             });
             
-            if(timerExists==1)
+            if(timerExists==1)  //don't run the animation if we're in a speed round
             {
                 clearCurrentApplet();
             } else
             {
-                appletTransition(correct);   
+                appletTransition(correct); //run the transition animation
             }
             
         }    

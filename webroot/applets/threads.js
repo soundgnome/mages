@@ -40,10 +40,8 @@ function threadPrompt() {
     });
 }
 
-var inTransition = 0;
 function appletTransition(correct) {
     state = 'transition'
-    inTransition = 1;
     
     //var backGroundImage = game.add.tileSprite(0, 0, 800, 600, 'starfield');
     var backGroundImage = getAnimatedGalaxy();
@@ -66,12 +64,13 @@ function appletTransition(correct) {
     var spriteImage;
     if(correct == 1)
     {
-        spriteImage = 'correctTitle';
         var letterSequence = ["C","O","R","R","E","C","T","!"]; //c-o-r-r-e-c-t-!
+    } else if(correct == 0)
+    {
+        var letterSequence = ["I","N","C","O","R","R","E","C","T","!"]; //i-n-c-o-r-r-e-c-t-!
     } else
     {
-        spriteImage = 'incorrectTitle';
-        var letterSequence = ["I","N","C","O","R","R","E","C","T","!"]; //i-n-c-o-r-r-e-c-t-!
+        var letterSequence = ["P","A","R","T"," ","R","I","G","H","T"];
     }
     var item;
     var tween;
@@ -219,7 +218,6 @@ function appletTransition(correct) {
         clearCurrentApplet();
         backGroundImage.destroy();
         game.world.remove(scoreText);
-        inTransition = 0;
         state = 'applet'
         if(correct==1){spaceship.destroy()}
     }
