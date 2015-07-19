@@ -108,25 +108,11 @@ function preload() {
     game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
     
     game.load.image('smokeParticle', 'assets/shipParts/alienShip/smokeParticle.png');
-    game.load.image('flameParticle1', 'assets/shipParts/alienShip/flame_part1.png');
-    game.load.image('flameParticle2', 'assets/shipParts/alienShip/flame_part2.png');
-    game.load.image('flameParticle3', 'assets/shipParts/alienShip/flame_part3.png');
-    game.load.image('flameParticle4', 'assets/shipParts/alienShip/flame_part4.png');
     game.load.image('nebulaTrail1', 'assets/shipParts/alienShip/nebulaTrail1.png');
     game.load.image('nebulaTrail2', 'assets/shipParts/alienShip/nebulaTrail2.png');
     
     
     //ship parts
-    game.load.image('bottomWings', 'assets/shipParts/bottomWings.png');
-    game.load.image('tailSpires', 'assets/shipParts/tailSpires.png');
-    game.load.image('gunners', 'assets/shipParts/gunners.png');
-    game.load.image('frontSpire', 'assets/shipParts/frontSpire.png');
-    game.load.image('hull', 'assets/shipParts/hull.png');
-    game.load.image('wingGuns', 'assets/shipParts/wingGuns.png');
-    game.load.image('wings', 'assets/shipParts/wings.png');
-    game.load.image('topGunner', 'assets/shipParts/topGunner.png');
-    game.load.image('windScreen', 'assets/shipParts/windScreen.png');
-
     game.load.image('alienBottomWings1', 'assets/shipParts/alienShip/bottomWings1.png');
     game.load.image('alienBottomWings2', 'assets/shipParts/alienShip/bottomWings2.png');
     game.load.image('alienBottomWings3', 'assets/shipParts/alienShip/bottomWings3.png');
