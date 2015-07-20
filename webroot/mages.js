@@ -228,7 +228,8 @@ function title() {
         titleInitiated=1; //only happens once
         loadScreen1.destroy(true);
         loadScreen2.destroy(true);
-        defineApplets();  
+        //defineApplets();  
+        loadThreads();
         titleText = game.add.sprite(game.world.centerX, game.world.centerY-100, 'title');
         titleText.anchor.set(0.5);
         game.add.tween(titleText).from( { y: -200 }, 2000, Phaser.Easing.Bounce.Out, true);
@@ -328,30 +329,7 @@ function showHelpScreen(helpScreen) {
     
 }
 
-//this file loads the applet definitions for MAGES.
-function defineApplets() {
 
-    console.log("retrieving applet data");
-    $.getJSON("applets/applets.json", function(data) {
-
-        console.log("loading applets");
-        var section_count = data.applets.length;
-        for (var i=0; i<section_count; i++) {
-            var problem_count = data.applets[i].problems.length;
-            for (var j=0; j<problem_count; j++) {
-                applet.push(data.applets[i].problems[j]);
-                if ("solution" in data.applets[i]) {
-                    var applet_id = data.applets[i].problems[0].appletID;
-                    tests[applet_id] = decodeURIComponent(data.applets[i].solution);
-                    //make a solutions array here
-                }
-            }
-        }
-
-        console.log("applets ready");
-    });
-    loadThreads();
-}
 
 /*******************************************************************************
  *                          APPLET LOAD SECTION
@@ -380,9 +358,9 @@ var tests = {};
 function runApplet() {
     if(appletInitiated==0)
     {
+        defineApplet(loadAppletID)
         appletInitiated=1;
         this.game.stage.backgroundColor = '#DDDDDD';
-        loadApplet();
     } else
     {
         /***********************************************************************
@@ -396,15 +374,43 @@ function runApplet() {
     }
 }
 
+//this function loads the applet definition from the json file for the loadApplet() function.
 
-//this goes through the applet array looking for relevant pieces.  Then it loads them with applet behaviors in place.
-
-
-var dragToBoxes = [];
-function loadApplet() {
-    for(var i=0; i<applet.length; i++)
+function defineApplet(loadID) {
+    console.log("retrieving applet data");
+    $.getJSON("applets/applets.json", function(data) 
     {
-        if(applet[i].appletID == loadAppletID)
+        var applet = [];
+        console.log("loading applet");
+        var applet_count = data.applets.length;
+        for (var i=0; i < applet_count; i++) 
+        {
+            if(data.applets[i].appletID == loadID)
+            {
+                var piece_count = data.applets[i].pieces.length;
+                for (var j=0; j < piece_count ; j++) 
+                {
+                    applet.push(data.applets[i].pieces[j]);
+                    //console.log(data.applets[i].pieces[j]);
+                    
+                    if ("doneStatement" in data.applets[i]) {
+                        var applet_id = data.applets[i].pieces[0].appletID;
+                        tests = decodeURIComponent(data.applets[i].doneStatement);
+                }  
+            }
+        }
+    }
+    loadApplet(applet)
+    });
+    
+}
+
+//This loads the widget pieces with applet behaviors in place
+var dragToBoxes = [];
+function loadApplet(applet) {
+    console.log("loading applet: " + loadAppletID)
+    for(var i=0; i < applet.length; i++)
+    {
         {
             
             switch(applet[i].type) {
@@ -486,7 +492,7 @@ function loadApplet() {
             buildHiddenNumber(applet[i]);
             break;
             
-            case 17: //inequality entry (inequalityEntryX, inequalityEntryY, displayX, displayY)
+            case 17: //inequality entry 
             buildInequalityEntry(applet[i]);
             break;
             
@@ -514,18 +520,16 @@ function loadApplet() {
             buildDrawLine(applet[i]);
             break;
             
-            
             case 99: //draw box
             buildDrawBox(applet[i]);
             break;
             
             } 
-        
         }
     }
-    
 }
 
+//this clears the current applet
 function clearCurrentApplet()
 {
     dragToBoxes.forEach(function(item){
@@ -625,16 +629,7 @@ function clearCurrentApplet()
     }
 }
 
-function calculateThreadPercent() {
-    var threadTotal = 0;  // Variable to hold your total
-            
-            for(var i = 0, len = threadRecord.length; i < len; i++) 
-            {
-                threadTotal += threadRecord[i];
-            }
-    return Math.round((threadTotal/threadRecord.length)*100)
 
-}
 
 /*******************************************************************************
  *                               BUILD SECTION
@@ -648,7 +643,7 @@ var draggingPiece;
 var piece = [];
 var menuKeyPressed = 0;
 var newAppletID=0;
-var applet=[];
+//var applet=[];
 var printed = 0;
 var appletDoneTest;
                         /*******************************************************

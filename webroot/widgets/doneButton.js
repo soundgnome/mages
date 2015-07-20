@@ -26,12 +26,12 @@ function doneButtonClick(item) {
         if(threadMode == 0)
         {
             
-            if($.isArray(eval(tests[loadAppletID])))  //partial credit problem
+            if($.isArray(eval(tests)))  //partial credit problem
             {
-                for(var test = 0 ; test < eval(tests[loadAppletID]).length ; test++ )
+                for(var test = 0 ; test < eval(tests).length ; test++ )
                 {
                     {
-                        correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
+                        correct += eval(eval(tests)[test])/(eval(tests).length)
                     }    
                 }
                 console.log(correct)
@@ -39,7 +39,7 @@ function doneButtonClick(item) {
                 threadRecord.push(correct);
             } else //singular question
             { 
-                if(+eval(tests[loadAppletID])==1)  //implicitly convert true to 1; also handles selectableScore()
+                if(+eval(tests)==1)  //implicitly convert true to 1; also handles selectableScore()
                 {
                     correct = 1;
                 } 
@@ -51,22 +51,22 @@ function doneButtonClick(item) {
             
         } else
         {
-            if($.isArray(eval(tests[loadAppletID]))) //partial credit problem
+            if($.isArray(eval(tests))) //partial credit problem
             {
-                for(var test = 0 ; test < eval(tests[loadAppletID]).length ; test++ )
+                for(var test = 0 ; test < eval(tests).length ; test++ )
                 {
                     {
-                        correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
+                        correct += eval(eval(tests)[test])/(eval(tests).length)
                     }    
                 }
                 if(correct > 0.99) {correct = 1}  //some partial credit applets don't end up getting to 1
                 threadRecord.push(correct);
             } else //singular question
             { 
-                if(+eval(tests[loadAppletID])>0)
+                if(+eval(tests)>0)
                 {
-                    threadRecord.push(+eval(tests[loadAppletID])); //implicitly convert true to 1; also handles selectableScore()
-                    correct = +eval(tests[loadAppletID]);
+                    threadRecord.push(+eval(tests)); //implicitly convert true to 1; also handles selectableScore()
+                    correct = +eval(tests);
                 } else
                 {
                     threadRecord.push(0);

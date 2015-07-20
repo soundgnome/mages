@@ -473,7 +473,7 @@ function printPieces(newAppletID, appletDoneTest) {
             }
         }
     printString = printString.slice(0, - 5)
-    constructorString="<br>SOLUTION: " + appletDoneTest + " ";
+    constructorString="<br>doneStatement: " + appletDoneTest + " ";
     printString = printString + openTag + constructorString + closeTag;  
     state="prompt";
     bootbox.alert({
