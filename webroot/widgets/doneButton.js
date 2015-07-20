@@ -34,6 +34,8 @@ function doneButtonClick(item) {
                         correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
                     }    
                 }
+                console.log(correct)
+                if(correct > 0.99) {correct = 1} ; //some partial credit applets don't end up getting to 1
                 threadRecord.push(correct);
             } else //singular question
             { 
@@ -47,7 +49,6 @@ function doneButtonClick(item) {
                 clearCurrentApplet();
             }
             
-            
         } else
         {
             if($.isArray(eval(tests[loadAppletID]))) //partial credit problem
@@ -58,6 +59,7 @@ function doneButtonClick(item) {
                         correct += eval(eval(tests[loadAppletID])[test])/(eval(tests[loadAppletID]).length)
                     }    
                 }
+                if(correct > 0.99) {correct = 1}  //some partial credit applets don't end up getting to 1
                 threadRecord.push(correct);
             } else //singular question
             { 

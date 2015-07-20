@@ -36,6 +36,8 @@ function buildDragToBox(item) {
     piece[piece.length-1].userScaleY = item.userScaleY;
     piece[piece.length-1].occupied = 0;
     piece[piece.length-1].contents = "0";
+    piece[piece.length-1].contentsID = null;
+    
     dragToBoxes[dragToBoxes.length] = piece[piece.length-1];  //add myself to the dragToBoxes array.
 }
 
