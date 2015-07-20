@@ -7,6 +7,7 @@ function getPrintSettings() {
                 message: 
                 getMenuEntryString("New applet ID#:" , "appletid", 0 , null) +
                 getMenuEntryString("New doneTest:", "donetest", "multipleChoiceCorrectAnswer==multipleChoiceSelected" , "This will be evaluated when the used presses the done button.") +
+                getMenuEntryString("New Summary:", "summary", "Edit this text to add an applet summary.", null) +
                 '</form> </div>  </div>',
                 buttons: {
                     success: {
@@ -18,9 +19,10 @@ function getPrintSettings() {
                             
                             newAppletID = $('#appletid').val();
                             appletDoneTest = encodeURI($('#donetest').val());
+                            var summary = $('#summary').val();
                             appletDoneTest = decodeURI(appletDoneTest);
                             state = 'build';
-                            printPieces(newAppletID, appletDoneTest);
+                            printPieces(newAppletID, appletDoneTest, summary);
                         }
                     }
                 }
@@ -34,8 +36,8 @@ function getPrintSettings() {
          * ********************************************************************/
 
 //this prints the constructor codes to an alert window
-function printPieces(newAppletID, appletDoneTest) {
-    var printString = "";
+function printPieces(newAppletID, appletDoneTest, summary) {
+    var printString = '{ "appletID" : "' + newAppletID + '", <br>"summary" : "' + summary + '",<br>"pieces" : [<br>';
     var openTag='';
     var closeTag = '<br>';
     var constructorString = "";
@@ -48,7 +50,6 @@ function printPieces(newAppletID, appletDoneTest) {
             {
                 case 0: //clickbox
                 var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "userScale": piece[item].userScale, 
                         "startX":piece[item].x , 
@@ -60,7 +61,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     
                 case 1: //text area constructor
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -78,7 +78,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     
                 case 2: //random number constructor
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -98,7 +97,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 3: //evaluate fraction constructor
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -118,7 +116,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 4: //hundredChart
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "userScale": piece[item].userScale, 
                         "staticValue": piece[item].staticValue,
@@ -131,7 +128,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 5: //doneButton
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y 
@@ -143,7 +139,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 case 6: //random decimal constructor
                 //(appletID, type, startX, startY, font, fill, randomCeiling, randomFloor, randomDigits) {
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -164,7 +159,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 7: //random mixed number constructor
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -186,7 +180,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 8: //draggable number constructor
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -201,7 +194,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 9: //dragTo Box
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -256,7 +248,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 case 12: //tally box
                 //(appletID, type, startX, startY, initialValue) {
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -269,7 +260,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 case 13: //clonable base ten blocks
                 //(appletID, type, startX, startY, dragX, dragY, dragWidth, dragHeight) {
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -284,7 +274,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 14: //number entry (numberEntryX, numberEntryY, orientation, displayX, displayY,displayDigits)
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "numberEntryX":piece[item].x , 
                         "numberEntryY":piece[item].y , 
@@ -301,7 +290,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 15: //EvaluatedExpression
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -336,7 +324,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     
                 case 17: //InequalityEntryConstructor(appletID, type,inequalityEntryX, inequalityEntryY, displayX, displayY)
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "inequalityEntryX":piece[item].x , 
                         "inequalityEntryY":piece[item].y ,
@@ -349,7 +336,6 @@ function printPieces(newAppletID, appletDoneTest) {
                 
                 case 18: //BarGraphConstructor(appletID, type, title, min, max, interval, numberLabel, numberedAxis, itemList, itemLabel, itemValueList, startX, startY)
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x , 
                         "startY":piece[item].y , 
@@ -372,7 +358,6 @@ function printPieces(newAppletID, appletDoneTest) {
                             piece[item].expressionList[itemCounter] =fixedEncodeURIComponent(piece[item].expressionList[itemCounter]) ;
                     }
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX": piece[item].x , 
                         "startY": piece[item].y , 
@@ -444,7 +429,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     
                 case 98: //draw line
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "color": piece[item].color, 
                         "drawingLineStartX":piece[item].x , 
@@ -458,7 +442,6 @@ function printPieces(newAppletID, appletDoneTest) {
                     
                 case 99: //draw box
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "color": piece[item].color, 
                         "drawingBoxStartX":piece[item].x , 
@@ -473,8 +456,9 @@ function printPieces(newAppletID, appletDoneTest) {
             }
         }
     printString = printString.slice(0, - 5)
-    constructorString="<br>doneStatement: " + appletDoneTest + " ";
+    constructorString='<br>],<br>"doneStatement" : "' + appletDoneTest + '"<br>}';
     printString = printString + openTag + constructorString + closeTag;  
+
     state="prompt";
     bootbox.alert({
         size: 'large',

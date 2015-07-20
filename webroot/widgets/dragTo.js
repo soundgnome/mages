@@ -1,12 +1,4 @@
-//DRAGTO BOX FOR DRAGGABLE NUMBER
-function DragToConstructor(appletID, type, startX, startY, userScale) {
-    this.appletID = appletID;
-    this.type=type;
-    this.startX = startX;
-    this.startY = startY;
-    this.userScale = userScale;
-}
-
+var dragToBoxes = [];
 function buildDragToBox(item) {
     var startX;
     var startY;

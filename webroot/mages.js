@@ -165,13 +165,12 @@ function update() {
     if(lastState != state)
     {
         lastState = state;
-        console.log('state change: ' , state , ' at ' + this.game.time.totalElapsedSeconds() );
+        console.log('state change to ' + state + ' at ' + Math.round(this.game.time.totalElapsedSeconds()*Math.pow(10,2))/Math.pow(10,2) +'s' );
     }
     
     switch(state) {
     case 'loading':
         //function probaly not necessary because we're not loading much sound, but will do anyway
-        //loading(); 
         break;
         
     case 'title':
@@ -181,11 +180,6 @@ function update() {
     case 'help':
         help();
         //a help screen describing the software's use
-        break;
-        
-    case 'appletSelection':
-        //call up an applet by ID
-        appletSelection();
         break;
     
     case 'threadSelection':
@@ -202,9 +196,11 @@ function update() {
         //build a new applet and print code to console
         build();
         break;
+        
     case 'prompt':
         //do nothing until the user is done inputting
         break;
+        
     case 'transition':
         //update the galaxy filter to animate it
         galaxyFilter.update(game.input.mousePointer);
@@ -266,7 +262,7 @@ function title() {
 
 //the three buttons each change the state
 function loadButtonClick() {
-    state='appletSelection';
+    appletSelection();
 }
 
 function threadButtonClick() {
@@ -297,7 +293,6 @@ function help() {
             if(helpScreen>3){
                 state='title';
                 helpScreen=1;
-                
             }
         }
         
@@ -354,7 +349,8 @@ function threadSelection() {
 }
 
 var appletInitiated = 0;
-var tests = {};
+var appletTests = [];
+var appletSummary;
 function runApplet() {
     if(appletInitiated==0)
     {
@@ -378,37 +374,39 @@ function runApplet() {
 
 function defineApplet(loadID) {
     console.log("retrieving applet data");
-    $.getJSON("applets/applets.json", function(data) 
+    $.getJSON("applets/applets.json", function(appletData) 
     {
         var applet = [];
-        console.log("loading applet");
-        var applet_count = data.applets.length;
+        var applet_count = appletData.applets.length;
         for (var i=0; i < applet_count; i++) 
         {
-            if(data.applets[i].appletID == loadID)
+            if(appletData.applets[i].appletID == loadID)  //find the applet that matches the loadID
             {
-                var piece_count = data.applets[i].pieces.length;
+                var piece_count = appletData.applets[i].pieces.length;
                 for (var j=0; j < piece_count ; j++) 
                 {
-                    applet.push(data.applets[i].pieces[j]);
-                    //console.log(data.applets[i].pieces[j]);
-                    
-                    if ("doneStatement" in data.applets[i]) {
-                        var applet_id = data.applets[i].pieces[0].appletID;
-                        tests = decodeURIComponent(data.applets[i].doneStatement);
-                }  
+                    //build up an applet array of the piece definitions
+                    applet.push(appletData.applets[i].pieces[j]);
+                    if ("doneStatement" in appletData.applets[i]) 
+                    {
+                        appletTests = decodeURIComponent(appletData.applets[i].doneStatement);
+                    }
+                    if ("summary" in appletData.applets[i]) 
+                    {
+                        appletSummary = appletData.applets[i].summary;
+                    }
+                }
             }
         }
-    }
+    
+    //now that I have an applet array consisting of all the pieces, I can load the applet
     loadApplet(applet)
     });
-    
 }
 
 //This loads the widget pieces with applet behaviors in place
-var dragToBoxes = [];
 function loadApplet(applet) {
-    console.log("loading applet: " + loadAppletID)
+    console.log("loading applet: " + loadAppletID + " - " + appletSummary)
     for(var i=0; i < applet.length; i++)
     {
         {
@@ -527,6 +525,7 @@ function loadApplet(applet) {
             } 
         }
     }
+    console.log('Finished loading applet at ' + Math.round(this.game.time.totalElapsedSeconds()*Math.pow(10,2))/Math.pow(10,2) +'s' );
 }
 
 //this clears the current applet
@@ -643,7 +642,6 @@ var draggingPiece;
 var piece = [];
 var menuKeyPressed = 0;
 var newAppletID=0;
-//var applet=[];
 var printed = 0;
 var appletDoneTest;
                         /*******************************************************

@@ -17,7 +17,7 @@ function buildDoneButton(item) {
     }
 }
 
-//this tests the doneStatement; this could trigger a dialog, another applet, etc.
+//this appletTests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
     if(state != 'transition')
     {
@@ -26,12 +26,12 @@ function doneButtonClick(item) {
         if(threadMode == 0)
         {
             
-            if($.isArray(eval(tests)))  //partial credit problem
+            if($.isArray(eval(appletTests)))  //partial credit problem
             {
-                for(var test = 0 ; test < eval(tests).length ; test++ )
+                for(var test = 0 ; test < eval(appletTests).length ; test++ )
                 {
                     {
-                        correct += eval(eval(tests)[test])/(eval(tests).length)
+                        correct += eval(eval(appletTests)[test])/(eval(appletTests).length)
                     }    
                 }
                 console.log(correct)
@@ -39,7 +39,7 @@ function doneButtonClick(item) {
                 threadRecord.push(correct);
             } else //singular question
             { 
-                if(+eval(tests)==1)  //implicitly convert true to 1; also handles selectableScore()
+                if(+eval(appletTests)==1)  //implicitly convert true to 1; also handles selectableScore()
                 {
                     correct = 1;
                 } 
@@ -51,22 +51,22 @@ function doneButtonClick(item) {
             
         } else
         {
-            if($.isArray(eval(tests))) //partial credit problem
+            if($.isArray(eval(appletTests))) //partial credit problem
             {
-                for(var test = 0 ; test < eval(tests).length ; test++ )
+                for(var test = 0 ; test < eval(appletTests).length ; test++ )
                 {
                     {
-                        correct += eval(eval(tests)[test])/(eval(tests).length)
+                        correct += eval(eval(appletTests)[test])/(eval(appletTests).length)
                     }    
                 }
                 if(correct > 0.99) {correct = 1}  //some partial credit applets don't end up getting to 1
                 threadRecord.push(correct);
             } else //singular question
             { 
-                if(+eval(tests)>0)
+                if(+eval(appletTests)>0)
                 {
-                    threadRecord.push(+eval(tests)); //implicitly convert true to 1; also handles selectableScore()
-                    correct = +eval(tests);
+                    threadRecord.push(+eval(appletTests)); //implicitly convert true to 1; also handles selectableScore()
+                    correct = +eval(appletTests);
                 } else
                 {
                     threadRecord.push(0);

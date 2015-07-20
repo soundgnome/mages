@@ -225,7 +225,6 @@ var dragToGraphic;
 var baseTenDragTo;
 
 function buildBaseTenDragTo(startX, startY, boxWidth, boxHeight) {
-    //baseTenDragTo = (new BaseTenDragToConstructor(startX, startY, boxWidth, boxHeight));
     baseTenDragTo = JSON.parse(JSON.stringify({    
                         "startX": startX, 
                         "startY": startY, 
