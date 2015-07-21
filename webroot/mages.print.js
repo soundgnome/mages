@@ -11,7 +11,7 @@ function getPrintSettings() {
                 '</form> </div>  </div>',
                 buttons: {
                     success: {
-                        label: "Save",
+                        label: "Encode",
                         className: "btn-success",
                         callback: function () {
                            // newAppletID = Number(prompt("Enter new applet ID#:"));  
@@ -462,7 +462,7 @@ function printPieces(newAppletID, appletDoneTest, summary) {
     state="prompt";
     bootbox.alert({
         size: 'large',
-        title: "Applet Constructor Code Output - Add to mages.applets.js",
+        title: "Applet Definition - Add to mages.applets.js",
         message: printString , //this is now possibly quite long
         callback: function(){ state="build"; }  //continue building
     });
@@ -477,4 +477,3 @@ function getConstructorString(newObject) {
     return "              " + json + ",";
 }
 
-//test

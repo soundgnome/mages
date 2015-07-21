@@ -2766,12 +2766,35 @@
             ],
           "doneStatement": "numberEntryValue==hiddenNumber[0]+hiddenNumber[1]+hiddenNumber[2]+hiddenNumber[3]+hiddenNumber[4]+hiddenNumber[5]+hiddenNumber[6]+hiddenNumber[7]+hiddenNumber[8]"
         },
-        { "summary": "",
-          "pieces": [
-          
-            ],
-          "doneStatement": ""
-        },
+        { "appletID" : "5-12", 
+          "summary" : "Metric mass/length equivalency",
+          "pieces" : [
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C6%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomIntExcluding%280%2C6%2ChiddenNumber%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt%280%2C1%29"},
+            {"appletID":"5-12","type":16,"expression":"getRandomInt(1,(getRandomInt(0,1) == 0 ? 99 : 999))*100000"},
+            {"appletID":"5-12","type":16,"expression":"%5B%20%5B%22kilogram%22%2C%20%22hectogram%22%2C%20%22decagram%22%2C%20%22gram%22%2C%20%22decigram%22%2C%20%22centigram%22%2C%20%22milligram%22%5D%20%2C%20%5B%22kilometer%22%2C%20%22hectometer%22%2C%20%22decameter%22%2C%20%22meter%22%2C%20%22decimeter%22%2C%20%22centimeter%22%2C%20%22millimeter%22%5D%20%5D%5BgetRandomInt%280%2C1%29%5D"},
+            {"type":15,"startX":400,"startY":60,"expression":"%22Which%20of%20these%20are%20equivalent%20to%20%22%20%2B%20%28hiddenNumber%5B0%5D%3C2%20%3F%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B0%5D%29%29%3AaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B0%5D%29%29%29%20%2B%20%27%20%27%20%2B%20hiddenNumber%5B14%5D%5BhiddenNumber%5B0%5D%5D%20%2B%20%27s%3F%27","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":556,"originalHeight":92},
+            {"type":15,"startX":400,"startY":140,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B1%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B1%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B1%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B7%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B1%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B2%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B7%5D==1","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":226,"originalHeight":60},
+            {"type":15,"startX":400,"startY":220,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B2%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B2%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B2%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B8%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B2%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B3%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B8%5D==1%20","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":325,"originalHeight":60},
+            {"type":15,"startX":400,"startY":300,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B3%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B3%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B3%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B9%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B3%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B4%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B9%5D==1%20","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":384,"originalHeight":60},
+            {"type":15,"startX":400,"startY":380,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B4%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B4%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B4%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B10%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B4%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B5%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B10%5D==1","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":357,"originalHeight":60},
+            {"type":15,"startX":400,"startY":460,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B5%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B5%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B5%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B11%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B5%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B0%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B11%5D==1","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":429,"originalHeight":60},
+            {"type":15,"startX":400,"startY":540,"expression":"%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B6%5D%29%3E999%3FaddCommas%28hiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B6%5D%29%29%3AhiddenNumber%5B13%5D%2FMath.pow%2810%2C%207-hiddenNumber%5B6%5D%29%29%20%2B%20%27%20%27%20%2B%28hiddenNumber%5B12%5D%3D%3D1%20%3F%20hiddenNumber%5B14%5D%5BhiddenNumber%5B6%5D%5D%20%3A%20hiddenNumber%5B14%5D%5BhiddenNumber%5B1%5D%5D%29%20%2B%20%27s%27","font":" 42px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B12%5D==1","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":424,"originalHeight":60},
+            {"type":5,"startX":720,"startY":540}
+          ],
+          "doneStatement" : "selectableScore()"
+          },
         { "summary": "",
           "pieces": [
           
