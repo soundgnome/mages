@@ -1,3 +1,66 @@
+var clockSetTime; 
+function buildClock(object)
+{
+    clockSetTime = eval(object.minutes);
+    piece.forEach(function(item) {
+        if(item.type == 23)
+        {
+            console.log("previous settable clock entry found - only one per applet");
+            item.deleted=true;
+            item.destroy(true);
+        }
+    });
+    piece[piece.length] = game.add.group();
+    piece[piece.length-1].type = 23;
+    piece[piece.length-1].minutes = object.minutes
+    
+    var clockSprite = game.add.sprite(60,6,drawClock(clockSetTime))
+    piece[piece.length-1].add(clockSprite)
+    newTextureTemp.clear();
+    
+    var buttonSpacing = 55;
+    piece[piece.length-1].create(5+0*buttonSpacing,215,'clockButton1').timeChange = -60;
+    piece[piece.length-1].create(5+1*buttonSpacing,215,'clockButton2').timeChange = -5;
+    piece[piece.length-1].create(5+2*buttonSpacing,215,'clockButton3').timeChange = -1;
+    piece[piece.length-1].create(5+3*buttonSpacing,215,'clockButton4').timeChange = 1;
+    piece[piece.length-1].create(5+4*buttonSpacing,215,'clockButton5').timeChange = 5;
+    piece[piece.length-1].create(5+5*buttonSpacing,215,'clockButton6').timeChange = 60;
+    
+    piece[piece.length-1].grouped=1;
+    var iteration = 0
+    piece[piece.length-1].forEach(function(subitem) {
+        subitem.inputEnabled='true';
+        subitem.events.onInputDown.add(buildGroupPieceClick, this);
+        subitem.events.onInputUp.add(onFinishDrag, draggingPiece);  
+        subitem.ParentPosition=piece.length-1;
+    });
+    
+    if(state!='build')
+    {
+        piece[piece.length-1].x = object.startX
+        piece[piece.length-1].y = object.startY
+        piece[piece.length-1].forEach(function(item) { //inequality entry button behavior
+            if (typeof item.timeChange === 'undefined') 
+            { } else
+            {
+                item.events.onInputDown.add(clockButtonClick, this);
+                item.ParentPosition=piece.length-1;  
+            }
+
+        });
+        
+    }
+    
+    function clockButtonClick(item) {
+        clockSetTime += item.timeChange;
+        if(clockSetTime > 60*24 ) {clockSetTime -= 60*24} else
+        if(clockSetTime < 0 ) {clockSetTime += 60*24}
+        clockSprite.loadTexture(drawClock(clockSetTime))
+        newTextureTemp.clear();
+    }
+    
+}
+
 function drawClock(minutes) {
     var angle;
     var angleHour = (minutes/60-15)/12*360*Math.PI/180;
@@ -45,5 +108,29 @@ function drawClock(minutes) {
 }
 
 function getClockSettings() {
-    
+    menuKeyPressed ==0;
+    state = 'prompt';
+    bootbox.dialog({
+                title: "Settable Clock Settings",
+                onEscape: function() {state='build'},
+                message: 
+                getMenuEntryString("Initial time:" , "minutes", "getRandomInt(0,1440)", "In minutes 0-1440" ) +
+                    '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            
+                            state = 'build';
+                            var newObject = JSON.parse(JSON.stringify({   
+                                "minutes":$('#minutes').val()
+                            })) ;
+                            buildClock(newObject);
+                           
+                        }
+                    }
+                }
+            }
+        );
 }

@@ -2795,24 +2795,125 @@
           ],
           "doneStatement" : "selectableScore()"
           },
-        { "summary": "",
-          "pieces": [
-          
+        { "appletID" : "5-13", 
+            "summary" : "area and perimeter of rectangle",
+            "pieces" : [
+            {"appletID":"5-13","type":16,"expression":"getRandomInt%286%2C9%29"},
+            {"appletID":"5-13","type":16,"expression":"getRandomInt%2825%2C35%29"},
+            {"appletID":"5-13","type":16,"expression":"%5B%22feet%22%2C%22yards%22%2C%22meters%22%5D%5BgetRandomInt%280%2C2%29%5D"},
+            {"type":15,"startX":380,"startY":71,"expression":"%22A%20garden%20has%20an%20area%20of%20%22%20%2B%20%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%20%2B%20%22%20square%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22.%20The%20short%20sides%20of%20the%20garden%20are%20each%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%27%20%27%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20long.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":670,"originalHeight":138},
+            {"appletID":"5-13","type":21,"startX":100,"startY":280,"textureExpression":"rectangleFigureTexture(hiddenNumber[1], 10, 24, 209, 31, '', 10, true)","number":"1","draggable":0,"selectable":0},
+            {"type":15,"startX":680,"startY":260,"expression":"%22l%20%3D%20%3F%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":46,"originalHeight":34},
+            {"type":15,"startX":680,"startY":300,"expression":"%22w%20%3D%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%27%20%27%20%2B%20hiddenNumber%5B2%5D","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":138,"originalHeight":34},
+            {"type":15,"startX":680,"startY":380,"expression":"%22A%20%3D%20%22%20%2B%20%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%20%2B%20%27%20sq.%20%27%20%2B%20hiddenNumber%5B2%5D","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"center","draggable":1,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":128,"originalHeight":68},
+            {"type":9,"startX":245,"startY":327,"userScaleX":1.7,"userScaleY":0.75},
+            {"type":9,"startX":245,"startY":245,"userScaleX":1.7,"userScaleY":0.75},
+            {"type":9,"startX":467,"startY":330,"userScaleX":1.7,"userScaleY":0.75},
+            {"type":1,"startX":46,"startY":161,"newText":"A.%20Drag%20the%20labels%20from%20the%20box%20into%20the%20correct%20spots%20on%20the%20diagram.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"},
+            {"type":1,"startX":39,"startY":393,"newText":"B.%20Enter%20the%20unknown%20length.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"175","alignment":"left"},
+            {"type":1,"startX":300,"startY":396,"newText":"C.%20Enter%20the%20perimeter%20of%20the%20rectangle.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"260","alignment":"left"},
+            {"type":14,"numberEntryX":20,"numberEntryY":540,"orientation":"h","displayX":[40,300],"displayY":[460,460],"hideInitialValue":"No","panelQuantity":"2","displayDigits":3},
+            {"type":15,"startX":220,"startY":500,"expression":"hiddenNumber%5B2%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"190","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"1","spriteAnchorY":"0","originalWidth":110,"originalHeight":46},
+            {"type":15,"startX":509,"startY":501,"expression":"hiddenNumber%5B2%5D","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"190","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"1","spriteAnchorY":"0","originalWidth":168,"originalHeight":46},
+            {"type":5,"startX":720,"startY":540},
+            {"type":98,"color":255,"drawingLineStartX":580,"drawingLineStartY":220,"drawingLineEndX":780,"drawingLineEndY":220},
+            {"type":98,"color":255,"drawingLineStartX":780,"drawingLineStartY":220,"drawingLineEndX":780,"drawingLineEndY":420},
+            {"type":98,"color":255,"drawingLineStartX":580,"drawingLineStartY":420,"drawingLineEndX":380,"drawingLineEndY":420},
+            {"type":98,"color":255,"drawingLineStartX":580,"drawingLineStartY":220,"drawingLineEndX":580,"drawingLineEndY":20},
+            {"appletID":"0","type":16,"expression":"piece%5B4%5D.x%20%2B%3D%20-%28hiddenNumber%5B1%5D-29%29%2a10"},
+            {"appletID":"0","type":16,"expression":"piece%5B8%5D.x%20%2B%3D%20-%28hiddenNumber%5B1%5D-29%29%2a5"},
+            {"appletID":"0","type":16,"expression":"piece%5B9%5D.x%20%2B%3D%20-%28hiddenNumber%5B1%5D-29%29%2a5"}
             ],
-          "doneStatement": ""
-        },
-        { "summary": "",
-          "pieces": [
-          
+            "doneStatement" : "['dragToBoxes[0].contentsID==3','dragToBoxes[1].contentsID==1','dragToBoxes[2].contentsID==2','numberEntryValue[0]==hiddenNumber[1]','numberEntryValue[1]==hiddenNumber[0]*2+hiddenNumber[1]*2']"
+            },
+        { "appletID" : "5-14", 
+            "summary" : "Perimeter in word problem",
+            "pieces" : [
+              {"type":16,"expression":"getRandomInt%2812%2C25%29"},
+              {"type":16,"expression":"hiddenNumber%5B0%5D-getRandomInt%281%2C6%29"},
+              {"type":15,"startX":400,"startY":160,"expression":"%22A%20rectangular%20poster%20measures%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20inches%20on%20the%20long%20sides.%20%20It%20measures%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20inches%20on%20the%20short%20sides.%20%20What%20is%20the%20perimeter%20of%20the%20poster%3F%22","font":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":683,"originalHeight":300},
+              {"type":14,"numberEntryX":160,"numberEntryY":440,"orientation":"h","displayX":[320],"displayY":[360],"hideInitialValue":"No","panelQuantity":"1","displayDigits":2},
+              {"type":1,"startX":408,"startY":382,"newText":"inches","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":5,"startX":720,"startY":540}
             ],
-          "doneStatement": ""
+            "doneStatement" : "numberEntryValue == hiddenNumber[0]*2+hiddenNumber[1]*2"
+            },
+        { "appletID" : "5-15", 
+              "summary" : "Metric mass in word problem (kg to g)",
+              "pieces" : [
+                {"type":16,"expression":"getRandomInt%282%2C4%29"},
+                {"type":16,"expression":"getRandomInt%2810%2C20%29"},
+                {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+                {"type":15,"startX":380,"startY":120,"expression":"%22A%20bag%20of%20ice%20has%20a%20mass%20of%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22%20kilograms.%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20buys%20%22%20%2BhiddenNumber%5B1%5D%20%2B%20%22%20bags%20of%20ice%20for%20a%20wedding%20party.%20%20How%20many%20grams%20of%20ice%20did%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20buy%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":662,"originalHeight":184},
+                {"type":16,"expression":"getRandomInt%280%2C3%29"},
+                {"type":15,"startX":200,"startY":300,"expression":"addCommas%28%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%2aMath.pow%2810%2C3-hiddenNumber%5B3%5D%29%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":53,"originalHeight":60},
+                {"type":15,"startX":200,"startY":360,"expression":"addCommas%28%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%2aMath.pow%2810%2C4-hiddenNumber%5B3%5D%29%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":80,"originalHeight":60},
+                {"type":15,"startX":200,"startY":420,"expression":"addCommas%28%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%2aMath.pow%2810%2C5-hiddenNumber%5B3%5D%29%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":120,"originalHeight":60},
+                {"type":15,"startX":200,"startY":480,"expression":"addCommas%28%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%2aMath.pow%2810%2C6-hiddenNumber%5B3%5D%29%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":146,"originalHeight":60},
+                {"type":9,"startX":440,"startY":420,"userScaleX":1.9,"userScaleY":0.5},
+                {"type":1,"startX":540,"startY":400,"newText":"grams","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+                {"type":98,"color":255,"drawingLineStartX":60,"drawingLineStartY":260,"drawingLineEndX":-220,"drawingLineEndY":260},
+                {"type":98,"color":255,"drawingLineStartX":340,"drawingLineStartY":260,"drawingLineEndX":340,"drawingLineEndY":520},
+                {"type":98,"color":255,"drawingLineStartX":60,"drawingLineStartY":520,"drawingLineEndX":-220,"drawingLineEndY":520},
+                {"type":98,"color":255,"drawingLineStartX":60,"drawingLineStartY":260,"drawingLineEndX":60,"drawingLineEndY":0},
+                {"type":5,"startX":720,"startY":540},
+                {"type":1,"startX":360,"startY":240,"newText":"Drag%20the%20correct%20value%20from%20the%20box%20to%20complete%20the%20answer.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"375","alignment":"center"}
+                ],
+              "doneStatement" : "dragToBoxes[0].contentsID-1==hiddenNumber[3]"
         },
-        { "summary": "",
-          "pieces": [
-          
-            ],
-          "doneStatement": ""
-        },
+        { "appletID" : "5-16", 
+          "summary" : "Standard conversion units.",
+          "pieces" : [
+              {"type":16,"expression":"getRandomInt%280%2C4%29"},
+              {"type":16,"expression":"getRandomIntExcluding%280%2C4%2ChiddenNumber%29"},
+              {"type":16,"expression":"getRandomIntExcluding%280%2C4%2ChiddenNumber%29"},
+              {"type":16,"expression":"getRandomIntExcluding%280%2C4%2ChiddenNumber%29"},
+              {"type":16,"expression":"getRandomIntExcluding%280%2C4%2ChiddenNumber%29"},
+              {"type":16,"expression":"getRandomInt%280%2C1%29"},
+              {"type":16,"expression":"getRandomInt%280%2C1%29"},
+              {"type":16,"expression":"getRandomInt%280%2C1%29"},
+              {"type":16,"expression":"getRandomInt%280%2C1%29"},
+              {"type":16,"expression":"getRandomInt%280%2C1%29"},
+              {"type":16,"expression":"getRandomInt%282%2C9%29"},
+              {"type":16,"expression":"getRandomInt%282%2C9%29"},
+              {"type":16,"expression":"getRandomInt%282%2C9%29"},
+              {"type":16,"expression":"getRandomInt%282%2C9%29"},
+              {"type":16,"expression":"getRandomInt%282%2C9%29"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B0%5D%2B10%20%5D%20%2B%20%22%20ft%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B0%5D%2B10%20%5D%2a12%20%2B%20%27%20in%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B0%5D%2B10%20%5D%20%2B%20%22%20ft%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B0%5D%2B10%20%5D%2a9%20%2B%20%27%20in%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20lb%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a16%20%2B%20%27%20oz%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20lb%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a20%20%2B%20%27%20oz%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20pt%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2F2%20%2B%20%27%20qt%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20pt%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a2%20%2B%20%27%20qt%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a3%20%2B%20%22%20yd%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%27%20ft%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a4%20%2B%20%22%20yd%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%27%20ft%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20gal%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a8%20%2B%20%27%20pt%27"},
+              {"type":16,"expression":"hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%20%2B%20%22%20gal%20%3D%20%22%20%2B%20hiddenNumber%5B%20hiddenNumber%5B1%5D%2B10%20%5D%2a16%20%2B%20%27%20pt%27"},
+              {"type":16,"expression":"2%2B2"},
+              {"type":15,"startX":400,"startY":160,"expression":"%28hiddenNumber%5B5%2BhiddenNumber%5B0%5D%5D%20%3D%3D%201%20%3F%20hiddenNumber%5B15%2BhiddenNumber%5B0%5D%2a2%5D%3AhiddenNumber%5B15%2BhiddenNumber%5B0%5D%2a2%2B1%5D%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5+hiddenNumber%5B0%5D%5D%20==%201","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":214,"originalHeight":60},
+              {"type":15,"startX":400,"startY":240,"expression":"%28hiddenNumber%5B5%2BhiddenNumber%5B1%5D%5D%20%3D%3D%201%20%3F%20hiddenNumber%5B15%2BhiddenNumber%5B1%5D%2a2%5D%3AhiddenNumber%5B15%2BhiddenNumber%5B1%5D%2a2%2B1%5D%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5+hiddenNumber%5B1%5D%5D%20==%201","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":225,"originalHeight":60},
+              {"type":15,"startX":400,"startY":320,"expression":"%28hiddenNumber%5B5%2BhiddenNumber%5B2%5D%5D%20%3D%3D%201%20%3F%20hiddenNumber%5B15%2BhiddenNumber%5B2%5D%2a2%5D%3AhiddenNumber%5B15%2BhiddenNumber%5B2%5D%2a2%2B1%5D%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5+hiddenNumber%5B2%5D%5D%20==%201","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":249,"originalHeight":60},
+              {"type":15,"startX":400,"startY":400,"expression":"%28hiddenNumber%5B5%2BhiddenNumber%5B3%5D%5D%20%3D%3D%201%20%3F%20hiddenNumber%5B15%2BhiddenNumber%5B3%5D%2a2%5D%3AhiddenNumber%5B15%2BhiddenNumber%5B3%5D%2a2%2B1%5D%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5+hiddenNumber%5B3%5D%5D%20==%201","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":214,"originalHeight":60},
+              {"type":15,"startX":400,"startY":480,"expression":"%28hiddenNumber%5B5%2BhiddenNumber%5B4%5D%5D%20%3D%3D%201%20%3F%20hiddenNumber%5B15%2BhiddenNumber%5B4%5D%2a2%5D%3AhiddenNumber%5B15%2BhiddenNumber%5B4%5D%2a2%2B1%5D%29","font":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":1,"selectedExpression":"hiddenNumber%5B5+hiddenNumber%5B4%5D%5D%20==%201","spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":249,"originalHeight":60},
+              {"type":1,"startX":100,"startY":40,"newText":"Select%20all%20the%20true%20conversions%3A","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+              {"type":5,"startX":720,"startY":540}
+              ],
+          "doneStatement" : "selectableScore()"
+          },
+        { "appletID" : "5-17", 
+"summary" : "Elapsed time on a judy clock.",
+"pieces" : [
+{"type":16,"expression":"getRandomInt%28120%2C240%29%2a5"},
+{"type":16,"expression":"getRandomInt%2817%2C23%29%2a5"},
+{"type":21,"startX":100,"startY":220,"textureExpression":"drawClock(hiddenNumber[0])","number":"1","draggable":0,"selectable":0},
+{"type":15,"startX":400,"startY":100,"expression":"%22A%20movie%20starts%20at%20the%20time%20below%2C%20and%20is%20exactly%201%20hour%20and%20%22%20%2B%20%28hiddenNumber%5B1%5D-60%29%20%2B%20%22%20minutes%20long.%20%20Set%20the%20clock%20to%20show%20when%20the%20movie%20ends.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":652,"originalHeight":138},
+{"type":23,"startX":370,"startY":212,"minutes":0},
+{"type":1,"startX":160,"startY":180,"newText":"Start","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+{"type":1,"startX":499,"startY":180,"newText":"End","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+{"type":5,"startX":720,"startY":540}
+],
+"doneStatement" : "clockSetTime==hiddenNumber[0]+hiddenNumber[1]"
+},
         { "summary": "",
           "pieces": [
           

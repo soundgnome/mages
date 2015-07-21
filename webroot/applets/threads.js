@@ -69,7 +69,7 @@ function appletTransition(correct) {
         var letterSequence = ["I","N","C","O","R","R","E","C","T","!"]; //i-n-c-o-r-r-e-c-t-!
     } else
     {
-        var letterSequence = ["P","A","R","T"," ","R","I","G","H","T"];
+        var letterSequence = [(correct).toFixed(2)[2],(correct).toFixed(2)[3],"%"," ","R","I","G","H","T","!"];
     }
     var item;
     var tween;

@@ -88,7 +88,7 @@ function dotTexture(diameter) {
 }
 
 
-function rectangleFigureTexture(width, height, red, green, blue, label, scale) {
+function rectangleFigureTexture(width, height, red, green, blue, unit, scale, hideLabel) {
     if (typeof scale === 'undefined') {scale = 1};
     var newGraphic = game.add.graphics(0, 0);
     newGraphic.lineStyle(2, 0x000000, 1);
@@ -98,21 +98,24 @@ function rectangleFigureTexture(width, height, red, green, blue, label, scale) {
     var image = game.add.group();
     image.add(newGraphic);
 
-    width = width + " " + label
-    height = height + " " + label
+    width = width + " " + unit
+    height = height + " " + unit
+    if(hideLabel != true)
+    {
+        newLabel = game.add.text(newGraphic.width/2-(width.toString().length*5),-21, width.toString(), {
+            font: "18px Arial",
+            fill: "black",
+            align: 'left'}); 
+        image.add(newLabel);
+        
+        newLabel = game.add.text(0,newGraphic.height/2-10, height.toString(), {
+            font: "18px Arial",
+            fill: "black",
+            align: 'left'}); 
+        image.add(newLabel);
+        newLabel.x = -(newLabel.width+3)   
+    }
     
-    newLabel = game.add.text(newGraphic.width/2-(width.toString().length*5),-21, width.toString(), {
-        font: "18px Arial",
-        fill: "black",
-        align: 'left'}); 
-    image.add(newLabel);
-    
-    newLabel = game.add.text(0,newGraphic.height/2-10, height.toString(), {
-        font: "18px Arial",
-        fill: "black",
-        align: 'left'}); 
-    image.add(newLabel);
-    newLabel.x = -(newLabel.width+3)
     var newGraphic = image.generateTexture();
     image.destroy();
     return newGraphic;
@@ -219,4 +222,5 @@ function getTextureAreaSettings(item) {
             }
         );
 }
+
 

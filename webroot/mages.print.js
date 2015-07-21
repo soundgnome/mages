@@ -208,7 +208,6 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                     if(piece[item].multiType==0 || piece[item].multiType==1 || piece[item].multiType==2)//main piece
                     { 
                         var newObject = JSON.stringify({    
-                            "appletID": newAppletID, 
                             "type": piece[item].type, 
                             "startX":piece[item].x , 
                             "startY":piece[item].y , 
@@ -230,7 +229,6 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                 case 11: //protractor and angle
                     if(piece[item].protractor!=1) {
                         var newObject = JSON.stringify({    
-                            "appletID": newAppletID, 
                             "type": piece[item].type, 
                             "angleX":piece[item].x , 
                             "angleY":piece[item].y , 
@@ -314,7 +312,6 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                     
                 case 16: //HiddenNumberConstructor(appletID, type, expression)
                     var newObject = JSON.stringify({    
-                        "appletID": newAppletID,
                         "type": piece[item].type, 
                         "expression": piece[item].expression
                         });
@@ -372,7 +369,6 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                 
                 case 20: //Number Line
                     var newObject = JSON.stringify({  
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x,
                         "startY":piece[item].y,
@@ -399,7 +395,6 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                 case 21: //Texture Area
                 console.log(piece[item].textureExpression)
                     var newObject = JSON.stringify({  
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x,
                         "startY":piece[item].y,
@@ -416,12 +411,22 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                     
                 case 22: //Timer
                     var newObject = JSON.stringify({  
-                        "appletID": newAppletID, 
                         "type": piece[item].type, 
                         "startX":piece[item].x,
                         "startY":piece[item].y,
                         "timeLimit": piece[item].timeLimit,
                         "size":piece[item].size
+                        });
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
+                
+                case 23: //Clock
+                    var newObject = JSON.stringify({  
+                        "type": piece[item].type, 
+                        "startX":piece[item].x,
+                        "startY":piece[item].y,
+                        "minutes": piece[item].minutes
                         });
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;

@@ -67,6 +67,12 @@ function preload() {
     game.load.image('numberEntryButton', 'assets/numberEntryButton.svg');
     game.load.image('numberEntryDisplay', 'assets/numberEntryDisplay.svg');
     game.load.image('textureDragBox', 'assets/whiteBox.svg');
+    game.load.image('clockButton1', 'assets/clockButtonNeg1H.png');
+    game.load.image('clockButton2', 'assets/clockButtonNeg5M.png');
+    game.load.image('clockButton3', 'assets/clockButtonNeg1M.png');
+    game.load.image('clockButton4', 'assets/clockButtonPos1M.png');
+    game.load.image('clockButton5', 'assets/clockButtonPos5M.png');
+    game.load.image('clockButton6', 'assets/clockButtonPos1H.png');
     
     
     //gui stuff
@@ -512,6 +518,10 @@ function loadApplet(applet) {
             
             case 22: //timer
             buildTimer(applet[i]);
+            break;
+            
+            case 23: //clock
+            buildClock(applet[i]);
             break;
             
             case 98: //draw line
@@ -1319,15 +1329,20 @@ function multiplicationProperty(type) {
 
 
 function addCommas( num ) {
-    var returnString = "";
-    num = num.toString();
-    
-    for(var i = 0; i < num.length ; i++) {
-        returnString += Number(num.charAt(i))
-        if( i<num.length-1 && (num.length-i-1)%3==0) {
-            returnString += ','
-        }
+    var returnString = num;
+    if(num > 999)
+    {
+        returnString = "";
+        num = num.toString();
+        
+        for(var i = 0; i < num.length ; i++) {
+            returnString += Number(num.charAt(i))
+            if( i<num.length-1 && (num.length-i-1)%3==0) {
+                returnString += ','
+            }
+        }   
     }
+    
     return returnString;
 }
 
