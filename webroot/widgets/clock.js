@@ -27,7 +27,6 @@ function buildClock(object)
     piece[piece.length-1].create(5+5*buttonSpacing,215,'clockButton6').timeChange = 60;
     
     piece[piece.length-1].grouped=1;
-    var iteration = 0
     piece[piece.length-1].forEach(function(subitem) {
         subitem.inputEnabled='true';
         subitem.events.onInputDown.add(buildGroupPieceClick, this);

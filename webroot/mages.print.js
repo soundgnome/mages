@@ -431,7 +431,34 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                     constructorString = getConstructorString(newObject);
                     printString = printString + openTag + constructorString + closeTag;
                     break;
-                    
+                
+                case 24: //Fraction Bar
+                    var newObject = JSON.stringify({  
+                        "type": piece[item].type, 
+                        "startX":piece[item].x,
+                        "startY":piece[item].y,
+                        "denominator": piece[item].denominator,
+                        "scaleX": piece[item].scaleX,
+                        "scaleY": piece[item].scaleY,
+                        "draggable": piece[item].draggable,
+                        "color": piece[item].color
+                        });
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                    break;
+                
+                case 25: //fraction bar dragTo
+                    var newObject = JSON.stringify({    
+                        "type": piece[item].type, 
+                        "startX":piece[item].x , 
+                        "startY":piece[item].y , 
+                        "scaleX":piece[item].scaleX ,
+                        "scaleY":piece[item].scaleY 
+                        });
+                    constructorString = getConstructorString(newObject);
+                    printString = printString + openTag + constructorString + closeTag;
+                     break;
+                     
                 case 98: //draw line
                     var newObject = JSON.stringify({    
                         "type": piece[item].type, 

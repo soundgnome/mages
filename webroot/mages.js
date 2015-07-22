@@ -373,6 +373,7 @@ function runApplet() {
         dragBaseTenBlock();
         dragNumberLineDot();
         advanceTimer();
+        dragFractionBar();
     }
 }
 
@@ -522,6 +523,14 @@ function loadApplet(applet) {
             
             case 23: //clock
             buildClock(applet[i]);
+            break;
+            
+            case 24: //fraction bar
+            buildFractionBar(applet[i]);
+            break;
+            
+            case 25: //fractionbar dragto
+            buildFractionBarDragToBox(applet[i]);
             break;
             
             case 98: //draw line

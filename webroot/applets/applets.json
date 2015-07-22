@@ -2806,9 +2806,9 @@
             {"type":15,"startX":680,"startY":260,"expression":"%22l%20%3D%20%3F%22","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":46,"originalHeight":34},
             {"type":15,"startX":680,"startY":300,"expression":"%22w%20%3D%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%27%20%27%20%2B%20hiddenNumber%5B2%5D","font":" 24px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":138,"originalHeight":34},
             {"type":15,"startX":680,"startY":380,"expression":"%22A%20%3D%20%22%20%2B%20%28hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%29%20%2B%20%27%20sq.%20%27%20%2B%20hiddenNumber%5B2%5D","font":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"center","draggable":1,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":128,"originalHeight":68},
-            {"type":9,"startX":245,"startY":327,"userScaleX":1.7,"userScaleY":0.75},
-            {"type":9,"startX":245,"startY":245,"userScaleX":1.7,"userScaleY":0.75},
-            {"type":9,"startX":467,"startY":330,"userScaleX":1.7,"userScaleY":0.75},
+            {"type":9,"startX":245,"startY":327,"userScaleX":1.8,"userScaleY":0.75},
+            {"type":9,"startX":245,"startY":245,"userScaleX":1.8,"userScaleY":0.75},
+            {"type":9,"startX":467,"startY":330,"userScaleX":1.8,"userScaleY":0.75},
             {"type":1,"startX":46,"startY":161,"newText":"A.%20Drag%20the%20labels%20from%20the%20box%20into%20the%20correct%20spots%20on%20the%20diagram.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"},
             {"type":1,"startX":39,"startY":393,"newText":"B.%20Enter%20the%20unknown%20length.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"175","alignment":"left"},
             {"type":1,"startX":300,"startY":396,"newText":"C.%20Enter%20the%20perimeter%20of%20the%20rectangle.","font":"","fontString":" 24px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"260","alignment":"left"},
@@ -2901,18 +2901,53 @@
           "doneStatement" : "selectableScore()"
           },
         { "appletID" : "5-17", 
-"summary" : "Elapsed time on a judy clock.",
+          "summary" : "Elapsed time on a judy clock.",
+          "pieces" : [
+              {"type":16,"expression":"getRandomInt%28120%2C240%29%2a5"},
+              {"type":16,"expression":"getRandomInt%2817%2C23%29%2a5"},
+              {"type":21,"startX":100,"startY":220,"textureExpression":"drawClock(hiddenNumber[0])","number":"1","draggable":0,"selectable":0},
+              {"type":15,"startX":400,"startY":100,"expression":"%22A%20movie%20starts%20at%20the%20time%20below%2C%20and%20is%20exactly%201%20hour%20and%20%22%20%2B%20%28hiddenNumber%5B1%5D-60%29%20%2B%20%22%20minutes%20long.%20%20Set%20the%20clock%20to%20show%20when%20the%20movie%20ends.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":652,"originalHeight":138},
+              {"type":23,"startX":370,"startY":212,"minutes":0},
+              {"type":1,"startX":160,"startY":180,"newText":"Start","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":1,"startX":499,"startY":180,"newText":"End","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":5,"startX":720,"startY":540}
+              ],
+          "doneStatement" : "clockSetTime==hiddenNumber[0]+hiddenNumber[1]"
+          },
+          { "appletID" : "5-18", 
+          "summary" : "Setting a clock to given minutes before a given time. ",
+          "pieces" : [
+              {"type":16,"expression":"getRandomInt%2884%2C108%29%2a5"},
+              {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+              {"type":16,"expression":"getRandomInt%281%2C5%29%2a5"},
+              {"type":15,"startX":400,"startY":140,"expression":"hiddenNumber%5B1%5D%20%2B%20%22%27s%20school%20starts%20at%20%22%20%2B%20Math.floor%28hiddenNumber%5B0%5D%2F60%29%20%2B%20%22%3A%22%20%2B%20%28hiddenNumber%5B0%5D%2560%3E9%3FhiddenNumber%5B0%5D%2560%3A%270%27%2BhiddenNumber%5B0%5D%2560%29%20%2B%20%27%20A.M.%20%20She%20needs%20to%20leave%20the%20house%20at%20least%20%27%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20minutes%20before%20school%20starts.%20%20Set%20the%20clock%20to%20the%20latest%20time%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20can%20leave%20the%20house.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":696,"originalHeight":230},
+              {"type":23,"startX":220,"startY":300,"minutes":"0"},
+              {"type":98,"color":255,"drawingLineStartX":200,"drawingLineStartY":280,"drawingLineEndX":580,"drawingLineEndY":280},
+              {"type":98,"color":255,"drawingLineStartX":580,"drawingLineStartY":280,"drawingLineEndX":580,"drawingLineEndY":560},
+              {"type":98,"color":255,"drawingLineStartX":200,"drawingLineStartY":560,"drawingLineEndX":-180,"drawingLineEndY":560},
+              {"type":98,"color":255,"drawingLineStartX":200,"drawingLineStartY":280,"drawingLineEndX":200,"drawingLineEndY":0},
+              {"type":5,"startX":720,"startY":540}
+              ],
+          "doneStatement" : "hiddenNumber[0]-hiddenNumber[2]==clockSetTime"
+          },
+          { "appletID" : "bartest", 
+"summary" : "Edit this text to add an applet summary.",
 "pieces" : [
-{"type":16,"expression":"getRandomInt%28120%2C240%29%2a5"},
-{"type":16,"expression":"getRandomInt%2817%2C23%29%2a5"},
-{"type":21,"startX":100,"startY":220,"textureExpression":"drawClock(hiddenNumber[0])","number":"1","draggable":0,"selectable":0},
-{"type":15,"startX":400,"startY":100,"expression":"%22A%20movie%20starts%20at%20the%20time%20below%2C%20and%20is%20exactly%201%20hour%20and%20%22%20%2B%20%28hiddenNumber%5B1%5D-60%29%20%2B%20%22%20minutes%20long.%20%20Set%20the%20clock%20to%20show%20when%20the%20movie%20ends.%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":652,"originalHeight":138},
-{"type":23,"startX":370,"startY":212,"minutes":0},
-{"type":1,"startX":160,"startY":180,"newText":"Start","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
-{"type":1,"startX":499,"startY":180,"newText":"End","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
-{"type":5,"startX":720,"startY":540}
+{"type":24,"startX":40,"startY":20,"denominator":1,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":60,"denominator":2,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":100,"denominator":3,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":140,"denominator":4,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":180,"denominator":5,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":220,"denominator":6,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":260,"denominator":7,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":300,"denominator":8,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":340,"denominator":9,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":380,"denominator":10,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":420,"denominator":11,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":24,"startX":40,"startY":460,"denominator":12,"scaleX":1,"scaleY":1,"draggable":true,"color":true},
+{"type":25,"startX":50,"startY":548,"scaleX":1,"scaleY":1}
 ],
-"doneStatement" : "clockSetTime==hiddenNumber[0]+hiddenNumber[1]"
+"doneStatement" : "multipleChoiceCorrectAnswer==multipleChoiceSelected"
 },
         { "summary": "",
           "pieces": [
