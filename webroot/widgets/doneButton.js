@@ -17,6 +17,7 @@ function buildDoneButton(item) {
     }
 }
 
+var timerExists;
 //this appletTests the doneStatement; this could trigger a dialog, another applet, etc.
 function doneButtonClick(item) {
     if(state != 'transition')
@@ -60,9 +61,11 @@ function doneButtonClick(item) {
                     }    
                 }
                 if(correct > 0.99) {correct = 1}  //some partial credit applets don't end up getting to 1
+                challengeRecord.push(correct);
                 threadRecord.push(correct);
             } else //singular question
-            { 
+            { //will need to form arrays for repeated questions in #challenge mode
+                challengeRecord.push(+eval(appletTests));
                 if(+eval(appletTests)>0)
                 {
                     threadRecord.push(+eval(appletTests)); //implicitly convert true to 1; also handles selectableScore()
@@ -74,7 +77,7 @@ function doneButtonClick(item) {
                 }    
             }
             
-            var timerExists = 0;
+            timerExists = 0;
             piece.forEach(function(item){
                 if( item.type == 22 ){ timerExists=1};
             });

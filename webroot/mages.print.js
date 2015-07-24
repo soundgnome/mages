@@ -441,6 +441,7 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                         "scaleX": piece[item].scaleX,
                         "scaleY": piece[item].scaleY,
                         "draggable": piece[item].draggable,
+                        "limit": piece[item].limit,
                         "color": piece[item].color
                         });
                     constructorString = getConstructorString(newObject);

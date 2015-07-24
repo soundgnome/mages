@@ -348,17 +348,19 @@ function buildMultipleChoiceFractions(item) {
     for(var iterator=0; iterator<3; iterator++)
     {
         newEvaluatedAnswer[answerEvaluated[0]] = findUniqueFraction(answers[answerEvaluated[0]] , newEvaluatedAnswer); 
-        answerEvaluated.splice(0, 1);
-        
-    }
-    if(newEvaluatedAnswer == null) {
+        if(newEvaluatedAnswer[answerEvaluated[0]] == null) {
             piece[piece.length-1].destroy(true); 
             bootbox.alert("Your answer definitions are too constrained!");
             newEvaluatedAnswer = [];
+        }
+        answerEvaluated.splice(0, 1);
+        
     }
+    
     
     for(var answer = 0 ; answer < 4; answer++)
     {
+        console.log(newEvaluatedAnswer[answer])
         var wholeOffset = 0;
         newEvaluatedAnswers[answer]= game.add.text(newAnswerX, newAnswerY, ['A.','B.','C.','D.'][answer], {
             font: item.multipleChoiceFontSize + 'px Arial',

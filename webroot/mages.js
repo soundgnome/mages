@@ -102,6 +102,7 @@ function preload() {
     game.load.image('menuNumberLine', 'assets/menuNumberLine.png');
     game.load.image('menuTTable', 'assets/menuTTable.png');
     game.load.image('menuTextureArea', 'assets/menuTextureArea.png');
+    game.load.image('menuConcreteFractions', 'assets/menuConcreteFractions.png');
     
     //applet images
     game.load.image('dogPawPrint', 'assets/dogPawPrint.png');
@@ -555,6 +556,14 @@ function clearCurrentApplet()
         item.destroy(true); 
     });
     dragToBoxes = [];
+    
+    fractionBarDragToBoxes.forEach(function(item){
+        
+        item.destroy(true); 
+    });
+    fractionBarDragToBoxes = [];
+    
+    
     if (typeof numberLine !== 'undefined') {numberLine.destroy(true)}
     
     numberLineDots.forEach(function(item){
@@ -634,10 +643,27 @@ function clearCurrentApplet()
     {
         appletIDPrompt(); 
     } else
-    {
+    { //this is where #challenge mode goes
         if(threadPoint < thread[threadNumber-1].length)
         {
-            threadPoint++;
+            if(challengeMode == 1)
+            {
+                if(timerExists == 0)
+                {
+                    var threadMove = checkChallengeRecord()
+                    threadPoint += threadMove;  //returns -1,0,1 depending on challenge record
+                    if(threadPoint<0){threadPoint=1}; //can't go past the beginning
+                    if( Math.abs(threadMove)>0 ){ challengeRecord = [] }   
+                } else
+                {
+                  threadPoint++;
+                  challengeRecord = [] ;
+                }
+            } else
+            {
+                
+            }
+
             loadAppletID=thread[threadNumber-1][threadPoint-1];
             appletInitiated=0; 
         } else
@@ -750,7 +776,7 @@ function defineMenu() {
         game.add.sprite(300, 50, 'menuTTable'),
         game.add.sprite(550, 50, 'menuNumberLine'),
         game.add.sprite(50 , 300, 'menuTextureArea'),
-        game.add.sprite(300, 300, 'menuButton'),
+        game.add.sprite(300, 300, 'menuConcreteFractions'),
         game.add.sprite(550, 300, 'menuButton'),
         ];
     
@@ -953,6 +979,10 @@ function onBuildMenuClick(item, pointer) {
             case 21:  //texture area
             getTextureAreaSettings() //in mages.dialogs.js
             break;
+            
+            case 22:  //texture area
+            getConcreteFractionTypeTypeSetting() //in mages.dialogs.js
+            break;
         }
         if(state != 'prompt')
         {
@@ -964,6 +994,7 @@ function onBuildMenuClick(item, pointer) {
 
 
 //common attributes for most pieces
+//this sucks and I should get rid of it
 function adjustNewPiece() {
     draggingPiece = piece[piece.length-1];
    //draggingPiece.id=this.id;
@@ -972,7 +1003,7 @@ function adjustNewPiece() {
     
     if(piece[piece.length-1].grouped != 1)
     {
-        if(piece[piece.length-1].type !=1  && piece[piece.length-1].type !=2 &&  piece[piece.length-1].type !=11 &&  piece[piece.length-1].type !='14b' &&  piece[piece.length-1].type !='17b' &&  piece[piece.length-1].type !=19) //text is achored left
+        if(piece[piece.length-1].type !=1  && piece[piece.length-1].type !=2 &&  piece[piece.length-1].type !=11 &&  piece[piece.length-1].type !='14b' &&  piece[piece.length-1].type !='17b' &&  piece[piece.length-1].type !=19 &&  piece[piece.length-1].type !=24 &&  piece[piece.length-1].type !=25) //text is achored left
         {
             draggingPiece.anchor.setTo(0.5, 0.5);     
         }
@@ -1445,6 +1476,19 @@ function getFunctionExcluding(outputFunction, args, exclude) {
 function shuffle(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
+}
+
+function getLeastFactors(number)
+{
+    var factors = [];
+    for (var i = 1 ; i <= Math.sqrt(number) ; i++ )
+    {
+        if((number/i) % 1 === 0)
+        {
+            factors = [i , number/i]
+        }
+    }
+    return factors; 
 }
 
 var girlNames = [ 'Sophia' , 'Emma' , 'Olivia' , 'Ava' , 'Isabella' , 'Mia' , 
