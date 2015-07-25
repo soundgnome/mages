@@ -7,7 +7,8 @@ function appletIDPrompt() {
         callback: function(result) {
             if (result === null) 
             {
-                //Example.show("Prompt dismissed");
+                titleInitiated=0;
+                state='title';
             } else 
             {
                 appletInitiated=0;
@@ -16,7 +17,8 @@ function appletIDPrompt() {
                 titleBack.destroy(true);
                 
             }
-        }
+        },
+        
     });
 }
 

@@ -49,6 +49,8 @@ function preload() {
     game.load.image('helpScreen1', 'assets/helpScreen1.png');
     game.load.image('helpScreen2', 'assets/helpScreen2.png');
     game.load.image('helpScreen3', 'assets/helpScreen3.png');
+    game.load.image('startCampaignButton', 'assets/startCampaignButton.png');
+    game.load.image('continueCampaignButton', 'assets/continueCampaignButton.png');
     
     
     //widget assets
@@ -224,6 +226,8 @@ var threadButton;
 var buildButton;
 var helpButton;
 var threadButton;
+var startCampaignButton;
+var continueCampaignButton;
 var titleText;
 function title() {
     if(titleInitiated==0)
@@ -264,6 +268,20 @@ function title() {
         helpButton.inputEnabled='true';
         helpButton.events.onInputDown.add(helpButtonClick, this);
         helpButton.anchor.setTo(0.5, 0.5);
+        
+        startCampaignButton = game.add.sprite(0, 0, 'startCampaignButton');
+        startCampaignButton.x = 250;
+        startCampaignButton.y = 500;
+        startCampaignButton.inputEnabled='true';
+        startCampaignButton.events.onInputDown.add(startCampaignButtonClick, this);
+        startCampaignButton.anchor.setTo(0.5, 0.5);
+        
+        continueCampaignButton = game.add.sprite(0, 0, 'continueCampaignButton');
+        continueCampaignButton.x = 550;
+        continueCampaignButton.y = 500;
+        continueCampaignButton.inputEnabled='true';
+        continueCampaignButton.events.onInputDown.add(continueCampaignButtonClick, this);
+        continueCampaignButton.anchor.setTo(0.5, 0.5);
     }
 }
 
@@ -284,6 +302,14 @@ function helpButtonClick() {
 
 function buildButtonClick() {
     state='build';
+}
+
+function startCampaignButtonClick() {
+    startCampaign();
+}
+
+function continueCampaignButtonClick() {
+    loadCampaign();
 }
 
 var helpSprite;
@@ -343,6 +369,8 @@ function appletSelection() {
     titleText.destroy(true);
     loadButton.destroy(true);
     threadButton.destroy(true);
+    startCampaignButton.destroy(true);
+    continueCampaignButton.destroy(true);
     appletIDPrompt();  //this is in mages.dialogs.js
 }
 
@@ -352,6 +380,8 @@ function threadSelection() {
     titleText.destroy(true);
     loadButton.destroy(true);
     threadButton.destroy(true);
+    startCampaignButton.destroy(true);
+    continueCampaignButton.destroy(true);
     threadPrompt(); 
 }
 
@@ -646,31 +676,100 @@ function clearCurrentApplet()
     { //this is where #challenge mode goes
         if(threadPoint < thread[threadNumber-1].length)
         {
-            if(challengeMode == 1)
+            if(campaignMode == 1)
+            {
+                if(timerExists == 0)
+                    {
+                        if( threadRecord[threadRecord.length-1] > 0.9 ) //close enough
+                        {
+                            campaignChallenges[currentCampaignChallenge].mastered++;
+                        } else
+                        {
+                            campaignChallenges[currentCampaignChallenge].mastered--;
+                            if(campaignChallenges[currentCampaignChallenge].mastered < 0)
+                            {campaignChallenges[currentCampaignChallenge].mastered = 0 }
+                        }
+                        localStorage.setObject("campaignChallenges",campaignChallenges)
+                        checkCampaignChallenges()
+                    } else  //this won't work, we need to repeat the timer applet here, not in the thread
+                    {
+                      if(timerRecord.length > timerRepetitions)
+                      {
+                            var timerRecordTotal = 0;
+                            timerRecord.forEach(function(item) {
+                                timerRecordTotal += item;
+                            });
+                            if(timerRecordTotal > 7)
+                            {
+                                console.log("passed time test")
+                                campaignChallenges[currentCampaignChallenge].mastered++; 
+                            }
+                            checkCampaignChallenges();
+                            timerRecord = [];
+                            currentCampaignChallenge = getRandomIntExcluding(0,4,currentCampaignChallenge);
+                      } else
+                      {
+
+                      }
+
+                    }
+            }
+            else
             {
                 if(timerExists == 0)
                 {
-                    var threadMove = checkChallengeRecord()
-                    threadPoint += threadMove;  //returns -1,0,1 depending on challenge record
-                    if(threadPoint<0){threadPoint=1}; //can't go past the beginning
-                    if( Math.abs(threadMove)>0 ){ challengeRecord = [] }   
+                    console.log("increasing thread because there's no timer")
+                    
                 } else
                 {
-                  threadPoint++;
-                  challengeRecord = [] ;
+                    if(timerRecord.length == timerRepetitions){ 
+                        threadPoint++ ; 
+                        timerRecord = [];
+                    }
+
                 }
-            } else
-            {
-                
+
             }
 
-            loadAppletID=thread[threadNumber-1][threadPoint-1];
-            appletInitiated=0; 
+
         } else
         {
-            bootbox.alert("Your score: " + calculateThreadPercent() + "%" );
+            bootbox.alert("Your score: " + calculateThreadPercent() + "%" , 
+            function(){             
+                titleInitiated=0;
+                state='title'; 
+                //reload title background
+            });
+
         }
     }
+    function checkCampaignChallenges()
+    {
+        if(campaignFurthestPoint[0] < campaignChallenges[campaignChallenges.length-1].threadNumber || campaignFurthestPoint[1] < campaignChallenges[campaignChallenges.length-1].threadPoint)
+        {
+            campaignFurthestPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber , campaignChallenges[campaignChallenges.length-1].threadPoint]; 
+        }
+        
+        addPoint = [ campaignFurthestPoint[0] , campaignFurthestPoint[1]+1];
+        if(addPoint[1] > thread[campaignChallenges[campaignChallenges.length-1].threadNumber-1].length)
+        { addPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber+1 , 1]}
+        
+        for(var i = 0 ; i < campaignChallenges.length ; i++)
+        {
+            if( campaignChallenges[i].mastered > 4 )
+            {
+                console.log("challenge " + i + "mastered")
+                campaignChallenges.splice(i,1)
+                campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0})
+            }
+              
+        }
+    currentCampaignChallenge = getRandomInt(0,4);
+    threadNumber =campaignChallenges[currentCampaignChallenge].threadNumber;
+    threadPoint = campaignChallenges[currentCampaignChallenge].threadPoint;
+    }
+    loadAppletID=thread[threadNumber-1][threadPoint-1];
+    appletInitiated=0; 
 }
 
 
@@ -724,6 +823,8 @@ function setupCanvas() {
     titleText.destroy(true);
     loadButton.destroy(true);
     threadButton.destroy(true);
+    startCampaignButton.destroy(true);
+    continueCampaignButton.destroy(true);
     var background = game.add.sprite(0, 0, 'grid');
     defineMenu();
     buildState='';

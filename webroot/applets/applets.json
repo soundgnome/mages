@@ -1363,11 +1363,11 @@
               {"type":15,"startX":320,"startY":300,"expression":"hiddenNumber%5B0%5D%20%2B%20%22%20x%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%3D%22","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
               {"type":14,"numberEntryX":180,"numberEntryY":340,"orientation":"h","displayX":[459],"displayY":[268],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":3},
               {"type":99,"color":0,"drawingBoxStartX":170,"drawingBoxStartY":253,"drawingBoxEndX":643,"drawingBoxEndY":390},
-              {"type":15,"startX":110,"startY":160,"expression":"%28threadMode%3D%3D1%3FthreadPoint%2B%22%2F10%22%3A%22%22%29","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
+              {"type":15,"startX":110,"startY":160,"expression":"(timerRecord.length+1) + '/' + timerRepetitions","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
               {"type":22,"startX":80,"startY":20,"timeLimit":"5","size":"96"},
               {"type":99,"color":16711680,"drawingBoxStartX":34,"drawingBoxStartY":18,"drawingBoxEndX":179,"drawingBoxEndY":183},
               {"type":1,"startX":191,"startY":397,"newText":"TIME%20TRIAL!","font":"","fontString":"bold 72px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"type":15,"startX":110,"startY":200,"expression":"%28threadMode%3D%3D1%3F%28typeof%20threadRecord%5BthreadPoint-2%5D%20%21%3D%3D%20%27undefined%27%3F%20%22Last%20problem%3A%20%22%20%2B%20%28threadRecord%5BthreadPoint-2%5D%3D%3D0%3F%20%22incorrect%22%20%3A%20%22correct%22%29%20%3A%20%22%22%29%3A%22%22%29","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
+              {"type":15,"startX":110,"startY":200,"expression":"(timerRecord.length == 0 ? '' : 'Last Problem: ' + (timerRecord[timerRecord.length-1]==1?'correct':'incorrect') )","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
   
               ],
           "doneStatement": "numberEntryValue==hiddenNumber[0]*hiddenNumber[1]"
@@ -1711,11 +1711,11 @@
               {"type":15,"startX":350,"startY":300,"expression":"hiddenNumber%5B0%5D%2ahiddenNumber%5B1%5D%20%2B%20%27%20%C3%B7%20%27%20%20%2B%20hiddenNumber%5B0%5D%20%2B%20%27%20%3D%20%27","font":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"right","draggable":0,"selectable":0},
               {"type":14,"numberEntryX":180,"numberEntryY":340,"orientation":"h","displayX":[510],"displayY":[268],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":3},
               {"type":99,"color":0,"drawingBoxStartX":170,"drawingBoxStartY":253,"drawingBoxEndX":643,"drawingBoxEndY":390},
-              {"type":15,"startX":110,"startY":160,"expression":"%28threadMode%3D%3D1%3FthreadPoint%2B%22%2F10%22%3A%22%22%29","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
+              {"type":15,"startX":110,"startY":160,"expression":"(timerRecord.length+1) + '/' + timerRepetitions","font":" 48px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0},
               {"type":22,"startX":80,"startY":20,"timeLimit":"5","size":"96"},
               {"type":99,"color":16711680,"drawingBoxStartX":34,"drawingBoxStartY":18,"drawingBoxEndX":179,"drawingBoxEndY":183},
               {"type":1,"startX":191,"startY":397,"newText":"TIME%20TRIAL!","font":"","fontString":"bold 72px Arial","fill":"Red","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"type":15,"startX":110,"startY":200,"expression":"%28threadMode%3D%3D1%3F%28typeof%20threadRecord%5BthreadPoint-2%5D%20%21%3D%3D%20%27undefined%27%3F%20%22Last%20problem%3A%20%22%20%2B%20%28threadRecord%5BthreadPoint-2%5D%3D%3D0%3F%20%22incorrect%22%20%3A%20%22correct%22%29%20%3A%20%22%22%29%3A%22%22%29","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
+              {"type":15,"startX":110,"startY":200,"expression":"(timerRecord.length == 0 ? '' : 'Last Problem: ' + (timerRecord[timerRecord.length-1]==1?'correct':'incorrect') )","font":" 12px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"150","align":"right","draggable":0,"selectable":0}
               ],
           "doneStatement": "numberEntryValue==hiddenNumber[1]"
         },
@@ -2958,7 +2958,7 @@
               {"type":16,"expression":"getRandomInt%282%2ChiddenNumber%5B0%5D%29"},
               {"type":24,"startX":20,"startY":120,"denominator":"hiddenNumber[0]","scaleX":1,"scaleY":1,"draggable":false,"color":true,"limit":"hiddenNumber[1]"},
               {"type":1,"startX":40,"startY":40,"newText":"Choose%20the%20fraction%20that%20equals%20this%20model%3A","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
-              {"type":10,"startX":260,"startY":320,"correct":{"whole":"null","numerator":"hiddenNumber[1]","denominator":"hiddenNumber[0]"},"incorrect1":{"whole":"null","numerator":"hiddenNumber[0]","denominator":"getRandomInt(2,12)"},"incorrect2":{"whole":"null","numerator":"hiddenNumber[0]+1","denominator":"getRandomInt(2,12)"},"incorrect3":{"whole":"null","numerator":"hiddenNumber[0]-1","denominator":"getRandomInt(2,12)"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"100","multiType":"1"},
+              {"type":10,"startX":260,"startY":320,"correct":{"whole":"null","numerator":"hiddenNumber[1]","denominator":"hiddenNumber[0]"},"incorrect1":{"whole":"null","numerator":"hiddenNumber[0]","denominator":"getRandomInt(2,12)"},"incorrect2":{"whole":"null","numerator":"hiddenNumber[0]+1","denominator":"getRandomInt(2,12)"},"incorrect3":{"whole":"null","numerator":"hiddenNumber[0]-1","denominator":"getRandomInt(2,12)"},"multipleChoiceFontSize":"40","spaceX":"200","spaceY":"200","multiType":"1"},
               {"type":5,"startX":720,"startY":540},
               {"type":16,"expression":"piece[2].x+=(700-piece[2].width)/2+10"}
               ],
@@ -2971,7 +2971,6 @@
               {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D%29"},
               {"type":16,"expression":"(getRandomInt(0,1)==1?'pie':'box')"},
               {"type":21,"startX":300,"startY":140,"textureExpression":"fractionModelTexture({type:hiddenNumber[2] , numerator:hiddenNumber[1] , denominator:hiddenNumber[0] , size:200 , color:0xff0000 })","number":"1","draggable":0,"selectable":0},
-              {"type":16,"expression":"(hiddenNumber[2]=='pie'?piece[3].y-=40:true)"},
               {"type":1,"startX":34,"startY":382,"newText":"Shaded%3A","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"type":1,"startX":330,"startY":383,"newText":"Unshaded%3A","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"type":14,"numberEntryX":120,"numberEntryY":540,"orientation":"h","displayX":[200,200,540,540],"displayY":[380,460,380,460],"hideInitialValue":"Yes","panelQuantity":"4","displayDigits":2},
@@ -3142,6 +3141,15 @@
       ],
       "doneStatement" : "multipleChoiceCorrectAnswer==multipleChoiceSelected"
       },
+{ "appletID" : "saratest", 
+"summary" : "I love Sara.",
+"pieces" : [
+{"type":24,"startX":40,"startY":40,"denominator":4,"scaleX":"1","scaleY":"1","draggable":true,"limit":"4","color":true},
+{"type":25,"startX":40,"startY":540,"scaleX":"1","scaleY":"1"},
+{"type":21,"startX":320,"startY":180,"textureExpression":"fractionModelTexture({type:\"'box'\", numerator:1, denominator:3, size:200, color:0x00ffff})","number":0.3333333333333333,"draggable":0,"selectable":1,"selectedExpression":"true"}
+],
+"doneStatement" : "selectableScore()"
+},
         { "summary": "",
           "pieces": [
           

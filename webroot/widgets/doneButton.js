@@ -65,7 +65,7 @@ function doneButtonClick(item) {
                 threadRecord.push(correct);
             } else //singular question
             { //will need to form arrays for repeated questions in #challenge mode
-                challengeRecord.push(+eval(appletTests));
+            //this adds adds the applet score to the challenge record
                 if(+eval(appletTests)>0)
                 {
                     threadRecord.push(+eval(appletTests)); //implicitly convert true to 1; also handles selectableScore()
@@ -84,6 +84,8 @@ function doneButtonClick(item) {
             
             if(timerExists==1)  //don't run the animation if we're in a speed round
             {
+                timerRecord.push(threadRecord[threadRecord.length-1]);
+                console.log(timerRecord)
                 clearCurrentApplet();
             } else
             {

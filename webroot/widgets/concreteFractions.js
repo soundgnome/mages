@@ -406,7 +406,7 @@ function fractionModelTexture(settings) {
                     newGraphic.beginFill(0xFFFFFF, 1);   
                 }
             //  Note the 'true' at the end, this tells it to draw anticlockwise
-            newGraphic.arc(-100, -100, settings.size, game.math.degToRad(startAngle), game.math.degToRad(startAngle+fractionAngle), false);
+            newGraphic.arc(-100, -100, settings.size/2, game.math.degToRad(startAngle), game.math.degToRad(startAngle+fractionAngle), false);
             
             
             startAngle += fractionAngle

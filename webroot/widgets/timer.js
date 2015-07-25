@@ -4,6 +4,7 @@ var timerStart;
 var timerTimeLeft;
 var timerLimit;
 var timedApplet = 0;
+var timerRepetitions = 10; //used to control thread and campaign mode.  Can be set using a hiddenNumber.
 
 function buildTimer(item) {
     timedApplet = 1;
