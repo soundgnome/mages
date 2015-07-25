@@ -42,13 +42,26 @@ function loadCampaign()
 
 function startCampaign()
 {
-    state = 'prompt';
-    bootbox.prompt("Type delete to remove the previous user's profile.", function(result) {                
-        if (result === null) {                                             
-            titleInitiated=0;
-            state='title';                         
-    } else if(result == 'delete') {
+    if (typeof localStorage.campaignChallenges === 'undefined') 
+            { 
+                newCampaign() 
+            } else
+            {
+                state = 'prompt';
+                bootbox.prompt("Type delete to remove the previous user's profile.", function(result) {                
+                if (result === null) {                                             
+                      
+                } else if(result == 'delete') 
+                {
+                    newCampaign() ;
+                }
+                });  
+            }
+
     
+    
+    function newCampaign()
+    {
         helpButton.destroy(true);
         buildButton.destroy(true);
         titleText.destroy(true);
@@ -78,10 +91,7 @@ function startCampaign()
         state = 'applet';
         
         titleBack.destroy(true);
-    
     }
-    });
-    
 }
 
 function loadThreads()

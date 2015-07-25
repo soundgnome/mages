@@ -1362,7 +1362,7 @@ function getCloseAnswer(answer, proximity) {
 
 
 function render () {
-    //game.debug.text("Mages Public Alpha.38 - Threads 1 and 2 are mostly working.", 10, 20);
+    //game.debug.text("Mages Public Alpha.47 - Start campaign to demo.", 10, 20);
 }
 
 
