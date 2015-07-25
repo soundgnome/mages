@@ -764,7 +764,7 @@ function clearCurrentApplet()
             }
               
         }
-    currentCampaignChallenge = getRandomInt(0,4);
+    currentCampaignChallenge = getRandomIntExcluding(0,4,currentCampaignChallenge);
     threadNumber =campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint = campaignChallenges[currentCampaignChallenge].threadPoint;
     }

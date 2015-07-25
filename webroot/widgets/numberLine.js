@@ -58,7 +58,7 @@ function buildNumberLine(item) {
     piece[piece.length-1].add(game.add.sprite( (item.lineOrientation == 'h' ?  0 : 10) , (item.lineOrientation == 'h' ?  -7 : 15) , newGraphic.generateTexture()) );
     newGraphic.clear();
     if(item.minLabel == true){
-            newLabel = game.add.text(0, 20 , item.min.toString(), {
+            newLabel = game.add.text(0, 20 , addCommas(item.min).toString(), {
             font: labelFontSize+"px Arial",
             fill: "black",
             align: 'left'}); 
@@ -72,7 +72,7 @@ function buildNumberLine(item) {
         for(var i = 1 ; i <= (item.max-item.min)/item.interval - 1 ; i++ )
         {
              
-            newLabel = game.add.text((item.lineOrientation == 'h' ?  i*item.lineLength/( (item.max-item.min) / item.interval) : 0), (item.lineOrientation == 'h' ?  0 : i*item.lineLength/( (item.max-item.min) / item.interval))+20 , (item.min+i*item.interval).toString(), {
+            newLabel = game.add.text((item.lineOrientation == 'h' ?  i*item.lineLength/( (item.max-item.min) / item.interval) : 0), (item.lineOrientation == 'h' ?  0 : i*item.lineLength/( (item.max-item.min) / item.interval))+20 , addCommas(item.min+i*item.interval).toString(), {
             font: labelFontSize+"px Arial",
             fill: "black",
             align: 'left'}); 
@@ -83,7 +83,7 @@ function buildNumberLine(item) {
     }
     
     if(item.maxLabel == true){
-        newLabel = game.add.text((item.lineOrientation == 'h' ? item.lineLength : 0), (item.lineOrientation == 'h' ? 20 : item.lineLength+20) , item.max.toString(), {
+        newLabel = game.add.text((item.lineOrientation == 'h' ? item.lineLength : 0), (item.lineOrientation == 'h' ? 20 : item.lineLength+20) , addCommas(item.max).toString(), {
         font: labelFontSize+"px Arial",
         fill: "black",
         align: 'left'}); 
