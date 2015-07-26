@@ -164,8 +164,7 @@ function preload() {
 
 function create() {
     titleBack = game.add.sprite(0, 0, 'starfield');
-    game.canvas.oncontextmenu = function (e) { e.preventDefault(); }
-}
+    game.canvas.oncontextmenu = function (e) { e.preventDefault(); }}
 
 /*******************************************************************************
  *                                  MAIN LOOP
@@ -639,9 +638,11 @@ function clearCurrentApplet()
     });
     numberEntryPanels = [];
 
+    
+
     activeEntryPanel = 0;
     numberEntryValue=[];
-
+    numberEntryButtons = [];
 
     
     evaluatedExpression = [];

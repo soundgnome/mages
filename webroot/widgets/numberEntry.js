@@ -5,6 +5,7 @@ var activeEntryPanel = 0;
 var numberEntryButtons = [];
 
 function buildNumberEntry(item) {
+    console.log("numberEntry")
     if (typeof item.panelQuantity === 'undefined') {item.panelQuantity = 1}
     
     piece.forEach(function(item) {
@@ -19,6 +20,7 @@ function buildNumberEntry(item) {
     piece[piece.length] = game.add.group();
     var pieceLabel;
     var pieceHandle;
+    
     for(var i = 0; i < 11; i++)
     {
         if(item.orientation == "h")
