@@ -405,6 +405,7 @@ function runApplet() {
         dragNumberLineDot();
         advanceTimer();
         dragFractionBar();
+        scanKeyboard();
     }
 }
 
@@ -674,8 +675,8 @@ function clearCurrentApplet()
         appletIDPrompt(); 
     } else
     { //this is where #challenge mode goes
-        if(threadPoint < thread[threadNumber-1].length)
-        {
+        
+        
             if(campaignMode == 1)
             {
                 if(timerExists == 0)
@@ -693,7 +694,7 @@ function clearCurrentApplet()
                         checkCampaignChallenges()
                     } else  //this won't work, we need to repeat the timer applet here, not in the thread
                     {
-                      if(timerRecord.length > timerRepetitions)
+                      if(timerRecord.length == timerRepetitions)
                       {
                             var timerRecordTotal = 0;
                             timerRecord.forEach(function(item) {
@@ -716,32 +717,38 @@ function clearCurrentApplet()
             }
             else
             {
-                if(timerExists == 0)
+                if(threadPoint < thread[threadNumber-1].length)
                 {
-                    console.log("increasing thread because there's no timer")
-                    
+                    if(timerExists == 0)
+                    {
+                        threadPoint++ ;
+                        
+                    } else
+                    {
+                        if(timerRecord.length == timerRepetitions){ 
+                            threadPoint++ ; 
+                            timerRecord = [];
+                        }
+    
+                    }     
                 } else
                 {
-                    if(timerRecord.length == timerRepetitions){ 
-                        threadPoint++ ; 
-                        timerRecord = [];
-                    }
-
+                    bootbox.alert("Your score: " + calculateThreadPercent() + "%" , 
+                    function(){             
+                        titleInitiated=0;
+                        state='title'; 
+                        //reload title background
+                    });}
+                    
+    
                 }
 
-            }
 
+        
 
-        } else
-        {
-            bootbox.alert("Your score: " + calculateThreadPercent() + "%" , 
-            function(){             
-                titleInitiated=0;
-                state='title'; 
-                //reload title background
-            });
-
-        }
+        
+            loadAppletID=thread[threadNumber-1][threadPoint-1];
+    appletInitiated=0; 
     }
     function checkCampaignChallenges()
     {
@@ -768,8 +775,7 @@ function clearCurrentApplet()
     threadNumber =campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint = campaignChallenges[currentCampaignChallenge].threadPoint;
     }
-    loadAppletID=thread[threadNumber-1][threadPoint-1];
-    appletInitiated=0; 
+
 }
 
 

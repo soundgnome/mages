@@ -2,6 +2,7 @@ var numberEntryValue=[];
 var numberEntryPanelText = [];
 var numberEntryPanels = [];
 var activeEntryPanel = 0;
+var numberEntryButtons = [];
 
 function buildNumberEntry(item) {
     if (typeof item.panelQuantity === 'undefined') {item.panelQuantity = 1}
@@ -17,11 +18,13 @@ function buildNumberEntry(item) {
     //number entry buttons
     piece[piece.length] = game.add.group();
     var pieceLabel;
+    var pieceHandle;
     for(var i = 0; i < 11; i++)
     {
         if(item.orientation == "h")
         {                           
-            piece[piece.length-1].create(i*40,0,'numberEntryButton').value=i;
+            pieceHandle = piece[piece.length-1].create(i*40,0,'numberEntryButton')
+            pieceHandle.value=i;
             pieceLabel = new Phaser.Text(game, i*40+10, 0, (i< 10 ? i.toString() : "X" ), {
             font: "36px Arial",
             fill: "black",
@@ -30,7 +33,8 @@ function buildNumberEntry(item) {
             piece[piece.length-1].add(pieceLabel);
         } else
         {
-            piece[piece.length-1].create(0,i*40+10,'numberEntryButton').value=i;
+            pieceHandle = piece[piece.length-1].create(0,i*40+10,'numberEntryButton');
+            pieceHandle.value=i;
             pieceLabel = new Phaser.Text(game, 10, i*40+10, (i< 10 ? i.toString() : "X" ), {
             font: "36px Arial",
             fill: "black",
@@ -38,6 +42,7 @@ function buildNumberEntry(item) {
             pieceLabel.value=i;
             piece[piece.length-1].add(pieceLabel);
         }
+        numberEntryButtons.push(pieceHandle)
         
     }
     
@@ -106,6 +111,7 @@ function buildNumberEntry(item) {
         piece[piece.length-1].x=item.numberEntryX;
         piece[piece.length-1].y=item.numberEntryY;
         piece[piece.length-1].forEach(function(subItem) { //number entry button behavior
+            
             subItem.events.onInputDown.add(numberEntryClick, this);
             subItem.displayDigits = item.displayDigits
             subItem.displayX = item.displayX;
@@ -116,13 +122,13 @@ function buildNumberEntry(item) {
     }
 }
 
+
 var numberEntryPanelBox 
 function entryPanelClick(item)
 {
     if(state=='applet')
     {
-         if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.clear()}
-        
+        if (typeof numberEntryPanelBox !== 'undefined') {numberEntryPanelBox.clear()}
         activeEntryPanel = item.panelNumber;
         if(numberEntryPanels.length>1)
         {
@@ -130,7 +136,36 @@ function entryPanelClick(item)
             numberEntryPanelBox.lineStyle(2, 0x0000FF, 1);
             numberEntryPanelBox.drawRect(-2, -2, item.width+4, item.height+4); 
         }
-        
+    }
+}
+
+var lastKey;
+var keyStillDown=0;
+function scanKeyboard()
+{
+    var i;
+    var numKey;
+    for (i = 0; i <= 9; i++) {
+		numKey = i.toString().charCodeAt(0);
+        if (game.input.keyboard.isDown(numKey) ) {
+        	if(keyStillDown == 0) {//only process it once
+	    		keyStillDown = 1;
+	    		lastKey = i;
+	    		numberEntryButtons.forEach(function(item) {
+	    		    if(item.value == i)
+	    		    {
+	    		        numberEntryClick(item);
+	    		    }
+	    		});
+    		}
+    	} else //the key isn't down anymore
+	    {
+	    	if(lastKey == i)
+	    	{
+	    		lastKey = 0; //reset
+	    		keyStillDown = 0; //make way for a new key
+	    	}
+	    }
     }
 }
 

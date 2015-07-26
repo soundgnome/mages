@@ -760,7 +760,7 @@
               {"type":5,"startX":380,"startY":480},
               {"type":99,"drawingBoxStartX":20,"drawingBoxStartY":18,"drawingBoxEndX":777,"drawingBoxEndY":581}
           ],
-          "doneStatement": "numberEntryValue==hiddenNumber[2]/hiddenNumber[1]"
+          "doneStatement": "numberEntryValue==hiddenNumber[2]*hiddenNumber[1]"
         },
         { "appletID":"44", "summary": "Divide larger numbers by 2-12: word problems",
           "pieces": [
@@ -1248,7 +1248,7 @@
               {"type":99,"color":0,"drawingBoxStartX":418,"drawingBoxStartY":332,"drawingBoxEndX":601,"drawingBoxEndY":394},
               {"type":5,"startX":720,"startY":540}
               ],
-          "doneStatement": "dragToBoxes[0].contents!=0&&numberEntryValue==eval( dragToBoxes[0].contents.replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.replace(',','') )"
+          "doneStatement": "dragToBoxes[0].contents!=0&&numberEntryValue==eval( dragToBoxes[0].contents.toString().replace(',','')+dragToBoxes[1].contents+dragToBoxes[2].contents.toString().replace(',','') )"
         },
         
         { "appletID":"1-23", "summary": "Missing added with dragToBoxes",

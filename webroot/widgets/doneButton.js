@@ -61,7 +61,6 @@ function doneButtonClick(item) {
                     }    
                 }
                 if(correct > 0.99) {correct = 1}  //some partial credit applets don't end up getting to 1
-                challengeRecord.push(correct);
                 threadRecord.push(correct);
             } else //singular question
             { //will need to form arrays for repeated questions in #challenge mode
