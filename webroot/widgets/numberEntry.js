@@ -115,7 +115,7 @@ function buildNumberEntry(item) {
         piece[piece.length-1].forEach(function(subItem) { //number entry button behavior
             
             subItem.events.onInputDown.add(numberEntryClick, this);
-            subItem.displayDigits = item.displayDigits
+            subItem.displayDigits = item.displayDigits;
             subItem.displayX = item.displayX;
             //item.events.onInputUp.add(numberEntryFinishClick, this);  
             subItem.ParentPosition=piece.length-1;
@@ -125,7 +125,7 @@ function buildNumberEntry(item) {
 }
 
 
-var numberEntryPanelBox 
+var numberEntryPanelBox ;
 function entryPanelClick(item)
 {
     if(state=='applet')
@@ -150,7 +150,7 @@ function scanKeyboard()
     for (i = 0; i <= 9; i++) {
 		numKey = i.toString().charCodeAt(0);
         if (game.input.keyboard.isDown(numKey) ) {
-        	if(keyStillDown == 0) {//only process it once
+        	if(keyStillDown == 0) { //only process it once
 	    		keyStillDown = 1;
 	    		lastKey = i;
 	    		numberEntryButtons.forEach(function(item) {
@@ -180,10 +180,10 @@ function numberEntryClick (item) {
         {
             if( (numberEntryValue[activeEntryPanel].toString().length-1)%3 == 0)
             {
-               numberEntryPanelText[activeEntryPanel].x -= 60  
+               numberEntryPanelText[activeEntryPanel].x -= 60;
             } else
             {
-               numberEntryPanelText[activeEntryPanel].x -= 40 
+               numberEntryPanelText[activeEntryPanel].x -= 40;
             }
         }
     } else
@@ -195,7 +195,7 @@ function numberEntryClick (item) {
         } else
         {
             numberEntryValue[activeEntryPanel] = 0;
-            numberEntryPanelText[activeEntryPanel].x = item.displayX[activeEntryPanel] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3)*20
+            numberEntryPanelText[activeEntryPanel].x = item.displayX[activeEntryPanel] + ((item.displayDigits-1)*40) + Math.floor((item.displayDigits-1)/3)*20;
             numberEntryPanelText[activeEntryPanel].text = numberEntryValue[activeEntryPanel].toString(); 
         }
         

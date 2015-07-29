@@ -3133,28 +3133,77 @@
               ],
         "doneStatement" : "[ 'dragToBoxes[0].contents-dragToBoxes[1].contents==hiddenNumber[1]-hiddenNumber[2]' , 'dragToBoxes[2].contents==hiddenNumber[1]-hiddenNumber[2]' ]"
         },
-              { "appletID" : "menuexample", 
-      "summary" : "Edit this text to add an applet summary.",
-      "pieces" : [
-      {"type":21,"startX":340,"startY":100,"textureExpression":"fractionModelTexture({type:\"pie\" , numerator:3 , denominator:4 , size:100 , color:0x008000 })","number":"1","draggable":0,"selectable":0},
-      {"type":24,"startX":306,"startY":318,"limit":3,"denominator":4,"scaleX":0.5,"scaleY":1,"draggable":true,"color":true}
-      ],
-      "doneStatement" : "multipleChoiceCorrectAnswer==multipleChoiceSelected"
-      },
-{ "appletID" : "saratest", 
-"summary" : "I love Sara.",
-"pieces" : [
-{"type":24,"startX":40,"startY":40,"denominator":4,"scaleX":"1","scaleY":"1","draggable":true,"limit":"4","color":true},
-{"type":25,"startX":40,"startY":540,"scaleX":"1","scaleY":"1"},
-{"type":21,"startX":320,"startY":180,"textureExpression":"fractionModelTexture({type:\"'box'\", numerator:1, denominator:3, size:200, color:0x00ffff})","number":0.3333333333333333,"draggable":0,"selectable":1,"selectedExpression":"true"}
-],
-"doneStatement" : "selectableScore()"
-},
-        { "summary": "",
-          "pieces": [
-          
+              { "appletID" : "6-10", 
+              "summary" : "Sums of fractions with like denominators.",
+              "pieces" : [
+                  {"type":16,"expression":"[3, 4, 5, 6, 8, 10, 12,16,20][getRandomInt(0,8)]"},
+                  {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-2%29"},
+                  {"type":16,"expression":"getRandomInt(1,hiddenNumber[0]-hiddenNumber[1])"},
+                  {"type":3,"startX":240,"startY":160,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[1]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+                  {"type":3,"startX":400,"startY":160,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[2]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+                  {"type":1,"startX":332,"startY":194,"newText":"%2B","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":1,"startX":486,"startY":193,"newText":"%3D","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":14,"numberEntryX":200,"numberEntryY":320,"orientation":"h","displayX":[540,540],"displayY":[150,230],"hideInitialValue":"Yes","panelQuantity":"2","displayDigits":2},
+                  {"type":1,"startX":526,"startY":169,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":1,"startX":260,"startY":40,"newText":"Enter%20the%20sum.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":5,"startX":720,"startY":540}
+                  ],
+              "doneStatement" : "(numberEntryValue[0]/numberEntryValue[1]).toFixed(4)==(hiddenNumber[1]/hiddenNumber[0]+hiddenNumber[2]/hiddenNumber[0]).toFixed(4)"
+              },
+              { "appletID" : "6-11", 
+              "summary" : "Differences of fractions with like denominators.",
+              "pieces" : [
+                  {"type":16,"expression":"[3, 4, 5, 6, 8, 10, 12,16,20][getRandomInt(0,8)]"},
+                  {"type":16,"expression":"getRandomInt(2,hiddenNumber[0])"},
+                  {"type":16,"expression":"getRandomInt(1,hiddenNumber[1])"},
+                  {"type":3,"startX":240,"startY":160,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[1]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+                  {"type":3,"startX":400,"startY":160,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[2]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+                  {"type":1,"startX":332,"startY":194,"newText":"-","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":1,"startX":486,"startY":193,"newText":"%3D","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":14,"numberEntryX":200,"numberEntryY":320,"orientation":"h","displayX":[540,540],"displayY":[150,230],"hideInitialValue":"Yes","panelQuantity":"2","displayDigits":2},
+                  {"type":1,"startX":526,"startY":169,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":1,"startX":260,"startY":40,"newText":"Enter%20the%20sum.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+                  {"type":5,"startX":720,"startY":540}
+                  ],
+              "doneStatement" : "(numberEntryValue[0]/numberEntryValue[1]).toFixed(4)==(hiddenNumber[1]/hiddenNumber[0]-hiddenNumber[2]/hiddenNumber[0]).toFixed(4)"
+              },
+        { "appletID" : "6-12", 
+        "summary" : "Identifying parts of a mixed number.",
+        "pieces" : [
+            {"type":16,"expression":"getRandomInt%281%2C9%29"},
+            {"type":16,"expression":"getRandomIntExcluding%281%2C20%2ChiddenNumber%29"},
+            {"type":16,"expression":"getRandomIntExcluding%281%2ChiddenNumber%5B1%5D%2ChiddenNumber%29"},
+            {"type":3,"startX":280,"startY":0,"fill":"Black","wholeExpression":"hiddenNumber[0]","numeratorExpression":"hiddenNumber[2]","denominatorExpression":"hiddenNumber[1]","size":"60","draggable":0,"selectable":0},
+            {"type":16,"expression":"getRandomInt%280%2C2%29"},
+            {"type":15,"startX":420,"startY":260,"expression":"%22Which%20part%20of%20the%20fraction%20does%20the%20%22%20%2B%20hiddenNumber%5BhiddenNumber%5B3%5D%5D%20%2B%20%22%20represent%3F%22","font":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":664,"originalHeight":120},
+            {"type":15,"startX":120,"startY":380,"expression":"%22numerator%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":164,"originalHeight":46},
+            {"type":15,"startX":380,"startY":380,"expression":"%22denominator%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":200,"originalHeight":46},
+            {"type":15,"startX":660,"startY":380,"expression":"%22whole%20number%22","font":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","align":"left","draggable":1,"selectable":0,"clonable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":226,"originalHeight":46},
+            {"type":98,"color":255,"drawingLineStartX":20,"drawingLineStartY":340,"drawingLineEndX":20,"drawingLineEndY":420},
+            {"type":98,"color":255,"drawingLineStartX":20,"drawingLineStartY":420,"drawingLineEndX":780,"drawingLineEndY":420},
+            {"type":98,"color":255,"drawingLineStartX":780,"drawingLineStartY":340,"drawingLineEndX":780,"drawingLineEndY":260},
+            {"type":98,"color":255,"drawingLineStartX":20,"drawingLineStartY":340,"drawingLineEndX":780,"drawingLineEndY":340},
+            {"type":9,"startX":460,"startY":460,"userScaleX":3,"userScaleY":0.5},
+            {"type":1,"startX":220,"startY":440,"newText":"It%20is%20the","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":1,"startX":585,"startY":440,"newText":".","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
             ],
-          "doneStatement": ""
+        "doneStatement" : "if%28hiddenNumber%5B3%5D%3D%3D0%29%7BdragToBoxes%5B0%5D.contents%3D%3D%22whole%20number%22%7D%20else%20if%28hiddenNumber%5B3%5D%3D%3D1%29%7BdragToBoxes%5B0%5D.contents%3D%3D%22denominator%22%7D%20else%20if%28hiddenNumber%5B3%5D%3D%3D2%29%7BdragToBoxes%5B0%5D.contents%3D%3D%22numerator%22%7D"
+        },
+        { "appletID" : "6-13", 
+        "summary" : "Model mixed numbers.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D%29"},
+            {"type":3,"startX":300,"startY":0,"fill":"Black","wholeExpression":"1","numeratorExpression":"hiddenNumber[1]","denominatorExpression":"hiddenNumber[0]","size":"60","draggable":0,"selectable":0},
+            {"type":24,"startX":40,"startY":300,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":true,"limit":0,"color":true},
+            {"type":24,"startX":40,"startY":340,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":true,"limit":0,"color":true},
+            {"type":25,"startX":40,"startY":420,"scaleX":"1","scaleY":"1"},
+            {"type":25,"startX":40,"startY":460,"scaleX":"1","scaleY":"1"},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":60,"startY":200,"newText":"Model%20the%20mixed%20number%20by%20dragging%20the%20correct%20fraction%20bars%20into%20the%20boxes%20below.","font":"","fontString":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
+            ],
+        "doneStatement" : "(1+hiddenNumber[1]/hiddenNumber[0]).toFixed(3)==(fractionBarDragToBoxes[0].contents+fractionBarDragToBoxes[1].contents).toFixed(3)"
         }
         
     ]

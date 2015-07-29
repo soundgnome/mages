@@ -74,7 +74,7 @@ function getConcreteFractionBarSettings() {
                                 "scaleY" : $('#scaley').val() , 
                                 "draggable": ($("input[name='draggable']:checked").val() == "Yes" ? true : false) ,
                                 "color": ($("input[name='color']:checked").val() == "Yes" ? true : false) ,
-                                "limit":($('#scalex').val() == 0 ? 0 : $('#denominator').val() )  ,
+                                "limit":( $('#limit').val() )  ,
                             })) ;
                             buildFractionBar(newObject);
                             state='build'
@@ -118,9 +118,18 @@ function getConcreteFractionBarDragToSettings() {
 
 //buildFractionBar({"type":24,"startX":40,"startY":20,"denominator":3,"scaleX":1,"scaleY":1,"draggable":true,"color":true})
 function buildFractionBar(item) {
-    if (typeof item.limit === 'undefined' || item.limit == 0) { item.limit = item.denominator }
-    var denominatorExpression = item.denominator;
+    item.denominatorExpression = item.denominator;
     item.denominator = eval(item.denominator);
+console.log("limit:" + item.limit)
+    if (typeof item.limit === 'undefined' || item.limit == 0) { 
+        item.limit = item.denominator;
+            
+    } else
+    {
+        item.limitExpression = item.limit;
+        item.limit = eval(item.limit);
+    }
+
     var colors = [0xFF0000,0xFFA500,0xFFFF00,0x008000,0x0000FF,0x4B0082,0xEE82EE,0xFF69B4,0xFFE4B5,0xADFF2F,0x48D1CC]
     piece[piece.length] = game.add.group();
     
@@ -191,10 +200,12 @@ function buildFractionBar(item) {
     }
     piece[piece.length-1].type = 24;
     piece[piece.length-1].denominator = item.denominator;
+    piece[piece.length-1].denominatorExpression = item.denominatorExpression;
     piece[piece.length-1].scaleX = item.scaleX;
     piece[piece.length-1].scaleY = item.scaleY;
     piece[piece.length-1].draggable = item.draggable;
     piece[piece.length-1].limit = item.limit;
+    piece[piece.length-1].limitExpression = item.limitExpression;
     piece[piece.length-1].color = item.color;
     
     
@@ -234,17 +245,32 @@ function fixSlotSpacing(dragTo) {
             dragTo.contentsIDs[i].y = dragTo.y-dragTo.contentsIDs[i].parent.y
             dragTo.contents += (1/dragTo.contentsIDs[i].parent.denominator) ; 
         }
-        console.log(dragTo.contents)
     }
 
 function stopDraggingFractionBar(barPiece) {
+    if(barPiece.occupying != null)
+    {
+            if( (((barPiece.occupying.x+barPiece.occupying.width)-game.input.x)>0) && (((barPiece.occupying.x+barPiece.occupying.width)-game.input.x)<barPiece.occupying.width) && (((barPiece.occupying.y+barPiece.occupying.height)-game.input.y)>0) && (((barPiece.occupying.y+barPiece.occupying.height)-game.input.y)<barPiece.occupying.height) )
+            {
+                if(parseFloat((barPiece.occupying.contents+1/barPiece.parent.denominator).toFixed(3))<=1)
+                {
+                    barPiece.x = barPiece.occupying.x+(barPiece.occupying.contents*barPiece.occupying.width)-barPiece.parent.x
+                    barPiece.y = barPiece.occupying.y-barPiece.parent.y
+                    barPiece.occupying = barPiece.occupying;  
+                }
+            } else
+            {
+                
+                barPiece.occupying = null;
+            }    
+    }
+            
     if(barPiece.occupying != null)
     {
        barPiece.occupying.contentsIDs.push(barPiece)
        barPiece.contentsSlot = barPiece.occupying.contentsIDs.length-1;
        fixSlotSpacing(barPiece.occupying);
        barPiece.occupying.contents = parseFloat(barPiece.occupying.contents.toFixed(3))
-       
     } else
     {
         barPiece.contentsSlot = null;
@@ -270,11 +296,12 @@ function dragFractionBar() {
                 {
                     fractionBarHandle.x = item.x+(item.contents*item.width)-fractionBarHandle.parent.x
                     fractionBarHandle.y = item.y-fractionBarHandle.parent.y
-                    fractionBarHandle.occupying = item;    
+                    fractionBarHandle.occupying = item;  
                 }
             } else
             {
-                fractionBarHandle.occupying = null;
+                
+                
             }
         });
 

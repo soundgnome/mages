@@ -437,11 +437,11 @@ function printPieces(newAppletID, appletDoneTest, summary) {
                         "type": piece[item].type, 
                         "startX":piece[item].x,
                         "startY":piece[item].y,
-                        "denominator": piece[item].denominator,
+                        "denominator": piece[item].denominatorExpression,
                         "scaleX": piece[item].scaleX,
                         "scaleY": piece[item].scaleY,
                         "draggable": piece[item].draggable,
-                        "limit": piece[item].limit,
+                        "limit": piece[item].limitExpression,
                         "color": piece[item].color
                         });
                     constructorString = getConstructorString(newObject);
