@@ -1775,7 +1775,7 @@
             "pieces": [
               {"type":16,"expression":"getRandomInt%280%2C99%29"},
               {"type":16,"expression":"getRandomInt%284%2C9%29"},
-              {"type":16,"expression":"%28%28Math.round%28getRandomInt%28120%2C180%29%2FhiddenNumber%5B1%5D%29%29%2ahiddenNumber%5B1%5D%29%2B1"},
+              {"type":16,"expression":"hiddenNumber[1]*getRandomInt(2,12)+(getRandomInt(0,1)==0?1:-1)"},
               {"type":15,"startX":389,"startY":94,"expression":"%22A%20storage%20shelf%20where%20%22%20%2B%20girlNames%5BhiddenNumber%5B0%5D%5D%20%2B%20%22%20works%20can%20hold%20about%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20kilograms.%20%20The%20storage%20shelf%20can%20hold%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20filing%20boxes.%20%20About%20how%20many%20kilograms%20does%20each%20box%20weight%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0},
               {"type":1,"startX":60,"startY":340,"newText":"Does%20this%20problem%20require%20an%20estimated%20or%20exact%20answer%3F%20%20Drag%20the%20correct%20choice%20into%20the%20box.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"600","alignment":"left"},
               {"type":15,"startX":180,"startY":513,"expression":"%22estimate%22","font":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"600","align":"right","draggable":1,"selectable":0},
@@ -1786,7 +1786,7 @@
               {"type":1,"startX":370,"startY":224,"newText":"kilograms","font":"","fontString":" 36px Arial","fill":"black","wordWrap":false,"wordWrapWidth":"600","alignment":"left"},
               {"type":99,"color":255,"drawingBoxStartX":90,"drawingBoxStartY":481,"drawingBoxEndX":601,"drawingBoxEndY":539}
               ],
-          "doneStatement": "[ (dragToBoxes[0].contents=='estimate') , 'numberEntryValue==Math.floor(hiddenNumber[2]/hiddenNumber[1])']"
+          "doneStatement": "[ (dragToBoxes[0].contents=='estimate') , 'numberEntryValue==Math.round(hiddenNumber[2]/hiddenNumber[1])']"
         },
         { "appletID":"3-6", "summary": "3-digit by 1-digit division with mulitple choice, no remainders",
             "pieces": [
@@ -2964,6 +2964,34 @@
               ],
           "doneStatement" : "multipleChoiceCorrectAnswer==multipleChoiceSelected"
           },
+          { "appletID" : "6-2.1", 
+          "summary" : "Model product of a whole number and unit fraction.",
+          "pieces" : [
+              {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+              {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+              {"type":24,"startX":40,"startY":140,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":false,"color":false},
+              {"type":24,"startX":40,"startY":140,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":false,"limit":"hiddenNumber[1]","color":true},
+              {"type":1,"startX":40,"startY":0,"newText":"Represent%20the%20shaded%20part%20of%20the%20fraction%20bar%20as%20the%20product%20of%20a%20whole%20number%20and%20a%20unit%20fraction.","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"},
+              {"type":14,"numberEntryX":20,"numberEntryY":420,"orientation":"h","displayX":[120],"displayY":[300],"hideInitialValue":"Yes","panelQuantity":"1","displayDigits":2},
+              {"type":1,"startX":220,"startY":304,"newText":"x","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":3,"startX":500,"startY":220,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"2","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":560,"startY":220,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"3","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":620,"startY":220,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"4","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":680,"startY":220,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"5","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":500,"startY":300,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"6","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":560,"startY":300,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"8","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":620,"startY":300,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"10","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":3,"startX":680,"startY":300,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"12","size":"36","draggable":1,"selectable":0,"clonable":0},
+              {"type":98,"color":255,"drawingLineStartX":460,"drawingLineStartY":200,"drawingLineEndX":740,"drawingLineEndY":200},
+              {"type":98,"color":255,"drawingLineStartX":740,"drawingLineStartY":200,"drawingLineEndX":740,"drawingLineEndY":380},
+              {"type":98,"color":255,"drawingLineStartX":460,"drawingLineStartY":380,"drawingLineEndX":180,"drawingLineEndY":380},
+              {"type":98,"color":255,"drawingLineStartX":460,"drawingLineStartY":200,"drawingLineEndX":460,"drawingLineEndY":20},
+              {"type":1,"startX":521,"startY":387,"newText":"Drag%20the%20correct%20fraction%20into%20place.","font":"","fontString":" 12px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":9,"startX":300,"startY":330,"userScaleX":1,"userScaleY":0.8},
+              {"type":5,"startX":720,"startY":540}
+          ],
+          "doneStatement" : "(numberEntryValue*dragToBoxes[0].contents).toFixed(3)==(hiddenNumber[1]/hiddenNumber[0]).toFixed(3)"
+          },
           { "appletID" : "6-3", 
           "summary" : "Identifying fraction and compliment.",
               "pieces" : [
@@ -3104,6 +3132,22 @@
               ],
           "doneStatement" : "[ 'dragToBoxes[0].contents+dragToBoxes[1].contents==hiddenNumber[1]+hiddenNumber[2]' , 'dragToBoxes[2].contents==hiddenNumber[1]+hiddenNumber[2]' ]"
           },
+            { "appletID" : "6-8.7", 
+            "summary" : "Adding like denominators in word problems",
+            "pieces" : [
+              {"type":16,"expression":"%5B%20%5B%27plays%20jacks%27%2C%27play%20jacks%27%5D%20%2C%20%5B%27jumps%20rope%27%2C%27jump%20rope%27%5D%20%2C%20%5B%27does%20crafts%27%2C%27do%20crafts%27%5D%20%2C%20%5B%27catches%20butterflies%27%2C%27catch%20butterflies%27%5D%20%2C%20%5B%27watches%20birds%27%2C%27watch%20birds%27%5D%20%2C%20%5B%27goes%20hiking%27%2C%27go%20hiking%27%5D%20%5D%5BgetRandomInt%280%2C5%29%5D"},
+              {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+              {"type":16,"expression":"%5B3%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C6%29%5D"},
+              {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B2%5D-1%29"},
+              {"type":16,"expression":"getRandomInt(1,hiddenNumber[2]-hiddenNumber[3])"},
+              {"type":15,"startX":380,"startY":120,"expression":"%22In%20the%20morning%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%22%20%2B%20hiddenNumber%5B0%5D%5B0%5D%20%2B%20%22%20for%20%22%20%2B%20hiddenNumber%5B3%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20hour.%20%20After%20lunch%2C%20she%20%22%20%2B%20hiddenNumber%5B0%5D%5B0%5D%20%2B%20%22%20for%20another%20%22%20%2B%20hiddenNumber%5B4%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20hour.%20%20How%20long%20does%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20%22%20%2B%20hiddenNumber%5B0%5D%5B1%5D%20%2B%20%22%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":638,"originalHeight":184},
+              {"type":14,"numberEntryX":160,"numberEntryY":420,"orientation":"h","displayX":[300,300],"displayY":[260,340],"hideInitialValue":"Yes","panelQuantity":"2","displayDigits":2},
+              {"type":1,"startX":405,"startY":306,"newText":"hour","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":1,"startX":285,"startY":280,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+              {"type":5,"startX":720,"startY":540}
+              ],
+            "doneStatement" : "((hiddenNumber[3]+hiddenNumber[4])/hiddenNumber[2]).toFixed(3)==(numberEntryValue[0]/numberEntryValue[1]).toFixed(3)"
+            },
         { "appletID" : "6-9", 
         "summary" : "Completing fraction subtraction equations.",
               "pieces" : [
@@ -3205,6 +3249,7 @@
             ],
         "doneStatement" : "(1+hiddenNumber[1]/hiddenNumber[0]).toFixed(3)==(fractionBarDragToBoxes[0].contents+fractionBarDragToBoxes[1].contents).toFixed(3)"
         }
+        
         
     ]
 }

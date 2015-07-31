@@ -120,7 +120,6 @@ function getConcreteFractionBarDragToSettings() {
 function buildFractionBar(item) {
     item.denominatorExpression = item.denominator;
     item.denominator = eval(item.denominator);
-console.log("limit:" + item.limit)
     if (typeof item.limit === 'undefined' || item.limit == 0) { 
         item.limit = item.denominator;
             

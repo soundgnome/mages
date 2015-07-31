@@ -764,9 +764,9 @@ function clearCurrentApplet()
         
         for(var i = 0 ; i < campaignChallenges.length ; i++)
         {
-            if( campaignChallenges[i].mastered > 4 )
+            if( campaignChallenges[i].mastered > 3 )
             {
-                console.log("challenge " + i + "mastered")
+                console.log("challenge " + i + " mastered")
                 campaignChallenges.splice(i,1)
                 campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0})
             }

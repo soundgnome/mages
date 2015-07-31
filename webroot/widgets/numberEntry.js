@@ -147,7 +147,7 @@ function scanKeyboard()
 {
     var i;
     var numKey;
-    for (i = 0; i <= 9; i++) {
+    for (i = 0; i <= 10; i++) {
 		numKey = i.toString().charCodeAt(0);
         if (game.input.keyboard.isDown(numKey) ) {
         	if(keyStillDown == 0) { //only process it once
@@ -166,7 +166,15 @@ function scanKeyboard()
 	    	{
 	    		lastKey = 0; //reset
 	    		keyStillDown = 0; //make way for a new key
-	    	}
+	    	} else if(i==10)  // check to see if the spacebar is pressed and clear
+        	{
+        	    
+        	    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) )
+        	    {
+        	        numberEntryClick(numberEntryButtons[10]);
+        	        lastKey = 10;
+        	    }
+        	}
 	    }
     }
 }
