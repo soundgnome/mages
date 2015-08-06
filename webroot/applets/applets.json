@@ -3248,6 +3248,174 @@
             {"type":1,"startX":60,"startY":200,"newText":"Model%20the%20mixed%20number%20by%20dragging%20the%20correct%20fraction%20bars%20into%20the%20boxes%20below.","font":"","fontString":" 30px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
             ],
         "doneStatement" : "(1+hiddenNumber[1]/hiddenNumber[0]).toFixed(3)==(fractionBarDragToBoxes[0].contents+fractionBarDragToBoxes[1].contents).toFixed(3)"
+        },
+        { "appletID" : "6-14", 
+        "summary" : "Convert mixed number to fraction.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%281%2C7%29"},
+            {"type":3,"startX":340,"startY":160,"fill":"Black","wholeExpression":"hiddenNumber[2]","numeratorExpression":"hiddenNumber[1]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":1,"startX":200,"startY":60,"newText":"Write%20as%20a%20fraction%3A","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":14,"numberEntryX":180,"numberEntryY":540,"orientation":"h","displayX":[360,360],"displayY":[380,460],"hideInitialValue":"Yes","panelQuantity":"2","displayDigits":2},
+            {"type":1,"startX":332,"startY":400,"newText":"_____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
+            ],
+        "doneStatement" : "((hiddenNumber[2]*hiddenNumber[0]+hiddenNumber[1])/hiddenNumber[0]).toFixed(3)==(numberEntryValue[0]/numberEntryValue[1]).toFixed(3)"
+        },
+        { "appletID" : "6-15", 
+        "summary" : "Convert fraction to mixed number.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%281%2C7%29"},
+            {"type":3,"startX":380,"startY":140,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[2]*hiddenNumber[0]+hiddenNumber[1]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":1,"startX":140,"startY":60,"newText":"Write%20as%20a%20mixed%20number%3A","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":14,"numberEntryX":180,"numberEntryY":520,"orientation":"h","displayX":[320,420,420],"displayY":[400,360,440],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":1,"startX":408,"startY":380,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
+            ],
+        "doneStatement" : "((hiddenNumber[2]*hiddenNumber[0]+hiddenNumber[1])/hiddenNumber[0]).toFixed(3)==((numberEntryValue[0]*numberEntryValue[2]+numberEntryValue[1])/numberEntryValue[2]).toFixed(3)"
+        },
+        { "appletID" : "6-16", 
+        "summary" : "Sums of fractions with like denominators to mixed number.",
+            "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%28hiddenNumber%5B0%5D%2ChiddenNumber%5B0%5D%2a2%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D-1%29"},
+            {"type":16,"expression":"hiddenNumber%5B1%5D-hiddenNumber%5B2%5D"},
+            {"type":3,"startX":179,"startY":210,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[2]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":3,"startX":336,"startY":210,"fill":"Black","wholeExpression":"null","numeratorExpression":"hiddenNumber[3]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":1,"startX":267,"startY":244,"newText":"%2B","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":1,"startX":437,"startY":244,"newText":"%3D","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":14,"numberEntryX":200,"numberEntryY":360,"orientation":"h","displayX":[500,600,600],"displayY":[240,200,280],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":1,"startX":586,"startY":218,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":140,"startY":40,"newText":"Write%20the%20sum%20as%20a%20mixed%20number.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
+            ],
+        "doneStatement" : "numberEntryValue[0]>0&&((hiddenNumber[2]+hiddenNumber[3])/hiddenNumber[0]).toFixed(3)==(numberEntryValue[0]+(numberEntryValue[2]>0?numberEntryValue[1]/numberEntryValue[2]:0)).toFixed(3)"
+        },
+        { "appletID" : "6-17", 
+        "summary" : "Adding mixed numbers.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2C5%29"},
+            {"type":16,"expression":"getRandomInt%281%2C5%29"},
+            {"type":16,"expression":"getRandomInt%28Math.floor%28hiddenNumber%5B0%5D%2F2%29%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%28Math.floor%28hiddenNumber%5B0%5D%2F2%29%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":3,"startX":340,"startY":100,"fill":"Black","wholeExpression":"hiddenNumber[1]","numeratorExpression":"hiddenNumber[3]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":3,"startX":340,"startY":220,"fill":"Black","wholeExpression":"hiddenNumber[2]","numeratorExpression":"hiddenNumber[4]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":1,"startX":40,"startY":20,"newText":"Add.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":1,"startX":240,"startY":260,"newText":"_______","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":1,"startX":260,"startY":260,"newText":"%2B","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":14,"numberEntryX":180,"numberEntryY":500,"orientation":"h","displayX":[300,399,400],"displayY":[380,343,420],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":387,"startY":360,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"}
+            ],
+        "doneStatement" : "(numberEntryValue[0]+(numberEntryValue[2]>0?numberEntryValue[1]/numberEntryValue[2]:0)).toFixed(3)==((hiddenNumber[1]+hiddenNumber[2])+((hiddenNumber[3]+hiddenNumber[4])/hiddenNumber[0])).toFixed(3)&&numberEntryValue[1]<=numberEntryValue[2]"
+        },
+        { "appletID" : "6-18", 
+        "summary" : "Subtracting mixed numbers.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%283%2C7%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":3,"startX":360,"startY":120,"fill":"Black","wholeExpression":"hiddenNumber[1]","numeratorExpression":"hiddenNumber[3]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":3,"startX":360,"startY":240,"fill":"Black","wholeExpression":"hiddenNumber[2]","numeratorExpression":"hiddenNumber[4]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":1,"startX":280,"startY":280,"newText":"______","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":1,"startX":300,"startY":280,"newText":"-","font":"","fontString":" 72px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":1,"startX":40,"startY":20,"newText":"Subtract.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":14,"numberEntryX":160,"numberEntryY":520,"orientation":"h","displayX":[320,420,420],"displayY":[400,364,440],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":1,"startX":406,"startY":381,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
+            ],
+        "doneStatement" : "((hiddenNumber[1]+hiddenNumber[3]/hiddenNumber[0])-(hiddenNumber[2]+hiddenNumber[4]/hiddenNumber[0])).toFixed(3)==(numberEntryValue[0]+(numberEntryValue[2]>0 ? numberEntryValue[1]/numberEntryValue[2] : 0)).toFixed(3)"
+        },
+        { "appletID" : "6-19", 
+        "summary" : "Compare mixed numbers.",
+        "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2C9%29"},
+            {"type":16,"expression":"getRandomInt%281%2C9%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D-1%29"},
+            {"type":3,"startX":204,"startY":209,"fill":"Black","wholeExpression":"hiddenNumber[1]","numeratorExpression":"hiddenNumber[3]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":3,"startX":494,"startY":209,"fill":"Black","wholeExpression":"hiddenNumber[2]","numeratorExpression":"hiddenNumber[4]","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":17,"inequalityEntryX":240,"inequalityEntryY":380,"displayX":360,"displayY":240},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":100,"startY":20,"newText":"Complete%20the%20inequality%20by%20entering%20the%20correct%20symbol.","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
+            ],
+        "doneStatement" : "eval((hiddenNumber[1]+hiddenNumber[3]/hiddenNumber[0])+inequality+(hiddenNumber[2]+hiddenNumber[4]/hiddenNumber[0]))"
+        },
+        { "appletID" : "6-20", 
+        "summary" : "Adding fractions with like denominators mixed plus fraction in word problem.",
+            "pieces" : [
+            {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2C3%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B1%5D%29"},
+            {"type":16,"expression":"%5B%22soccer%22%2C%22ping-pong%22%2C%22board%20games%22%2C%22tag%22%2C%22computer%20games%22%2C%22in%20the%20pool%22%2C%22at%20the%20park%22%2C%22on%20the%20lawn%22%2C%22at%20her%20friend%27s%20house%22%2C%22with%20her%20food%22%5D%5BgetRandomInt%280%2C9%29%5D"},
+            {"type":15,"startX":400,"startY":180,"expression":"hiddenNumber%5B0%5D%20%2B%20%22%20spent%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20%22%20%2B%20hiddenNumber%5B3%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20hours%20playing%20%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20on%20Saturday%20and%20%22%20%2B%20hiddenNumber%5B4%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20hour%20playing%20%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20on%20Sunday.%20%20How%20much%20time%20did%20she%20spend%20playing%20%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20over%20the%20weekend%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":660,"originalHeight":230},
+            {"type":1,"startX":419,"startY":342,"newText":"hours","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":14,"numberEntryX":140,"numberEntryY":460,"orientation":"h","displayX":[220,320,320],"displayY":[340,300,380],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":1,"startX":308,"startY":319,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
+            ],
+        "doneStatement" : "(numberEntryValue[0]+(numberEntryValue[2]>0? numberEntryValue[1]/numberEntryValue[2]:0)).toFixed(3)==(hiddenNumber[2]+(hiddenNumber[3]+hiddenNumber[4])/hiddenNumber[1]).toFixed(3)"
+        },
+        { "appletID" : "6-21", 
+        "summary" : "Subtracting mixed numbers in word problem.",
+            "pieces" : [
+            {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+            {"type":16,"expression":"%5B%22church%22%2C%22school%22%2C%22her%20job%22%5D%5BgetRandomInt%280%2C2%29%5D"},
+            {"type":16,"expression":"%5B%22the%20library%22%2C%22her%20friend%27s%20house%22%2C%22the%20ice%20cream%20shop%22%5D%5BgetRandomInt%280%2C2%29%5D"},
+            {"type":16,"expression":"%5B%22her%20apartment%22%2C%22the%20pinball%20museum%22%2C%22her%20favorite%20restaurant%22%5D%5BgetRandomInt%280%2C2%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2C2%29"},
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B5%5D-1%29"},
+            {"type":16,"expression":"hiddenNumber%5B4%5D%2BgetRandomInt%281%2C2%29"},
+            {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B5%5D-1%29"},
+            {"type":15,"startX":420,"startY":180,"expression":"hiddenNumber%5B0%5D%20%2B%20%22%20walked%20from%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20to%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22.%20Then%20she%20walked%20%22%20%2B%20hiddenNumber%5B4%5D%20%2B%20%22%20%22%20%2B%20hiddenNumber%5B6%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20miles%20from%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20to%20%22%20%2B%20hiddenNumber%5B3%5D%20%2B%20%22.%20%20If%20she%20walked%20%22%20%2B%20hiddenNumber%5B7%5D%20%2B%20%22%20%22%20%2B%20hiddenNumber%5B8%5D%20%2B%20%22%2F%22%20%2B%20hiddenNumber%5B5%5D%20%2B%20%22%20miles%20in%20all%2C%20how%20far%20did%20she%20walk%20from%20%22%20%2BhiddenNumber%5B1%5D%20%2B%20%22%20to%20%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":706,"originalHeight":276},
+            {"type":14,"numberEntryX":160,"numberEntryY":480,"orientation":"h","displayX":[260,360,360],"displayY":[360,400,320],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":347,"startY":338,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":1,"startX":470,"startY":359,"newText":"miles","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"}
+            ],
+        "doneStatement" : "( (hiddenNumber[7]+hiddenNumber[8]/hiddenNumber[5])-(hiddenNumber[4]+hiddenNumber[6]/hiddenNumber[5]) ).toFixed(3)==( numberEntryValue[0]+(numberEntryValue[1]>0? numberEntryValue[2]/numberEntryValue[1]:0) ).toFixed(3)"
+        },
+        { "appletID" : "6-22", 
+        "summary" : "Modeling whole number multiplied by unit fraction.",
+            "pieces" : [
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt%28%20hiddenNumber%5B0%5D%20%2C%20hiddenNumber%5B0%5D%2a2%20%29"},
+            {"type":15,"startX":340,"startY":180,"expression":"hiddenNumber%5B1%5D%20%2B%20%22%20%E2%8B%85%22","font":" 64px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"2","spriteAnchorY":"0","originalWidth":73,"originalHeight":77},
+            {"type":3,"startX":418,"startY":116,"fill":"Black","wholeExpression":"null","numeratorExpression":"1","denominatorExpression":"hiddenNumber[0]","size":"48","draggable":0,"selectable":0},
+            {"type":24,"startX":40,"startY":280,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":true,"color":true},
+            {"type":24,"startX":40,"startY":320,"denominator":"hiddenNumber[0]","scaleX":"1","scaleY":"1","draggable":true,"color":true},
+            {"type":25,"startX":40,"startY":400,"scaleX":"1","scaleY":"1"},
+            {"type":25,"startX":40,"startY":440,"scaleX":"1","scaleY":"1"},
+            {"type":5,"startX":720,"startY":540},
+            {"type":1,"startX":40,"startY":20,"newText":"Drag%20the%20fraction%20bars%20to%20show%20the%20value%20of%20the%20expression%3A","font":"","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
+            ],
+        "doneStatement" : "(fractionBarDragToBoxes[0].contents+fractionBarDragToBoxes[1].contents).toFixed(3)==(hiddenNumber[1]/hiddenNumber[0]).toFixed(3)"
+        },
+        { "appletID" : "6-23", 
+        "summary" : "Multiplying unit fraction in word problem.",
+            "pieces" : [
+            {"type":16,"expression":"boyNames%5BgetRandomInt%280%2C99%29%5D"},
+            {"type":16,"expression":"girlNames%5BgetRandomInt%280%2C99%29%5D"},
+            {"type":16,"expression":"%5B2%2C%203%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C7%29%5D"},
+            {"type":16,"expression":"getRandomInt(hiddenNumber[2]+1,5*hiddenNumber[2])"},
+            {"type":15,"startX":400,"startY":120,"expression":"hiddenNumber%5B0%5D%20%2B%20%22%20ran%201%2F%22%20%2B%20hiddenNumber%5B2%5D%20%2B%20%22%20mile.%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20ran%20%22%20%2B%20hiddenNumber%5B3%5D%20%2B%20%22%20times%20as%20far%20as%20%22%20%2B%20hiddenNumber%5B0%5D%20%2B%20%22.%20Written%20as%20a%20mixed%20number%2C%20how%20far%20did%20%22%20%2B%20hiddenNumber%5B1%5D%20%2B%20%22%20run%3F%22","font":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","align":"left","draggable":0,"selectable":0,"spriteAnchorX":"0","spriteAnchorY":"0","originalWidth":688,"originalHeight":138},
+            {"type":14,"numberEntryX":180,"numberEntryY":380,"orientation":"h","displayX":[280,380,380],"displayY":[260,220,300],"hideInitialValue":"Yes","panelQuantity":"3","displayDigits":2},
+            {"type":1,"startX":479,"startY":264,"newText":"miles","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":1,"startX":369,"startY":240,"newText":"____","font":"","fontString":" 48px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"700","alignment":"left"},
+            {"type":5,"startX":720,"startY":540}
+            ],
+        "doneStatement" : "numberEntryValue[0]>0&&(numberEntryValue[0]+(numberEntryValue[2]>0?numberEntryValue[1]/numberEntryValue[2]:0)).toFixed(3)==(hiddenNumber[3]/hiddenNumber[2]).toFixed(3)"
         }
         
         

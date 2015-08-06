@@ -16,7 +16,7 @@ function loadThreads()
     thread[2]=["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10","3-11","3-12","3-13","3-14","3-15","3-16","3-17","3-18"];
     thread[3]=["4-1","4-2","4-3","4-4","4-5","4-6","4-7","4-8","4-9","4-10", "4-11", "4-12" , "4-13" , "4-14" , "4-15" , "4-16" , "4-17"];
     thread[4]=["5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11","5-12","5-13","5-14","5-15","5-16","5-17"];
-    thread[5]=["6-1","6-2","6-2.1","6-3","6-4","6-5","6-6","6-7","6-8","6-8.5","6-8.7","6-9","9","29","30","6-10","6-11","6-12","6-13"];
+    thread[5]=["6-1","6-2","6-2.1","6-3","6-4","6-5","6-6","6-7","6-8","6-8.5","6-8.7","6-9","9","29","30","6-10","6-11","6-12","6-13","6-14","6-15","6-16","6-17","6-18","6-19"];
 }
 
 function loadCampaign()
@@ -41,8 +41,6 @@ function loadCampaign()
     currentCampaignChallenge = getRandomInt(0,4);
     threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
-    console.log(threadNumber)
-    console.log(threadPoint)
     loadAppletID=thread[threadNumber-1][threadPoint-1];
     
     state = 'applet';
