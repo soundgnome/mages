@@ -691,7 +691,22 @@ function clearCurrentApplet()
                             if(campaignChallenges[currentCampaignChallenge].mastered < 0)
                             {campaignChallenges[currentCampaignChallenge].mastered = 0 }
                         }
-                        localStorage.setObject("campaignChallenges",campaignChallenges)
+                        //localStorage.setObject("campaignChallenges",campaignChallenges)
+                        var currentUser = {
+                            name: user,
+                            password: password,
+                            campaignChallenges: campaignChallenges
+                          };
+                        
+                          $.ajax({
+                              url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
+                              type: "PUT",
+                              data: currentUser
+                            })
+                            .done(function(data) {
+                              console.log("Userdata updated");
+                            });
+        
                         checkCampaignChallenges()
                     } else  //this won't work, we need to repeat the timer applet here, not in the thread
                     {
@@ -764,7 +779,7 @@ function clearCurrentApplet()
         
         for(var i = 0 ; i < campaignChallenges.length ; i++)
         {
-            if( campaignChallenges[i].mastered > 3 )
+            if( campaignChallenges[i].mastered > 2 )
             {
                 console.log("challenge " + i + " mastered")
                 campaignChallenges.splice(i,1)
@@ -1787,3 +1802,4 @@ function colorSwatchColorClick(item) {
     colorSwatchHandle.destroy()
 
 }
+

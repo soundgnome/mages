@@ -8,6 +8,10 @@ var campaignChallenges;
 var currentCampaignChallenge;
 var campaignFurthestPoint;
 var timerRecord = [];
+var apiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb'
+var userID;
+var password;
+var user;
 
 function loadThreads()
 {
@@ -22,8 +26,41 @@ function loadThreads()
 function loadCampaign()
 {
     state = 'prompt';
+    bootbox.prompt("Type user name:", function(result) {                
+        if (result == "") {                                             
+        } else
+        {
+            var query = JSON.stringify({name:result});
 
-    
+            $.get("https://openws.herokuapp.com/mages_users?q="+query+"&apiKey="+apiKey)
+                .done(function(data) {
+                if (typeof data[0] === 'undefined' ) 
+                { 
+                    bootbox.alert("User not found in database!")
+                } else
+                {
+                    bootbox.prompt({
+                        title: "Type password:", 
+                        inputType: "password",
+                        callback: function(passwordResult) {
+                            if(data[0].password == passwordResult)
+                            {
+                                loadUser(data[0]);   
+                            } else
+                            {
+                                bootbox.alert("Incorrect password.")
+                            }
+                        }
+                    });
+
+                }
+              });
+        }
+        }); 
+
+    function loadUser(userData)
+    {
+    userID = userData._id;
     helpButton.destroy(true);
     buildButton.destroy(true);
     titleText.destroy(true);
@@ -37,7 +74,8 @@ function loadCampaign()
     campaignMode = 1;
 
     campaignFurthestPoint = [1,5];
-    campaignChallenges = localStorage.getObject("campaignChallenges")
+    //campaignChallenges = localStorage.getObject("campaignChallenges")
+    campaignChallenges = userData.campaignChallenges;
     currentCampaignChallenge = getRandomInt(0,4);
     threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
@@ -45,28 +83,52 @@ function loadCampaign()
     
     state = 'applet';
     
-    titleBack.destroy(true);
+    titleBack.destroy(true);  
+    }
+    
 }
 
 function startCampaign()
 {
-    if (typeof localStorage.campaignChallenges === 'undefined') 
-            { 
-                newCampaign() 
-            } else
-            {
-                state = 'prompt';
-                bootbox.prompt("Type delete to remove the previous user's profile.", function(result) {                
-                if (result === null) {                                             
-                      
-                } else if(result == 'delete') 
-                {
-                    newCampaign() ;
-                }
-                });  
-            }
 
-    
+    state = 'prompt';
+        bootbox.prompt("Type a new user name:", function(result) {   
+            console.log(result)
+        if (result === "") {                                             
+        } else
+        {
+            var query = JSON.stringify({name:result});
+
+            $.get("https://openws.herokuapp.com/mages_users?q="+query+"&apiKey="+apiKey)
+                .done(function(data) {
+                    console.log(data)
+                if (typeof data[0] === 'undefined' ) 
+                    {
+                        user = result;
+                        getNewPassword();  
+                    } else
+                    {
+                        bootbox.alert("That user already exists!") 
+                    }
+              });
+        }
+        }); 
+                
+
+    function getNewPassword() {
+        bootbox.prompt("Type a password for your new user (minimum 6 characters):", function(result) {                
+                if (result === null) {                                             
+                   getNewPassword()
+                } else if (result.length < 6)
+                {
+                    bootbox.alert("Must be 6 or more characters!" , getNewPassword)
+                } else
+                {
+                    password = result;
+                    newCampaign();
+                }
+                }); 
+    }
     
     function newCampaign()
     {
@@ -89,11 +151,22 @@ function startCampaign()
                                 {threadNumber:1 , threadPoint:4 , mastered:0} ,
                                 {threadNumber:1 , threadPoint:5 , mastered:0} ]
         currentCampaignChallenge = getRandomInt(0,4);
-        localStorage.setObject("campaignChallenges",campaignChallenges)
+        
+        var currentUser = {
+            name: user,
+            password: password,
+            campaignChallenges: campaignChallenges
+          };
+        //localStorage.setObject("campaignChallenges",campaignChallenges)
+        console.log(campaignChallenges)
+        
+        $.post("https://openws.herokuapp.com/mages_users/?apiKey="+apiKey,currentUser)
+            .done(function(data) {
+                userID = data._id
+              console.log("User saved successfully");
+            });
         threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
         threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
-        console.log(threadNumber)
-        console.log(threadPoint)
         loadAppletID=thread[threadNumber-1][threadPoint-1];
         
         state = 'applet';
@@ -530,3 +603,4 @@ Storage.prototype.getObject = function(key) {
     var value = this.getItem(key);
     return value && JSON.parse(value);
 }
+
