@@ -1,4 +1,4 @@
-var battleMode = true;
+var battleMode = false;
 var battleBackground = null;
 var battleButtons = [];
 var battleOrders = null;
