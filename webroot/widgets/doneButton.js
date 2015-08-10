@@ -81,11 +81,24 @@ function doneButtonClick(item) {
                 if( item.type == 22 ){ timerExists=1};
             });
             
-            if(timerExists==1)  //don't run the animation if we're in a speed round
-            {
-                timerRecord.push(threadRecord[threadRecord.length-1]);
-                console.log(timerRecord)
-                clearCurrentApplet();
+            if(timerExists==1)  //don't run the animation if we're still in a speed round
+            {   timerRecord.push(threadRecord[threadRecord.length-1]);
+                if(timerRecord.length < timerRepetitions )
+                {
+                    
+                    console.log(timerRecord)
+                    clearCurrentApplet();   
+                } else //done with speed round
+                {
+                    correct = 0;
+                    timerRecord.forEach(function(item){
+                        correct += item/timerRepetitions;  //calculate the speed round score
+                    });
+                    console.log("precentage: " + correct)
+                    appletTransition(correct);
+                    
+                }
+                
             } else
             {
                 appletTransition(correct); //run the transition animation

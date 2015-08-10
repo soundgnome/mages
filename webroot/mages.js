@@ -16,7 +16,7 @@ var WebFontConfig = {
 
         //  The Google Fonts we want to load (specify as many as you like in the array)
         google: {
-          families: ['Revalia','Orbitron']
+          families: ['Revalia','Orbitron','Michroma']
         }
 
     };
@@ -156,6 +156,18 @@ function preload() {
     game.load.image('alienWindScreen3', 'assets/shipParts/alienShip/windScreen3.png');
     game.load.image('alienWindScreen4', 'assets/shipParts/alienShip/windScreen4.png');
     
+    //battle gui
+    game.load.image('battleBack', 'assets/battleBackground.png');
+    game.load.image('battleBeam', 'assets/battleBeam.png');
+    game.load.image('battleHack', 'assets/battleHack.png');
+    game.load.image('battleRetreat', 'assets/battleRetreat.png');
+    game.load.image('battleTorpedo', 'assets/battleTorpedo.png');
+    game.load.image('battleNavLarge', 'assets/battleNavLarge.png');
+    game.load.image('battleNavSmall', 'assets/battleNavSmall.png');
+    game.load.image('battleShipDetailPane', 'assets/battleShipDetailPane.png');
+    game.load.image('battleTarget', 'assets/battleTarget.png');
+    
+    
     //  Load the Google WebFont Loader script
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     
@@ -212,6 +224,17 @@ function update() {
     case 'transition':
         //update the galaxy filter to animate it
         galaxyFilter.update(game.input.mousePointer);
+        break;
+        
+    case 'battle':
+        if(battleMode)
+        {
+           continueBattle(); 
+        } else
+        {
+            state = 'applet'
+        }
+        
         break;
     }
 }
@@ -691,13 +714,9 @@ function clearCurrentApplet()
                             if(campaignChallenges[currentCampaignChallenge].mastered < 0)
                             {campaignChallenges[currentCampaignChallenge].mastered = 0 }
                         }
-                        //localStorage.setObject("campaignChallenges",campaignChallenges)
-                        var currentUser = {
-                            name: user,
-                            password: password,
-                            campaignChallenges: campaignChallenges
-                          };
-                        
+
+                        currentUser.campaignChallenges =  campaignChallenges;
+                          
                           $.ajax({
                               url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
                               type: "PUT",
@@ -763,25 +782,32 @@ function clearCurrentApplet()
         
 
         
-            loadAppletID=thread[threadNumber-1][threadPoint-1];
+    loadAppletID=thread[threadNumber-1][threadPoint-1];
     appletInitiated=0; 
     }
+    
+    //this function checks to see if a challenge is mastered and adds the correct next challenge to the campaignChallenges
     function checkCampaignChallenges()
     {
         if(campaignFurthestPoint[0] < campaignChallenges[campaignChallenges.length-1].threadNumber || campaignFurthestPoint[1] < campaignChallenges[campaignChallenges.length-1].threadPoint)
         {
             campaignFurthestPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber , campaignChallenges[campaignChallenges.length-1].threadPoint]; 
+            console.log("new furthest point: " + campaignFurthestPoint )
         }
         
-        addPoint = [ campaignFurthestPoint[0] , campaignFurthestPoint[1]+1];
+        addPoint = [ parseInt(campaignFurthestPoint[0]) , parseInt(campaignFurthestPoint[1])+1];
+        console.log("next add point: " + addPoint)
         if(addPoint[1] > thread[campaignChallenges[campaignChallenges.length-1].threadNumber-1].length)
-        { addPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber+1 , 1]}
-        
+        { 
+            addPoint = [ parseInt(campaignChallenges[campaignChallenges.length-1].threadNumber)+1 , 1]
+            console.log("addpoint past end of thread; new add point: " + addPoint)
+        }
+
         for(var i = 0 ; i < campaignChallenges.length ; i++)
         {
             if( campaignChallenges[i].mastered > 2 )
             {
-                console.log("challenge " + i + " mastered")
+                console.log("challenge " + i + " mastered; adding " + addPoint)
                 campaignChallenges.splice(i,1)
                 campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0})
             }
@@ -1802,4 +1828,3 @@ function colorSwatchColorClick(item) {
     colorSwatchHandle.destroy()
 
 }
-
