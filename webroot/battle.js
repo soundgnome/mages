@@ -1,4 +1,4 @@
-var battleMode = false;
+var battleMode = true;
 var battleBackground = null;
 var battleButtons = [];
 var battleOrders = null;
@@ -73,7 +73,7 @@ function continueBattle()
         //this needs to build ships to order
         if(battleShips.length == 0) //no ship sprites created yet
         {
-            battleShips.push(game.add.sprite(arenaLeftEdge + 6*arenaGridSpacing, arenaTopEdge + 12*arenaGridSpacing, buildShip(0.5,[0,200,200]) ))
+            battleShips.push(game.add.sprite(arenaLeftEdge + 6*arenaGridSpacing, arenaTopEdge + 12*arenaGridSpacing, buildShip(0.5,[255,255,255]) ))
             battleShips[0].moving = false;
             
             var enemies = 3;
@@ -212,6 +212,12 @@ function enemyShipClick(item) {
         if(battleShipDetailPane != null) //maybe we disappeared it by clicking twice quickly
         {
             console.log(item)
+            var modelShipShadow = game.add.sprite(-195, 20, item.generateTexture());
+            modelShipShadow.scale.setTo(0.45,0.45);
+            modelShipShadow.anchor.setTo(0.45,-0.05)  //this is slightly different from the model that's casting it
+            modelShipShadow.tint = 0x000000; //black shadow
+            battleShipDetailPane.addChild(modelShipShadow);
+            
             var modelShip = game.add.sprite(-195, 20, item.generateTexture());
             modelShip.scale.setTo(0.45,0.45);
             modelShip.anchor.setTo(0.5,0)
@@ -239,6 +245,7 @@ function enemyShipClick(item) {
             battleShipDetailPane.destroy(true);
             battleShipDetailPane = null
             targetButton = null;
+            battleTargetting = false;
             battleOrders = 'complete'
         }
         

@@ -608,12 +608,16 @@ Storage.prototype.getObject = function(key) {
     return value && JSON.parse(value);
 }
 
-function clearUsers()
+function clearUsers(userID)
 {
-    console.log($)
-    $.delete("https://openws.herokuapp.com/my_test_collection/55c7665933698603009a9c93?apiKey="+apiKey)
-    .done(function() {
-      console.log("Product deleted successfully");
-    });
-        
+    $.ajax({
+    url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
+    type: 'DELETE',
+    success: function(result) {
+      console.log("Item deleted " + result);
+    },
+    error: function() {
+      console.log("Error");
+    }
+});
 }

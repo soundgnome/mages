@@ -716,17 +716,12 @@ function clearCurrentApplet()
                         }
 
                         currentUser.campaignChallenges =  campaignChallenges;
-                          
-                          $.ajax({
-                              url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
-                              type: "PUT",
-                              data: currentUser
-                            })
-                            .done(function(data) {
-                              console.log("Userdata updated");
-                            });
+                        
+                        checkCampaignChallenges();
+                        updateUserData();
+
         
-                        checkCampaignChallenges()
+                        
                     } else  //this won't work, we need to repeat the timer applet here, not in the thread
                     {
                       if(timerRecord.length == timerRepetitions)
@@ -741,6 +736,7 @@ function clearCurrentApplet()
                                 campaignChallenges[currentCampaignChallenge].mastered++; 
                             }
                             checkCampaignChallenges();
+                            updateUserData();
                             timerRecord = [];
                             currentCampaignChallenge = getRandomIntExcluding(0,4,currentCampaignChallenge);
                       } else
@@ -789,19 +785,8 @@ function clearCurrentApplet()
     //this function checks to see if a challenge is mastered and adds the correct next challenge to the campaignChallenges
     function checkCampaignChallenges()
     {
-        if(campaignFurthestPoint[0] < campaignChallenges[campaignChallenges.length-1].threadNumber || campaignFurthestPoint[1] < campaignChallenges[campaignChallenges.length-1].threadPoint)
-        {
-            campaignFurthestPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber , campaignChallenges[campaignChallenges.length-1].threadPoint]; 
-            console.log("new furthest point: " + campaignFurthestPoint )
-        }
         
-        addPoint = [ parseInt(campaignFurthestPoint[0]) , parseInt(campaignFurthestPoint[1])+1];
-        console.log("next add point: " + addPoint)
-        if(addPoint[1] > thread[campaignChallenges[campaignChallenges.length-1].threadNumber-1].length)
-        { 
-            addPoint = [ parseInt(campaignChallenges[campaignChallenges.length-1].threadNumber)+1 , 1]
-            console.log("addpoint past end of thread; new add point: " + addPoint)
-        }
+        checkFurthestPoint();
 
         for(var i = 0 ; i < campaignChallenges.length ; i++)
         {
@@ -810,6 +795,8 @@ function clearCurrentApplet()
                 console.log("challenge " + i + " mastered; adding " + addPoint)
                 campaignChallenges.splice(i,1)
                 campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0})
+                checkFurthestPoint();
+                
             }
               
         }
@@ -817,7 +804,35 @@ function clearCurrentApplet()
     threadNumber =campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint = campaignChallenges[currentCampaignChallenge].threadPoint;
     }
-
+    
+    function checkFurthestPoint()
+        {
+            if(campaignFurthestPoint[0] < campaignChallenges[campaignChallenges.length-1].threadNumber || campaignFurthestPoint[1] < campaignChallenges[campaignChallenges.length-1].threadPoint)
+            {
+                campaignFurthestPoint = [ campaignChallenges[campaignChallenges.length-1].threadNumber , campaignChallenges[campaignChallenges.length-1].threadPoint]; 
+                console.log("new furthest point: " + campaignFurthestPoint )
+            }
+            
+            addPoint = [ parseInt(campaignFurthestPoint[0]) , parseInt(campaignFurthestPoint[1])+1];
+            console.log("next add point: " + addPoint)
+            if(addPoint[1] > thread[campaignChallenges[campaignChallenges.length-1].threadNumber-1].length)
+            { 
+                addPoint = [ parseInt(campaignChallenges[campaignChallenges.length-1].threadNumber)+1 , 1]
+                console.log("addpoint past end of thread; new add point: " + addPoint)
+            }   
+        }
+    
+    function updateUserData()
+    {
+        $.ajax({
+            url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
+            type: "PUT",
+            data: currentUser
+            })
+        .done(function(data) {
+          console.log("Userdata updated");
+        });    
+    }
 }
 
 
