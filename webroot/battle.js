@@ -113,22 +113,57 @@ function continueBattle()
         
         
         battleDrawn = 1;
+        showPlayerAttack(); 
+        if(playerMovePending !=null)
+        {
+            movePlayerAnimation(playerMovePending.xSpaces,playerMovePending.ySpaces);    
+        }
+       
     } else  //we've already drawn the arena and ships
     {
-        showPlayerAttack();
+
+        //   //if playerAttackDone == false
+        
     }
 
 }
 
-var playerAttackDone = false;
+var playerAttackDone = true;
 function showPlayerAttack() {
     if(playerAttackDone == false)
     {
         //player attack animation
-        playerAttackDone = true;
-    } else
+        var newAngle = angleBetweenPoints(battleShips[0], battleShips[battleTargetting] )+90
+        var tweenAngle = game.add.tween(battleShips[0]).to( { angle: newAngle}, 500, Phaser.Easing.Cubic.Out, true);
+        tweenAngle.onComplete.add(projectileMove); 
+        
+        function projectileMove()
+        {
+            var torpedo = game.add.sprite(battleShips[0].x, battleShips[0].y, 'alienWingGuns2');
+            torpedo.scale.setTo(0.5,0.2);
+            torpedo.anchor.setTo(0.5,1);
+            torpedo.angle = angleBetweenPoints(battleShips[0], battleShips[battleTargetting])+90
+            torpedo.hit = ( threadRecord[threadRecord.length-1] > 0.9 ? true : false)
+            var distance = lineDistance(battleShips[0], battleShips[battleTargetting]);
+            
+            var tween = game.add.tween(torpedo).to( { x: battleShips[battleTargetting].x + (torpedo.hit==true ? 0 : getRandomInt(20,40)), y: battleShips[battleTargetting].y + (torpedo.hit==true ? 0 : getRandomInt(20,40))}, distance*3, Phaser.Easing.Quartic.In, true);
+            tween.onComplete.add(finishPlayerAttackAnimation, torpedo);
+            battleShips[0].bringToTop()    
+        }
+
+    } 
+    
+    function finishPlayerAttackAnimation(torpedo)
     {
-        showEnemyAttacks(0);
+       playerAttackDone = true; 
+       showEnemyAttacks(0);
+       torpedo.destroy();
+       battleTargetting = false;
+       console.log(torpedo.hit==true?"HIT!":"MISS!")
+       if(torpedo.hit)
+       {
+           cameraShake(5);
+       }
     }
 }
 
@@ -152,6 +187,8 @@ function showEnemyAttacks(enemyPosition) {
 
 }
 
+
+        
 function shakeShip(ship) {
         var min = -2;
         var max = 2;
@@ -242,11 +279,13 @@ function enemyShipClick(item) {
         function battleTargetClick(targetButton)
         {
             console.log("attack!")
+            battleTargetting = battleShipDetailPane.enemyID;
             battleShipDetailPane.destroy(true);
             battleShipDetailPane = null
             targetButton = null;
-            battleTargetting = false;
+            playerAttackDone = false;
             battleOrders = 'complete'
+            clearBattle(); 
         }
         
         function battleTargetOver(targetButton)
@@ -284,35 +323,35 @@ function battleButtonClick(item) {
             break;
             
         case 4: //back
-            movePlayerAnimation(0, 1)
+            checkPlayerMove(0, 1)
             break;
             
         case 5: //forward
-            movePlayerAnimation(0, -1)
+            checkPlayerMove(0, -1)
             break;
         
         case 6: //left
-            movePlayerAnimation(-1, 0)
+            checkPlayerMove(-1, 0)
             break;
             
         case 7: //right
-            movePlayerAnimation(1, 0)
+            checkPlayerMove(1, 0)
             break;
             
         case 8: //back-left
-            movePlayerAnimation(-1, 1)
+            checkPlayerMove(-1, 1)
             break;
             
         case 9: //forward-right
-            movePlayerAnimation(1, -1)
+            checkPlayerMove(1, -1)
             break;
             
         case 10: //forward-left
-            movePlayerAnimation(-1, -1)
+            checkPlayerMove(-1, -1)
             break;
             
         case 11: //back-right
-            movePlayerAnimation(1, 1)
+            checkPlayerMove(1, 1)
             break;
 
         default:
@@ -320,19 +359,41 @@ function battleButtonClick(item) {
     }
 }
 
-function movePlayerAnimation(xSpaces, ySpaces)
+var playerMovePending = null
+function checkPlayerMove(xSpaces, ySpaces)
 {
-    if(battleShips[0].moving == false)
-    {
-         if( battleShips[0].gridLocation.x+xSpaces <= (arenaRightEdge-arenaLeftEdge) / arenaGridSpacing 
+    if( battleShips[0].gridLocation.x+xSpaces <= (arenaRightEdge-arenaLeftEdge) / arenaGridSpacing 
             && battleShips[0].gridLocation.x+xSpaces >= 0 
             && battleShips[0].gridLocation.y+ySpaces <= (arenaBottomEdge-arenaTopEdge) / arenaGridSpacing 
             && battleShips[0].gridLocation.y+ySpaces >= 0)
         {
-            battleShips[0].shakeTween.stop();
-            battleShips[0].moving = true;
-            var tween = game.add.tween(battleShips[0]).to( { x: battleShips[0].x+xSpaces*arenaGridSpacing , y: battleShips[0].y+ySpaces*arenaGridSpacing }, 1500, Phaser.Easing.Cubic.Out, true);
-            tween.onComplete.add(resetPlayerGridLocation); 
+            playerMovePending = { xSpaces:xSpaces , ySpaces:ySpaces}
+            clearBattle();
+        }
+        
+}
+
+function movePlayerAnimation(xSpaces, ySpaces)
+{
+    if(battleShips[0].moving == false)
+    {
+        if( threadRecord[threadRecord.length-1] > 0.9 ? true : false)
+        {
+            playerMovePending = null;
+            var newAngle = angleBetweenPoints(battleShips[0], { x: battleShips[0].x+xSpaces*arenaGridSpacing , y: battleShips[0].y+ySpaces*arenaGridSpacing } )+90
+            console.log(newAngle)
+            var tweenAngle = game.add.tween(battleShips[0]).to( { angle: newAngle}, 500, Phaser.Easing.Cubic.Out, true);
+            tweenAngle.onComplete.add(animateMove); 
+                
+            function animateMove()
+            {
+                console.log(battleShips[0].angle)
+                battleShips[0].shakeTween.stop();
+                battleShips[0].moving = true;
+                var tween = game.add.tween(battleShips[0]).to( { x: battleShips[0].x+xSpaces*arenaGridSpacing , y: battleShips[0].y+ySpaces*arenaGridSpacing }, 1500, Phaser.Easing.Cubic.Out, true);
+                tween.onComplete.add(resetPlayerGridLocation);     
+            }
+
             function resetPlayerGridLocation() 
             {
                 battleShips[0].gridLocation = new Phaser.Point( (battleShips[0].x-arenaLeftEdge)/arenaGridSpacing , (battleShips[0].y-arenaTopEdge)/arenaGridSpacing)
@@ -400,5 +461,49 @@ function playerTargetting(buttonID) {
         battleTargetting = buttonID+1;
         battleButtons[buttonID].tint = 0xFF0000;
         battleButtons[buttonID].scale.setTo(1)
+    }
+}
+
+var totalShakes = null;
+function cameraShake(shakes) {
+    if(totalShakes == null)
+    {
+        totalShakes = shakes;
+    }
+    console.log("shaking " + shakes + " times")
+    if(shakes > 0)
+    {
+        console.log(shakes)
+        var min = -100*shakes/totalShakes;
+        var max = 100*shakes/totalShakes;
+        var range = Math.abs(min-max)
+        game.world.setBounds(-range/2, -range/2, game.width+range, game.height+range);
+        game.stage.backgroundColor = 0x000000;
+        var newX = Math.floor(Math.random() * (max - min + 1)) + min ;
+        var newY = Math.floor(Math.random() * (max - min + 1)) + min ;
+        console.log("going to: " + newX + " , " + newY)
+        var tween = game.add.tween(this.game.camera).to( { x: newX , y: newY }, getRandomInt(10,200), Phaser.Easing.Bounce.Out, true);
+        shakes = shakes -1
+        console.log(shakes)
+        tween.onComplete.add(reshakeCamera);     
+    } 
+    
+    function reshakeCamera()
+    {
+        console.log("Now at: " + game.camera.x  + " , " + game.camera.y)
+        if(shakes == 0)
+        {
+            console.log("back to start")
+            game.camera.x = 0 
+            game.camera.y = 0  
+            game.world.setBounds(0, 0, game.width, game.height);
+            game.stage.backgroundColor = 0xFFFFFF;
+            console.log("x: " + game.camera.x + " y: " + game.camera.y)
+            totalShakes = null;
+        } else
+        {
+            cameraShake(shakes)    
+        }
+        
     }
 }

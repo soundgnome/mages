@@ -824,14 +824,22 @@ function clearCurrentApplet()
     
     function updateUserData()
     {
-        $.ajax({
-            url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
-            type: "PUT",
-            data: currentUser
-            })
-        .done(function(data) {
-          console.log("Userdata updated");
-        });    
+        if(networkStorage)
+        {
+            $.ajax({
+                url: "https://openws.herokuapp.com/"+openWSCollection+"/"+userID+"?apiKey="+openWSapiKey,
+                type: "PUT",
+                data: currentUser
+                })
+            .done(function(data) {
+                console.log("Network Userdata updated");
+            });    
+        } else
+        {
+            localStorage.setObject(currentUser.name,currentUser);
+            console.log("Local Userdata updated");
+        }
+   
     }
 }
 
@@ -1759,6 +1767,24 @@ function modulus(dividend, divisor)
     return(dividend%divisor)
 }
 
+function lineDistance( point1, point2 )
+    {
+      var xs = 0;
+      var ys = 0;
+      
+      xs = point2.x - point1.x;
+      xs = xs * xs;
+     
+      ys = point2.y - point1.y;
+      ys = ys * ys;
+     
+      return Math.sqrt( xs + ys );
+    }
+
+function angleBetweenPoints(p1, p2)
+{
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
+}
 function fixedEncodeURIComponent (str) {
   return encodeURIComponent(str).replace(/[!'()*"+]/g, function(c) {
     return '%' + c.charCodeAt(0).toString(16);

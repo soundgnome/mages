@@ -8,7 +8,9 @@ var campaignChallenges;
 var currentCampaignChallenge;
 var campaignFurthestPoint;
 var timerRecord = [];
-var apiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb'
+var networkStorage = true;
+var openWSapiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb'
+var openWSCollection = 'mages_users';
 var currentUser;
 var userID;
 
@@ -30,31 +32,58 @@ function loadCampaign()
         if (result == "") {                                             
         } else
         {
-            var query = JSON.stringify({name:result});
-
-            $.get("https://openws.herokuapp.com/mages_users?q="+query+"&apiKey="+apiKey)
-                .done(function(data) {
-                if (typeof data[0] === 'undefined' ) 
-                { 
-                    bootbox.alert("User not found in database!")
-                } else
-                {
-                    bootbox.prompt({
-                        title: "Type password:", 
-                        inputType: "password",
-                        callback: function(passwordResult) {
-                            if(data[0].password == passwordResult)
-                            {
-                                loadUser(data[0]);   
-                            } else
-                            {
-                                bootbox.alert("Incorrect password.")
+            if(networkStorage)
+            {
+                var query = JSON.stringify({name:result});
+                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
+                    .done(function(data) {
+                    if (typeof data[0] === 'undefined' ) 
+                    { 
+                        bootbox.alert("User not found in database!")
+                    } else
+                    {
+                        bootbox.prompt({
+                            title: "Type password:", 
+                            inputType: "password",
+                            callback: function(passwordResult) {
+                                if(data[0].password == passwordResult)
+                                {
+                                    loadUser(data[0]);   
+                                } else
+                                {
+                                    bootbox.alert("Incorrect password.")
+                                }
                             }
-                        }
-                    });
-
-                }
-              });
+                        });
+        
+                    }
+                  });   
+            } else
+            {
+                var data = localStorage.getObject(result)
+                console.log(data)
+                if (typeof data === 'undefined' ) 
+                    { 
+                        bootbox.alert("User not found in database!")
+                    } else
+                    {
+                        bootbox.prompt({
+                            title: "Type password:", 
+                            inputType: "password",
+                            callback: function(passwordResult) {
+                                if(data.password == passwordResult)
+                                {
+                                    loadUser(data);   
+                                } else
+                                {
+                                    bootbox.alert("Incorrect password.")
+                                }
+                            }
+                        });
+        
+                    }
+            }
+            
         }
         }); 
 
@@ -103,18 +132,31 @@ function startCampaign()
         if (result === "") {                                             
         } else
         {
-            var query = JSON.stringify({name:result});
+            if(networkStorage)
+            {
+                var query = JSON.stringify({name:result});
+                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
+                    .done(function(data) {
+                        if (typeof data[0] === 'undefined' ) 
+                        {
+                            getNewPassword(result);  
+                        } else
+                        {
+                            bootbox.alert("That user already exists!") 
+                        }
+                    });   
+            } else
+            {
+                var data = localStorage.getObject(result)
+                if (typeof data === 'undefined' ) 
+                {
+                    getNewPassword(result);  
+                } else
+                {
+                    bootbox.alert("That user already exists!") 
+                }
+            }
 
-            $.get("https://openws.herokuapp.com/mages_users?q="+query+"&apiKey="+apiKey)
-                .done(function(data) {
-                if (typeof data[0] === 'undefined' ) 
-                    {
-                        getNewPassword(result);  
-                    } else
-                    {
-                        bootbox.alert("That user already exists!") 
-                    }
-              });
         }
         }); 
                 
@@ -161,14 +203,20 @@ function startCampaign()
             password: userPassword,
             campaignChallenges: campaignChallenges
           };
-        //localStorage.setObject("campaignChallenges",campaignChallenges)
-        console.log(currentUser)
+         
         
-        $.post("https://openws.herokuapp.com/mages_users/?apiKey="+apiKey,currentUser)
-            .done(function(data) {
+        if(networkStorage)
+        {
+            $.post("https://openws.herokuapp.com/"+openWSCollection+"/?apiKey="+openWSapiKey,currentUser)
+                .done(function(data) {
                 userID= data._id;
-              console.log("User saved successfully");
-            });
+                console.log("User saved successfully");
+            });   
+        } else
+        {
+           localStorage.setObject(currentUser.name,currentUser) 
+        }
+
         threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
         threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
         loadAppletID=thread[threadNumber-1][threadPoint-1];
@@ -611,7 +659,7 @@ Storage.prototype.getObject = function(key) {
 function clearUsers(userID)
 {
     $.ajax({
-    url: "https://openws.herokuapp.com/mages_users/"+userID+"?apiKey="+apiKey,
+    url: "https://openws.herokuapp.com/"+openWSCollection+"/"+userID+"?apiKey="+openWSapiKey,
     type: 'DELETE',
     success: function(result) {
       console.log("Item deleted " + result);
