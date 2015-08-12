@@ -2997,7 +2997,7 @@
               "pieces" : [
               {"type":16,"expression":"%5B3%2C%204%2C%205%2C%206%2C%208%2C%2010%2C%2012%5D%5BgetRandomInt%280%2C6%29%5D"},
               {"type":16,"expression":"getRandomInt%281%2ChiddenNumber%5B0%5D%29"},
-              {"type":16,"expression":"(getRandomInt(0,1)==1?'pie':'box')"},
+              {"type":16,"expression":"(getRandomInt(0,1)==1?'box':'box')"},
               {"type":21,"startX":300,"startY":140,"textureExpression":"fractionModelTexture({type:hiddenNumber[2] , numerator:hiddenNumber[1] , denominator:hiddenNumber[0] , size:200 , color:0xff0000 })","number":"1","draggable":0,"selectable":0},
               {"type":1,"startX":34,"startY":382,"newText":"Shaded%3A","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},
               {"type":1,"startX":330,"startY":383,"newText":"Unshaded%3A","font":"","fontString":" 40px Arial","fill":"Black","wordWrap":false,"wordWrapWidth":"300","alignment":"left"},

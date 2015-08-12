@@ -8,13 +8,6 @@ var campaignChallenges;
 var currentCampaignChallenge;
 var campaignFurthestPoint;
 var timerRecord = [];
-var currentUser;
-var userID;
-
-var networkStorage = true;
-var openWSCollection = 'mages_users';
-// go to https://openws-app.herokuapp.com/ to get your own WS api key:
-var openWSapiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb';
 
 function loadThreads()
 {
@@ -29,70 +22,8 @@ function loadThreads()
 function loadCampaign()
 {
     state = 'prompt';
-    getOaklandWeather();
-    bootbox.prompt("Type user name:", function(result) {                
-        if (result == "") {                                             
-        } else
-        {
-            if(networkStorage)
-            {
-                var query = JSON.stringify({name:result});
-                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-                    .done(function(data) {
-                    if (typeof data[0] === 'undefined' ) 
-                    { 
-                        bootbox.alert("User not found in database!")
-                    } else
-                    {
-                        bootbox.prompt({
-                            title: "Type password:", 
-                            inputType: "password",
-                            callback: function(passwordResult) {
-                                if(data[0].password == passwordResult)
-                                {
-                                    loadUser(data[0]);   
-                                } else
-                                {
-                                    bootbox.alert("Incorrect password.")
-                                }
-                            }
-                        });
-        
-                    }
-                  });   
-            } else
-            {
-                var data = localStorage.getObject(result)
-                console.log(data)
-                if (typeof data === 'undefined' ) 
-                    { 
-                        bootbox.alert("User not found in database!")
-                    } else
-                    {
-                        bootbox.prompt({
-                            title: "Type password:", 
-                            inputType: "password",
-                            callback: function(passwordResult) {
-                                if(data.password == passwordResult)
-                                {
-                                    loadUser(data);   
-                                } else
-                                {
-                                    bootbox.alert("Incorrect password.")
-                                }
-                            }
-                        });
-        
-                    }
-            }
-            
-        }
-        }); 
 
-    function loadUser(userData)
-    {
-    userID = userData._id;
-
+    
     helpButton.destroy(true);
     buildButton.destroy(true);
     titleText.destroy(true);
@@ -106,83 +37,38 @@ function loadCampaign()
     campaignMode = 1;
 
     campaignFurthestPoint = [1,5];
-    //campaignChallenges = localStorage.getObject("campaignChallenges")
-    campaignChallenges = userData.campaignChallenges;
-    
-    currentUser = {
-            name: userData.name,
-            password: userData.password,
-            campaignChallenges: campaignChallenges,
-            chronics: userData.chronics,
-            challengesMastered: userData.challengesMastered,
-            challengesAttempted: userData.challengesAttempted
-          };
+    campaignChallenges = localStorage.getObject("campaignChallenges")
     currentCampaignChallenge = getRandomInt(0,4);
     threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
     loadAppletID=thread[threadNumber-1][threadPoint-1];
     
-    showWelcomeMessage();
     state = 'applet';
     
-    titleBack.destroy(true);  
-    }
-    
+    titleBack.destroy(true);
 }
 
 function startCampaign()
 {
-    getOaklandWeather();
-    state = 'prompt';
-        bootbox.prompt("Type a new user name:", function(result) {   
-        if (result === "") {                                             
-        } else
-        {
-            if(networkStorage)
-            {
-                var query = JSON.stringify({name:result});
-                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-                    .done(function(data) {
-                        if (typeof data[0] === 'undefined' ) 
-                        {
-                            getNewPassword(result);  
-                        } else
-                        {
-                            bootbox.alert("That user already exists!") 
-                        }
-                    });   
+    if (typeof localStorage.campaignChallenges === 'undefined') 
+            { 
+                newCampaign() 
             } else
             {
-                var data = localStorage.getObject(result)
-                if (typeof data === 'undefined' ) 
+                state = 'prompt';
+                bootbox.prompt("Type delete to remove the previous user's profile.", function(result) {                
+                if (result === null) {                                             
+                      
+                } else if(result == 'delete') 
                 {
-                    getNewPassword(result);  
-                } else
-                {
-                    bootbox.alert("That user already exists!") 
+                    newCampaign() ;
                 }
+                });  
             }
 
-        }
-        }); 
-                
-
-    function getNewPassword(userName) {
-        bootbox.prompt("Type a password for your new user (minimum 6 characters):", function(result) {                
-                if (result === null) {                                             
-                   getNewPassword()
-                } else if (result.length < 6)
-                {
-                    bootbox.alert("Must be 6 or more characters!" , getNewPassword)
-                } else
-                {
-                    
-                    newCampaign(userName, result);
-                }
-                }); 
-    }
     
-    function newCampaign(userName, userPassword)
+    
+    function newCampaign()
     {
         helpButton.destroy(true);
         buildButton.destroy(true);
@@ -203,38 +89,20 @@ function startCampaign()
                                 {threadNumber:1 , threadPoint:4 , mastered:0} ,
                                 {threadNumber:1 , threadPoint:5 , mastered:0} ]
         currentCampaignChallenge = getRandomInt(0,4);
-        
-        currentUser = {
-            name: userName,
-            password: userPassword,
-            campaignChallenges: campaignChallenges,
-            challengesMastered: 0
-          };
-         
-        
-        if(networkStorage)
-        {
-            $.post("https://openws.herokuapp.com/"+openWSCollection+"/?apiKey="+openWSapiKey,currentUser)
-                .done(function(data) {
-                userID= data._id;
-                console.log("User saved successfully");
-            });   
-        } else
-        {
-           localStorage.setObject(currentUser.name,currentUser) 
-        }
-
+        localStorage.setObject("campaignChallenges",campaignChallenges)
         threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
         threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
+        console.log(threadNumber)
+        console.log(threadPoint)
         loadAppletID=thread[threadNumber-1][threadPoint-1];
-        showWelcomeMessage();
+        
         state = 'applet';
         
         titleBack.destroy(true);
     }
 }
 
-var threadModeOnly = false;
+
 function threadPrompt() {
     menuKeyPressed ==0;
     state = 'prompt';
@@ -253,7 +121,6 @@ function threadPrompt() {
                         callback: function () {
                             appletInitiated=0;
                             threadMode = 1;
-                            threadModeOnly = true;
                             threadNumber = $('#threadID').val();
                             threadPoint = 1;
                             loadAppletID=thread[threadNumber-1][threadPoint-1];
@@ -447,7 +314,7 @@ function appletTransition(correct) {
         clearCurrentApplet();
         backGroundImage.destroy();
         game.world.remove(scoreText);
-        state = 'battle';
+        state = 'applet'
         if(correct==1){spaceship.destroy()}
     }
 }
@@ -664,120 +531,3 @@ Storage.prototype.getObject = function(key) {
     return value && JSON.parse(value);
 }
 
-//this is used to delete an individual user from the openWS user data collection
-function deleteNetUser(userName)
-{
-    if(networkStorage)
-    {
-        var query = JSON.stringify( { name : userName } );
-        $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-            .done(function(data) {
-            if (typeof data[0] !== 'undefined') {
-                var deleteID = data[0]._id ;
-                $.ajax({
-                url: "https://openws.herokuapp.com/"+openWSCollection+"/"+deleteID+"?apiKey="+openWSapiKey,
-                type: 'DELETE',
-                success: function(result) {
-                      console.log('User deleted: "' + userName +'"');
-                    },
-                    error: function() {
-                      console.log("Error");
-                    }
-                });    
-            } else
-            {
-                console.log('User "' + userName + '" does not exist!' )
-            }
-        });    
-    } else
-    {
-        console.log("Network storage is inactive!");
-    }
-    
-}
-
-
-function netUserMaintenance(order)
-{
-    $.get("https://openws.herokuapp.com/" + openWSCollection + "?apiKey=" + openWSapiKey)
-        .done(function(data) {
-            console.log("Users retrieved.");
-            switch(order.key) 
-            {
-                case 'sortUsersByKey':
-                    //var order = { key:'sortUsersByKey' , keyToSort:'challengesMastered' }
-                    order.sorted = data.sort(function(a, b) {
-                            var y = a[order.keyToSort]; var x = b[order.keyToSort];
-                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                        });
-                break;
-                
-                case 'setDefaultValueForAll':
-                    //var order = { key:'setDefaultValueForAll' , newKey:'challengesMastered' , newValue:0 }
-                    data.forEach(function(user) { 
-                        if (typeof user[order.newKey] === 'undefined') 
-                        { user[order.newKey] = order.newValue}
-                    });
-                    
-                    console.log(data)
-                    saveUserData();
-                break; 
-
-            }
-            
-            function saveUserData()
-            {   
-                data.forEach(function(user) { 
-                        $.ajax({
-                            url: "https://openws.herokuapp.com/"+openWSCollection+"/"+user._id+"?apiKey="+openWSapiKey,
-                            type: "PUT",
-                            data: user
-                        });
-                         
-                    });
-                    
-                
-            }
-        });    
-    }
-
-function showWelcomeMessage()
-{
-    if(networkStorage)
-    {
-        bootbox.alert('<b>Hello, ' + currentUser.name + ' and welcome to Mages Online. </b>' + oaklandWeatherString + 
-        '<br><br>Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
-        'Mages is still in development, so do not expect stable software.'+
-        '<br><br><b>You have reached a mastery level on ' + currentUser.challengesMastered + ' applets after attempting ' + currentUser.challengesAttempted + '.</b>' );
-               
-    }
-    
-}
-
-var oaklandWeatherString = "Here in Oakland, CA the weather is Beautiful."
-function getOaklandWeather () 
-{
-    var conditons = ["tornado","tropical storm","hurricane","severe thunderstorms",
-    "thunderstorms","mixed rain and snow","mixed rain and sleet","mixed snow and sleet",
-    "freezing drizzle","drizzle","freezing rain","showers","showers","snow flurries",
-    "light snow showers","blowing snow","snow","hail","sleet","dust","foggy","haze",
-    "smoky","blustery","windy","cold","cloudy","mostly cloudy tonight",
-    "mostly cloudy today","partly cloudy tonight","partly cloudy today","clear tonight",
-    "sunny","fair tonight","fair today","mixed rain and hail","hot",
-    "isolated thunderstorms","scattered thunderstorms","scattered thunderstorms",
-    "scattered showers","heavy snow","scattered snow showers","heavy snow",
-    "partly cloudy","thundershowers","snow showers","isolated thundershowers"];
-    $.simpleWeather({
-    location: 'Oakland, CA',
-    woeid: '',
-    unit: 'f',
-    success: function(weather) {
-      oaklandWeatherString = "Here in Oakland, CA the weather is " + weather.temp + '&deg ' + weather.units.temp + ' and ' + conditons[weather.code] + '.';
-  
-    },
-    error: function(error) {
-      console.log("error")
-    }
-  });
-    
-}

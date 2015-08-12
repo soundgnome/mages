@@ -166,6 +166,10 @@ function preload() {
     game.load.image('battleNavSmall', 'assets/battleNavSmall.png');
     game.load.image('battleShipDetailPane', 'assets/battleShipDetailPane.png');
     game.load.image('battleTarget', 'assets/battleTarget.png');
+    game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
+    
+    // c/o opengameartuser Clint Bellanger
+    game.load.spritesheet('sparks', 'assets/sparks.png', 64, 64);
     
     
     //  Load the Google WebFont Loader script
@@ -229,10 +233,17 @@ function update() {
     case 'battle':
         if(battleMode)
         {
-           continueBattle(); 
+            if(threadModeOnly == false)
+            {
+                continueBattle();   
+            } else
+            {
+                state = 'applet';
+            }
+            
         } else
         {
-            state = 'applet'
+            state = 'applet';
         }
         
         break;
@@ -563,7 +574,7 @@ function loadApplet(applet) {
             buildtTable(applet[i]);
             break;
             
-            case 20: //tTable
+            case 20: //number line
             buildNumberLine(applet[i]);
             break;
             
@@ -701,18 +712,25 @@ function clearCurrentApplet()
     { //this is where #challenge mode goes
         
         
-            if(campaignMode == 1)
+            if(campaignMode == 1)  //battle mode
             {
-                if(timerExists == 0)
+                    if(timerExists == 0)
                     {
+                        if (typeof currentUser.challengesAttempted === 'undefined') 
+                                { currentUser.challengesAttempted = 1 }
+                        else    { currentUser.challengesAttempted++ }
+                
                         if( threadRecord[threadRecord.length-1] > 0.9 ) //close enough
                         {
                             campaignChallenges[currentCampaignChallenge].mastered++;
                         } else
                         {
                             campaignChallenges[currentCampaignChallenge].mastered--;
-                            if(campaignChallenges[currentCampaignChallenge].mastered < 0)
-                            {campaignChallenges[currentCampaignChallenge].mastered = 0 }
+                            
+                            //this was removed to accomodate chronic
+                            //if(campaignChallenges[currentCampaignChallenge].mastered < 0)
+                            //{campaignChallenges[currentCampaignChallenge].mastered = 0 }
+                            
                         }
 
                         currentUser.campaignChallenges =  campaignChallenges;
@@ -726,6 +744,10 @@ function clearCurrentApplet()
                     {
                       if(timerRecord.length == timerRepetitions)
                       {
+                            if (typeof currentUser.challengesAttempted === 'undefined') 
+                                { currentUser.challengesAttempted = 1 }
+                            else    { currentUser.challengesAttempted++ }
+                            
                             var timerRecordTotal = 0;
                             timerRecord.forEach(function(item) {
                                 timerRecordTotal += item;
@@ -741,7 +763,7 @@ function clearCurrentApplet()
                             currentCampaignChallenge = getRandomIntExcluding(0,4,currentCampaignChallenge);
                       } else
                       {
-
+                            
                       }
 
                     }
@@ -785,21 +807,70 @@ function clearCurrentApplet()
     //this function checks to see if a challenge is mastered and adds the correct next challenge to the campaignChallenges
     function checkCampaignChallenges()
     {
+        // This is the Mages adaptive algorithm
+        // The user is assigned the first n starting applets.  This number is 
+        // static and does not change.  Each applet the mastery level up and down
+        // from its initial starting point of 0.  If the mastery reaches the
+        // masteryLevel variable, the applet is now mastered, and is removed 
+        // from the potential applets.  If the master level reaches the chronicLevel
+        // variable, it goes into the chronic stack, and a new applet is added.
+        // When an applet is mastered, it has a 1 in chronicFrequency+1 chance of
+        // pulling a random applet from the chronic stack, again with a masteryLevel
+        // of 0.  Otherwise it pulls the next applet 
+        
+        
+        var masteryLevel = 3;  //the level that determines when an applet has been mastered
+        var chronicLevel = -5; //the level that determines when an applet goes chronic
+        var chronicFrequency = 2 //0 chosen from 0 to this number
+        var chronicsAllowed = 5 //the number of chronics before they repeat
         
         checkFurthestPoint();
-
         for(var i = 0 ; i < campaignChallenges.length ; i++)
         {
-            if( campaignChallenges[i].mastered > 2 )
+            if( campaignChallenges[i].mastered >= masteryLevel )  //mastery
             {
-                console.log("challenge " + i + " mastered; adding " + addPoint)
+                console.log("challenge " + i + " mastered")
+                
+                if (typeof currentUser.challengesMastered === 'undefined') 
+                        { currentUser.challengesMastered = 0 }
+                else    { currentUser.challengesMastered++ }
+                
+                
                 campaignChallenges.splice(i,1)
+                if (typeof currentUser.chronics === 'undefined')
+                { currentUser.chronics = [] }
+                
+                console.log("Enough chonics?: " + currentUser.chronics.length >= chronicsAllowed)
+                if(getRandomInt(0,chronicFrequency) == 0 && currentUser.chronics.length > 1 ) //pull a chronic
+                {
+                    console.log("adding a chronic")
+                    campaignChallenges.unshift(currentUser.chronics.splice(getRandomInt(0,currentUser.chronics.length-1),1)[0][0])
+                } else
+                {
+                    console.log("adding " + addPoint)
+                    campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0}) 
+                    checkFurthestPoint();
+                }
+                
+                
+            }
+            
+            if( campaignChallenges[i].mastered <= chronicLevel )  //chronic
+            {
+                console.log("challenge " + i + " chronic; adding " + addPoint)
+                campaignChallenges[i].mastered = 0; //reset for next time it gets added
+                
+                if (typeof currentUser.chronics === 'undefined') 
+                        { currentUser.chronics =   [campaignChallenges.splice(i,1)] }
+                else    { currentUser.chronics.push(campaignChallenges.splice(i,1))}
+                
                 campaignChallenges.push({threadNumber:addPoint[0] , threadPoint:addPoint[1] , mastered:0})
                 checkFurthestPoint();
                 
             }
               
         }
+    currentUser.campaignChallenges = campaignChallenges;
     currentCampaignChallenge = getRandomIntExcluding(0,4,currentCampaignChallenge);
     threadNumber =campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint = campaignChallenges[currentCampaignChallenge].threadPoint;
@@ -1182,6 +1253,7 @@ function adjustNewPiece() {
         
         draggingPiece.events.onInputDown.add(buildRedragPiece, draggingPiece);
         draggingPiece.events.onInputUp.add(onFinishDrag, draggingPiece);
+        console.log(draggingPiece.events.onInputDown)
     }
 }
 
@@ -1219,17 +1291,13 @@ function onFinishDrag(item, pointer) {
     }
 }
 
-function buildRedragPiece(item, pointer){
-    if(game.input.mouse.button==0)
-    {
-        draggingPiece = item;
-        buildState = 'dragging';
-        dragging=1;   
-    } else if (game.input.mouse.button==2)
-    {
-        console.log(item);
-        
-    }
+function buildRedragPiece(item){
+
+    console.log("dragging")
+    draggingPiece = item;
+    buildState = 'dragging';
+    dragging=1;   
+
 }
 
 //group pieces have to register their parent as the dragging pieces
@@ -1769,6 +1837,8 @@ function modulus(dividend, divisor)
 
 function lineDistance( point1, point2 )
     {
+    console.log(point1)
+    console.log(point2)
       var xs = 0;
       var ys = 0;
       
@@ -1790,6 +1860,8 @@ function fixedEncodeURIComponent (str) {
     return '%' + c.charCodeAt(0).toString(16);
   });
 }
+
+
 
 var colorSwatchHandle
 function colorSwatch() {

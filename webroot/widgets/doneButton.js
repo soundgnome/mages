@@ -110,3 +110,9 @@ function doneButtonClick(item) {
     
     
 }
+
+function getAnswerRight()
+{
+    threadRecord.push(1);
+    appletTransition(1);
+}
