@@ -1863,7 +1863,61 @@ function fixedEncodeURIComponent (str) {
 
 
 
-var colorSwatchHandle
+// var colorSwatchHandle
+// function colorSwatch() {
+//     if (typeof colorSwatchHandle === 'undefined') 
+//     { } else
+//     {
+//       colorSwatchHandle.destroy()  
+//     }
+//     var boxX = 5
+//     var boxY = 545
+//     colorSwatchHandle = game.add.group();
+//     var swatchBox = game.add.graphics(boxX, boxY);
+//     swatchBox.beginFill(0xD0D0D0);
+//     swatchBox.lineStyle(2, 0x000000, 1);
+//     swatchBox.drawRect(0, 0, 335, 50);
+//     swatchBox.endFill();
+//     colorSwatchHandle.add(swatchBox)
+//     //swatchBox.clear()
+    
+//     var swatchColorBox
+//     var swatchColorSprite
+//     for(var i = 0; i<8 ; i++)
+//     {
+//         swatchColorBox = game.add.graphics(0, 0);
+        
+//         if(i<7)
+//         {
+//             swatchColorBox.beginFill(rainbow[i]);    
+//         } else
+//         {
+//             swatchColorBox.beginFill(0x000000)
+//         }
+//         swatchColorBox.lineStyle(2, 0x000000, 1);
+//         swatchColorBox.drawRect(0, 0, 30, 30);
+//         swatchColorSprite = game.add.sprite( boxX+10+(i*40),boxY+10,swatchColorBox.generateTexture() ) 
+//         if(i<7)
+//         {
+//             swatchColorSprite.color = rainbow[i];    
+//         } else
+//         {
+//             swatchColorSprite.color = 0x000000;
+//         }
+//         colorSwatchHandle.add(swatchColorSprite ) 
+//         swatchColorBox.clear()
+//     }
+//     colorSwatchHandle.forEach(function(item) { 
+//         if(item.color >= 0)
+//         {
+//           item.inputEnabled='true';
+//             item.events.onInputDown.add(colorSwatchColorClick, this);  
+//         }
+            
+//         });
+// }
+
+var colorSwatchHandle;
 function colorSwatch() {
     if (typeof colorSwatchHandle === 'undefined') 
     { } else
@@ -1871,50 +1925,95 @@ function colorSwatch() {
       colorSwatchHandle.destroy()  
     }
     var boxX = 5
-    var boxY = 545
+    var boxY = 425
     colorSwatchHandle = game.add.group();
     var swatchBox = game.add.graphics(boxX, boxY);
     swatchBox.beginFill(0xD0D0D0);
     swatchBox.lineStyle(2, 0x000000, 1);
-    swatchBox.drawRect(0, 0, 335, 50);
+    swatchBox.drawRect(0, 0, 128, 173);
     swatchBox.endFill();
     colorSwatchHandle.add(swatchBox)
     //swatchBox.clear()
     
-    var swatchColorBox
-    var swatchColorSprite
-    for(var i = 0; i<8 ; i++)
+    var swatchColorBox;
+    var swatchColorSprite;
+    var rowLength;
+    var tints = [0x000000, 0xFFFFFF];
+    var tintNumber = 0;
+    var frequency = .15;
+    
+    
+    var redFrequency = .1;
+    var grnFrequency = .1;
+    var bluFrequency = .1;
+    var center = 255;
+    var width = 0;
+
+
+    //http://krazydad.com/tutorials/makecolors.php
+    for (var i = 0; i < 32; ++i)
     {
-        swatchColorBox = game.add.graphics(0, 0);
-        
-        if(i<7)
-        {
-            swatchColorBox.beginFill(rainbow[i]);    
-        } else
-        {
-            swatchColorBox.beginFill(0x000000)
-        }
-        swatchColorBox.lineStyle(2, 0x000000, 1);
-        swatchColorBox.drawRect(0, 0, 30, 30);
-        swatchColorSprite = game.add.sprite( boxX+10+(i*40),boxY+10,swatchColorBox.generateTexture() ) 
-        if(i<7)
-        {
-            swatchColorSprite.color = rainbow[i];    
-        } else
-        {
-            swatchColorSprite.color = 0x000000;
-        }
-        colorSwatchHandle.add(swatchColorSprite ) 
-        swatchColorBox.clear()
+       red   = Math.sin(redFrequency*i + 0) * center + width;
+       green = Math.sin(grnFrequency*i + 2*Math.PI/3) * center + width;
+       blue  = Math.sin(bluFrequency*i + 4*Math.PI/3) * center + width;
+    
+       tints.push(RGB2Color(red,green,blue))
     }
-    colorSwatchHandle.forEach(function(item) { 
-        if(item.color >= 0)
+
+    console.log(tints)
+    for(var i = 0; i<9 ; i++)
+    {
+        
+        console.log("rowLength: " + rowLength)
+        if(i==0)
         {
-          item.inputEnabled='true';
-            item.events.onInputDown.add(colorSwatchColorClick, this);  
+            rowLength=2;   
+        } else if(i < 5)
+        {
+            rowLength++;
+        } else
+        {
+            rowLength--;
         }
+        
+        for (var j = 0; j < rowLength; j++)
+        {
+            swatchColorHex = game.add.graphics(0, 0);
+            console.log(tints[tintNumber])
+            swatchColorHex.beginFill(tints[tintNumber])
+            var currentTint = tints[tintNumber];
+            tintNumber++;
+    
+            swatchColorHex.lineStyle(1, 0x000000, 1);
+            points = [  new Phaser.Point(10,0),
+                        new Phaser.Point(5,-9),
+                        new Phaser.Point(-5,-9),
+                        new Phaser.Point(-10,0),
+                        new Phaser.Point(-5,9),
+                        new Phaser.Point(5,9)
+                        ]
+            swatchColorHex.drawPolygon(points);
             
-        });
+            swatchColorSprite = game.add.sprite(boxX+50+j*20+(i<5?-i*10:i*10-80), boxY+i*18,swatchColorHex.generateTexture() ) 
+            swatchColorSprite.angle += 30;
+            swatchColorSprite.color = currentTint;
+            swatchColorSprite.inputEnabled='true';
+            swatchColorSprite.events.onInputDown.add(colorSwatchColorClick, this);
+    
+            colorSwatchHandle.add(swatchColorSprite ) 
+            swatchColorHex.clear()
+        }    
+    }
+    
+    function RGB2Color(r,g,b)
+      {
+        return '0x' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+      }   
+    function byte2Hex(n)
+      {
+        var nybHexString = "0123456789ABCDEF";
+        return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+      }
 }
 
 var lastLineColor = 0x000000
@@ -1941,3 +2040,4 @@ function colorSwatchColorClick(item) {
     colorSwatchHandle.destroy()
 
 }
+

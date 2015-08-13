@@ -12,6 +12,7 @@ var currentUser;
 var userID;
 
 var networkStorage = true;
+var networkStandings = { key:'sortUsersByKey' , keyToSort:'challengesMastered' , sorted:'unavailable'} ;
 var openWSCollection = 'mages_users';
 // go to https://openws-app.herokuapp.com/ to get your own WS api key:
 var openWSapiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb';
@@ -23,13 +24,14 @@ function loadThreads()
     thread[2]=["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10","3-11","3-12","3-13","3-14","3-15","3-16","3-17","3-18"];
     thread[3]=["4-1","4-2","4-3","4-4","4-5","4-6","4-7","4-8","4-9","4-10", "4-11", "4-12" , "4-13" , "4-14" , "4-15" , "4-16" , "4-17"];
     thread[4]=["5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11","5-12","5-13","5-14","5-15","5-16","5-17"];
-    thread[5]=["6-1","6-2","6-2.1","6-3","6-4","6-5","6-6","6-7","6-8","6-8.5","6-8.7","6-9","9","29","30","6-10","6-11","6-12","6-13","6-14","6-15","6-16","6-17","6-18","6-19"];
+    thread[5]=["6-1","6-2","6-2.1","6-3","6-4","6-5","6-6","6-7","6-8","6-8.5","6-8.7","6-9","9","29","30","6-10","6-11","6-12","6-13","6-14","6-15","6-16","6-17","6-18","6-19","6-20","6-21","6-22","6-23","6-24","6-25"];
 }
 
 function loadCampaign()
 {
     state = 'prompt';
     getOaklandWeather();
+    netUserMaintenance(networkStandings);
     bootbox.prompt("Type user name:", function(result) {                
         if (result == "") {                                             
         } else
@@ -133,6 +135,7 @@ function loadCampaign()
 function startCampaign()
 {
     getOaklandWeather();
+    netUserMaintenance(networkStandings);
     state = 'prompt';
         bootbox.prompt("Type a new user name:", function(result) {   
         if (result === "") {                                             
@@ -745,10 +748,12 @@ function showWelcomeMessage()
 {
     if(networkStorage)
     {
-        bootbox.alert('<b>Hello, ' + currentUser.name + ' and welcome to Mages Online. </b>' + oaklandWeatherString + 
+        bootbox.alert('Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
         '<br><br>Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
         'Mages is still in development, so do not expect stable software.'+
-        '<br><br><b>You have reached a mastery level on ' + currentUser.challengesMastered + ' applets after attempting ' + currentUser.challengesAttempted + '.</b>' );
+        '<br><br><b>You have reached a mastery level on ' + currentUser.challengesMastered + 
+        ' applets after attempting ' + currentUser.challengesAttempted + '.' +
+        '<br>The highest ranked user is ' + networkStandings.sorted[0].name + ' with ' + networkStandings.sorted[0].challengesMastered + ' applets mastered.');
                
     }
     
