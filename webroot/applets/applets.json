@@ -3539,7 +3539,21 @@
             {"type":1,"startX":60,"startY":40,"newText":"Drag%20the%20fraction%20to%20the%20correct%20box%20to%20show%20if%20it%20is%20closer%20to%200%20or%201.","font":"Arial","fontString":" 36px Arial","fill":"Black","wordWrap":true,"wordWrapWidth":"700","alignment":"left"}
             ],
         "doneStatement" : "dragToBoxes[0].contents>0?hiddenNumber[1]/hiddenNumber[0]<=0.5:dragToBoxes[1].contents>0?hiddenNumber[1]/hiddenNumber[0]>=0.5:false"
-        }
+        },
+        { "appletID" : "humanships", 
+"summary" : "Edit this text to add an applet summary.",
+"pieces" : [
+{"type":21,"startX":60,"startY":60,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":260,"startY":60,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":460,"startY":80,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":640,"startY":80,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":60,"startY":340,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":260,"startY":320,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":460,"startY":320,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0},
+{"type":21,"startX":640,"startY":320,"textureExpression":"buildShip(0.5,[255,255,255],getRandomHumanShip())","number":"1","draggable":0,"selectable":0}
+],
+"doneStatement" : "multipleChoiceCorrectAnswer==multipleChoiceSelected"
+}
         
     ]
 }

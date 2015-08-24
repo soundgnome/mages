@@ -117,7 +117,9 @@ function loadCampaign()
             campaignChallenges: campaignChallenges,
             chronics: userData.chronics,
             challengesMastered: userData.challengesMastered,
-            challengesAttempted: userData.challengesAttempted
+            challengesAttempted: userData.challengesAttempted,
+            ship: userData.ship,
+            credits: userData.credits
           };
     currentCampaignChallenge = getRandomInt(0,4);
     threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
@@ -125,7 +127,7 @@ function loadCampaign()
     loadAppletID=thread[threadNumber-1][threadPoint-1];
     
     showWelcomeMessage();
-    state = 'applet';
+   // state = 'applet';
     
     titleBack.destroy(true);  
     }
@@ -231,7 +233,7 @@ function startCampaign()
         threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
         loadAppletID=thread[threadNumber-1][threadPoint-1];
         showWelcomeMessage();
-        state = 'applet';
+       // state = 'applet';
         
         titleBack.destroy(true);
     }
@@ -373,13 +375,15 @@ function appletTransition(correct) {
         game.add.tween(emitter).from( { x:(direction==1 ? 100 : game.world.width-100) }, 2000, Phaser.Easing.Cubic.In, true);
         
         var shipTexture;
-        switch(getRandomInt(3,3)) //just use the random alien ship generator right now
+        switch(getRandomInt(0,1)) //just use the random alien ship generator right now
         {
             case 0:
-                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship1', exists:true, offset: 0, texture: 'spaceship1'}}} , 0 );
+                console.log("human")
+                shipTexture =  buildShip(1,[255,255,255],getRandomHumanShip());
                 break;
             case 1:
-                shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship2', exists:true, offset: 0, texture: 'spaceship2'}}} , 0 );
+                console.log("alien")
+                shipTexture = buildShip(1,shipTint);  //default ship
                 break;
             case 2:
                 shipTexture =  buildShip(1, { part: { hull: { label:'ogaSpaceship3', exists:true, offset: 0, texture: 'spaceship3'}}} , 0 );
@@ -465,73 +469,28 @@ function calculateThreadPercent() {
     return Math.round((threadTotal/threadRecord.length)*100)
 }
 
-
-function buildShip(scale, tint, ship, angleOffset)
+function getRandomHumanShip()
 {
-    if (typeof tint === 'undefined') 
-            {
-                tint = [0,0,0]
-            }
-            else {
-            }
-    var shipGraphic = game.add.group();
-    
-    if (typeof ship === 'undefined') 
-    { 
-        ship =  { 
+    return { 
                 part:
                     {
-                    bottomWings:    { label:'bottomWingsDefault',    exists:true,   offsetX: getRandomInt(20,40),    offsetY: -getRandomInt(0,20),   mirror:true,        texture: 'alienBottomWings'+getRandomInt(1,5)},
-                    tailSpires:     { label:'tailSpiresDefault',     exists:true,   offsetX: getRandomInt(20,50),    offsetY: -95,   mirror:true,        texture: 'alienTailSpire'+getRandomInt(1,2)},
-                    gunners:        { label:'gunnersDefault',        exists:false,  offsetX: 0,    offsetY: -200,   mirror:true,        texture: 'gunners'}, 
-                    frontSpire:     { label:'frontSpireDefault',     exists:true,   offsetX: 0,    offsetY:  50,   mirror:false,       texture: 'alienFrontSpire'+getRandomInt(1,4)}, 
-                    hull:           { label:'hullDefault',           exists:true,   offsetX: 0,    offsetY: getRandomInt(-100,-100),      mirror:false,       texture: 'alienHull'+getRandomInt(1,2)}, 
-                    wings:          { label:'wingsDefault',          exists:true,   offsetX: getRandomInt(30,90),   offsetY: 0,      mirror:true,        texture: 'alienWings'+getRandomInt(1,4)}, 
-                    wingGuns:       { label:'wingGunsDefault',       exists:true,   offsetX: 60,    offsetY: -30,   mirror:true,        texture: 'alienWingGuns'+getRandomInt(1,6)}, 
-                    topGunner:      { label:'topGunnerDefault',      exists:true,  offsetX: 0,    offsetY: -50,   mirror:false,       texture: 'alienTopGunner'+getRandomInt(1,5)}, 
-                    windScreen:     { label:'windScreenDefault',     exists:true,  offsetX: 0,    offsetY:  10,   mirror:false,       texture: 'alienWindScreen'+getRandomInt(1,4)}
+                    bottomWings:    { label:'bottomWingsDefault',    exists:true,   offsetX: 15,    offsetY: 10,   mirror:true,           texture: 'bottomWings'+getRandomInt(1,10)},
+                    tailSpires:     { label:'tailSpiresDefault',     exists:true,   offsetX: 40,    offsetY: -70,   mirror:true,                           texture: 'tailSpires'+getRandomInt(1,10)},
+                    frontSpire:     { label:'frontSpireDefault',     exists:true,   offsetX: 0,    offsetY:  25,   mirror:false,                                            texture: 'frontSpire'+getRandomInt(1,10)}, 
+                   
+                    wings:          { label:'wingsDefault',          exists:true,   offsetX: 40,   offsetY: -30,      mirror:true,                           texture: 'wings'+getRandomInt(1,10)},
+                     wingGuns:       { label:'wingGunsDefault',       exists:true,   offsetX: 40,    offsetY: -10,   mirror:true,                                            texture: 'wingGuns'+getRandomInt(1,10)}, 
+                    hull:           { label:'hullDefault',           exists:true,   offsetX: 0,    offsetY: -20,      mirror:false,                     texture: 'hull'+getRandomInt(1,10)}, 
+                    topGunner:      { label:'topGunnerDefault',      exists:true,  offsetX: 0,    offsetY: -30,   mirror:false,                                             texture: 'topGunner'+getRandomInt(1,10)}, 
+                    windScreen:     { label:'windScreenDefault',     exists:false,  offsetX: 0,    offsetY:  25,   mirror:false,                                             texture: 'windScreen'+getRandomInt(1,10)}
+                    
+                    
+                    
                     }
                 };
-    }
-
-    
-    $.each(ship.part, function(part, partSettings) {
-        buildPart(partSettings);
-    });
-    
-    
-    
-    var returnTexture = shipGraphic.generateTexture();
-    returnTexture.scaleOffset = scale;
-    if (typeof angleOffset === 'undefined')
-    {
-        returnTexture.angleOffset = 90;
-    } else
-    {
-        returnTexture.angleOffset=angleOffset;
-    }
-    shipGraphic.destroy();
-    return returnTexture;
-    
-    function buildPart(part)
-    {
-        if(part.exists==true)
-        {
-            var partSprite = game.add.sprite( -part.offsetX , -part.offsetY , part.texture )
-            partSprite.anchor.setTo(0.5,0.5);
-            partSprite.tint = tint[0] + 256 * tint[1] + 65536 * tint[2];
-            shipGraphic.add(partSprite)
-            if(part.mirror == true)
-            {
-                var mirroredPart = shipGraphic.create( part.offsetX , -part.offsetY , part.texture )
-                mirroredPart.anchor.setTo(0.5,0.5);
-                mirroredPart.scale.setTo(-1,1);
-                mirroredPart.tint = tint[0] + 256 * tint[1] + 65536 * tint[2];
-                shipGraphic.add(mirroredPart)
-            }
-        }
-    }
 }
+
+
 
 var galaxyFilter;
 function getAnimatedGalaxy () {
@@ -744,20 +703,119 @@ function netUserMaintenance(order)
         });    
     }
 
-function showWelcomeMessage()
+function showWelcomeMessage2()
 {
     if(networkStorage)
     {
-        bootbox.alert('Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
+        
+        bootbox.dialog({
+          message: 'Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
         '<br><br>Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
         'Mages is still in development, so do not expect stable software.'+
         '<br><br><b>You have reached a mastery level on ' + currentUser.challengesMastered + 
         ' applets after attempting ' + currentUser.challengesAttempted + '.' +
-        '<br>The highest ranked user is ' + networkStandings.sorted[0].name + ' with ' + networkStandings.sorted[0].challengesMastered + ' applets mastered.');
-               
+        '<br>The highest ranked user is ' + networkStandings.sorted[0].name + ' with ' + networkStandings.sorted[0].challengesMastered + ' applets mastered.',
+          title: "Welcome",
+          buttons: {
+            success: {
+              label: "Ready!",
+              className: "btn-success",
+              callback: function() {
+                continueBattle();
+              }
+            }
+          }
+        });     
     }
     
 }
+
+function showWelcomeMessage()
+{
+    var welcomeOverlay = game.add.group();
+    var welcomeBoxGraphic = game.add.graphics(0, 0);
+    welcomeBoxGraphic.beginFill(0x000066);  //dark blue
+    welcomeBoxGraphic.lineStyle(0, 0x000000, 1);
+    welcomeBoxGraphic.drawRect(0, 0, 600, 300);
+    welcomeBoxGraphic.endFill();
+    
+    var welcomeBox = game.add.sprite(100,150,welcomeBoxGraphic.generateTexture())
+    welcomeBoxGraphic.destroy();
+    welcomeBox.alpha = 0.7
+    welcomeOverlay.add(welcomeBox)
+    
+
+    var message = 'Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
+        '  Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
+        'Mages is still in development, so do not expect stable software.  '+
+        'You have reached a mastery level on ' + currentUser.challengesMastered + 
+        ' applets after attempting ' + currentUser.challengesAttempted + '.  ' +
+        'The highest ranked user is ' + networkStandings.sorted[0].name + ' with ' + networkStandings.sorted[0].challengesMastered + ' applets mastered.'
+    var welcomeText = game.add.text(125,175,message)
+    welcomeText.font = 'Michroma'
+    welcomeText.wordWrap=true;
+    welcomeText.wordWrapWidth = 550;
+    welcomeText.fontSize = 14;
+    welcomeText.fill='white'
+    welcomeOverlay.add(welcomeText)
+    if(typeof currentUser.credits === 'undefined') { currentUser.credits =0 }
+
+    
+    
+    var continueButton = game.add.group();
+    
+    var continueButtonBoxGraphic = game.add.graphics(0, 0);
+    continueButtonBoxGraphic.beginFill(0x666666);  //dark gray
+    continueButtonBoxGraphic.lineStyle(0, 0x000000, 1);
+    continueButtonBoxGraphic.drawRect(0, 0, 150, 50);
+    continueButtonBoxGraphic.endFill();
+    
+    var continueButtonBox = game.add.sprite(400,400,continueButtonBoxGraphic.generateTexture())
+    continueButtonBox.inputEnabled='true'
+    continueButtonBox.events.onInputDown.add(continueButtonClick);
+    continueButtonBox.events.onInputOver.add(continueButtonOver);
+    continueButtonBox.events.onInputOut.add(continueButtonOut);
+    continueButtonBox.anchor.setTo(0.5,0.25)
+    continueButtonBoxGraphic.destroy();
+    continueButtonBox.alpha = 0.7
+    continueButton.add(continueButtonBox)
+    
+    var continueText = game.add.text(340,400,"CONTINUE")
+    continueText.anchor.setTo=(0.5,0.5)
+    continueText.font = 'Michroma'
+    continueText.fontSize = 16;
+    continueText.fill='white'
+    
+    function continueButtonClick()
+    {
+        welcomeOverlay.destroy();
+        continueButton.destroy();
+        continueText.destroy();
+        if(battleMode)
+        {
+            continueBattle()
+        } else
+        {
+            state = 'applet'
+        }
+        
+    }
+    
+    function continueButtonOver()
+    {
+        continueText.fontSize = 17;
+        continueText.x -= 5;
+        console.log("over")
+    }
+    
+    function continueButtonOut()
+    {
+        continueText.fontSize = 16;
+        continueText.x += 5;
+        console.log("out")
+    }
+}
+
 
 var oaklandWeatherString = "Here in Oakland, CA the weather is Beautiful."
 function getOaklandWeather () 
@@ -777,7 +835,7 @@ function getOaklandWeather ()
     woeid: '',
     unit: 'f',
     success: function(weather) {
-      oaklandWeatherString = "Here in Oakland, CA the weather is " + weather.temp + '&deg ' + weather.units.temp + ' and ' + conditons[weather.code] + '.';
+      oaklandWeatherString = "Here in Oakland, CA the weather is " + weather.temp + ' degrees ' + weather.units.temp + ' and ' + conditons[weather.code] + '.';
   
     },
     error: function(error) {

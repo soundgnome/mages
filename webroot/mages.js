@@ -115,12 +115,11 @@ function preload() {
     game.load.image('spaceship3', 'assets/nightraiderfixed.png');
             //cc3.0 credit dravenx on opengameart for spaceship
     game.load.image('yellowStar', 'assets/starYellow50pix.png');
-    game.load.image('starfield', 'assets/darkrift-orig_full.jpg');
+    game.load.image('starfield', 'assets/starfield.jpg');
     
     game.load.image('smokeParticle', 'assets/shipParts/alienShip/smokeParticle.png');
     game.load.image('nebulaTrail1', 'assets/shipParts/alienShip/nebulaTrail1.png');
     game.load.image('nebulaTrail2', 'assets/shipParts/alienShip/nebulaTrail2.png');
-    
     
     //ship parts
     game.load.image('alienBottomWings1', 'assets/shipParts/alienShip/bottomWings1.png');
@@ -156,6 +155,98 @@ function preload() {
     game.load.image('alienWindScreen3', 'assets/shipParts/alienShip/windScreen3.png');
     game.load.image('alienWindScreen4', 'assets/shipParts/alienShip/windScreen4.png');
     
+    game.load.image('bottomWings1', 'assets/shipParts/humanShip/bottomWings1.png');
+    game.load.image('bottomWings2', 'assets/shipParts/humanShip/bottomWings2.png');
+    game.load.image('bottomWings3', 'assets/shipParts/humanShip/bottomWings3.png');
+    game.load.image('bottomWings4', 'assets/shipParts/humanShip/bottomWings4.png');
+    game.load.image('bottomWings5', 'assets/shipParts/humanShip/bottomWings5.png');
+    game.load.image('bottomWings6', 'assets/shipParts/humanShip/bottomWings6.png');
+    game.load.image('bottomWings7', 'assets/shipParts/humanShip/bottomWings7.png');
+    game.load.image('bottomWings8', 'assets/shipParts/humanShip/bottomWings8.png');
+    game.load.image('bottomWings9', 'assets/shipParts/humanShip/bottomWings9.png');
+    game.load.image('bottomWings10', 'assets/shipParts/humanShip/bottomWings10.png');
+    
+    game.load.image('frontSpire1', 'assets/shipParts/humanShip/frontSpire1.png');
+    game.load.image('frontSpire2', 'assets/shipParts/humanShip/frontSpire2.png');
+    game.load.image('frontSpire3', 'assets/shipParts/humanShip/frontSpire3.png');
+    game.load.image('frontSpire4', 'assets/shipParts/humanShip/frontSpire4.png');
+    game.load.image('frontSpire5', 'assets/shipParts/humanShip/frontSpire5.png');
+    game.load.image('frontSpire6', 'assets/shipParts/humanShip/frontSpire6.png');
+    game.load.image('frontSpire7', 'assets/shipParts/humanShip/frontSpire7.png');
+    game.load.image('frontSpire8', 'assets/shipParts/humanShip/frontSpire8.png');
+    game.load.image('frontSpire9', 'assets/shipParts/humanShip/frontSpire9.png');
+    game.load.image('frontSpire10', 'assets/shipParts/humanShip/frontSpire10.png');
+    
+    game.load.image('hull1', 'assets/shipParts/humanShip/hull1.png');
+    game.load.image('hull2', 'assets/shipParts/humanShip/hull2.png');
+    game.load.image('hull3', 'assets/shipParts/humanShip/hull3.png');
+    game.load.image('hull4', 'assets/shipParts/humanShip/hull4.png');
+    game.load.image('hull5', 'assets/shipParts/humanShip/hull5.png');
+    game.load.image('hull6', 'assets/shipParts/humanShip/hull6.png');
+    game.load.image('hull7', 'assets/shipParts/humanShip/hull7.png');
+    game.load.image('hull8', 'assets/shipParts/humanShip/hull8.png');
+    game.load.image('hull9', 'assets/shipParts/humanShip/hull9.png');
+    game.load.image('hull10', 'assets/shipParts/humanShip/hull10.png');
+    
+    game.load.image('tailSpires1', 'assets/shipParts/humanShip/tailSpire1.png');
+    game.load.image('tailSpires2', 'assets/shipParts/humanShip/tailSpire2.png');
+    game.load.image('tailSpires3', 'assets/shipParts/humanShip/tailSpire3.png');
+    game.load.image('tailSpires4', 'assets/shipParts/humanShip/tailSpire4.png');
+    game.load.image('tailSpires5', 'assets/shipParts/humanShip/tailSpire5.png');
+    game.load.image('tailSpires6', 'assets/shipParts/humanShip/tailSpire6.png');
+    game.load.image('tailSpires7', 'assets/shipParts/humanShip/tailSpire7.png');
+    game.load.image('tailSpires8', 'assets/shipParts/humanShip/tailSpire8.png');
+    game.load.image('tailSpires9', 'assets/shipParts/humanShip/tailSpire9.png');
+    game.load.image('tailSpires10', 'assets/shipParts/humanShip/tailSpire10.png');
+    
+    game.load.image('topGunner1', 'assets/shipParts/humanShip/topGunner1.png');
+    game.load.image('topGunner2', 'assets/shipParts/humanShip/topGunner2.png');
+    game.load.image('topGunner3', 'assets/shipParts/humanShip/topGunner3.png');
+    game.load.image('topGunner4', 'assets/shipParts/humanShip/topGunner4.png');
+    game.load.image('topGunner5', 'assets/shipParts/humanShip/topGunner5.png');
+    game.load.image('topGunner6', 'assets/shipParts/humanShip/topGunner6.png');
+    game.load.image('topGunner7', 'assets/shipParts/humanShip/topGunner7.png');
+    game.load.image('topGunner8', 'assets/shipParts/humanShip/topGunner8.png');
+    game.load.image('topGunner9', 'assets/shipParts/humanShip/topGunner9.png');
+    game.load.image('topGunner10', 'assets/shipParts/humanShip/topGunner10.png');
+    
+    game.load.image('windScreen1', 'assets/shipParts/humanShip/windScreen1.png');
+    game.load.image('windScreen2', 'assets/shipParts/humanShip/windScreen2.png');
+    game.load.image('windScreen3', 'assets/shipParts/humanShip/windScreen3.png');
+    game.load.image('windScreen4', 'assets/shipParts/humanShip/windScreen4.png');
+    game.load.image('windScreen5', 'assets/shipParts/humanShip/windScreen5.png');
+    game.load.image('windScreen6', 'assets/shipParts/humanShip/windScreen6.png');
+    game.load.image('windScreen7', 'assets/shipParts/humanShip/windScreen7.png');
+    game.load.image('windScreen8', 'assets/shipParts/humanShip/windScreen8.png');
+    game.load.image('windScreen9', 'assets/shipParts/humanShip/windScreen9.png');
+    game.load.image('windScreen10', 'assets/shipParts/humanShip/windScreen10.png');
+    
+    game.load.image('wingGuns1', 'assets/shipParts/humanShip/wingGuns1.png');
+    game.load.image('wingGuns2', 'assets/shipParts/humanShip/wingGuns2.png');
+    game.load.image('wingGuns3', 'assets/shipParts/humanShip/wingGuns3.png');
+    game.load.image('wingGuns4', 'assets/shipParts/humanShip/wingGuns4.png');
+    game.load.image('wingGuns5', 'assets/shipParts/humanShip/wingGuns5.png');
+    game.load.image('wingGuns6', 'assets/shipParts/humanShip/wingGuns6.png');
+    game.load.image('wingGuns7', 'assets/shipParts/humanShip/wingGuns7.png');
+    game.load.image('wingGuns8', 'assets/shipParts/humanShip/wingGuns8.png');
+    game.load.image('wingGuns9', 'assets/shipParts/humanShip/wingGuns9.png');
+    game.load.image('wingGuns10', 'assets/shipParts/humanShip/wingGuns10.png');
+    
+    game.load.image('wings1', 'assets/shipParts/humanShip/wings1.png');
+    game.load.image('wings2', 'assets/shipParts/humanShip/wings2.png');
+    game.load.image('wings3', 'assets/shipParts/humanShip/wings3.png');
+    game.load.image('wings4', 'assets/shipParts/humanShip/wings4.png');
+    game.load.image('wings5', 'assets/shipParts/humanShip/wings5.png');
+    game.load.image('wings6', 'assets/shipParts/humanShip/wings6.png');
+    game.load.image('wings7', 'assets/shipParts/humanShip/wings7.png');
+    game.load.image('wings8', 'assets/shipParts/humanShip/wings8.png');
+    game.load.image('wings9', 'assets/shipParts/humanShip/wings9.png');
+    game.load.image('wings10', 'assets/shipParts/humanShip/wings10.png');
+    
+    
+    
+    
+    
     //battle gui
     game.load.image('battleBack', 'assets/battleBackground.png');
     game.load.image('battleBeam', 'assets/battleBeam.png');
@@ -166,7 +257,10 @@ function preload() {
     game.load.image('battleNavSmall', 'assets/battleNavSmall.png');
     game.load.image('battleShipDetailPane', 'assets/battleShipDetailPane.png');
     game.load.image('battleTarget', 'assets/battleTarget.png');
+    game.load.image('battleReticule', 'assets/battleReticule.png');
+    game.load.image('laserPink', 'assets/laserPink.png');
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
+    game.load.spritesheet('lightning', 'assets/lightning.png', 320, 80);
     
     // c/o opengameartuser Clint Bellanger
     game.load.spritesheet('sparks', 'assets/sparks.png', 64, 64);
@@ -175,7 +269,15 @@ function preload() {
     //  Load the Google WebFont Loader script
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     
-
+    //flare stuff
+    game.load.image('stationAgent', 'assets/spaceShipInterior1.png');
+    game.load.image('spaceShipInterior2', 'assets/spaceShipInterior2.png');
+    game.load.image('spaceShipInterior3', 'assets/spaceShipInterior3.png');
+    game.load.image('spaceStation', 'assets/spaceStation.png');
+    game.load.image('stationField', 'assets/stationField.png');
+    
+    game.load.image('chatBack', 'assets/chatBack.png');
+    game.load.json('applets', 'applets/applets.json');
 }
 
 function create() {
@@ -443,12 +545,43 @@ function runApplet() {
 }
 
 //this function loads the applet definition from the json file for the loadApplet() function.
+// function defineApplet_bak(loadID) {
+//     console.log("retrieving applet data");
+//     $.getJSON("applets/applets.json", function(appletData) 
+//     {
+//         var applet = [];
+//         var applet_count = appletData.applets.length;
+//         for (var i=0; i < applet_count; i++) 
+//         {
+//             if(appletData.applets[i].appletID == loadID)  //find the applet that matches the loadID
+//             {
+//                 var piece_count = appletData.applets[i].pieces.length;
+//                 for (var j=0; j < piece_count ; j++) 
+//                 {
+//                     //build up an applet array of the piece definitions
+//                     applet.push(appletData.applets[i].pieces[j]);
+//                     if ("doneStatement" in appletData.applets[i]) 
+//                     {
+//                         appletTests = decodeURIComponent(appletData.applets[i].doneStatement);
+//                     }
+//                     if ("summary" in appletData.applets[i]) 
+//                     {
+//                         appletSummary = appletData.applets[i].summary;
+//                     }
+//                 }
+//             }
+//         }
+    
+//     //now that I have an applet array consisting of all the pieces, I can load the applet
+//     loadApplet(applet)
+//     });
+// }
 
 function defineApplet(loadID) {
+    var appletData = game.cache.getJSON('applets');
+    
     console.log("retrieving applet data");
-    $.getJSON("applets/applets.json", function(appletData) 
-    {
-        var applet = [];
+    var applet = [];
         var applet_count = appletData.applets.length;
         for (var i=0; i < applet_count; i++) 
         {
@@ -473,7 +606,6 @@ function defineApplet(loadID) {
     
     //now that I have an applet array consisting of all the pieces, I can load the applet
     loadApplet(applet)
-    });
 }
 
 //This loads the widget pieces with applet behaviors in place
@@ -893,7 +1025,10 @@ function clearCurrentApplet()
             }   
         }
     
-    function updateUserData()
+    
+}
+
+function updateUserData()
     {
         if(networkStorage)
         {
@@ -912,9 +1047,6 @@ function clearCurrentApplet()
         }
    
     }
-}
-
-
 
 /*******************************************************************************
  *                               BUILD SECTION
@@ -1948,8 +2080,7 @@ function colorSwatch() {
     var bluFrequency = .1;
     var center = 255;
     var width = 0;
-
-
+ 
     //http://krazydad.com/tutorials/makecolors.php
     for (var i = 0; i < 32; ++i)
     {
