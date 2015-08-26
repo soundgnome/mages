@@ -269,15 +269,28 @@ function preload() {
     //  Load the Google WebFont Loader script
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     
+    //ship menu
+    game.load.image('shipMenuCombatButton', 'assets/shipMenuCombatButton.png');
+    game.load.image('shipMenuCommButton', 'assets/shipMenuCommButton.png');
+    game.load.image('shipMenuMiningButton', 'assets/shipMenuMiningButton.png');
+    game.load.image('shipMenuShipButton', 'assets/shipMenuShipButton.png');
+    game.load.image('shipMenuCombatPane', 'assets/shipMenuCombatPane.png');
+    game.load.image('shipMenuCommPane', 'assets/shipMenuCommPane.png');
+    game.load.image('shipMenuMiningPane', 'assets/shipMenuMiningPane.png');
+    game.load.image('shipMenuShipPane', 'assets/shipMenuShipPane.png');
+    
     //flare stuff
-    game.load.image('stationAgent', 'assets/spaceShipInterior1.png');
-    game.load.image('spaceShipInterior2', 'assets/spaceShipInterior2.png');
-    game.load.image('spaceShipInterior3', 'assets/spaceShipInterior3.png');
+    game.load.image('stationAgent', 'assets/portraits/stationAgent.png');
+    game.load.image('stationAgentMini', 'assets/portraits/stationAgentMini.png');
     game.load.image('spaceStation', 'assets/spaceStation.png');
     game.load.image('stationField', 'assets/stationField.png');
     
     game.load.image('chatBack', 'assets/chatBack.png');
+    game.load.image('logoEditConfirmBack', 'assets/logoEditConfirmBack.png');
+    game.load.image('logoEditConfirmButton', 'assets/logoEditConfirmButton.png');
+    game.load.image('hexCursor', 'assets/hexCursor.png');
     game.load.json('applets', 'applets/applets.json');
+    game.load.json('characters', 'characters.json');
 }
 
 function create() {
@@ -972,7 +985,7 @@ function clearCurrentApplet()
                 if (typeof currentUser.chronics === 'undefined')
                 { currentUser.chronics = [] }
                 
-                console.log("Enough chonics?: " + currentUser.chronics.length >= chronicsAllowed)
+                
                 if(getRandomInt(0,chronicFrequency) == 0 && currentUser.chronics.length > 1 ) //pull a chronic
                 {
                     console.log("adding a chronic")
@@ -1385,7 +1398,7 @@ function adjustNewPiece() {
         
         draggingPiece.events.onInputDown.add(buildRedragPiece, draggingPiece);
         draggingPiece.events.onInputUp.add(onFinishDrag, draggingPiece);
-        console.log(draggingPiece.events.onInputDown)
+
     }
 }
 
@@ -1775,8 +1788,6 @@ function listString(list) {
     var returnString = "[ ";
     for (var i = 0; i< list.length ; i++)
     {
-        console.log(list[i])
-        console.log(returnString)
         returnString += ' "' + list[i] + '" ';
         if(list.length-1 > i)
         {
@@ -1969,8 +1980,6 @@ function modulus(dividend, divisor)
 
 function lineDistance( point1, point2 )
     {
-    console.log(point1)
-    console.log(point2)
       var xs = 0;
       var ys = 0;
       
@@ -1994,60 +2003,6 @@ function fixedEncodeURIComponent (str) {
 }
 
 
-
-// var colorSwatchHandle
-// function colorSwatch() {
-//     if (typeof colorSwatchHandle === 'undefined') 
-//     { } else
-//     {
-//       colorSwatchHandle.destroy()  
-//     }
-//     var boxX = 5
-//     var boxY = 545
-//     colorSwatchHandle = game.add.group();
-//     var swatchBox = game.add.graphics(boxX, boxY);
-//     swatchBox.beginFill(0xD0D0D0);
-//     swatchBox.lineStyle(2, 0x000000, 1);
-//     swatchBox.drawRect(0, 0, 335, 50);
-//     swatchBox.endFill();
-//     colorSwatchHandle.add(swatchBox)
-//     //swatchBox.clear()
-    
-//     var swatchColorBox
-//     var swatchColorSprite
-//     for(var i = 0; i<8 ; i++)
-//     {
-//         swatchColorBox = game.add.graphics(0, 0);
-        
-//         if(i<7)
-//         {
-//             swatchColorBox.beginFill(rainbow[i]);    
-//         } else
-//         {
-//             swatchColorBox.beginFill(0x000000)
-//         }
-//         swatchColorBox.lineStyle(2, 0x000000, 1);
-//         swatchColorBox.drawRect(0, 0, 30, 30);
-//         swatchColorSprite = game.add.sprite( boxX+10+(i*40),boxY+10,swatchColorBox.generateTexture() ) 
-//         if(i<7)
-//         {
-//             swatchColorSprite.color = rainbow[i];    
-//         } else
-//         {
-//             swatchColorSprite.color = 0x000000;
-//         }
-//         colorSwatchHandle.add(swatchColorSprite ) 
-//         swatchColorBox.clear()
-//     }
-//     colorSwatchHandle.forEach(function(item) { 
-//         if(item.color >= 0)
-//         {
-//           item.inputEnabled='true';
-//             item.events.onInputDown.add(colorSwatchColorClick, this);  
-//         }
-            
-//         });
-// }
 
 var colorSwatchHandle;
 function colorSwatch() {
@@ -2091,11 +2046,11 @@ function colorSwatch() {
        tints.push(RGB2Color(red,green,blue))
     }
 
-    console.log(tints)
+
     for(var i = 0; i<9 ; i++)
     {
         
-        console.log("rowLength: " + rowLength)
+
         if(i==0)
         {
             rowLength=2;   
@@ -2109,14 +2064,14 @@ function colorSwatch() {
         
         for (var j = 0; j < rowLength; j++)
         {
-            swatchColorHex = game.add.graphics(0, 0);
-            console.log(tints[tintNumber])
+            var swatchColorHex = game.add.graphics(0, 0);
+
             swatchColorHex.beginFill(tints[tintNumber])
             var currentTint = tints[tintNumber];
             tintNumber++;
     
             swatchColorHex.lineStyle(1, 0x000000, 1);
-            points = [  new Phaser.Point(10,0),
+            var points = [  new Phaser.Point(10,0),
                         new Phaser.Point(5,-9),
                         new Phaser.Point(-5,-9),
                         new Phaser.Point(-10,0),

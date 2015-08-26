@@ -13,58 +13,60 @@ var arenaGridSpacing = 35;
 var arenaRightEdge = arenaLeftEdge + 12*arenaGridSpacing
 var arenaBottomEdge = arenaTopEdge + 12*arenaGridSpacing
 
+function definePlayerShip()
+{
+    //player ship stuff
+    if(typeof currentUser.ship === 'undefined')
+    {
+        currentUser.ship = {    hp: { now: 40 , total: 40 } , 
+                                power: { now: 40 , total: 40 } , 
+                                torpedoes: 5,
+                                rgb:[255,255,255] ,
+                                laserActivated: true ,
+                                torpedoActivated: false ,
+                                hackArrayActivated: false ,
+                                laserLevel: 0,
+                                torpedoLevel: 0,
+                                hackArrayLevel: 0,
+                                heatShieldLevel: 0,
+                                blastShieldLevel: 0,
+                                firewallLevel: 0,
+                                weaponsDisabled: 0,
+                                };
+    }
+    
+    var levelScaleAdjustment = ((Math.floor(currentUser.challengesMastered/3))/80*.5)
+    battleShips.push(game.add.sprite(arenaLeftEdge + 6*arenaGridSpacing, arenaTopEdge + 12*arenaGridSpacing, buildShip(0.5+levelScaleAdjustment,[parseInt(currentUser.ship.rgb[0]),parseInt(currentUser.ship.rgb[1]),parseInt(currentUser.ship.rgb[2])] , getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1)) ))
+    battleShips[0].moving = false;
+    battleShips[0].hp = currentUser.ship.hp;
+    battleShips[0].power = currentUser.ship.power;
+    
+    battleShips[0].torpedoActivated = currentUser.ship.torpedoActivated;
+    battleShips[0].laserActivated = currentUser.ship.laserActivated;
+    battleShips[0].hackArrayActivated = currentUser.ship.hackArrayActivated;
+    battleShips[0].laserLevel = currentUser.ship.laserLevel;
+    battleShips[0].torpedoLevel = currentUser.ship.torpedoLevel;
+    battleShips[0].hackArrayLevel = currentUser.ship.hackArrayLevel;
+    battleShips[0].heatShieldLevel = currentUser.ship.heatShieldLevel;
+    battleShips[0].blastShieldLevel = currentUser.ship.blastShieldLevel;
+    battleShips[0].firewallLevel = currentUser.ship.firewallLevel;
+    battleShips[0].torpedoes = currentUser.ship.torpedoes;
+            
+
+}
 function continueBattle(questID)
 {
     
     if ( battleBackground == null) //redraw the battle arena
     {
         
-        //player ship stuff
-        if(battleShips.length == 0)  //no player ship is created yet
-        {
-            if(typeof currentUser.ship === 'undefined')
-            {
-                currentUser.ship = {    hp: { now: 40 , total: 40 } , 
-                                        power: { now: 40 , total: 40 } , 
-                                        torpedoes: 5,
-                                        rgb:[255,255,255] ,
-                                        laserActivated: true ,
-                                        torpedoActivated: false ,
-                                        hackArrayActivated: false ,
-                                        laserLevel: 0,
-                                        torpedoLevel: 0,
-                                        hackArrayLevel: 0,
-                                        heatShieldLevel: 0,
-                                        blastShieldLevel: 0,
-                                        firewallLevel: 0,
-                                        weaponsDisabled: 0,
-                                        };
-            }
-            
-            var levelScaleAdjustment = ((Math.floor(currentUser.challengesMastered/3))/80*.5)
-            battleShips.push(game.add.sprite(arenaLeftEdge + 6*arenaGridSpacing, arenaTopEdge + 12*arenaGridSpacing, buildShip(0.5+levelScaleAdjustment,[parseInt(currentUser.ship.rgb[0]),parseInt(currentUser.ship.rgb[1]),parseInt(currentUser.ship.rgb[2])] , getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1)) ))
-            battleShips[0].moving = false;
-            battleShips[0].hp = currentUser.ship.hp;
-            battleShips[0].power = currentUser.ship.power;
-            
-            battleShips[0].torpedoActivated = currentUser.ship.torpedoActivated;
-            battleShips[0].laserActivated = currentUser.ship.laserActivated;
-            battleShips[0].hackArrayActivated = currentUser.ship.hackArrayActivated;
-            battleShips[0].laserLevel = currentUser.ship.laserLevel;
-            battleShips[0].torpedoLevel = currentUser.ship.torpedoLevel;
-            battleShips[0].hackArrayLevel = currentUser.ship.hackArrayLevel;
-            battleShips[0].heatShieldLevel = currentUser.ship.heatShieldLevel;
-            battleShips[0].blastShieldLevel = currentUser.ship.blastShieldLevel;
-            battleShips[0].firewallLevel = currentUser.ship.firewallLevel;
-            battleShips[0].torpedoes = currentUser.ship.torpedoes;
-            
-        } 
-        console.log(battleShips[0].power.now )
+        
+
         var rechargeRate = 5;
         if(battleShips[0].power.total-battleShips[0].power.now > 5)
         {
             battleShips[0].power.now = parseInt(battleShips[0].power.now)+rechargeRate
-            console.log(battleShips[0].power.now )
+
         } else 
         {
             battleShips[0].power.now=battleShips[0].power.total //top it up
@@ -256,7 +258,7 @@ function getPlayerShip(level)  //changes the textures one at a time, 80 levels i
                     windScreen:     { label:'windScreenDefault',     exists:false,  offsetX: 0,    offsetY:  25,   mirror:false,    texture: null}
                     }
                 };
-    console.log(ship)
+
     for (var i = 0; i < level ; i ++)
     {
         switch(i%8) {
@@ -511,11 +513,10 @@ function showPlayerAttack() {
                       
             function beamStrike(start, finish, width, primary)
             {
-                console.log("start: " + start)
+
                 var newAngle = angleBetweenPoints(start, finish )
                 var beam = game.add.sprite(start.x, start.y, 'laserPink');
-               
-                console.log(beam)
+
                 var distance = lineDistance(start, finish);
                 beam.scale.setTo(width,0)
                 beam.anchor.setTo(0.5,1)
@@ -524,7 +525,7 @@ function showPlayerAttack() {
                 beam.battleTargetting = battleTargetting;
                 beam.primary = primary;
                 beam.buff = getBeamBuff();
-                console.log(beam.buff)
+
                 var tweenLength = game.add.tween(beam.scale).to( { x: width, y: distance/600 }, distance/2, Phaser.Easing.Linear.In, true);
                  
                 tweenLength.onComplete.add(holdBeam); 
@@ -553,7 +554,7 @@ function showPlayerAttack() {
                 }
                 function holdBeam()
                 {
-                    console.log("holding beacm")
+
                     game.time.events.add(Phaser.Timer.SECOND * 1.5, shrinkBackBeam, this);
                     if(beam.hit)  //veer the beams away from the target
                     {
@@ -580,7 +581,6 @@ function showPlayerAttack() {
                 function shrinkBackBeam()
                 {
                     //this looks neat
-                    console.log("shrinking back")
                     var tweenLocation = game.add.tween(beam.anchor).to( { x: 0.5, y: 2 }, distance/2, Phaser.Easing.Linear.In, true);
                     var tweenLength = game.add.tween(beam.scale).to( { x: width, y: 0 }, distance/2, Phaser.Easing.Linear.In, true);
                     tweenLength.onComplete.add(finishBeam); 
@@ -590,7 +590,6 @@ function showPlayerAttack() {
                 {
                     if(beam.primary)  //only one beam ends attack
                     {
-                        console.log("adding finish animation")
                       finishPlayerAttackAnimation(beam)  
                     }
                     
@@ -638,7 +637,6 @@ function showPlayerAttack() {
                     } 
                     
                     //This modifier is based on the target's totalHP, not the damage already dealt
-                    console.log(projectile.buff)
                     if(typeof projectile.buff !== 'undefined')
                     {
                         
@@ -649,7 +647,6 @@ function showPlayerAttack() {
                     console.log("total damage: " + damage)
                     battleShips[projectile.battleTargetting].hp.now -= damage;
                     hpBarHandle[projectile.battleTargetting].destroy();
-                    console.log(battleShips[projectile.battleTargetting].hp.now)
                     
                     if(battleShips[projectile.battleTargetting].hp.now <= 0 )
                     {
@@ -713,7 +710,6 @@ function showPlayerAttack() {
             explosion.anchor.setTo(0.5,0.5)
             var explosionReference = explosion.animations.add('explode');
             explosion.events.onAnimationComplete.add(function(){
-                console.log("explosion done")
                 explosion.destroy()
                 }, this);
             explosionReference.play('kaboom', 30, false, true);    
@@ -725,7 +721,6 @@ function showPlayerAttack() {
           battleTargetting = false;  
         }
         
-        console.log(projectile.hit==true?"HIT!":"MISS!") 
         
         function tintShip()
         {
@@ -799,15 +794,15 @@ function lootCheck()
     lootOverlay.add(lootBox)
     
     
-    var lootedCredits = (currentUser.challengesMastered/3)*getRandomInt(30,50)/10+2
+    var lootedCredits = ((currentUser.challengesMastered/3)*getRandomInt(30,50)/10+2).toFixed(0);
 
     var creditLootText = game.add.text(125,175,"You scavenged " + lootedCredits + " credits.")
     creditLootText.font = 'Michroma'
     creditLootText.fontSize = 16
     creditLootText.fill='white'
     lootOverlay.add(creditLootText)
-    if(typeof currentUser.credits === 'undefined') { currentUser.credits =0 }
-    currentUser.credits +=lootedCredits;
+    if(typeof currentUser.credits === 'undefined') { currentUser.credits = 0 }
+    currentUser.credits = parseInt(currentUser.credits) + parseInt(lootedCredits);
     updateUserData()  //in mages.js
     
     
@@ -847,25 +842,18 @@ function lootCheck()
     {
         continueText.fontSize = 17;
         continueText.x -= 5;
-        console.log("over")
     }
     
     function continueButtonOut()
     {
         continueText.fontSize = 16;
         continueText.x += 5;
-        console.log("out")
     }
 }
 
 var enemyAttackSequenceComplete = false;
 function showEnemyAttacks(enemyPosition) {
-    console.log(enemyPosition)
-
-    
     var nextEnemy = enemyPosition+1;
-    console.log("nextEnemy: " + nextEnemy + " battleShips.length: " + battleShips.length)
-    console.log(nextEnemy < battleShips.length)
     if(nextEnemy <= battleShips.length)  //still enemies to attack
     {
         if(typeof battleShips[enemyPosition].turnsInactive === 'undefined')
@@ -879,7 +867,6 @@ function showEnemyAttacks(enemyPosition) {
             showEnemyAttacks(enemyPosition+1) //skip it, he's dead
         } else if(battleShips[enemyPosition].turnsInactive > 0)
         {
-            console.log("inactive")
                 if(nextEnemy <= battleShips.length)
                 {
                     console.log("Skipping an idle enemy");
@@ -938,7 +925,6 @@ function showEnemyAttacks(enemyPosition) {
                         if(enemyNumber != enemyPosition)  //don't check to see if we occupy the space
                         {
                             var newPosition = {x: battleShips[enemyPosition].gridLocation.x+xPos , y: battleShips[enemyPosition].gridLocation.y+yPos}
-                            console.log("enemyX: " + battleShips[enemyNumber].gridLocation.x + " enemyY: " + battleShips[enemyNumber].gridLocation.y  + " newPosX: " + newPosition.x + " newPosY: " + newPosition.y )
                             if(Math.abs(battleShips[enemyNumber].gridLocation.x - newPosition.x) <= enemyBoundary && Math.abs(battleShips[enemyNumber].gridLocation.y - newPosition.y) <= enemyBoundary)
                             {
                                 if(battleShips[enemyNumber].dead != true)
@@ -1095,7 +1081,6 @@ function showEnemyAttacks(enemyPosition) {
         
         function enemyAttack(type)
         {
-            console.log(type)
             var newAngle = angleBetweenPoints(battleShips[0], {x:battleShips[enemyPosition].x,y:battleShips[enemyPosition].y} )+270
             if(Math.abs(battleShips[enemyPosition].angle-newAngle)>180)
             {
@@ -1113,10 +1098,7 @@ function showEnemyAttacks(enemyPosition) {
         
         function enemyProjectileMove(type)
         {
-            console.log(type)
-            
-            
-            
+
             switch(type) {
             case 'torpedo':
                     projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'alienWingGuns2');
@@ -1133,7 +1115,7 @@ function showEnemyAttacks(enemyPosition) {
                     projectile.type = type;
                     projectile.hit = (getRandomInt(0,1)==1);
                     projectile.scale.setTo(0.1,0.3)
-                    projectile.anchor.setTo(0.5,0.8)
+                    projectile.anchor.setTo(0.5,0.5)
                     var lightningReference = projectile.animations.add('strike');
                     lightningReference.play(20, true, false);
                     var tweenLength = game.add.tween(projectile.scale).to( { x: 0.3, y: 0.3 }, 500, Phaser.Easing.Quartic.Out, true);
@@ -1321,7 +1303,6 @@ function showEnemyAttacks(enemyPosition) {
         
             function holdBeam()
             {
-                console.log("holding beacm")
                 game.time.events.add(Phaser.Timer.SECOND * 1.5, shrinkBackBeam);
                 if(beam.hit)  //veer the beams away from the target
                 {
@@ -1348,7 +1329,6 @@ function showEnemyAttacks(enemyPosition) {
             function shrinkBackBeam()
             {
                 //this looks neat
-                console.log("shrinking back")
                 cycleEnemyAttacks();
                 var tweenLocation = game.add.tween(beam.anchor).to( { x: 0.5, y: 2 }, distance/2, Phaser.Easing.Linear.In, true);
                 var tweenLength = game.add.tween(beam.scale).to( { x: width, y: 0 }, distance/2, Phaser.Easing.Linear.In, true);
@@ -1447,7 +1427,6 @@ var battleReticule = null
 var targetButton = null;
 var enemyClickReady = true;
 function enemyShipClick(item) {
-    console.log("click")
     var reticuleYOffset = 4*item.height/55
     if(enemyAttackSequenceComplete || battleFirstRound )
     {
@@ -1542,9 +1521,7 @@ function enemyShipClick(item) {
 
             }
             if(reticuleLineLengthScale<0.01){reticuleLineLengthScale=0}
-            console.log("reticuleLineXOffset: " + reticuleLineXOffset)
-            console.log("reticuleLineYOffset: " + reticuleLineYOffset)
-            console.log("reticuleLineLengthScale: " + reticuleLineLengthScale)
+
             if(fresh)
             {
                 battleReticule.lines[i] = game.add.sprite( battleReticule.x+reticuleLineXOffset , battleReticule.y+reticuleLineYOffset , line.generateTexture())    
@@ -1556,7 +1533,7 @@ function enemyShipClick(item) {
                 game.add.tween( battleReticule.lines[i]).to( { x: battleReticule.x+reticuleLineXOffset, y: battleReticule.y+reticuleLineYOffset}, 300, Phaser.Easing.Quartic.In, true);
                 game.add.tween( battleReticule.lines[i].scale).to( { x: reticuleLineLengthScale, y: 1}, 300, Phaser.Easing.Quartic.In, true);
             }
-            console.log("actualWidth: " + battleReticule.lines[i].width)
+
             
         }
         line.destroy();
@@ -1576,7 +1553,7 @@ function enemyShipClick(item) {
 
                 battleReticule.lines.forEach(function(line){
                     line.destroy();
-                    console.log("destroying line : " + line)
+
                 });
                 battleReticule.destroy()
                 
@@ -1650,33 +1627,13 @@ function enemyShipClick(item) {
                 targetButton.events.onInputOver.add(battleTargetOver, item);
                 targetButton.events.onInputOut.add(battleTargetOut, item);
                 battleShipDetailPane.addChild(targetButton);
-                console.log("ready to target")
+
             }
             function battleTargetClick(targetButton)
             {
-                hpBarHandle[battleShipDetailPane.enemyID].destroy();
-                drawHPBar(battleShipDetailPane.enemyID)
-                battleTargetting = battleShipDetailPane.enemyID;
-                battleShipDetailPane.destroy(true);
-                battleShipDetailPane = null
-                targetButton = null;
-                if(battleShipDetailPane != null)
-                {
-                    
-                    battleShipDetailPane.destroy(true);
-                    battleShipDetailPane=null;
-                    targetButton = null;
-                }
-                if(battleReticule != null)
-                {
-                    battleReticule.lines.forEach(function(item){
-                                item.destroy();
-                            });
-                    battleReticule.destroy();
-                    battleReticule = null;
-                }
+                
                 //check range on laser weapon
-                var minLaserRange = 9;
+                var minLaserRange = 6;
                 var rangePerLaserLevel = 0.5;
                 
                 //if(weaponSelected == 1  && lineDistance(battleShips[0], battleShips[battleTargetting]) > ((battleShips[0].laserLevel*rangePerLaserLevel+minLaserRange)*arenaGridSpacing))
@@ -1691,7 +1648,27 @@ function enemyShipClick(item) {
                     outOfPower()
                 } else
                 {
-                    console.log("attack!:" + targetButton)
+                    hpBarHandle[battleShipDetailPane.enemyID].destroy();
+                    drawHPBar(battleShipDetailPane.enemyID)
+                    battleTargetting = battleShipDetailPane.enemyID;
+                    battleShipDetailPane.destroy(true);
+                    battleShipDetailPane = null
+                    targetButton = null;
+                    if(battleShipDetailPane != null)
+                    {
+                        
+                        battleShipDetailPane.destroy(true);
+                        battleShipDetailPane=null;
+                        targetButton = null;
+                    }
+                    if(battleReticule != null)
+                    {
+                        battleReticule.lines.forEach(function(item){
+                                    item.destroy();
+                                });
+                        battleReticule.destroy();
+                        battleReticule = null;
+                    }
 
                     playerAttackDone = false;
                     battleOrders = 'complete'
@@ -1701,16 +1678,19 @@ function enemyShipClick(item) {
                 {
                     //put up a temporary out of range warning that fades after a few seconds
                     console.log("out of range")
+                    battleAlert("The target is out of range.")
                 }
                 function outOfTorpedoes()
                 {
                     //put up a temporary out of range warning that fades after a few seconds
                     console.log("out of torpedoes")
+                    battleAlert("You are out of torpedoes.")
                 }
                 function outOfPower()
                 {
                     //put up a temporary out of range warning that fades after a few seconds
                     console.log("out of power")
+                    battleAlert("You are out of power.")
                 }
 
             }
@@ -1821,7 +1801,6 @@ function checkPlayerMove(xSpaces, ySpaces)
                 if(Math.round(Math.abs(battleShips[0].gridLocation.y + ySpaces - battleShips[i].gridLocation.y ) <= enemyBoundary) )
                 {
                     pathFree = false
-                    console.log("blocked by enemy " + i)
                 }    
             }
         }
@@ -1871,7 +1850,6 @@ function movePlayerAnimation(xSpaces, ySpaces)
 }
 
 function battleButtonOver(item){
-    console.log(item.buttonID)
     if(battleShips[0].weaponsDisabled == 0  || item.buttonID>3)
     {
         if(battleTargetting == false && (enemyAttackSequenceComplete || battleFirstRound ))
@@ -1960,7 +1938,6 @@ function cameraShake(shakes) {
     {
         totalShakes = shakes;
     }
-    console.log("shaking " + shakes + " times")
     if(shakes > 0)
     {
         var min = -100*shakes/totalShakes;
@@ -2033,16 +2010,12 @@ function drawHPBar(shipID, scale, differentLocation) {  //different location is 
     }
     if(typeof differentLocation === 'undefined')
     {
-        console.log(shipID)
         barPoint = new Phaser.Point(battleShips[shipID].x-scale*25,battleShips[shipID].y+scale*30*(battleShips[shipID].height/50));
     } else
     {
         barPoint = new Phaser.Point(differentLocation.x-199,differentLocation.y+140);  //why?
     }
-    console.log("shipID: " + shipID)
-    console.log("scale: " + shipID)
-    console.log("differentLocation: " + differentLocation)
-    console.log("barPoint: " + barPoint)
+
 
     
     hpBarHandle[shipID] = game.add.group();
@@ -2099,11 +2072,7 @@ function testRollsVsPlayer()
     }
     
     var avg = sum/record.length;
-    console.log("enemies: " + enemies)
-    console.log("upperRange: " + upperRange)
-    console.log("lowerRange: " + lowerRange)
-    console.log("1/"+Math.round(1/(avg) ) + " damage per hit.")
-    console.log("Player lives: " + Math.round(1/(avg*enemies)) + " rounds.")
+
 }
 
 function testRollsVsEnemy()
@@ -2122,20 +2091,16 @@ function testRollsVsEnemy()
     }
     
     var avg = sum/record.length;
-    console.log("enemies: " + enemies)
-    console.log("upperRange: " + upperRange)
-    console.log("lowerRange: " + lowerRange)
-    console.log("1/"+Math.round(enemies/(avg) ) + " damage per hit.")
-    console.log("Battle lasts: " + (enemies/avg).toFixed(1) + " rounds.")
+
 }
 
 
 
 
 
-function testMovement()
+function parkingMovement()
 {
-    defineCharacters();
+    // defineCharacters();
     var starsSprite = game.add.sprite(400,300, 'starfield');
     starsSprite.anchor.setTo(0.5,0.5)
     var spaceStation = game.add.group();
@@ -2171,7 +2136,7 @@ function testMovement()
 
         });
         
-    var playerSprite = game.add.sprite(400, 300,  buildShip(1,[255,255,255],getRandomHumanShip()));
+    var playerSprite = game.add.sprite(400, 300,  buildShip(1,[255,255,255],getPlayerShip(currentUser.challengesMastered/3+1))); //set to currentUser.challengesMastered/3+1
     
     var radius = 700;
     
@@ -2202,7 +2167,6 @@ function testMovement()
         playerSprite.angle = angleBetweenPoints(spaceStation,playerSprite)+180
         if(iterations < parkingSpots[emptySpot].iterations)
         {
-            console.log()
             game.time.events.add(Phaser.Timer.SECOND/frameRate, startMovement, this);
             if(parkingSpots[emptySpot].iterations-iterations<frameRate*1)
             {
@@ -2213,8 +2177,7 @@ function testMovement()
         }  else if(!parking)
         {
             parking=true;
-            // console.log("x: " + (spaceStation.x+parkingSpots[emptySpot].x) )
-            // console.log("y: " + (spaceStation.y+parkingSpots[emptySpot].y) )
+
             var finalSpotCoordinates = new Phaser.Point((spaceStation.x-460+parkingSpots[emptySpot].x), (spaceStation.y-355+parkingSpots[emptySpot].y))
             
             var newAngle=angleBetweenPoints(playerSprite, finalSpotCoordinates)+90
@@ -2227,10 +2190,7 @@ function testMovement()
         {
             var newX = spaceStation.x+400-(spaceStation.x-460*1.5+parkingSpots[emptySpot].x*1.5)+parkingSpots[emptySpot].finalOffset.x
             var newY = spaceStation.y+300-(spaceStation.y-355*1.5+parkingSpots[emptySpot].y*1.5)+parkingSpots[emptySpot].finalOffset.y
-            console.log(newX)
-            console.log(newY)
-            console.log(spaceStation.x)
-            console.log(spaceStation.y)
+
              var moveStation = game.add.tween(spaceStation).to( {x: newX , y: newY}, 1500, Phaser.Easing.Sinusoidal.Out, true);
              game.add.tween(playerSprite).to( {angle:parkingSpots[emptySpot].angle-360}, 1500, Phaser.Easing.Sinusoidal.Out, true);
              moveStation.onComplete.add(callStationAgent)
@@ -2238,11 +2198,36 @@ function testMovement()
         
         function callStationAgent()
         {
-            starsSprite.destroy();
-            spaceStation.destroy();
-            playerSprite.destroy();
+            // starsSprite.destroy();
+            // spaceStation.destroy();
+            // playerSprite.destroy();
+            spaceStation.orginalX = spaceStation.x
+            spaceStation.orginalY = spaceStation.y
+            playerSprite.orginalX = playerSprite.x
+            playerSprite.orginalY = playerSprite.y
             
-            createConversation('stationAgent');
+            shakeStation();
+            var spaceStationScene = game.add.group()
+            spaceStationScene.add(starsSprite)
+            spaceStationScene.add(spaceStation)
+            spaceStationScene.add(playerSprite)
+            
+            buildShipMenu(spaceStationScene)
+            
+            //createConversation('stationAgent');
+        }
+        
+        function shakeStation() {
+            var min = -2;
+            var max = 2;
+            var newX =  Math.floor(Math.random() * (max - min + 1)) + min;
+            var newY =  Math.floor(Math.random() * (max - min + 1)) + min;
+            var duration = getRandomInt(1000,2000)
+            spaceStation.shakeTween = game.add.tween(spaceStation).to( { x: spaceStation.orginalX+newX, y: spaceStation.orginalY + newY}, duration, Phaser.Easing.Linear.Out, true);
+            game.add.tween(playerSprite).to( { x: playerSprite.orginalX+newX, y: playerSprite.orginalY + newY}, duration, Phaser.Easing.Linear.Out, true);
+            spaceStation.shakeTween.onComplete.add(shakeStation);      
+
+          
         }
 
 
@@ -2252,3 +2237,644 @@ function testMovement()
     
 }
 
+function buildShipMenu(spaceStationScene)
+{
+    var buttons = []
+    var menuAlpha = 0.8
+    var menuItems = game.add.group();
+    buttons.push(game.add.sprite(10,50,  'shipMenuCombatButton'));
+    buttons.push(game.add.sprite(10,190, 'shipMenuShipButton'));
+    buttons.push(game.add.sprite(10,330, 'shipMenuCommButton'));
+    buttons.push(game.add.sprite(10,470, 'shipMenuMiningButton'));
+    
+    var panelTextures = ['shipMenuCombatPane', 'shipMenuShipPane'  , 'shipMenuCommPane' , 'shipMenuMiningPane' ]
+    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'MINING']
+    var buttonCount = 0;
+    buttons.forEach(function(button){
+            menuItems.add(button)
+            button.id = buttonCount;
+            button.paneLoaded = false;
+            button.scale.setTo(5/6,5/6)
+            button.alpha=menuAlpha
+            button.inputEnabled='true';
+            button.events.onInputDown.add(buttonClick, button);
+            
+            var buttonLabel = game.add.text(button.x+button.width/2,button.y+button.height/2, buttonLabels[buttonCount] )
+            button.group = game.add.group();
+            button.group.add(button)
+            button.group.add(buttonLabel)
+            buttonLabel.anchor.setTo(0.5,0.5);
+            buttonLabel.font = 'Michroma';
+            buttonLabel.fontSize = 18;
+            buttonLabel.fill = '#FFFFFF';
+            buttonLabel.align = 'center';
+            buttonCount++;
+        });
+    
+    function buttonClick(button)
+    {
+        buttons.forEach(function(button){
+                if(button.paneLoaded == true)
+                {
+                    if(typeof button.pane.group !== 'undefined')
+                    {
+                        button.pane.group.destroy();
+                    }
+
+                    button.pane.destroy();
+                    button.paneLoaded == false
+                }
+            });
+
+        button.paneLoaded = true;
+        button.pane = game.add.sprite(button.x+148,button.y, panelTextures[button.id])
+        button.pane.alpha=menuAlpha
+        if(button.id == 3)
+        {
+            button.pane.anchor.setTo(0,1)
+            button.pane.y += button.height
+            button.pane.x += 6
+        }
+        button.pane.scale.setTo(0,5/6)
+        var tweenScale = game.add.tween(button.pane.scale).to( { x:5/6 , y:5/6}, 500, Phaser.Easing.Cubic.In, true);
+        game.add.tween(button.pane).to( { x:button.pane.x-11 , y:button.pane.y}, 500, Phaser.Easing.Cubic.In, true);
+        tweenScale.onComplete.add(populatePane)
+        game.world.bringToTop(button.group);
+        
+        function populatePane()
+        {
+            var logo = [];
+            var shipShadowModel;
+            var shipModel;
+            var swatchCursor = null;
+            button.pane.group = game.add.group();
+            var swatchArray = [];
+            var swatchCursorMoving = false;
+            switch(button.id) 
+            {
+                case 0:
+                    //Combat
+                    startBattle()
+                    console.log("Combat stuff here")
+                    break;
+                case 1:
+                    //Ship
+                    shipShadowModel= game.add.sprite(650,300,battleShips[0].generateTexture())
+                    shipShadowModel.anchor.setTo(0.45,0.45)
+                    shipShadowModel.tint = 0x000000
+                    shipShadowModel.alpha=0.5
+                    button.pane.group.add(shipShadowModel)
+                    
+                    shipModel= game.add.sprite(650,300,battleShips[0].generateTexture())
+                    shipModel.anchor.setTo(0.5,0.5)
+                    button.pane.group.add(shipModel)
+                    
+
+                    var shipLevelLabels = ['LASERS:' , 'TORPEDOES:' , 'HACK ARRAY:' , 'HEAT SHIELD:' , 'BLAST SHIELD:' , 'FIREWALL:']
+                    var shipLevelKeys = ['laserLevel', 'torpedoLevel' , 'hackArrayLevel' , 'heatShieldLevel' , 'blastShieldLevel' , 'firewallLevel']
+                    var shipLevelLocations = [{x:400,y:450},{x:400,y:490},{x:400,y:530},{x:650,y:450},{x:650,y:490},{x:650,y:530}]
+                    
+                    drawShipLevelBar(shipLevelLocations[0], shipLevelKeys[0] , shipLevelLabels[0])
+                    
+                    if(currentUser.ship.torpedoActivated == 'true')
+                    {
+                        drawShipLevelBar(shipLevelLocations[1], shipLevelKeys[1] , shipLevelLabels[1])    
+                    }
+                    
+                    if(currentUser.ship.hackArrayActivated == 'true')
+                    {
+                        drawShipLevelBar(shipLevelLocations[2], shipLevelKeys[2] , shipLevelLabels[2])    
+                    }
+                    
+                    for (var i = 3 ; i < 6 ; i++)
+                    {
+                        drawShipLevelBar(shipLevelLocations[i], shipLevelKeys[i] , shipLevelLabels[i])
+                    }
+                    
+                    
+                    logoMenu('display');
+                    
+                    
+                    
+                    console.log("Ship stuff here")
+                    break;
+                case 2:
+                    //Comm
+                    commMenu(0)
+
+                    console.log("Comm stuff here")
+                    break;
+                case 3:
+                    //Mining
+                    console.log("Mining stuff here")
+                    break;
+                
+                
+            }
+        function startBattle()
+        {
+            turnOffMenu(true);
+            continueBattle();
+        }
+        
+        function commMenu(page)
+        {
+            var portraitsPerPage = 3
+            var spacing = 140;
+            for(var i = page*portraitsPerPage ; i < (page+1)*portraitsPerPage ; i++)
+            if(typeof currentUser.charactersActivated[i] !== 'undefined')
+            {
+                var backBox = game.add.graphics(0, 0);
+                backBox.beginFill(0xe6a353);  //orange
+                backBox.lineStyle(0, 0x000000, 1);
+                backBox.drawRect(-50, -50, 100, 100);
+                backBox.endFill();
+                
+                
+                var backBoxSprite = game.add.sprite(375+i*spacing, 425, backBox.generateTexture());
+                backBoxSprite.characterID = currentUser.charactersActivated[i]
+                backBox.destroy();
+                backBoxSprite.anchor.setTo(0.5,0.5);
+                backBoxSprite.alpha=0.5
+                backBoxSprite.inputEnabled='true';
+                backBoxSprite.events.onInputDown.add(loadConversation, this);
+                backBoxSprite.input.useHandCursor = true;
+                button.pane.group.add(backBoxSprite); 
+                
+                var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
+                portrait.characterID = currentUser.charactersActivated[i]
+                portrait.anchor.setTo(0.5,0.5);
+                portrait.inputEnabled='true';
+                portrait.events.onInputDown.add(loadConversation, this);
+                portrait.input.useHandCursor = true;
+                button.pane.group.add(portrait); 
+                
+                
+                if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                {
+                    var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
+                    nameText.anchor.setTo(0.5,0.5);
+                    nameText.font = 'Michroma';
+                    nameText.fontSize = 12;
+                    nameText.fill = '#FFFFFF';
+                    nameText.align = 'center';   
+                    button.pane.group.add(nameText); 
+                }
+                
+                if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
+                {
+                    var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
+                    jobText.anchor.setTo(0.5,0.5);
+                    jobText.font = 'Michroma';
+                    jobText.fontSize = 12;
+                    jobText.fill = '#FFFFFF';
+                    jobText.align = 'center';   
+                    button.pane.group.add(jobText); 
+                }
+                
+            function loadConversation(character)
+            {
+                turnOffMenu(false)
+                
+                createConversation(character.characterID, buttons)    
+            }
+            
+
+            }
+
+        }
+        
+        function turnOffMenu(disappear)
+        {
+            //turn off menu buttons and delete any loaded panes
+                buttons.forEach(function(button){
+                    button.inputEnabled=false;
+                    
+                    if(disappear)
+                    {
+                        button.group.alpha = 0; 
+                        spaceStationScene.alpha = 0;
+                    }
+                    
+                    if(button.paneLoaded == true)
+                    {
+                        if(typeof button.pane.group !== 'undefined')
+                        {
+                            button.pane.group.destroy();
+                        }
+    
+                        button.pane.destroy();
+                        button.paneLoaded == false
+                    }
+                    });
+        }
+        function drawShipLevelBar(barPoint, key , label)
+        {
+            var back = game.add.graphics(barPoint.x, barPoint.y);
+            back.beginFill(0xcc9bcc);  //purple
+            back.lineStyle(0, 0x000000, 1);
+            back.drawRect(0, 0, 100, 20);
+            back.endFill();
+            button.pane.group.add(back)
+            var current = game.add.graphics(barPoint.x, barPoint.y);
+            current.beginFill(0xCC6464);  //pink
+            current.lineStyle(0, 0x000000, 1);
+            current.drawRect(0, 0, 100*(parseInt(currentUser.ship[key])/10), 20);
+            current.endFill();
+            button.pane.group.add(current)
+            var label = game.add.text(barPoint.x-5, barPoint.y+13 , label)
+            label.anchor.setTo(1,0.5)
+            label.font = 'Michroma';
+            label.fontSize = 12;
+            label.fill = '#FFFFFF';
+            label.align = 'center';
+            button.pane.group.add(label)
+        }
+        
+        function checkLastLogin()
+        {
+            
+            if(typeof currentUser.lastLogoEdit === 'undefined')
+                {
+                    currentUser.lastLogoEdit = new Date(0);
+                }
+            var lastLogin = new Date(currentUser.lastLogoEdit)
+            var currentTime = new Date();
+            if(currentTime - lastLogin > 86400000)//one day in ms
+            {
+                currentUser.lastLogoEdit = new Date()
+                swatchBoxDisplayClick() 
+            } else
+            {
+                var waitTime = (24-Math.round((currentTime - lastLogin)/3600000))
+                var waitText = "You must wait " + waitTime + " hour" + (waitTime >1? 's':'')+ "."
+                battleAlert(waitText)
+            }
+        }
+        function swatchBoxDisplayClick()
+        {
+            console.log("building confirm menu")
+            logo.forEach(function(box){
+                    box.inputEnabled=false;
+                });
+            var confirmMenu = game.add.group();
+
+            var confirmBack = game.add.sprite(400,300,'logoEditConfirmBack')
+            confirmMenu.add(confirmBack)
+            confirmBack.scale.setTo(0.8,0.5)
+            
+            var confirmButtonYes = game.add.sprite(300,325,'logoEditConfirmButton')
+            confirmMenu.add(confirmButtonYes)
+            confirmButtonYes.scale.setTo(0.8,0.4)
+            confirmButtonYes.anchor.setTo(0.5,0.5)
+            confirmButtonYes.inputEnabled='true';
+            confirmButtonYes.events.onInputDown.add(editLogo);
+            confirmButtonYes.input.useHandCursor = true;
+            
+            var confirmButtonNo = game.add.sprite(500,325,'logoEditConfirmButton')
+            confirmMenu.add(confirmButtonNo)
+            confirmButtonNo.scale.setTo(0.8,0.4)
+            confirmBack.anchor.setTo(0.5,0.5)
+            confirmButtonNo.anchor.setTo(0.5,0.5)
+            confirmButtonNo.inputEnabled='true';
+            confirmButtonNo.events.onInputDown.add(declineEditLogo);
+            confirmButtonNo.input.useHandCursor = true;
+            
+            
+            var questionLabel = game.add.text(confirmBack.x, confirmBack.y-14 , "ARE YOU READY TO EDIT YOUR LOGO?") 
+            confirmMenu.add(questionLabel)
+            questionLabel.font = 'Michroma';
+            questionLabel.fontSize = 24;
+            questionLabel.fill = '#FFFFFF';
+            questionLabel.align = 'center';
+            questionLabel.anchor.setTo(0.5,0.5)
+            
+            var yesLabel = game.add.text(confirmButtonYes.x-30, confirmButtonYes.y-12 , "YES") 
+            confirmMenu.add(yesLabel)
+            yesLabel.font = 'Michroma';
+            yesLabel.fontSize = 20;
+            yesLabel.fill = '#FFFFFF';
+            yesLabel.align = 'center';
+        
+            
+            var noLabel = game.add.text(confirmButtonNo.x-24, confirmButtonNo.y-12 , "NO")
+            confirmMenu.add(noLabel)
+            noLabel.font = 'Michroma';
+            noLabel.fontSize = 20;
+            noLabel.fill = '#FFFFFF';
+            noLabel.align = 'center';
+            function editLogo()
+            {
+                
+                confirmMenu.destroy();
+                shipModel.destroy();
+                shipShadowModel.destroy();
+                logo.forEach(function(box){
+                    box.destroy();
+                });
+
+                buttons.forEach(function(button){
+                    button.inputEnabled=false;
+                });
+                logoMenu('edit')
+                startEditTimer(60);
+            }
+            
+            function startEditTimer(time)
+            {
+                var timerText = game.add.text(665,400 , time.toString())
+                timerText.font = 'Michroma';
+                timerText.fontSize = 24;
+                timerText.fill = '#FFFFFF';
+                timerText.align = 'center';
+                timerText.anchor.setTo(0.5,0.5)
+                game.time.events.add(Phaser.Timer.SECOND * 1, cycleTimer);  
+                
+                function cycleTimer()
+                {
+                    timerText.destroy();
+                    if(time > 1)
+                    {
+                        startEditTimer(time-1);    
+                    } else
+                    {
+                        buttons.forEach(function(button){
+                            button.inputEnabled='true';
+                            if(button.paneLoaded == true)
+                                {
+                                    if(typeof button.pane.group !== 'undefined')
+                                    {
+                                        button.pane.group.destroy();
+                                    }
+                
+                                    button.pane.destroy();
+                                    button.paneLoaded == false
+                                }
+                        });
+                        for(var i = 0; i < logo.length ; i++)
+                        {
+                            currentUser.logo[i] = logo[i].tintNumber;
+                        }
+                        updateUserData()
+                    }
+
+                }
+            }
+            function declineEditLogo()
+            {
+
+                confirmMenu.destroy();
+                logo.forEach(function(box){
+                    box.inputEnabled=true;
+                });
+            }
+            
+        }
+        
+        var lastBox = null;
+        function swatchBoxEditClick(box)
+        {
+            lastBox = box.boxNumber;
+            console.log(box)
+            var swatchBox = game.add.graphics(box.x, box.y);
+            swatchBox.lineStyle(1, 0x000000, 1);
+            button.pane.group.add(swatchBox)
+            logo[box.boxNumber] = swatchBox
+            swatchBox.beginFill(swatchCursor.tintString);   
+            swatchBox.drawRect(box.logoOffsetX+box.row*box.squareSize, box.logoOffsetY+box.column*box.squareSize, box.squareSize, box.squareSize);
+            swatchBox.endFill(); 
+            swatchBox.tintNumber = swatchCursor.tintNumber
+            swatchBox.boxNumber = box.boxNumber;
+            swatchBox.inputEnabled='true';
+            swatchBox.input.useHandCursor = true;
+            swatchBox.events.onInputDown.add(swatchBoxEditClick, this);    
+            swatchBox.boxNumber = box.boxNumber;
+            swatchBox.logoOffsetX = box.logoOffsetX
+            swatchBox.logoOffsetY= box.logoOffsetY
+            swatchBox.row= box.row
+            swatchBox.column= box.column
+            swatchBox.squareSize= box.squareSize
+            box.destroy();
+            
+                
+        }   
+        //this function displays and allows editing of the user logo
+        function logoMenu(type)
+        {
+            var boxX
+            var boxY
+            if(type=='display')
+            {
+                boxX = 180;
+                boxY = 200;
+            } else
+            {
+                boxX = 180;
+                boxY = 200;
+            }
+            
+            
+            
+            var swatchColorBox;
+            var swatchColorSprite;
+            var rowLength;
+            var tints = [0xFFFFFF , 0x000000 ];
+            var tintNumber = 0;
+            var frequency = .15;
+            var redFrequency = .1;
+            var grnFrequency = .1;
+            var bluFrequency = .1;
+            var center = 255;
+            var width = 0;
+            
+            //http://krazydad.com/tutorials/makecolors.php
+            for (var i = 0; i < 32; ++i)
+            {
+               red   = Math.sin(redFrequency*i + 0) * center + width;
+               green = Math.sin(grnFrequency*i + 2*Math.PI/3) * center + width;
+               blue  = Math.sin(bluFrequency*i + 4*Math.PI/3) * center + width;
+            
+               tints.push(RGB2Color(red,green,blue))
+            }
+            
+            var squareSize = 20
+            var logoOffsetX = 130;
+            var logoOffsetY = 10;
+
+            if(typeof currentUser.logo === 'undefined')
+            {
+                console.log("making first logo")
+                currentUser.logo = []
+                for (var i = 0 ; i < 100 ; i++)
+                {
+                    currentUser.logo.push(getRandomInt(2,tints.length-1))
+                }
+            }
+            
+            var boxNumber = 0;
+            for(var row = 0 ; row < 10 ; row++)
+            {
+              for(var column = 0 ; column < 10 ; column++)
+                {
+                    var swatchBox = game.add.graphics(boxX, boxY);
+                    swatchBox.lineStyle(1, 0x000000, 1);
+                    button.pane.group.add(swatchBox)
+                    logo.push(swatchBox)
+                    swatchBox.beginFill(tints[currentUser.logo[boxNumber]]); 
+                    swatchBox.tintNumber = currentUser.logo[boxNumber];
+                    swatchBox.drawRect(logoOffsetX+row*squareSize, logoOffsetY+column*squareSize, squareSize, squareSize);
+                    swatchBox.endFill(); 
+                    swatchBox.boxNumber = boxNumber;
+                    swatchBox.row=row
+                    swatchBox.column=column
+                    swatchBox.logoOffsetX=logoOffsetX
+                    swatchBox.logoOffsetY=logoOffsetY
+                    swatchBox.squareSize =squareSize
+                    swatchBox.inputEnabled='true';
+                    swatchBox.input.useHandCursor = true;
+                    if(type=='edit')
+                    {
+                        swatchBox.events.onInputDown.add(swatchBoxEditClick, this);    
+                    } else
+                    {
+                        swatchBox.events.onInputDown.add(checkLastLogin);   
+                    }
+                    
+                    boxNumber++;
+                }  
+            }
+            if(type=='edit')
+            {
+                for(var i = 0; i<9 ; i++)
+                {
+                    
+            
+                    if(i==0)
+                    {
+                        rowLength=2;   
+                    } else if(i < 5)
+                    {
+                        rowLength++;
+                    } else
+                    {
+                        rowLength--;
+                    }
+                    
+                    for (var j = 0; j < rowLength; j++)
+                    {
+                        var swatchColorHex = game.add.graphics(0, 0);
+
+                        swatchColorHex.beginFill(tints[tintNumber])
+                        var currentTint = tints[tintNumber];
+                        
+                        
+                        var swatchOffsetX = 470;
+                        var swatchOffsetY = 0;
+                        swatchColorHex.lineStyle(1, 0x000000, 1);
+                        var points = [  new Phaser.Point(10,0),
+                                    new Phaser.Point(5,-9),
+                                    new Phaser.Point(-5,-9),
+                                    new Phaser.Point(-10,0),
+                                    new Phaser.Point(-5,9),
+                                    new Phaser.Point(5,9)
+                                    ]
+                        swatchColorHex.drawPolygon(points);
+                        
+                        swatchColorSprite = game.add.sprite(boxX+swatchOffsetX+j*20+(i<5?-i*10:i*10-80), boxY+swatchOffsetY+i*18,swatchColorHex.generateTexture() ) 
+                        swatchColorSprite.tintNumber = tintNumber;
+                        tintNumber++;
+                        swatchArray.push(swatchColorSprite)
+                        swatchColorSprite.angle += 30;
+                        swatchColorSprite.color = currentTint;
+                        swatchColorSprite.inputEnabled='true';
+                        swatchColorSprite.events.onInputDown.add(chooseSwatchColor, this);
+                        button.pane.group.add(swatchColorSprite)
+                        game.world.bringToTop(swatchBox);
+                        game.world.bringToTop(swatchColorHex);
+                        swatchColorHex.clear()
+                    }    
+                }   
+            swatchCursor = game.add.sprite(swatchArray[0].x,swatchArray[0].y,'hexCursor')
+            swatchCursor.tintString = swatchArray[0].tint;
+            swatchCursor.tintNumber = swatchArray[0].tintNumber
+            button.pane.group.add(swatchCursor)
+            swatchCursor.anchor.setTo(0.35,0.1)
+            swatchCursor.scale.setTo(0.45,0.45)
+            swatchCursor.alpha = 0.8
+            
+            
+            function chooseSwatchColor(hex)
+            {
+                if(!swatchCursorMoving)
+                {
+                    swatchCursorMoving = true
+                    var tweenLocation = game.add.tween(swatchCursor).to( { x: hex.x , y: hex.y }, 300, Phaser.Easing.Cubic.Out, true);
+                    tweenLocation.onComplete.add(resetFlag);
+                    swatchCursor.tintString = tints[hex.tintNumber];
+                    swatchCursor.tintNumber = hex.tintNumber
+                }
+                
+                
+                
+                function resetFlag()
+                {
+                    swatchCursorMoving = false
+                }
+            }
+            }
+            
+            
+            
+            function RGB2Color(r,g,b)
+              {
+                return '0x' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+              }   
+            function byte2Hex(n)
+              {
+                var nybHexString = "0123456789ABCDEF";
+                return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+              }
+              
+             
+            
+        }   
+        }
+    }
+}
+
+
+function battleAlert(text)
+{
+    var alertBoxGraphic = game.add.graphics(0, 0);
+    alertBoxGraphic.beginFill(0x555555);  //dark blue
+    alertBoxGraphic.lineStyle(0, 0x000000, 1);
+    alertBoxGraphic.drawRect(0, 0, 600, 50);
+    alertBoxGraphic.endFill();
+    var alertBox = game.add.sprite(400,550,alertBoxGraphic.generateTexture())
+    alertBoxGraphic.destroy();
+    alertBox.alpha = 0.8
+    alertBox.anchor.setTo(0.5,0.5)
+    var alertText = game.add.text(alertBox.x, alertBox.y, text)
+    alertText.anchor.setTo(0.5,0.5);
+    alertText.font = 'Michroma';
+    alertText.fontSize = 18;
+    alertText.fill = '#FFFFFF';
+    alertText.align = 'center';
+    var alert = game.add.group();
+    alert.add(alertBox)
+    alert.add(alertText)
+    game.time.events.add(Phaser.Timer.SECOND * 1.5, fadeOut, this);
+    
+    function fadeOut()
+    {
+        var tweenAlpha = game.add.tween(alert).to( { alpha:0 }, 800, Phaser.Easing.Cubic.Out, true);
+        tweenAlpha.onComplete.add(deleteAlert);    
+    }
+
+    
+    function deleteAlert()
+    {
+        alert.destroy();
+    }
+
+}

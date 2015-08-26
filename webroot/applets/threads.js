@@ -111,16 +111,7 @@ function loadCampaign()
     //campaignChallenges = localStorage.getObject("campaignChallenges")
     campaignChallenges = userData.campaignChallenges;
     
-    currentUser = {
-            name: userData.name,
-            password: userData.password,
-            campaignChallenges: campaignChallenges,
-            chronics: userData.chronics,
-            challengesMastered: userData.challengesMastered,
-            challengesAttempted: userData.challengesAttempted,
-            ship: userData.ship,
-            credits: userData.credits
-          };
+    currentUser = userData;
     currentCampaignChallenge = getRandomInt(0,4);
     threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
     threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
@@ -213,9 +204,14 @@ function startCampaign()
             name: userName,
             password: userPassword,
             campaignChallenges: campaignChallenges,
-            challengesMastered: 0
+            challengesMastered: 0,
+            charactersActivated: ['stationAgent'],
+            characters:{stationAgent:{}}
           };
          
+         currentUser.characters.stationAgent.questSlot = null
+         currentUser.characters.stationAgent.keys = []
+         currentUser.characters.stationAgent.startKey = 'start'
         
         if(networkStorage)
         {
@@ -703,32 +699,7 @@ function netUserMaintenance(order)
         });    
     }
 
-function showWelcomeMessage2()
-{
-    if(networkStorage)
-    {
-        
-        bootbox.dialog({
-          message: 'Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
-        '<br><br>Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
-        'Mages is still in development, so do not expect stable software.'+
-        '<br><br><b>You have reached a mastery level on ' + currentUser.challengesMastered + 
-        ' applets after attempting ' + currentUser.challengesAttempted + '.' +
-        '<br>The highest ranked user is ' + networkStandings.sorted[0].name + ' with ' + networkStandings.sorted[0].challengesMastered + ' applets mastered.',
-          title: "Welcome",
-          buttons: {
-            success: {
-              label: "Ready!",
-              className: "btn-success",
-              callback: function() {
-                continueBattle();
-              }
-            }
-          }
-        });     
-    }
-    
-}
+
 
 function showWelcomeMessage()
 {
@@ -793,7 +764,9 @@ function showWelcomeMessage()
         continueText.destroy();
         if(battleMode)
         {
-            continueBattle()
+            // continueBattle()
+            definePlayerShip()
+            parkingMovement();
         } else
         {
             state = 'applet'

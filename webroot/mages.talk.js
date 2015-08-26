@@ -1,6 +1,6 @@
-var characters = {};
 
-function createConversation(character) {
+
+function createConversation(character, menuButtons) {
     var leftEdge = 231
 
     //  From http://glslsandbox.com/e#18578.0
@@ -41,33 +41,32 @@ function createConversation(character) {
             "gl_FragColor = vec4( 0.0, c, 0.0, 1.0 );",
         "}"
     ];
-
+    var chatScreen = game.add.group();
     var chatBack = game.add.sprite(0,0,'chatBack')
-
+    chatScreen.add(chatBack)
     filter = new Phaser.Filter(game, null, fragmentSrc);
     filter.setResolution(800, 600);
 
 
     var sprite;
     sprite = game.add.sprite(leftEdge,19);
+    chatScreen.add(sprite)
     sprite.width = 800*2/3;
     sprite.height = 600*2/3;
     sprite.filters = [ filter ];
     game.time.events.add(Phaser.Timer.SECOND * 0.1, updateFilter);
     game.time.events.add(Phaser.Timer.SECOND * 0.1, updateComSignal);
     
+    console.log(character)
     var comSignal = game.add.sprite(leftEdge,19,character);
+    chatScreen.add(comSignal)
     comSignal.alpha=0.5
     comSignal.scale.setTo(2/3,2/3)
     
-    
-    switch(character) {
-    case 'stationAgent':
-        scrollText(characters.stationAgent,'start')
-        break;
-    }
 
-    
+    var characters = game.cache.getJSON('characters');
+    scrollText(characters[character],currentUser.characters[character].startKey, chatScreen, menuButtons);
+    console.log(characters[character].defaultKeys)
     
     function updateFilter()
     {
@@ -94,85 +93,34 @@ function createConversation(character) {
 
 }
 
-function defineCharacters()
-{
-    characters.stationAgent =
-                    {     
-                    keyID : 'stationAgent',
-                    start  : { 
-                        text: "Hello, sentient ship, " +  ", how may I help you?" ,
-                        keys:['name', 'job'] 
-                    },
-                    name  : { 
-                        text: "My name is Agent Forner.", 
-                        keys:[] 
-                    },
-                    "job"  : { 
-                        text: "I am the station agent here at Outpost Station.", 
-                        keys:[ "Outpost Station" ] 
-                    },
-                    "Outpost Station" : { 
-                        text: "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
-                        keys:["Trad"] 
-                    },
-                    "Trad" : { 
-                        text: "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
-                        keys:["bounty"] 
-                    },
-                    "bounty" : { 
-                        text: [
-                            "1I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                            "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                            "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                            "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                            "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
-                        ], 
-                        keys:["accept"] ,
-                        rewards:[5,5,5,10,30]
-                        },
-                    "accept" : { 
-                        text: [
-                            "1Come back when you're done and I'll pay you the credits.",
-                            "2Come back when you're done and I'll pay you the credits.",
-                            "3Come back when you're done and I'll pay you the credits.",
-                            "4Come back when you're done and I'll pay you the credits.",
-                            "5Come back when you're done and I'll pay you the credits."
-                        ],
-                        keys:[]
-                    },
-                    "reward" : { 
-                        text: [
-                            "1Great job!  Here are the credits I promised.",
-                            "2Great job!  Here are the credits I promised.",
-                            "3Great job!  Here are the credits I promised.",
-                            "4Great job!  Here are the credits I promised.",
-                            "5Great job!  Here are the credits I promised."
-                        ],
-                        keys:[]
-                    },
-                    "goodbye" : { 
-                        text: "Goodbye.", 
-                        keys:[] 
-                    },
-                    defaultKeys: [ 'goodbye']
-    }
-}
-    
+
 
 var scroller = [];
 var currentTalkKeys = null;
-function scrollText(talk, key)
+function scrollText(talk, key, chatScreen, menuButtons)
 {
+    console.log(chatScreen)
+    console.log(talk);
     console.log("key: " + key)
     var text ;
     if(typeof key === 'undefined') {
         key = 'start';
         text = talk.start.text;
+
     } else
     {
+        if(key == 'name')
+        {
+            currentUser.characters[talk.keyID].knownName = talk.name.label;
+
+        }
+        if(key == 'job')
+        {
+            currentUser.characters[talk.keyID].knownJob = talk.job.label;
+        }
         if(key == 'bounty' || key == 'accept' || key == 'reward'  )
         {
-            text = talk[key].text[characters[talk.keyID].questPoint];
+            text = talk[key].text[currentUser.characters[talk.keyID].questPoint];
         } else
         {
             text = talk[key].text;    
@@ -183,14 +131,30 @@ function scrollText(talk, key)
     var location = new Phaser.Point(235,560)
     if(currentTalkKeys == null)
     {
-        console.log("default keys")
-        currentTalkKeys = talk.defaultKeys;
+        if(typeof currentUser.characters[talk.keyID].currentKeys === 'undefined')
+        {
+            currentTalkKeys = [];
+            currentUser.characters[talk.keyID].currentKeys = currentTalkKeys;
+        } else
+        {
+            currentTalkKeys = currentUser.characters[talk.keyID].currentKeys;
+        }
+
+        
     } 
     
     talk[key].keys.forEach(function(item){
                 currentTalkKeys.push(item)
             });
+    currentTalkKeys.push("goodbye")  //always have a goodbye
+    //check for duplicate keys
+    var uniqueKeys = [];
+    $.each(currentTalkKeys, function(i, el){
+        if($.inArray(el, uniqueKeys) === -1) uniqueKeys.push(el);
+    });
     
+    currentTalkKeys = uniqueKeys;
+
     var wrap = 52
     var lines = 6;
     if(scroller.length !=lines)
@@ -199,6 +163,7 @@ function scrollText(talk, key)
         for (var i = 0; i < lines ; i++)
         {
             scroller[i] = game.add.text(location.x, location.y-i*25, '')
+            chatScreen.add(scroller[i] )
             scroller[i].anchor.setTo(0,0)
             scroller[i].font ='Michroma';
             scroller[i].fontSize = 16
@@ -316,6 +281,7 @@ function scrollText(talk, key)
                                 key.font ='Michroma';
                                 key.fontSize = 16;
                                 key.keyID = talk.keyID;
+                                key.input.useHandCursor = true;
                             });
                         
                         
@@ -335,21 +301,14 @@ function scrollText(talk, key)
                         {
                             if(item.keyString == 'bounty')
                             {
-                                if(typeof characters[item.keyID].questPoint === 'undefined')
+                                if(typeof currentUser.characters[item.keyID].questPoint === 'undefined')
                                 {
-                                    characters[item.keyID].questPoint = 0
-                                } else
-                                {
-                                    characters[item.keyID].questPoint++
-                                }   
+                                    currentUser.characters[item.keyID].questPoint = 0;
+                                }    
                             }
                             if(item.keyString == 'accept')
                             {
-                                if(typeof currentUser.quests === 'undefined')
-                                {
-                                    currentUser.quests = {}
-                                } 
-                                currentUser.quests[item.keyID] =  characters[item.keyID].questPoint
+                                currentUser.characters[item.keyID].questPoint++;
                             }
                             if(item.keyString == 'reward')
                             {
@@ -357,11 +316,27 @@ function scrollText(talk, key)
                                 {
                                     currentUser.credits = 0;
                                 } 
-                                currentUser.credits += characters[item.keyID].bounty.rewards[characters[item.keyID].questPoint];
+                                var characters = game.cache.getJSON('characters');
+                                currentUser.credits += characters[item.keyID].bounty.rewards[currentUser.characters[item.keyID].questPoint];
                             }
                         } 
                         currentTalkKeys.splice(currentTalkKeys.indexOf(item.keyString), 1)
-                        scrollText(item.talk, item.keyString)  
+                        if(item.keyString != 'goodbye')
+                        {
+                            scrollText(item.talk, item.keyString, chatScreen, menuButtons)  
+                        } else
+                        {
+                            currentUser.characters[talk.keyID].currentKeys = currentTalkKeys;
+                            currentUser.characters[talk.keyID].currentKeys.push("goodbye")
+                            currentUser.characters[talk.keyID].startKey = "acquainted"
+                            chatScreen.destroy();
+                            menuButtons.forEach(function(button){
+                                button.inputEnabled=true;
+                            });
+                            scroller = [];
+                            currentTalkKeys = null;
+                        }
+                        
                         
                         textKeys.destroy();
                         
