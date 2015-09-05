@@ -282,6 +282,13 @@ function preload() {
     //flare stuff
     game.load.image('stationAgent', 'assets/portraits/stationAgent.png');
     game.load.image('stationAgentMini', 'assets/portraits/stationAgentMini.png');
+    game.load.image('emissary', 'assets/portraits/emissary.png');
+    game.load.image('emissaryMini', 'assets/portraits/emissaryMini.png');
+    game.load.image('engineer', 'assets/portraits/engineer.png');
+    game.load.image('engineerMini', 'assets/portraits/engineerMini.png');
+    game.load.image('weaponsDealer', 'assets/portraits/weaponsDealer.png');
+    game.load.image('weaponsDealerMini', 'assets/portraits/weaponsDealerMini.png');
+    
     game.load.image('spaceStation', 'assets/spaceStation.png');
     game.load.image('stationField', 'assets/stationField.png');
     

@@ -12,6 +12,7 @@ var arenaTopEdge = 110
 var arenaGridSpacing = 35;
 var arenaRightEdge = arenaLeftEdge + 12*arenaGridSpacing
 var arenaBottomEdge = arenaTopEdge + 12*arenaGridSpacing
+var hiddenButtons;
 
 function definePlayerShip()
 {
@@ -56,7 +57,7 @@ function definePlayerShip()
 }
 function continueBattle(questID)
 {
-    
+    battleTargetting=false;
     if ( battleBackground == null) //redraw the battle arena
     {
         
@@ -151,19 +152,19 @@ function continueBattle(questID)
             item.events.onInputOut.add(battleButtonOut, item);
         });
         
-        if(battleShips[0].torpedoActivated == false)
+        if(battleShips[0].torpedoActivated == "false" || !battleShips[0].torpedoActivated)
         {
             torpedoButton.alpha = 0;
             torpedoButton.inputEnabled='false';
         }
         
-        if(battleShips[0].laserActivated == false)
+        if(battleShips[0].laserActivated == "false" || !battleShips[0].laserActivated)
         {
             laserButton.alpha = 0;
             laserButton.inputEnabled='false';
         }
         
-        if(battleShips[0].hackArrayActivated == false)
+        if(battleShips[0].hackArrayActivated == "false" || !battleShips[0].hackArrayActivated)
         {
             hackArrayButton.alpha = 0;
             hackArrayButton.inputEnabled='false';
@@ -217,8 +218,24 @@ function continueBattle(questID)
         
         
         battleDrawn = 1;
+        if(!inRetreat)
+        {
+            showPlayerAttack(); //only if it's pending   
+        } else
+        {
+            inRetreat = false;
+            if(( threadRecord[threadRecord.length-1] > 0.9 ? true : false))
+            {
+                //put in a retreat animation
+                state = 'shipMenu'
+                clearBattle(true)   
+            } else
+            {
+                showEnemyAttacks(1)
+            }
+
+        }
         
-        showPlayerAttack(); //only if it's pending
         console.log("got through attack")
         if(playerMovePending !=null)
         {
@@ -463,7 +480,7 @@ function showPlayerAttack() {
                     beamStrike(rightStart, battleShips[battleTargetting], 0.2, false)
 
                     break;
-                default:  //0 and 2 because retreat isn't done
+                case 0:  //0 and 2 because retreat isn't done
                     battleShips[0].torpedoes--;
                     torpedoLabel.setText('TORPEDOES: ' + battleShips[0].torpedoes);
                     var torpedo = game.add.sprite(battleShips[0].x, battleShips[0].y, 'alienWingGuns2');
@@ -479,6 +496,7 @@ function showPlayerAttack() {
                             game.world.bringToTop(item);
                         });
                     tween.onComplete.add(finishPlayerAttackAnimation, torpedo);
+                    break;
                         
                     
             }
@@ -835,6 +853,7 @@ function lootCheck()
         lootOverlay.destroy();
         continueButton.destroy();
         continueText.destroy();
+        state = 'shipMenu'
         clearBattle(true)
     }
     
@@ -1416,10 +1435,21 @@ function clearBattle(end) {
 
         hpBarHandle.forEach(function(item){
             item.destroy()
+        
         });
+        
+        hiddenButtons.forEach(function(button){
+                    button.group.alpha = 1;
+                    button.inputEnabled=true;
+                    button.input.useHandCursor = true;
+                });
+        hiddenButtons.spaceStationScene.alpha=1;
+    } else
+    {
+        //go to the queued applet
+        state='applet'; 
     }
-    state='applet';
-    
+
 }
 
 var battleShipDetailPane = null
@@ -1711,6 +1741,30 @@ function enemyShipClick(item) {
     
 }
 
+var inRetreat = false;
+function retreat()
+{
+    
+    inRetreat = true;              
+    battleTargetting = null;
+    
+    battleShipDetailPane = null
+    targetButton = null;
+    
+    if(battleReticule != null)
+    {
+        battleReticule.lines.forEach(function(item){
+                    item.destroy();
+                });
+        battleReticule.destroy();
+        battleReticule = null;
+    }
+
+    playerAttackDone = false;
+    battleOrders = 'complete'
+    clearBattle();  
+}
+
 function battleButtonClick(item) {
     if(enemyAttackSequenceComplete || battleFirstRound )
     {
@@ -1725,7 +1779,7 @@ function battleButtonClick(item) {
                 break;
             
             case 2: //retreat
-                playerTargetting(item.buttonID)  //this needs to be another function
+                retreat()
                 break;
             
             case 3: //hacker
@@ -1909,6 +1963,7 @@ function playerTargetting(buttonID) {
     if(battleShips[0].weaponsDisabled > 0)
     {
             console.log("weapons disabled")
+            battleAlert("Weapons are temporarilly disabled due to enemy hack.")
     } else
     {
         weaponSelected = buttonID;
@@ -2239,6 +2294,7 @@ function parkingMovement()
 
 function buildShipMenu(spaceStationScene)
 {
+    state = 'shipMenu'
     var buttons = []
     var menuAlpha = 0.8
     var menuItems = game.add.group();
@@ -2257,6 +2313,7 @@ function buildShipMenu(spaceStationScene)
             button.scale.setTo(5/6,5/6)
             button.alpha=menuAlpha
             button.inputEnabled='true';
+            button.input.useHandCursor = true;
             button.events.onInputDown.add(buttonClick, button);
             
             var buttonLabel = game.add.text(button.x+button.width/2,button.y+button.height/2, buttonLabels[buttonCount] )
@@ -2314,7 +2371,7 @@ function buildShipMenu(spaceStationScene)
             {
                 case 0:
                     //Combat
-                    startBattle()
+                    startBattle()  //edit this function to cycle between battle and menus
                     console.log("Combat stuff here")
                     break;
                 case 1:
@@ -2373,80 +2430,172 @@ function buildShipMenu(spaceStationScene)
             }
         function startBattle()
         {
-            turnOffMenu(true);
+            turnOffMenu(true);  //this menu needs to be public so I can turn it back on upon returning
             continueBattle();
         }
         
         function commMenu(page)
         {
+            console.log("drawing comm page: " + page)
+            //build portraits
+            if(!button.pane.group.alive)
+            {
+                button.pane.group = game.add.group();
+            }
             var portraitsPerPage = 3
             var spacing = 140;
             for(var i = page*portraitsPerPage ; i < (page+1)*portraitsPerPage ; i++)
-            if(typeof currentUser.charactersActivated[i] !== 'undefined')
             {
-                var backBox = game.add.graphics(0, 0);
-                backBox.beginFill(0xe6a353);  //orange
-                backBox.lineStyle(0, 0x000000, 1);
-                backBox.drawRect(-50, -50, 100, 100);
-                backBox.endFill();
-                
-                
-                var backBoxSprite = game.add.sprite(375+i*spacing, 425, backBox.generateTexture());
-                backBoxSprite.characterID = currentUser.charactersActivated[i]
-                backBox.destroy();
-                backBoxSprite.anchor.setTo(0.5,0.5);
-                backBoxSprite.alpha=0.5
-                backBoxSprite.inputEnabled='true';
-                backBoxSprite.events.onInputDown.add(loadConversation, this);
-                backBoxSprite.input.useHandCursor = true;
-                button.pane.group.add(backBoxSprite); 
-                
-                var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
-                portrait.characterID = currentUser.charactersActivated[i]
-                portrait.anchor.setTo(0.5,0.5);
-                portrait.inputEnabled='true';
-                portrait.events.onInputDown.add(loadConversation, this);
-                portrait.input.useHandCursor = true;
-                button.pane.group.add(portrait); 
-                
-                
-                if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                if(typeof currentUser.charactersActivated[i] !== 'undefined')
                 {
-                    var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
-                    nameText.anchor.setTo(0.5,0.5);
-                    nameText.font = 'Michroma';
-                    nameText.fontSize = 12;
-                    nameText.fill = '#FFFFFF';
-                    nameText.align = 'center';   
-                    button.pane.group.add(nameText); 
-                }
-                
-                if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
-                {
-                    var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
-                    jobText.anchor.setTo(0.5,0.5);
-                    jobText.font = 'Michroma';
-                    jobText.fontSize = 12;
-                    jobText.fill = '#FFFFFF';
-                    jobText.align = 'center';   
-                    button.pane.group.add(jobText); 
-                }
-                
-            function loadConversation(character)
-            {
-                turnOffMenu(false)
-                
-                createConversation(character.characterID, buttons)    
+                    console.log("slot: " + i)
+                    var backBox = game.add.graphics(0, 0);
+                    backBox.beginFill(0xe6a353);  //orange
+                    backBox.lineStyle(0, 0x000000, 1);
+                    backBox.drawRect(-50, -50, 100, 100);
+                    backBox.endFill();
+                    
+                    
+                    var backBoxSprite = game.add.sprite(375+(i-page*portraitsPerPage)*spacing, 425, backBox.generateTexture());
+                    backBoxSprite.characterID = currentUser.charactersActivated[i]
+                    backBox.destroy();
+                    backBoxSprite.anchor.setTo(0.5,0.5);
+                    backBoxSprite.alpha=0.5
+                    backBoxSprite.inputEnabled='true';
+                    backBoxSprite.events.onInputDown.add(loadConversation, this);
+                    backBoxSprite.input.useHandCursor = true;
+                    button.pane.group.add(backBoxSprite); 
+                    
+                    var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
+                    portrait.characterID = currentUser.charactersActivated[i]
+                    portrait.anchor.setTo(0.5,0.5);
+                    portrait.inputEnabled='true';
+                    portrait.events.onInputDown.add(loadConversation, this);
+                    portrait.input.useHandCursor = true;
+                    button.pane.group.add(portrait); 
+                    
+                    
+                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                    {
+                        var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
+                        nameText.anchor.setTo(0.5,0.5);
+                        nameText.font = 'Michroma';
+                        nameText.fontSize = 12;
+                        nameText.fill = '#FFFFFF';
+                        nameText.align = 'center';   
+                        button.pane.group.add(nameText); 
+                    }
+                    
+                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
+                    {
+                        var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
+                        jobText.anchor.setTo(0.5,0.5);
+                        jobText.font = 'Michroma';
+                        jobText.fontSize = 12;
+                        jobText.fill = '#FFFFFF';
+                        jobText.align = 'center';   
+                        button.pane.group.add(jobText); 
+                    }    
             }
             
+            
 
+        }
+        
+        //add arrows
+        if(currentUser.charactersActivated.length > (page+1)*portraitsPerPage)
+        {
+            //add right arrow
+            console.log("adding right arrow")
+            var arrow = drawArrow('right')
+            arrow.inputEnabled='true';
+            arrow.direction = 'right'
+            arrow.events.onInputDown.add(turnPage, this);
+            arrow.input.useHandCursor = true;
+            
+        }
+        
+        if(page > 0)
+        {
+            var arrow = drawArrow('left')
+            arrow.inputEnabled='true';
+            arrow.direction = 'left'
+            arrow.events.onInputDown.add(turnPage, this);
+            arrow.input.useHandCursor = true;
+        }
+        
+        function drawArrow(direction)
+        {
+            console.log("drawing " + direction + " arrow.")
+            var arrowGraphic = game.add.graphics(0, 0);
+            // var arrowLocation = (direction == 'left' ? new Phaser.Point(285,425) : new Phaser.Point(740,425))
+            var arrowLocation = (direction == 'left' ? new Phaser.Point(button.pane.x+145,button.pane.y+95) : new Phaser.Point(button.pane.x+590,button.pane.y+95))
+            arrowGraphic.beginFill(0xCC6464)
+            var height = 50
+            var width = (direction == 'right' ? 30 : -30 )
+           // arrowGraphic.lineStyle(0, 0x000000, 1);
+            var points = [  new Phaser.Point(0,0),
+                        new Phaser.Point(0,height),
+                        new Phaser.Point(width,0),
+                        new Phaser.Point(0,-height),
+                        new Phaser.Point(0,0)
+                        ]
+            arrowGraphic.drawPolygon(points);
+            
+            var sprite = game.add.sprite(arrowLocation.x, arrowLocation.y , arrowGraphic.generateTexture() ) 
+            sprite.anchor.setTo(0.5,0.5)
+            button.pane.group.add(sprite)
+            arrowGraphic.destroy();
+            return sprite
+        }
+        
+        function turnPage(arrow)
+        {
+            console.log(arrow.direction)
+            //clear portraits
+            button.pane.group.destroy();
+            button.pane.group.alive = false;
+            //load correct page
+            if(arrow.direction == 'left')
+            {
+                commMenu(page-1);
+            } else
+            {
+                console.log("loading page: " + (page+1))
+                commMenu((page+1));
             }
+        }
+        
+            
+        function loadConversation(character)
+        {
+            turnOffMenu(false)
+            
+            createConversation(character.characterID, buttons)    
+        }
+        
 
+        }
+            
+        function turnOffMenuButtons()
+        {
+            buttons.forEach(function(button){
+                    button.inputEnabled=false;
+                });
+        }
+        function turnOnMenuButtons()
+        {
+            buttons.forEach(function(button){
+                    button.input.useHandCursor = true;
+                    button.inputEnabled=true;
+                });
         }
         
         function turnOffMenu(disappear)
         {
             //turn off menu buttons and delete any loaded panes
+                hiddenButtons = buttons;
+                hiddenButtons.spaceStationScene = spaceStationScene;
                 buttons.forEach(function(button){
                     button.inputEnabled=false;
                     
@@ -2491,29 +2640,11 @@ function buildShipMenu(spaceStationScene)
             button.pane.group.add(label)
         }
         
-        function checkLastLogin()
-        {
-            
-            if(typeof currentUser.lastLogoEdit === 'undefined')
-                {
-                    currentUser.lastLogoEdit = new Date(0);
-                }
-            var lastLogin = new Date(currentUser.lastLogoEdit)
-            var currentTime = new Date();
-            if(currentTime - lastLogin > 86400000)//one day in ms
-            {
-                currentUser.lastLogoEdit = new Date()
-                swatchBoxDisplayClick() 
-            } else
-            {
-                var waitTime = (24-Math.round((currentTime - lastLogin)/3600000))
-                var waitText = "You must wait " + waitTime + " hour" + (waitTime >1? 's':'')+ "."
-                battleAlert(waitText)
-            }
-        }
+        
         function swatchBoxDisplayClick()
         {
             console.log("building confirm menu")
+            turnOffMenuButtons();
             logo.forEach(function(box){
                     box.inputEnabled=false;
                 });
@@ -2528,7 +2659,7 @@ function buildShipMenu(spaceStationScene)
             confirmButtonYes.scale.setTo(0.8,0.4)
             confirmButtonYes.anchor.setTo(0.5,0.5)
             confirmButtonYes.inputEnabled='true';
-            confirmButtonYes.events.onInputDown.add(editLogo);
+            confirmButtonYes.events.onInputDown.add(checkLastLogin);
             confirmButtonYes.input.useHandCursor = true;
             
             var confirmButtonNo = game.add.sprite(500,325,'logoEditConfirmButton')
@@ -2563,6 +2694,30 @@ function buildShipMenu(spaceStationScene)
             noLabel.fontSize = 20;
             noLabel.fill = '#FFFFFF';
             noLabel.align = 'center';
+            
+            function checkLastLogin()
+            {
+                console.log("checking login")
+                if(typeof currentUser.lastLogoEdit === 'undefined')
+                    {
+                        currentUser.lastLogoEdit = new Date(0);
+                    }
+                var lastLogin = new Date(currentUser.lastLogoEdit)
+                var currentTime = new Date();
+                if(currentTime - lastLogin > 86400000)//one day in ms
+                {
+                    currentUser.lastLogoEdit = new Date()
+                    editLogo() //change me
+                } else
+                {
+                    var waitTime = (24-Math.round((currentTime - lastLogin)/3600000))
+                    var waitText = "You must wait " + waitTime + " hour" + (waitTime >1? 's':'')+ "."
+                    battleAlert(waitText)
+                    confirmMenu.destroy();
+                    turnOnMenuButtons();
+                }
+            }
+            
             function editLogo()
             {
                 
@@ -2573,9 +2728,7 @@ function buildShipMenu(spaceStationScene)
                     box.destroy();
                 });
 
-                buttons.forEach(function(button){
-                    button.inputEnabled=false;
-                });
+                
                 logoMenu('edit')
                 startEditTimer(60);
             }
@@ -2598,8 +2751,8 @@ function buildShipMenu(spaceStationScene)
                         startEditTimer(time-1);    
                     } else
                     {
+                        turnOnMenuButtons();
                         buttons.forEach(function(button){
-                            button.inputEnabled='true';
                             if(button.paneLoaded == true)
                                 {
                                     if(typeof button.pane.group !== 'undefined')
@@ -2627,6 +2780,7 @@ function buildShipMenu(spaceStationScene)
                 logo.forEach(function(box){
                     box.inputEnabled=true;
                 });
+                turnOnMenuButtons();
             }
             
         }
@@ -2737,7 +2891,7 @@ function buildShipMenu(spaceStationScene)
                         swatchBox.events.onInputDown.add(swatchBoxEditClick, this);    
                     } else
                     {
-                        swatchBox.events.onInputDown.add(checkLastLogin);   
+                        swatchBox.events.onInputDown.add(swatchBoxDisplayClick, this); //this shouldn't go here   
                     }
                     
                     boxNumber++;

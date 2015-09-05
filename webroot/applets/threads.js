@@ -205,13 +205,22 @@ function startCampaign()
             password: userPassword,
             campaignChallenges: campaignChallenges,
             challengesMastered: 0,
-            charactersActivated: ['stationAgent'],
-            characters:{stationAgent:{}}
+            charactersActivated: ['stationAgent','engineer','weaponsDealer','emissary'],
+            characters:{stationAgent:{},engineer:{},weaponsDealer:{},emissary:{}}
           };
          
          currentUser.characters.stationAgent.questSlot = null
          currentUser.characters.stationAgent.keys = []
          currentUser.characters.stationAgent.startKey = 'start'
+         currentUser.characters.engineer.questSlot = null
+         currentUser.characters.engineer.keys = []
+         currentUser.characters.engineer.startKey = 'start'
+         currentUser.characters.weaponsDealer.questSlot = null
+         currentUser.characters.weaponsDealer.keys = []
+         currentUser.characters.weaponsDealer.startKey = 'start'
+         currentUser.characters.emissary.questSlot = null
+         currentUser.characters.emissary.keys = []
+         currentUser.characters.emissary.startKey = 'start'
         
         if(networkStorage)
         {
@@ -717,7 +726,7 @@ function showWelcomeMessage()
     
 
     var message = 'Hello, ' + currentUser.name + ' and welcome to Mages Online. ' + oaklandWeatherString + 
-        '  Lately much of the work has gone into starting to develop battle mode and improving the adaptive algorithm. '+
+        '  Lately much of the work has gone into developing the Mages game. Currently, the bounty system is being developed.'+
         'Mages is still in development, so do not expect stable software.  '+
         'You have reached a mastery level on ' + currentUser.challengesMastered + 
         ' applets after attempting ' + currentUser.challengesAttempted + '.  ' +

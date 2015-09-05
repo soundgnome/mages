@@ -67,5 +67,215 @@
             "keys":[] 
         },
         "defaultKeys": ["goodbye"]
+    },
+    "engineer" :      
+    {     
+        "keyID" : "engineer",
+        "start"  : { 
+            "text": "Hello, sentient ship, how may I help you?" ,
+            "keys":["name", "job"] 
+        },
+        "acquainted"  : { 
+            "text": "Hello again, sentient ship." ,
+            "keys":[] 
+        },
+        "name"  : { 
+            "text": "My name is Agent Lessig.", 
+            "keys":[] ,
+            "label":"Lessig"
+        },
+        "job"  : { 
+            "text": "I am the station agent here at Outpost Station.", 
+            "keys":[ "Outpost Station" ] ,
+            "label":"Station Agent"
+        },
+        "Outpost Station" : { 
+            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
+            "keys":["Trad"] 
+        },
+        "Trad" : { 
+            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "bounty" : { 
+            "text": [
+                "1I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
+            ], 
+            "keys":[["accept","decline"]] ,
+            "rewards":[5,5,5,10,30]
+            },
+        "decline" : { 
+            "text": "Talk to me again if you're interested in a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "accept" : { 
+            "text": [
+                "1Come back when you're done and I'll pay you the credits.",
+                "2Come back when you're done and I'll pay you the credits.",
+                "3Come back when you're done and I'll pay you the credits.",
+                "4Come back when you're done and I'll pay you the credits.",
+                "5Come back when you're done and I'll pay you the credits."
+            ],
+            "keys":[]
+        },
+        "reward" : { 
+            "text": [
+                "1Great job!  Here are the credits I promised.",
+                "2Great job!  Here are the credits I promised.",
+                "3Great job!  Here are the credits I promised.",
+                "4Great job!  Here are the credits I promised.",
+                "5Great job!  Here are the credits I promised."
+            ],
+            "keys":[]
+        },
+        "goodbye" : { 
+            "text": "Goodbye.", 
+            "keys":[] 
+        },
+        "defaultKeys": ["goodbye"]
+    },
+    "weaponsDealer" :      
+    {     
+        "keyID" : "weaponsDealer",
+        "start"  : { 
+            "text": "Hello, sentient ship, how may I help you?" ,
+            "keys":["name", "job"] 
+        },
+        "acquainted"  : { 
+            "text": "Hello again, sentient ship." ,
+            "keys":[] 
+        },
+        "name"  : { 
+            "text": "My name is Agent Lessig.", 
+            "keys":[] ,
+            "label":"Lessig"
+        },
+        "job"  : { 
+            "text": "I am the station agent here at Outpost Station.", 
+            "keys":[ "Outpost Station" ] ,
+            "label":"Station Agent"
+        },
+        "Outpost Station" : { 
+            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
+            "keys":["Trad"] 
+        },
+        "Trad" : { 
+            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "bounty" : { 
+            "text": [
+                "1I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
+            ], 
+            "keys":[["accept","decline"]] ,
+            "rewards":[5,5,5,10,30]
+            },
+        "decline" : { 
+            "text": "Talk to me again if you're interested in a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "accept" : { 
+            "text": [
+                "1Come back when you're done and I'll pay you the credits.",
+                "2Come back when you're done and I'll pay you the credits.",
+                "3Come back when you're done and I'll pay you the credits.",
+                "4Come back when you're done and I'll pay you the credits.",
+                "5Come back when you're done and I'll pay you the credits."
+            ],
+            "keys":[]
+        },
+        "reward" : { 
+            "text": [
+                "1Great job!  Here are the credits I promised.",
+                "2Great job!  Here are the credits I promised.",
+                "3Great job!  Here are the credits I promised.",
+                "4Great job!  Here are the credits I promised.",
+                "5Great job!  Here are the credits I promised."
+            ],
+            "keys":[]
+        },
+        "goodbye" : { 
+            "text": "Goodbye.", 
+            "keys":[] 
+        },
+        "defaultKeys": ["goodbye"]
+    },
+    "emissary" :      
+    {     
+        "keyID" : "emissary",
+        "start"  : { 
+            "text": "Hello, sentient ship, how may I help you?" ,
+            "keys":["name", "job"] 
+        },
+        "acquainted"  : { 
+            "text": "Hello again, sentient ship." ,
+            "keys":[] 
+        },
+        "name"  : { 
+            "text": "My name is Agent Lessig.", 
+            "keys":[] ,
+            "label":"Lessig"
+        },
+        "job"  : { 
+            "text": "I am the station agent here at Outpost Station.", 
+            "keys":[ "Outpost Station" ] ,
+            "label":"Station Agent"
+        },
+        "Outpost Station" : { 
+            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
+            "keys":["Trad"] 
+        },
+        "Trad" : { 
+            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "bounty" : { 
+            "text": [
+                "1I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
+                "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
+            ], 
+            "keys":[["accept","decline"]] ,
+            "rewards":[5,5,5,10,30]
+            },
+        "decline" : { 
+            "text": "Talk to me again if you're interested in a bounty. ", 
+            "keys":["bounty"] 
+        },
+        "accept" : { 
+            "text": [
+                "1Come back when you're done and I'll pay you the credits.",
+                "2Come back when you're done and I'll pay you the credits.",
+                "3Come back when you're done and I'll pay you the credits.",
+                "4Come back when you're done and I'll pay you the credits.",
+                "5Come back when you're done and I'll pay you the credits."
+            ],
+            "keys":[]
+        },
+        "reward" : { 
+            "text": [
+                "1Great job!  Here are the credits I promised.",
+                "2Great job!  Here are the credits I promised.",
+                "3Great job!  Here are the credits I promised.",
+                "4Great job!  Here are the credits I promised.",
+                "5Great job!  Here are the credits I promised."
+            ],
+            "keys":[]
+        },
+        "goodbye" : { 
+            "text": "Goodbye.", 
+            "keys":[] 
+        },
+        "defaultKeys": ["goodbye"]
     }
 }
