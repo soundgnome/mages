@@ -65,6 +65,7 @@ function createConversation(character, menuButtons) {
     
 
     var characters = game.cache.getJSON('characters');
+    console.log(characters)
     scrollText(characters[character],currentUser.characters[character].startKey, chatScreen, menuButtons);
     console.log(characters[character].defaultKeys)
     
@@ -120,7 +121,7 @@ function scrollText(talk, key, chatScreen, menuButtons)
         }
         if(key == 'bounty' || key == 'accept' || key == 'reward'  )
         {
-            text = talk[key].text[currentUser.characters[talk.keyID].questPoint];
+            text = talk[key].text[currentUser.characters[talk.keyID].questPoint-1];
         } else
         {
             text = talk[key].text;    
@@ -139,13 +140,19 @@ function scrollText(talk, key, chatScreen, menuButtons)
         {
             currentTalkKeys = currentUser.characters[talk.keyID].currentKeys;
         }
-
-        
     } 
+    
+    
     
     talk[key].keys.forEach(function(item){
                 currentTalkKeys.push(item)
             });
+    
+    if(currentUser.characters[talk.keyID].questComplete == 'true')
+    {
+        currentTalkKeys.push("reward")    
+    }
+    
     currentTalkKeys.push("goodbye")  //always have a goodbye
     //check for duplicate keys
     var uniqueKeys = [];
@@ -297,18 +304,30 @@ function scrollText(talk, key, chatScreen, menuButtons)
                     {
                         console.log(item)
 
-                        if(item.keyString == 'bounty'  || item.keyString == 'accept'  || item.keyString == 'reward' )
+                        if(item.keyString == 'bounty'  || item.keyString == 'accept'  || item.keyString == 'reward'  ||item.keyString == 'decline'  )
                         {
                             if(item.keyString == 'bounty')
                             {
                                 if(typeof currentUser.characters[item.keyID].questPoint === 'undefined')
                                 {
                                     currentUser.characters[item.keyID].questPoint = 0;
-                                }    
+                                }   
+                                currentUser.characters[item.keyID].questPoint++;
                             }
                             if(item.keyString == 'accept')
                             {
-                                currentUser.characters[item.keyID].questPoint++;
+                                
+                                currentUser.characters[item.keyID].questComplete = false;
+                                if(typeof currentUser.questCharacters === 'undefined')
+                                {
+                                    currentUser.questCharacters = []
+                                }
+                                currentUser.questCharacters.push(item.keyID);
+                                updateUserData(); //save the new quest
+                            }
+                            if(item.keyString == 'decline')
+                            {
+                                currentUser.characters[item.keyID].questPoint = 0;
                             }
                             if(item.keyString == 'reward')
                             {
@@ -316,8 +335,15 @@ function scrollText(talk, key, chatScreen, menuButtons)
                                 {
                                     currentUser.credits = 0;
                                 } 
+                                //remove the character from the questCharacters array
+                                var index = currentUser.questCharacters.indexOf(item.keyID);
+                                if (index > -1) {
+                                    currentUser.questCharacters.splice(index, 1);
+                                }
                                 var characters = game.cache.getJSON('characters');
                                 currentUser.credits += characters[item.keyID].bounty.rewards[currentUser.characters[item.keyID].questPoint];
+                                updateUserData();  //save your new money
+                                
                             }
                         } 
                         currentTalkKeys.splice(currentTalkKeys.indexOf(item.keyString), 1)

@@ -298,6 +298,7 @@ function preload() {
     game.load.image('hexCursor', 'assets/hexCursor.png');
     game.load.json('applets', 'applets/applets.json');
     game.load.json('characters', 'characters.json');
+    game.load.json('quests', 'quests.json');
 }
 
 function create() {

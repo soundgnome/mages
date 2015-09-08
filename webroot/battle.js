@@ -203,7 +203,7 @@ function continueBattle(questID)
         
         //just make them appear again; we're continuing battle
        battleShips.forEach(function(item){
-           if(!item.dead)
+           if(!item.dead  && item!=null)
            {
                 item.alpha=1;
                 item.bringToTop()
@@ -493,7 +493,10 @@ function showPlayerAttack() {
                     var distance = lineDistance(battleShips[0], battleShips[battleTargetting]);
                     var tween = game.add.tween(torpedo).to( { x: battleShips[battleTargetting].x + (torpedo.hit==true ? 0 : getRandomInt(20,40)), y: battleShips[battleTargetting].y + (torpedo.hit==true ? 0 : getRandomInt(20,40))}, distance*4, Phaser.Easing.Quartic.In, true);
                     battleShips.forEach(function(item){
+                        if(item!=null)
+                        {
                             game.world.bringToTop(item);
+                        }
                         });
                     tween.onComplete.add(finishPlayerAttackAnimation, torpedo);
                     break;
@@ -549,7 +552,11 @@ function showPlayerAttack() {
                 tweenLength.onComplete.add(holdBeam); 
                 
                 battleShips.forEach(function(item){
-                    game.world.bringToTop(item);
+                    if(item!=null)
+                    {
+                        game.world.bringToTop(item);   
+                    }
+                    
                 });
                 
                 function getBeamBuff()
@@ -1316,7 +1323,11 @@ function showEnemyAttacks(enemyPosition) {
             tweenLength.onComplete.add(holdBeam, projectile); 
             
             battleShips.forEach(function(item){
-                game.world.bringToTop(item);
+                if(item!=null)
+                {
+                    game.world.bringToTop(item);   
+                }
+                
             });
             
         
@@ -1412,10 +1423,18 @@ function clearBattle(end) {
             item.destroy(true)
         });
     battleShips.forEach(function(item){
-            item.alpha=0
+        if(item!=null)
+        {
+           item.alpha=0 
+        }
+            
         });
     hpBarHandle.forEach(function(item){
+        if(item!=null)
+        {
             item.destroy();
+        }
+            
         });
     battleCombatLabels[0].destroy();
     battleCombatLabels[1].destroy();
@@ -1476,7 +1495,7 @@ function enemyShipClick(item) {
     {
 
     
-        if(battleReticule != null)
+        if(battleReticule != null && battleShipDetailPane !=null)
         {
             if (battleShipDetailPane.enemyID == item.enemyID)  //clicked again
             {
@@ -1501,11 +1520,19 @@ function enemyShipClick(item) {
     
             reticuleLines(true);  
             battleShips.forEach(function(item){
-                    game.world.bringToTop(item);
+                if(item!=null)
+                {
+                    game.world.bringToTop(item);   
+                }
+                    
                 });
             game.world.bringToTop(battleReticule);  
             hpBarHandle.forEach(function(item){
-                    game.world.bringToTop(item);
+                if(item!=null)
+                {
+                    game.world.bringToTop(item);   
+                }
+                    
                 });
             addDetailPane();
         }    
@@ -2371,7 +2398,8 @@ function buildShipMenu(spaceStationScene)
             {
                 case 0:
                     //Combat
-                    startBattle()  //edit this function to cycle between battle and menus
+                    //startBattle()
+                    questSelection(0);
                     console.log("Combat stuff here")
                     break;
                 case 1:
@@ -2428,12 +2456,158 @@ function buildShipMenu(spaceStationScene)
                 
                 
             }
-        function startBattle()
+        function startBattle(questCharacter)
         {
             turnOffMenu(true);  //this menu needs to be public so I can turn it back on upon returning
-            continueBattle();
+            continueBattle(questCharacter.questID);
         }
         
+        function questSelection(page)
+        {
+            console.log("drawing quest page: " + page)
+            //build portraits
+            if(!button.pane.group.alive)
+            {
+                button.pane.group = game.add.group();
+            }
+            var portraitsPerPage = 3
+            var spacing = 150;
+            for(var i = page*portraitsPerPage ; i < (page+1)*portraitsPerPage ; i++)
+            {
+                if(typeof currentUser.questCharacters !== 'undefined' && typeof currentUser.characters[currentUser.questCharacters[i]] !== 'undefined' && typeof currentUser.characters[currentUser.questCharacters[i]].questPoint !== 'undefined'  && currentUser.characters[currentUser.questCharacters[i]].questPoint > 0)
+                {
+                    console.log("slot: " + i)
+                    var backBox = game.add.graphics(0, 0);
+                    backBox.beginFill(0xe6a353);  //purple
+                    backBox.lineStyle(0, 0x000000, 1);
+                    backBox.drawRect(-50, -50, 100, 100);
+                    backBox.endFill();
+                    
+                    
+                    var backBoxSprite = game.add.sprite(350, 120+(i-page*portraitsPerPage)*spacing, backBox.generateTexture());
+                    backBoxSprite.characterID = currentUser.questCharacters[i]
+                    backBox.destroy();
+                    backBoxSprite.anchor.setTo(0.5,0.5);
+                    backBoxSprite.alpha=0.5
+                    backBoxSprite.inputEnabled='true';
+                    backBoxSprite.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                    backBoxSprite.events.onInputDown.add(startBattle, this);
+                    backBoxSprite.input.useHandCursor = true;
+                    button.pane.group.add(backBoxSprite); 
+                    
+                    var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
+                    portrait.characterID = currentUser.questCharacters[i]
+                    portrait.anchor.setTo(0.5,0.5);
+                    portrait.inputEnabled='true';
+                    portrait.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                    portrait.events.onInputDown.add(startBattle, this);
+                    portrait.input.useHandCursor = true;
+                    button.pane.group.add(portrait); 
+                    
+                    
+                    //name label
+                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                    {
+                        var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
+                        nameText.anchor.setTo(0.5,0.5);
+                        nameText.font = 'Michroma';
+                        nameText.fontSize = 12;
+                        nameText.fill = '#FFFFFF';
+                        nameText.align = 'center';   
+                        button.pane.group.add(nameText); 
+                    }
+                    
+                    //job label
+                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
+                    {
+                        var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
+                        jobText.anchor.setTo(0.5,0.5);
+                        jobText.font = 'Michroma';
+                        jobText.fontSize = 12;
+                        jobText.fill = '#FFFFFF';
+                        jobText.align = 'center';   
+                        button.pane.group.add(jobText); 
+                    }    
+                    
+                    //reward label
+                    
+ 
+            }
+            
+            
+
+        }
+        
+        //add arrows
+        if(typeof currentUser.questCharacters !== 'undefined')
+        {
+            if(currentUser.questCharacters.length > (page+1)*portraitsPerPage)
+            {
+                //add right arrow
+                console.log("adding right arrow")
+                var arrow = drawQuestArrow('right')
+                arrow.inputEnabled='true';
+                arrow.direction = 'right'
+                arrow.events.onInputDown.add(turnQuestPage, this);
+                arrow.input.useHandCursor = true;
+                
+            }    
+        }
+        
+        
+        if(page > 0)
+        {
+            var arrow = drawQuestArrow('left')
+            arrow.inputEnabled='true';
+            arrow.direction = 'left'
+            arrow.events.onInputDown.add(turnQuestPage, this);
+            arrow.input.useHandCursor = true;
+        }
+        
+        function drawQuestArrow(direction)
+        {
+            console.log("drawing " + direction + " arrow.")
+            var arrowGraphic = game.add.graphics(0, 0);
+            // var arrowLocation = (direction == 'left' ? new Phaser.Point(285,425) : new Phaser.Point(740,425))
+            var arrowLocation = (direction == 'left' ? new Phaser.Point(button.pane.x+120,button.pane.y+250) : new Phaser.Point(button.pane.x+610,button.pane.y+250))
+            arrowGraphic.beginFill(0xe6a353)
+            var height = 50
+            var width = (direction == 'right' ? 30 : -30 )
+           // arrowGraphic.lineStyle(0, 0x000000, 1);
+            var points = [  new Phaser.Point(0,0),
+                        new Phaser.Point(0,height),
+                        new Phaser.Point(width,0),
+                        new Phaser.Point(0,-height),
+                        new Phaser.Point(0,0)
+                        ]
+            arrowGraphic.drawPolygon(points);
+            
+            var sprite = game.add.sprite(arrowLocation.x, arrowLocation.y , arrowGraphic.generateTexture() ) 
+            sprite.anchor.setTo(0.5,0.5)
+            button.pane.group.add(sprite)
+            arrowGraphic.destroy();
+            return sprite
+        }
+        
+        function turnQuestPage(arrow)
+        {
+            console.log(arrow.direction)
+            //clear portraits
+            button.pane.group.destroy();
+            button.pane.group.alive = false;
+            //load correct page
+            if(arrow.direction == 'left')
+            {
+                questSelection(page-1);
+            } else
+            {
+                console.log("loading page: " + (page+1))
+                questSelection((page+1));
+            }
+        }
+        
+
+        }
         function commMenu(page)
         {
             console.log("drawing comm page: " + page)
@@ -2450,7 +2624,7 @@ function buildShipMenu(spaceStationScene)
                 {
                     console.log("slot: " + i)
                     var backBox = game.add.graphics(0, 0);
-                    backBox.beginFill(0xe6a353);  //orange
+                    backBox.beginFill(0xe6a353);  //pink
                     backBox.lineStyle(0, 0x000000, 1);
                     backBox.drawRect(-50, -50, 100, 100);
                     backBox.endFill();

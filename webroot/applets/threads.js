@@ -209,16 +209,12 @@ function startCampaign()
             characters:{stationAgent:{},engineer:{},weaponsDealer:{},emissary:{}}
           };
          
-         currentUser.characters.stationAgent.questSlot = null
          currentUser.characters.stationAgent.keys = []
          currentUser.characters.stationAgent.startKey = 'start'
-         currentUser.characters.engineer.questSlot = null
          currentUser.characters.engineer.keys = []
          currentUser.characters.engineer.startKey = 'start'
-         currentUser.characters.weaponsDealer.questSlot = null
          currentUser.characters.weaponsDealer.keys = []
          currentUser.characters.weaponsDealer.startKey = 'start'
-         currentUser.characters.emissary.questSlot = null
          currentUser.characters.emissary.keys = []
          currentUser.characters.emissary.startKey = 'start'
         
