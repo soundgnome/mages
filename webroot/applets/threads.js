@@ -205,7 +205,7 @@ function startCampaign()
             password: userPassword,
             campaignChallenges: campaignChallenges,
             challengesMastered: 0,
-            charactersActivated: ['stationAgent','engineer','weaponsDealer','emissary'],
+            charactersActivated: ['stationAgent'],
             characters:{stationAgent:{},engineer:{},weaponsDealer:{},emissary:{}}
           };
          
@@ -446,6 +446,7 @@ function appletTransition(correct) {
     }
     
     function cleanUp () {
+        console.log("cleaning up")
         //transitionSprite.destroy();
         for (var i = 0; i < letterSequence.length; i++)
         {

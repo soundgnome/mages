@@ -30,13 +30,23 @@
         "bounty" : { 
             "text": [
                 "I'm paying a bounty right now.  Communications are detecting a Trad scout ship.  I need you to drive it away with your laser blasters.  I'll pay you 5 credits if you succeed.",
-                "I'm paying another bounty right now.  I'm detecting a couple of Trad scout ships this time.  If you accept, I can give you access to the rest of the station. I'll pay you 5 more credits if you succeed.",
+                "I'm paying another bounty right now.  I'm detecting a couple of Trad scout ships this time. I'll pay you 5 more credits if you succeed.",
                 "I'm paying another bounty right now.  I'm detecting two more Trad scout ships on the border with Alpha sector.  I'll pay you 5 more credits if you succeed.  ",
                 "I'm paying another bounty right now.  Now I've got a squadron of three Trad scout ships on the edge of Delta sector.  This time I suppose it's fair I pay you 10 credits if you succeed.",
                 "I'm paying another bounty right now.  I've got another squadron, this time, with a nasty Trad attack fighter and two scout ships.  If you can drive them away, I'll pay you 30 credits."
-            ], 
+            ],
+            "summaryText": [
+                "Drive away a Trad Scout",
+                "Drive away two Trad Scouts; attempt to disable individually",
+                "Drive away two Trad Scouts; beware hacking array",
+                "Drive away three Trad Scouts",
+                "Drive away two Trad scouts; one Trad fighter"
+            ],
+            "defaultText":"Patrol description here.", 
+            "defaultSummary":"Scare away two trad fighters",
             "keys":[["accept","decline"]] ,
-            "rewards":[5,5,5,10,30]
+            "rewards":[5,5,5,10,30],
+            "defaultReward":15
             },
         "decline" : { 
             "text": "Talk to me again if you're interested in a bounty. ", 
@@ -50,6 +60,7 @@
                 "At least they didn't bring an attack fighter with them.  I'll see you when you get back.",
                 "One more thing - I'll give you access to the station's entire comm array.  You can make some new friends!"
             ],
+            "defaultText":"Everyone appreciates the work you do around here, Sentient Ship.",
             "keys":[]
         },
         "reward" : { 
@@ -60,7 +71,8 @@
                 "It's not so easy taking on three of those scouts at once.  Here are your credits!",
                 "That big one was pretty tough!  I didn't expect the two scouts would each be armed with a torpedo.  They have unlimited range!  Now that you have access to the station's comm system, you'll be able to find out about adding other weapons systems, like torpedoes, to your ship, as well as upgrading your weapons and defense systems. Here are the credits I promised.  I'll always have a bounty available, and you can always come to me to repair your damage.  Explore the station's comm system to talk to the other interesting characters who inhabit this outpost.  Good luck!  This quadrant isn't exactly known as a quiet and calm neighborhood, but you can't beat the view!"
             ],
-            "keys":[]
+            "defaultText":"Here you are, Sentient Ship.",
+            "keys":["bounty"]
         },
         "goodbye" : { 
             "text": "Take care of yourself Sentient Ship.  Don't take any hacked credits!", 
@@ -130,7 +142,7 @@
                 "4Great job!  Here are the credits I promised.",
                 "5Great job!  Here are the credits I promised."
             ],
-            "keys":[]
+            "keys":["bounty"]
         },
         "goodbye" : { 
             "text": "Goodbye.", 

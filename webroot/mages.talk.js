@@ -121,7 +121,16 @@ function scrollText(talk, key, chatScreen, menuButtons)
         }
         if(key == 'bounty' || key == 'accept' || key == 'reward'  )
         {
-            text = talk[key].text[currentUser.characters[talk.keyID].questPoint-1];
+            var characters = game.cache.getJSON('characters');
+            //if our questPoint is past the number of rewards
+            if(currentUser.characters[talk.keyID].questPoint > characters[talk.keyID].bounty.rewards.length )
+            {
+                console.log(talk[key])
+                text = talk[key].defaultText;
+            } else
+            {
+                text = talk[key].text[currentUser.characters[talk.keyID].questPoint-1];    
+            }
         } else
         {
             text = talk[key].text;    
@@ -148,19 +157,50 @@ function scrollText(talk, key, chatScreen, menuButtons)
                 currentTalkKeys.push(item)
             });
     
+    console.log("quest status: " + currentUser.characters[talk.keyID].questComplete)
     if(currentUser.characters[talk.keyID].questComplete == 'true')
     {
+        console.log("adding reward")
         currentTalkKeys.push("reward")    
     }
+    
+
     
     currentTalkKeys.push("goodbye")  //always have a goodbye
     //check for duplicate keys
     var uniqueKeys = [];
+    console.log(currentTalkKeys)
     $.each(currentTalkKeys, function(i, el){
         if($.inArray(el, uniqueKeys) === -1) uniqueKeys.push(el);
     });
-    
     currentTalkKeys = uniqueKeys;
+    
+    
+    currentTalkKeys.forEach(function(key){
+        //if there's a bounty key,
+            if(key == 'bounty')
+            {
+                //check that we're not past the last questpoint with the number of rewards
+                var characters = game.cache.getJSON('characters');
+                if(currentUser.characters[talk.keyID].questPoint > characters[talk.keyID].bounty.rewards.length )
+                {
+                    //if it is, check to see if there's a default
+                    if(typeof characters[talk.keyID].bounty.defaultText !== 'undefined')
+                    {
+                        
+                    } else //if not, take out the bounty key
+                    {
+                        var index = currentTalkKeys.indexOf('bounty');
+                        currentTalkKeys.splice(index, 1);
+                    }
+                }
+                
+                
+                
+            }
+        });
+
+
 
     var wrap = 52
     var lines = 6;
@@ -317,7 +357,7 @@ function scrollText(talk, key, chatScreen, menuButtons)
                             if(item.keyString == 'accept')
                             {
                                 
-                                currentUser.characters[item.keyID].questComplete = false;
+                                currentUser.characters[item.keyID].questComplete = 'false';
                                 if(typeof currentUser.questCharacters === 'undefined')
                                 {
                                     currentUser.questCharacters = []
@@ -336,13 +376,33 @@ function scrollText(talk, key, chatScreen, menuButtons)
                                     currentUser.credits = 0;
                                 } 
                                 //remove the character from the questCharacters array
+                                if(typeof currentUser.questCharacters === 'undefined')
+                                {
+                                    currentUser.questCharacters = [];
+                                }
                                 var index = currentUser.questCharacters.indexOf(item.keyID);
                                 if (index > -1) {
                                     currentUser.questCharacters.splice(index, 1);
                                 }
                                 var characters = game.cache.getJSON('characters');
-                                currentUser.credits += characters[item.keyID].bounty.rewards[currentUser.characters[item.keyID].questPoint];
+                                
+                                if(currentUser.characters[item.keyID].questPoint >= characters[item.keyID].bounty.rewards.length )
+                                {
+                                    currentUser.credits += characters[item.keyID].bounty.defaultReward;
+                                } else
+                                {
+                                    currentUser.credits += characters[item.keyID].bounty.rewards[currentUser.characters[item.keyID].questPoint];   
+                                }
+                                
+                               
+                                checkQuestBenchmarks(); //see if anything important happened
                                 updateUserData();  //save your new money
+                                //remove reward
+                                var index = currentTalkKeys.indexOf(key);
+                                currentTalkKeys.splice(index, 1);
+                                
+                                //add bounty -- this will be conditional later
+                                currentUser.characters[talk.keyID].questComplete = 'rewarded';
                                 
                             }
                         } 
@@ -352,6 +412,17 @@ function scrollText(talk, key, chatScreen, menuButtons)
                             scrollText(item.talk, item.keyString, chatScreen, menuButtons)  
                         } else
                         {
+                            currentTalkKeys.forEach(function(key){
+                                console.log(key.toString())
+                                //get rid of any accept/decline keys and replace with bounty
+                                if(key.toString() == 'accept,decline')
+                                {
+                                    console.log("Found unanswered invitation!")
+                                    currentTalkKeys.splice(currentTalkKeys.indexOf(["accept", "decline"]), 1);
+                                    currentTalkKeys.push('bounty')
+                                    currentUser.characters[talk.keyID].questPoint--;
+                                }
+                            });
                             currentUser.characters[talk.keyID].currentKeys = currentTalkKeys;
                             currentUser.characters[talk.keyID].currentKeys.push("goodbye")
                             currentUser.characters[talk.keyID].startKey = "acquainted"
@@ -361,6 +432,7 @@ function scrollText(talk, key, chatScreen, menuButtons)
                             });
                             scroller = [];
                             currentTalkKeys = null;
+                            updateUserData();
                         }
                         
                         
@@ -373,6 +445,18 @@ function scrollText(talk, key, chatScreen, menuButtons)
             }
 
         }
+        
+        function checkQuestBenchmarks()
+        {
+            switch(currentUser.currentQuestID) {
+                case 'stationAgent5':
+                    currentUser.charactersActivated.push('engineer');
+                    currentUser.charactersActivated.push('weaponsDealer');
+                    currentUser.charactersActivated.push('emissary');
+                    break;
+            }
+        }
+        
     }
 
     

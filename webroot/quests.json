@@ -211,5 +211,44 @@
                         "windScreen":     { "label":"windScreenDefault",     "exists":true,  "offsetX": 0,    "offsetY":  10,   "mirror":false,       "texture": "alienWindScreen4"}
                         }
             }
+    ],
+    "stationAgentDefault" :      
+    [
+            {   "gridX": 9 , 
+                "gridY": 5 , 
+                "toughness": 1.25 , 
+                "torpedoes": 1 , 
+                "hacks": 0, 
+                "hp":{"now":10 , "total":10},
+                "part":
+                        {
+                        "bottomWings":    { "label":"bottomWingsDefault",    "exists":true,   "offsetX": 30,    "offsetY": -10,   "mirror":true,        "texture": "alienBottomWings1"},
+                        "tailSpires":     { "label":"tailSpiresDefault",     "exists":true,   "offsetX": 35,    "offsetY": -95,   "mirror":true,        "texture": "alienTailSpire1"},
+                        "frontSpire":     { "label":"frontSpireDefault",     "exists":true,   "offsetX": 0,    "offsetY":  50,   "mirror":false,       "texture": "alienFrontSpire1"}, 
+                        "hull":           { "label":"hullDefault",           "exists":true,   "offsetX": 0,    "offsetY": 0,      "mirror":false,       "texture": "alienHull1"}, 
+                        "wings":          { "label":"wingsDefault",          "exists":true,   "offsetX": 60,   "offsetY": 0,      "mirror":true,        "texture": "alienWings1"}, 
+                        "wingGuns":       { "label":"wingGunsDefault",       "exists":true,   "offsetX": 60,    "offsetY": -30,   "mirror":true,        "texture": "alienWingGuns1"}, 
+                        "topGunner":      { "label":"topGunnerDefault",      "exists":true,  "offsetX": 0,    "offsetY": -50,   "mirror":false,       "texture": "alienTopGunner1"}, 
+                        "windScreen":     { "label":"windScreenDefault",     "exists":true,  "offsetX": 0,    "offsetY":  10,   "mirror":false,       "texture": "alienWindScreen1"}
+                        }
+            },
+            {   "gridX": 3 , 
+                "gridY": 5 , 
+                "toughness": 1.25 , 
+                "torpedoes": 0 , 
+                "hacks": 2, 
+                "hp":{"now":10 , "total":10},
+                "part":
+                        {
+                        "bottomWings":    { "label":"bottomWingsDefault",    "exists":true,   "offsetX": 30,    "offsetY": -10,   "mirror":true,        "texture": "alienBottomWings1"},
+                        "tailSpires":     { "label":"tailSpiresDefault",     "exists":true,   "offsetX": 35,    "offsetY": -95,   "mirror":true,        "texture": "alienTailSpire1"},
+                        "frontSpire":     { "label":"frontSpireDefault",     "exists":true,   "offsetX": 0,    "offsetY":  50,   "mirror":false,       "texture": "alienFrontSpire1"}, 
+                        "hull":           { "label":"hullDefault",           "exists":true,   "offsetX": 0,    "offsetY": 0,      "mirror":false,       "texture": "alienHull1"}, 
+                        "wings":          { "label":"wingsDefault",          "exists":true,   "offsetX": 60,   "offsetY": 0,      "mirror":true,        "texture": "alienWings1"}, 
+                        "wingGuns":       { "label":"wingGunsDefault",       "exists":true,   "offsetX": 60,    "offsetY": -30,   "mirror":true,        "texture": "alienWingGuns1"}, 
+                        "topGunner":      { "label":"topGunnerDefault",      "exists":true,  "offsetX": 0,    "offsetY": -50,   "mirror":false,       "texture": "alienTopGunner1"}, 
+                        "windScreen":     { "label":"windScreenDefault",     "exists":true,  "offsetX": 0,    "offsetY":  10,   "mirror":false,       "texture": "alienWindScreen1"}
+                        }
+            }
     ]
 }

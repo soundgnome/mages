@@ -57,7 +57,7 @@ function definePlayerShip()
 }
 function continueBattle(questID)
 {
-    battleTargetting=false;
+    battleTargettingWeapon=false;
     if ( battleBackground == null) //redraw the battle arena
     {
         
@@ -727,6 +727,7 @@ function showPlayerAttack() {
         if(!ricochet)
         {
             showEnemyAttacks(1);    
+            battleTargetting = false;
         }
         
         if(weaponSelected==0) //torpedo explosion
@@ -796,6 +797,7 @@ function showPlayerAttack() {
             }
             if(enemiesAlive == 0) //everyone's dead
             {
+                enemyAttackSequenceComplete = false; //to prevent attack buttons
                 lootCheck()
             }
         }
@@ -812,7 +814,7 @@ function lootCheck()
     lootBoxGraphic.lineStyle(0, 0x000000, 1);
     lootBoxGraphic.drawRect(0, 0, 600, 300);
     lootBoxGraphic.endFill();
-    
+    currentUser.characters[currentUser.currentQuest].questComplete = 'true';
     var lootBox = game.add.sprite(100,150,lootBoxGraphic.generateTexture())
     lootBoxGraphic.destroy();
     lootBox.alpha = 0.7
@@ -1453,8 +1455,10 @@ function clearBattle(end) {
         battleShips = [battleShips[0]]  //just keep the player ship
 
         hpBarHandle.forEach(function(item){
-            item.destroy()
-        
+            if(item != null)
+            {
+                item.destroy();    
+            }
         });
         
         hiddenButtons.forEach(function(button){
@@ -1479,7 +1483,7 @@ function enemyShipClick(item) {
     var reticuleYOffset = 4*item.height/55
     if(enemyAttackSequenceComplete || battleFirstRound )
     {
-        if(enemyClickReady){
+        if(enemyClickReady && !battleShips[item.enemyID].dead && battleShips[item.enemyID].alpha == 1){
             buildPaneAndReticule()   
             enemyClickReady = false;
             game.time.events.add(Phaser.Timer.SECOND * .3, resetClickTimer);
@@ -1663,17 +1667,16 @@ function enemyShipClick(item) {
                 modelShip.scale.setTo(0.45,0.45);
                 modelShip.anchor.setTo(0.5,0)
                 battleShipDetailPane.addChild(modelShip);
-                
-
-                
-                
+                modelShip.inputEnabled='true';
+                modelShip.input.useHandCursor = true;
+                modelShip.events.onInputDown.add(showMoreEnemyDetail, modelShip);
                 hpBarHandle[item.enemyID].destroy();
                 drawHPBar(item.enemyID,1,new Phaser.Point(battleShipDetailPane.x,battleShipDetailPane.y));
                 
     
                 
             }
-            if(battleTargetting != false)
+            if(battleTargettingWeapon != false)
             {
                 //add a targetting button
                 targetButton = game.add.sprite(-135, 150, 'battleTarget');
@@ -1692,22 +1695,29 @@ function enemyShipClick(item) {
                 //check range on laser weapon
                 var minLaserRange = 6;
                 var rangePerLaserLevel = 0.5;
-                
+                console.log("setting target to enemy id")
+                battleTargetting = battleShipDetailPane.enemyID;
                 //if(weaponSelected == 1  && lineDistance(battleShips[0], battleShips[battleTargetting]) > ((battleShips[0].laserLevel*rangePerLaserLevel+minLaserRange)*arenaGridSpacing))
                 if(weaponSelected == 1  && lineDistance(battleShips[0].gridLocation, battleShips[battleTargetting].gridLocation) > ((battleShips[0].laserLevel*rangePerLaserLevel+minLaserRange)))
                 {
                     outOfRange()
+                    battleTargetting = false;
+
                 } else if(weaponSelected == 0  && battleShips[0].torpedoes<1)
                 {
                     outOfTorpedoes()
+                    battleTargetting = false;
+
                 } else if(weaponSelected == 3  && battleShips[0].power.now<(20-battleShips[0].hackArrayLevel))
                 {
                     outOfPower()
+                    battleTargetting = false;
+
                 } else
                 {
                     hpBarHandle[battleShipDetailPane.enemyID].destroy();
                     drawHPBar(battleShipDetailPane.enemyID)
-                    battleTargetting = battleShipDetailPane.enemyID;
+                    
                     battleShipDetailPane.destroy(true);
                     battleShipDetailPane = null
                     targetButton = null;
@@ -1768,14 +1778,68 @@ function enemyShipClick(item) {
     
 }
 
+function showMoreEnemyDetail(ship)
+{
+    console.log(ship.parent.enemyID)
+    var quests = game.cache.getJSON('quests');
+    var shipTorpedoes = quests[currentUser.currentQuestID ][ship.parent.enemyID-1].torpedoes
+    var shipHacks = quests[currentUser.currentQuestID][ship.parent.enemyID-1].hacks
+    var weaponRange = 6*quests[currentUser.currentQuestID][ship.parent.enemyID-1].toughness;
+    var alertText = (shipTorpedoes > 0 ? "Torpedoes: " + shipTorpedoes + " " : "") + (shipHacks > 0 ? "Hack Charges: " + shipHacks + " " : "")
+    if(alertText != "") {battleAlert(alertText)}
+    drawRangeCircle()
+    function drawRangeCircle()
+    {
+        if(typeof battleShips[ship.parent.enemyID].rangeCircleDrawn === 'undefined')
+        {
+            battleShips[ship.parent.enemyID].rangeCircleDrawn = false
+        }
+        
+        if(battleShips[ship.parent.enemyID].rangeCircleDrawn == false)
+        {
+            battleShips[ship.parent.enemyID].rangeCircleDrawn = true
+            var rangeEnemyID = ship.parent.enemyID
+            var circleGraphic = game.add.graphics(0,0)
+            circleGraphic.beginFill(0xFF0000, 1);
+            circleGraphic.drawCircle(0, 0, weaponRange*arenaGridSpacing*2);
+            var circleSprite = game.add.sprite(battleShips[ship.parent.enemyID].x-weaponRange*arenaGridSpacing,battleShips[ship.parent.enemyID].y-weaponRange*arenaGridSpacing,circleGraphic.generateTexture())
+            circleGraphic.destroy();
+            circleSprite.alpha=0.3;
+            game.world.bringToTop(battleShips[ship.parent.enemyID]);
+            game.world.bringToTop(battleReticule)
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, fadeOut);
+        }
+        
+        function fadeOut()
+        {
+            var tweenAlpha = game.add.tween(circleSprite).to( { alpha:0 }, 1500, Phaser.Easing.Cubic.Out, true);
+            tweenAlpha.onComplete.add(deleteRangeCircle);    
+        }
+
+        
+        function deleteRangeCircle()
+        {
+
+            battleShips[rangeEnemyID].rangeCircleDrawn = false    
+
+            circleSprite.destroy();
+        }
+        
+    }
+}
 var inRetreat = false;
 function retreat()
 {
     
     inRetreat = true;              
     battleTargetting = null;
-    
-    battleShipDetailPane = null
+    battleTargettingWeapon = false;
+    if(battleShipDetailPane != null)
+        {
+            battleShipDetailPane.destroy(true);
+            battleShipDetailPane=null;
+            targetButton = null;
+        }
     targetButton = null;
     
     if(battleReticule != null)
@@ -1933,7 +1997,7 @@ function movePlayerAnimation(xSpaces, ySpaces)
 function battleButtonOver(item){
     if(battleShips[0].weaponsDisabled == 0  || item.buttonID>3)
     {
-        if(battleTargetting == false && (enemyAttackSequenceComplete || battleFirstRound ))
+        if(battleTargettingWeapon == false && (enemyAttackSequenceComplete || battleFirstRound ))
         {
             if(battleShipDetailPane != null)
             {
@@ -1976,7 +2040,7 @@ function battleButtonOver(item){
 }
 
 function battleButtonOut(item){
-    if(battleTargetting == false)
+    if(battleTargettingWeapon == false)
     {
         item.tint = 0xFFFFFF;
         item.scale.setTo(1)    
@@ -1984,6 +2048,7 @@ function battleButtonOut(item){
     
 }
 
+var battleTargettingWeapon = false;
 var battleTargetting = false; 
 var weaponSelected = null;
 function playerTargetting(buttonID) {
@@ -1994,19 +2059,20 @@ function playerTargetting(buttonID) {
     } else
     {
         weaponSelected = buttonID;
-        if(battleTargetting == false)
+        if(battleTargettingWeapon == false)
         {
-            battleTargetting = buttonID+1; //cannot be 0 due to implicit conversion of 0 to false
+            battleTargettingWeapon = buttonID+1; //cannot be 0 due to implicit conversion of 0 to false
             battleButtons[buttonID].tint = 0xFF0000;
             battleButtons[buttonID].scale.setTo(1)
-        } else if(battleTargetting-1 == buttonID)
+        } else if(battleTargettingWeapon-1 == buttonID)
         {
-            battleTargetting = false;
+            battleTargettingWeapon = false;
             battleButtons[buttonID].tint = 0xFFFFFF;
         } else
         {
-            battleButtons[battleTargetting-1].tint = 0xFFFFFF;
-            battleTargetting = buttonID+1;
+            console.log("setting target")
+            battleButtons[battleTargettingWeapon-1].tint = 0xFFFFFF;
+            battleTargettingWeapon = buttonID+1;
             battleButtons[buttonID].tint = 0xFF0000;
             battleButtons[buttonID].scale.setTo(1)
         }   
@@ -2458,8 +2524,22 @@ function buildShipMenu(spaceStationScene)
             }
         function startBattle(questCharacter)
         {
+            console.log(questCharacter)
             turnOffMenu(true);  //this menu needs to be public so I can turn it back on upon returning
-            continueBattle(questCharacter.questID);
+            currentUser.currentQuest = questCharacter.characterID;
+            var characters = game.cache.getJSON('characters');
+            if(currentUser.characters[questCharacter.characterID].questPoint > characters[questCharacter.characterID].bounty.rewards.length)
+            {
+                currentUser.currentQuestID = questCharacter.characterID + 'Default'
+                continueBattle(currentUser.currentQuestID);
+                
+            } else
+            {
+                currentUser.currentQuestID = questCharacter.questID
+                continueBattle(questCharacter.questID);   
+            }
+            
+            
         }
         
         function questSelection(page)
@@ -2474,64 +2554,140 @@ function buildShipMenu(spaceStationScene)
             var spacing = 150;
             for(var i = page*portraitsPerPage ; i < (page+1)*portraitsPerPage ; i++)
             {
+                //exclude completed quests
                 if(typeof currentUser.questCharacters !== 'undefined' && typeof currentUser.characters[currentUser.questCharacters[i]] !== 'undefined' && typeof currentUser.characters[currentUser.questCharacters[i]].questPoint !== 'undefined'  && currentUser.characters[currentUser.questCharacters[i]].questPoint > 0)
                 {
-                    console.log("slot: " + i)
-                    var backBox = game.add.graphics(0, 0);
-                    backBox.beginFill(0xe6a353);  //purple
-                    backBox.lineStyle(0, 0x000000, 1);
-                    backBox.drawRect(-50, -50, 100, 100);
-                    backBox.endFill();
-                    
-                    
-                    var backBoxSprite = game.add.sprite(350, 120+(i-page*portraitsPerPage)*spacing, backBox.generateTexture());
-                    backBoxSprite.characterID = currentUser.questCharacters[i]
-                    backBox.destroy();
-                    backBoxSprite.anchor.setTo(0.5,0.5);
-                    backBoxSprite.alpha=0.5
-                    backBoxSprite.inputEnabled='true';
-                    backBoxSprite.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
-                    backBoxSprite.events.onInputDown.add(startBattle, this);
-                    backBoxSprite.input.useHandCursor = true;
-                    button.pane.group.add(backBoxSprite); 
-                    
-                    var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
-                    portrait.characterID = currentUser.questCharacters[i]
-                    portrait.anchor.setTo(0.5,0.5);
-                    portrait.inputEnabled='true';
-                    portrait.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
-                    portrait.events.onInputDown.add(startBattle, this);
-                    portrait.input.useHandCursor = true;
-                    button.pane.group.add(portrait); 
-                    
-                    
-                    //name label
-                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                    if(currentUser.characters[currentUser.questCharacters[i]].questComplete == 'false')
                     {
-                        var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
-                        nameText.anchor.setTo(0.5,0.5);
-                        nameText.font = 'Michroma';
-                        nameText.fontSize = 12;
-                        nameText.fill = '#FFFFFF';
-                        nameText.align = 'center';   
-                        button.pane.group.add(nameText); 
+                        console.log("slot: " + i)
+                        var backBox = game.add.graphics(0, 0);
+                        backBox.beginFill(0xe6a353);  //purple
+                        backBox.lineStyle(0, 0x000000, 1);
+                        backBox.drawRect(-50, -50, 100, 100);
+                        backBox.endFill();
+                        
+                        
+                        var backBoxSprite = game.add.sprite(350, 120+(i-page*portraitsPerPage)*spacing, backBox.generateTexture());
+                        backBoxSprite.characterID = currentUser.questCharacters[i]
+                        backBox.destroy();
+                        backBoxSprite.anchor.setTo(0.5,0.5);
+                        backBoxSprite.alpha=0.5
+                        backBoxSprite.inputEnabled='true';
+                        backBoxSprite.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                        backBoxSprite.events.onInputDown.add(startBattle, this);
+                        backBoxSprite.input.useHandCursor = true;
+                        button.pane.group.add(backBoxSprite); 
+                        
+                        var portrait = game.add.sprite(backBoxSprite.x,backBoxSprite.y,currentUser.charactersActivated[i]+'Mini')
+                        portrait.characterID = currentUser.questCharacters[i]
+                        portrait.anchor.setTo(0.5,0.5);
+                        portrait.inputEnabled='true';
+                        portrait.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                        portrait.events.onInputDown.add(startBattle, this);
+                        portrait.input.useHandCursor = true;
+                        button.pane.group.add(portrait); 
+                        
+                        
+                        //name label
+                        if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownName !== 'undefined')
+                        {
+                            var nameText = game.add.text(backBoxSprite.x,backBoxSprite.y+65,currentUser.characters[currentUser.charactersActivated[i]].knownName)
+                            nameText.anchor.setTo(0.5,0.5);
+                            nameText.font = 'Michroma';
+                            nameText.fontSize = 12;
+                            nameText.fill = '#FFFFFF';
+                            nameText.align = 'center';   
+                            button.pane.group.add(nameText); 
+                        }
+                        
+                        //job label
+                        if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
+                        {
+                            var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
+                            jobText.anchor.setTo(0.5,0.5);
+                            jobText.font = 'Michroma';
+                            jobText.fontSize = 12;
+                            jobText.fill = '#FFFFFF';
+                            jobText.align = 'center';   
+                            button.pane.group.add(jobText); 
+                        } 
+                        
+                        //get all the character attributes
+                        var characters = game.cache.getJSON('characters');
+                        
+                        //summary label
+                        
+                        var summaryText = game.add.text(backBoxSprite.x+65,backBoxSprite.y-50,"SUMMARY: " + characters[currentUser.questCharacters[i]].bounty.summaryText[currentUser.characters[currentUser.questCharacters[i]].questPoint-1])
+                        if(currentUser.characters[currentUser.questCharacters[i]].questPoint > characters[currentUser.questCharacters[i]].bounty.rewards.length)
+                        {
+                            summaryText.setText("SUMMARY: " + characters[currentUser.questCharacters[i]].bounty.defaultSummary);
+                        }
+                        summaryText.anchor.setTo(0,0);
+                        summaryText.font = 'Michroma';
+                        summaryText.fontSize = 12;
+                        summaryText.fill = '#FFFFFF';
+                        summaryText.align = 'left';   
+                        summaryText.inputEnabled='true';
+                        summaryText.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                        summaryText.events.onInputDown.add(startBattle, this);
+                        summaryText.input.useHandCursor = true;
+                        summaryText.wordWrap =  true;
+                        summaryText.wordWrapWidth = 350; 
+                        button.pane.group.add(summaryText); 
+                        
+                        
+                        //reward label
+                        var rewardText = game.add.text(backBoxSprite.x+65,summaryText.y+summaryText.height,"BOUNTY: " + characters[currentUser.questCharacters[i]].bounty.rewards[currentUser.characters[currentUser.questCharacters[i]].questPoint-1] + " credits")
+                        if(currentUser.characters[currentUser.questCharacters[i]].questPoint > characters[currentUser.questCharacters[i]].bounty.rewards.length)
+                        {
+                            rewardText.setText("BOUNTY: " + characters[currentUser.questCharacters[i]].bounty.defaultReward);
+                        }
+                        rewardText.anchor.setTo(0,0);
+                        rewardText.font = 'Michroma';
+                        rewardText.fontSize = 12;
+                        rewardText.fill = '#FFFFFF';
+                        rewardText.align = 'left';   
+                        rewardText.inputEnabled='true';
+                        rewardText.questID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                        rewardText.events.onInputDown.add(startBattle, this);
+                        rewardText.input.useHandCursor = true;
+                        button.pane.group.add(rewardText); 
+                            
+                        
+                        
+                        //get all the quest attributes
+                        var quests = game.cache.getJSON('quests');
+                        var questShipsLabel = game.add.group()
+                        
+                        //if I've gone past the questLimit
+                        var questKey;
+                        if(currentUser.characters[currentUser.questCharacters[i]].questPoint > characters[currentUser.questCharacters[i]].bounty.rewards.length)
+                        {
+                            questKey = currentUser.questCharacters[i] + "Default"
+                        } else
+                        {
+                            questKey = currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint;
+                        
+                        }
+                        
+                        var shipLabelArray = []
+                        var shipSpriteQuestID =  currentUser.questCharacters[i] + currentUser.characters[currentUser.questCharacters[i]].questPoint
+                        for(var i = 0; i < quests[questKey].length  ; i++)
+                        {
+                            var shipSprite = game.add.sprite(i==0 ? backBoxSprite.x+70 : shipLabelArray[i-1].x+shipLabelArray[i-1].width+10 , rewardText.y+rewardText.height , buildShip(0.2 , [0,255,0], quests[questKey][i] ))
+                            shipLabelArray.push(shipSprite)
+                            shipSprite.anchor.setTo(0,0);
+                            shipSprite.scale.setTo(0.2*quests[questKey][i].toughness,0.2*quests[questKey][i].toughness);
+                            shipSprite.inputEnabled='true';
+                            shipSprite.questID = shipSpriteQuestID
+                            shipSprite.events.onInputDown.add(startBattle, this);
+                            shipSprite.input.useHandCursor = true;
+                            button.pane.group.add(shipSprite); 
+                            
+                        }
+       
                     }
                     
-                    //job label
-                    if(typeof currentUser.characters[currentUser.charactersActivated[i]].knownJob !== 'undefined')
-                    {
-                        var jobText = game.add.text(backBoxSprite.x,backBoxSprite.y+80,currentUser.characters[currentUser.charactersActivated[i]].knownJob)
-                        jobText.anchor.setTo(0.5,0.5);
-                        jobText.font = 'Michroma';
-                        jobText.fontSize = 12;
-                        jobText.fill = '#FFFFFF';
-                        jobText.align = 'center';   
-                        button.pane.group.add(jobText); 
-                    }    
-                    
-                    //reward label
-                    
- 
             }
             
             

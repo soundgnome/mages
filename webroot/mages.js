@@ -358,7 +358,13 @@ function update() {
         {
             if(threadModeOnly == false)
             {
-                continueBattle();   
+                if ( battleBackground == null)
+                {
+                    
+                }
+                continueBattle();    
+                state = 'battling'
+                  
             } else
             {
                 state = 'applet';
@@ -1655,6 +1661,7 @@ function getCloseAnswer(answer, proximity) {
 
 function render () {
     //game.debug.text("Mages Public Alpha.47 - Start campaign to demo.", 10, 20);
+    //game.debug.text(battleTargetting, 10, 20);
 }
 
 
