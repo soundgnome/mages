@@ -810,6 +810,15 @@ function showPlayerAttack() {
 
 function lootCheck()
 {
+    //increment the currentUser.battlesOne
+    if(typeof currentUser.battlesWon === 'undefined') 
+    { 
+        currentUser.battlesWon = 0; 
+    } else
+    {
+        currentUser.battlesWon++;
+    }
+    
     var lootOverlay = game.add.group();
     var lootBoxGraphic = game.add.graphics(0, 0);
     lootBoxGraphic.beginFill(0x000066);  //dark blue
@@ -2574,20 +2583,21 @@ function buildShipMenu(spaceStationScene)
                 case 3:
                     //Tables
                     console.log("Tables stuff here")
-                    testScoreBoard()
+                    scoreBoard("credits")
                     break;
                 
                 
             }
         
-        function testScoreBoard()
+        function scoreBoard(sortKey)
         {
+            console.log("drawing")
             var ref = new Firebase("https://mages.firebaseio.com/users");
             var itemCount = 0
-            ref.orderByChild("credits").on("child_added", function(snapshot) {
+            ref.orderByChild(sortKey).on("child_added", function(snapshot) {
+                console.log(snapshot.val().userData[sortKey])
                 if(itemCount<10)
                 {
-                    console.log(snapshot.val().userData.credits); 
                     var boxX = 180
                     var boxY = 60+itemCount*80
                     
@@ -2624,13 +2634,13 @@ function buildShipMenu(spaceStationScene)
                     var logoOffsetX = 130;
                     var logoOffsetY = 10;
                     
-                    shipCreditLabel = game.add.text(90+boxX+logoOffsetX,38+boxY+logoOffsetY , snapshot.val().userData.credits)
-                    shipCreditLabel.anchor.setTo(0.5,0.5)
-                    shipCreditLabel.font = 'Michroma';
-                    shipCreditLabel.fontSize = 12;
-                    shipCreditLabel.fill = '#FFFFFF';
-                    shipCreditLabel.align = 'center';
-                    button.pane.group.add(shipCreditLabel)
+                    var tableValueLabel = game.add.text(90+boxX+logoOffsetX,38+boxY+logoOffsetY , snapshot.val().userData[sortKey])
+                    tableValueLabel.anchor.setTo(0.5,0.5)
+                    tableValueLabel.font = 'Michroma';
+                    tableValueLabel.fontSize = 16;
+                    tableValueLabel.fill = '#FFFFFF';
+                    tableValueLabel.align = 'center';
+                    button.pane.group.add(tableValueLabel)
                     
                     var boxNumber = 0;
                     for(var row = 0 ; row < 10 ; row++)
@@ -2656,19 +2666,89 @@ function buildShipMenu(spaceStationScene)
                     }
                 }
                 
-
                 function RGB2Color(r,g,b)
-                  {
+                {
                     return '0x' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
-                  }   
+                }   
                 function byte2Hex(n)
-                  {
+                {
                     var nybHexString = "0123456789ABCDEF";
                     return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
-                  }
+                }
             });
+            
+            //menu buttons
+            for(var i = 0 ; i < 3 ; i++)
+            {
+
+                var scoreTableButton = game.add.sprite(350+i*160, 530, 'scoreTableButton');
+                scoreTableButton.anchor.setTo(0.5,0.55);
+                scoreTableButton.scale.setTo(0.8,0.7);
+                scoreTableButton.alpha=0.5
+                scoreTableButton.inputEnabled='true';
+                scoreTableButton.events.onInputDown.add(changeMenu, this);
+                scoreTableButton.input.useHandCursor = true;
+                scoreTableButton.type = i;
+                button.pane.group.add(scoreTableButton); 
+                
+                if(sortKey == "credits" && i == 0)
+                {
+                    scoreTableButton.alpha=1; 
+                }
+                if(sortKey == "challengesMastered" && i == 1)
+                {
+                    scoreTableButton.alpha=1;
+                }
+                if(sortKey == "battlesWon" && i == 2)
+                {
+                    scoreTableButton.alpha=1;  
+                }
+                
+                var buttonLabel
+                switch(i) {
+                    case 0:
+                        buttonLabel = "CREDITS"
+                        break;
+                    case 1:
+                        buttonLabel = "CHALLENGES MASTERED"
+                        break;
+                    case 2:
+                        buttonLabel = "BATTLES WON"
+                        break;
+                }
+                var scoreTableButtonLabel = game.add.text(350+i*160, 530,buttonLabel)
+                scoreTableButtonLabel.anchor.setTo(0.5,0.5);
+                scoreTableButtonLabel.font = 'Michroma';
+                scoreTableButtonLabel.fontSize = 12;
+                scoreTableButtonLabel.fill = '#FFFFFF';
+                scoreTableButtonLabel.align = 'center';   
+                scoreTableButtonLabel.wordWrap =  true;
+                scoreTableButtonLabel.wordWrapWidth = 70; 
+                button.pane.group.add(scoreTableButtonLabel); 
+                
+            }
         }
-                    
+        
+        function changeMenu(item)
+        {
+            button.pane.group.destroy();
+            button.pane.group = game.add.group();
+            switch(item.type) {
+                    case 0:
+                        console.log("building credits board")
+                        scoreBoard("credits")
+                        break;
+                    case 1:
+                        console.log("building credits board")
+                        scoreBoard("challengesMastered")
+                        break;
+                    case 2:
+                        console.log("building battles won board")
+                        scoreBoard("battlesWon")
+                        break;
+                }
+            
+        }
         function startBattle(questCharacter)
         {
             console.log(questCharacter)

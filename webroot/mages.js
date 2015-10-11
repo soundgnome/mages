@@ -298,6 +298,7 @@ function preload() {
     game.load.json('applets', 'applets/applets.json');
     game.load.json('characters', 'characters.json');
     game.load.json('quests', 'quests.json');
+    game.load.image('scoreTableButton', 'assets/scoreTableButton.png');
 }
 
 function create() {
@@ -1047,7 +1048,11 @@ function updateUserData()
         if(networkStorage)
         {
             console.log(currentUser.lastLogoEdit)
-            currentUser.lastLogoEdit = currentUser.lastLogoEdit.toString();
+            if(typeof currentUser.lastLogoEdit !== 'undefined')
+            {
+                currentUser.lastLogoEdit = currentUser.lastLogoEdit.toString();   
+            }
+            
             game.ref.child("users").child(game.authData.google.id).set({
               userData:currentUser
             });

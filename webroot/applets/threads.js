@@ -81,15 +81,50 @@ function startGame()
                 characters:{stationAgent:{},engineer:{},securityAnalyst:{},emissary:{}}
               };
              
-             currentUser.characters.stationAgent.keys = []
-             currentUser.characters.stationAgent.startKey = 'start'
-             currentUser.characters.engineer.keys = []
-             currentUser.characters.engineer.startKey = 'start'
-             currentUser.characters.securityAnalyst.keys = []
-             currentUser.characters.securityAnalyst.startKey = 'start'
-             currentUser.characters.emissary.keys = []
-             currentUser.characters.emissary.startKey = 'start'
+            currentUser.characters.stationAgent.keys = [];
+            currentUser.characters.stationAgent.startKey = 'start';
+            currentUser.characters.engineer.keys = [];
+            currentUser.characters.engineer.startKey = 'start';
+            currentUser.characters.securityAnalyst.keys = [];
+            currentUser.characters.securityAnalyst.startKey = 'start';
+            currentUser.characters.emissary.keys = [];
+            currentUser.characters.emissary.startKey = 'start';
+            currentUser.battlesWon = 0;
+            currentUser.credits = 0;
             
+            console.log("making first logo")
+            var tints = [0xFFFFFF , 0x000000 ];
+            var redFrequency = .1;
+            var grnFrequency = .1;
+            var bluFrequency = .1;
+            var center = 255;
+            var width = 0;
+            //http://krazydad.com/tutorials/makecolors.php
+            for (var i = 0; i < 32; ++i)
+            {
+               red   = Math.sin(redFrequency*i + 0) * center + width;
+               green = Math.sin(grnFrequency*i + 2*Math.PI/3) * center + width;
+               blue  = Math.sin(bluFrequency*i + 4*Math.PI/3) * center + width;
+            
+               tints.push(RGB2Color(red,green,blue))
+            }
+            currentUser.logo = []
+            for (var i = 0 ; i < 100 ; i++)
+            {
+                currentUser.logo.push(getRandomInt(2,tints.length-1))
+            }
+            
+            function RGB2Color(r,g,b)
+              {
+                return '0x' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+              }   
+            function byte2Hex(n)
+              {
+                var nybHexString = "0123456789ABCDEF";
+                return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+              }
+              
+            //write userData to server
             game.ref.child("users").child(authData.google.id).set({
               userData:currentUser
             });   
