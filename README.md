@@ -14,5 +14,3 @@ Mages is also a game.  It is a spaceship battle RPG that includes the applet cha
 
 The public version of Mages is hosted [here](https://mages.firebaseapp.com/).
 
-.
-
