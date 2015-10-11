@@ -30,7 +30,6 @@ function startGame()
     game.ref = new Firebase("https://Mages.firebaseio.com");
     state = 'prompt';
     getOaklandWeather();
-    netUserMaintenance(networkStandings);
     
     game.ref.authWithOAuthPopup("google", function(error, authData) {
       if (error) {

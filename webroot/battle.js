@@ -2440,7 +2440,7 @@ function buildShipMenu(spaceStationScene)
     buttons.push(game.add.sprite(10,470, 'shipMenuMiningButton'));
     
     var panelTextures = ['shipMenuCombatPane', 'shipMenuShipPane'  , 'shipMenuCommPane' , 'shipMenuMiningPane' ]
-    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'TABLES']
+    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'STORE']
     var buttonCount = 0;
     buttons.forEach(function(button){
             menuItems.add(button)
@@ -2498,6 +2498,7 @@ function buildShipMenu(spaceStationScene)
         {
             var logo = [];
             var shipShadowModel;
+            var shipCreditLabel;
             var shipModel;
             var swatchCursor = null;
             button.pane.group = game.add.group();
@@ -2520,9 +2521,18 @@ function buildShipMenu(spaceStationScene)
                     shipShadowModel.alpha=0.5
                     button.pane.group.add(shipShadowModel)
                     
-                    shipModel= game.add.sprite(650,300,spaceStation.parkedShip.generateTexture())
+                    shipModel = game.add.sprite(650,300,spaceStation.parkedShip.generateTexture())
                     shipModel.alpha = 1;
                     shipModel.anchor.setTo(0.5,0.5)
+                    
+                    var creditLabelString = 'CREDITS: ' + currentUser.credits
+                    shipCreditLabel = game.add.text(650,410 , creditLabelString)
+                    shipCreditLabel.anchor.setTo(0.5,0.5)
+                    shipCreditLabel.font = 'Michroma';
+                    shipCreditLabel.fontSize = 12;
+                    shipCreditLabel.fill = '#FFFFFF';
+                    shipCreditLabel.align = 'center';
+                    button.pane.group.add(shipCreditLabel)
                     
                     button.pane.group.add(shipModel)
 
