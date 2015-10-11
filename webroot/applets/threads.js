@@ -125,9 +125,7 @@ function startGame()
               }
               
             //write userData to server
-            game.ref.child("users").child(authData.google.id).set({
-              userData:currentUser
-            });   
+            updateUserData() 
 
     
             threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;

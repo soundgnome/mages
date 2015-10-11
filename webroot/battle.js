@@ -100,8 +100,6 @@ function continueBattle(questID)
         {
             battleShips[0].loadTexture(buildShip(1,[255,255,255],getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1)))
             enemyAttackSequenceComplete = true;
-            //player dead? reset -- remove this later
-            if(battleShips[0].hp.now <=0 ){battleShips[0].hp.now = battleShips[0].hp.total}
             getQuestShips(questID);
             
         }else
@@ -681,7 +679,9 @@ function showPlayerAttack() {
                         enemyDeathAnimation();
                     }
                     
-                    drawHPBar(projectile.battleTargetting);     
+
+                    drawHPBar(projectile.battleTargetting);   
+                    
                 } else if(weaponSelected == 3) //hackArray
                 {
                     //Stil need to do:
@@ -1079,10 +1079,14 @@ function showEnemyAttacks(enemyPosition) {
             
             function animateMove()
             {
-                battleShips[enemyPosition].shakeTween.stop();
-                var tween = game.add.tween(battleShips[enemyPosition]).to( { x: arenaLeftEdge+((battleShips[enemyPosition].gridLocation.x+bestMove.xPos)*arenaGridSpacing) , y: arenaTopEdge+((battleShips[enemyPosition].gridLocation.y+bestMove.yPos)*arenaGridSpacing) }, 1500, Phaser.Easing.Cubic.Out, true);
-                var tween = game.add.tween(hpBarHandle[enemyPosition]).to( { x: hpBarHandle[enemyPosition].x+bestMove.xPos*arenaGridSpacing , y: hpBarHandle[enemyPosition].y+bestMove.yPos*arenaGridSpacing }, 1500, Phaser.Easing.Cubic.Out, true);
-                tween.onComplete.add(allDone);     
+                if(battleShips[0].hp.now>0)
+                {
+                    battleShips[enemyPosition].shakeTween.stop();
+                    var tween = game.add.tween(battleShips[enemyPosition]).to( { x: arenaLeftEdge+((battleShips[enemyPosition].gridLocation.x+bestMove.xPos)*arenaGridSpacing) , y: arenaTopEdge+((battleShips[enemyPosition].gridLocation.y+bestMove.yPos)*arenaGridSpacing) }, 1500, Phaser.Easing.Cubic.Out, true);
+                    var tween = game.add.tween(hpBarHandle[enemyPosition]).to( { x: hpBarHandle[enemyPosition].x+bestMove.xPos*arenaGridSpacing , y: hpBarHandle[enemyPosition].y+bestMove.yPos*arenaGridSpacing }, 1500, Phaser.Easing.Cubic.Out, true);
+                    tween.onComplete.add(allDone); 
+                }
+    
             }
             
             function allDone()
@@ -1137,39 +1141,43 @@ function showEnemyAttacks(enemyPosition) {
         
         function enemyProjectileMove(type)
         {
-
-            switch(type) {
-            case 'torpedo':
-                    projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'alienWingGuns2');
-                    battleShips[enemyPosition].torpedoes--
-                    projectile.type = type;
-                    projectile.hit = (getRandomInt(0,1)==1);
-                    projectile.scale.setTo(0.5,0.2);
-                    projectile.anchor.setTo(0.5,1);
-                    
-                break;
-            case 'hack':
-                    projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'lightning');
-                    battleShips[enemyPosition].hacks--
-                    projectile.type = type;
-                    projectile.hit = (getRandomInt(0,1)==1);
-                    projectile.scale.setTo(0.1,0.3)
-                    projectile.anchor.setTo(0.5,0.5)
-                    var lightningReference = projectile.animations.add('strike');
-                    lightningReference.play(20, true, false);
-                    var tweenLength = game.add.tween(projectile.scale).to( { x: 0.3, y: 0.3 }, 500, Phaser.Easing.Quartic.Out, true);
-                    if(!projectile.hit) //just disappear because you missed
-                    {
-                        var tweenAlpha = game.add.tween(projectile).to( { alpha: 0 }, 1500, Phaser.Easing.Linear.Out, true);
+            if(battleShips[0].hp.now>0) //player is still alive
+            {
+                switch(type) {
+                    case 'torpedo':
+                            projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'alienWingGuns2');
+                            battleShips[enemyPosition].torpedoes--
+                            projectile.type = type;
+                            projectile.hit = (getRandomInt(0,1)==1);
+                            projectile.scale.setTo(0.5,0.2);
+                            projectile.anchor.setTo(0.5,1);
+                            
+                        break;
+                    case 'hack':
+                            projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'lightning');
+                            battleShips[enemyPosition].hacks--
+                            projectile.type = type;
+                            projectile.hit = (getRandomInt(0,1)==1);
+                            projectile.scale.setTo(0.1,0.3)
+                            projectile.anchor.setTo(0.5,0.5)
+                            var lightningReference = projectile.animations.add('strike');
+                            lightningReference.play(20, true, false);
+                            var tweenLength = game.add.tween(projectile.scale).to( { x: 0.3, y: 0.3 }, 500, Phaser.Easing.Quartic.Out, true);
+                            if(!projectile.hit) //just disappear because you missed
+                            {
+                                var tweenAlpha = game.add.tween(projectile).to( { alpha: 0 }, 1500, Phaser.Easing.Linear.Out, true);
+                            }
+                        break;
+                     case 'laser':
+                            projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'laserPink');
+                            projectile.type = type;
+                            projectile.hit = (getRandomInt(0,1)==1);
+                            beamStrike(battleShips[enemyPosition], battleShips[0], 0.2)
+                        break;
                     }
-                break;
-             case 'laser':
-                    projectile = game.add.sprite(battleShips[enemyPosition].x, battleShips[enemyPosition].y, 'laserPink');
-                    projectile.type = type;
-                    projectile.hit = (getRandomInt(0,1)==1);
-                    beamStrike(battleShips[enemyPosition], battleShips[0], 0.2)
-                break;
+                
             }
+            
             
             projectile.angle = angleBetweenPoints(battleShips[enemyPosition], battleShips[0])+90
             if(projectile.type == 'hack')
@@ -1252,13 +1260,18 @@ function showEnemyAttacks(enemyPosition) {
                     //projectile.buff = {name:'1 in 10 chance critical hit!' , range:[0,(getRandomInt(0,4)==0?1:0)]}
                     damage += getRandomInt(projectile.buff.range[0],projectile.buff.range[1])
                 }
-                console.log("Initial Damade: " + damage)
+                console.log("Initial Damage: " + damage)
                 var damageModifier = 3;  //this is an overall toughness modifier on all enemies
                 damage = damage*damageModifier*battleShips[enemyPosition-1].toughness;
-                console.log("Attack Damade: " + damage)
+                console.log("Attack Damage: " + damage)
                 battleShips[0].hp.now -= damage;
                 hpBarHandle[0].destroy();
                 drawHPBar(0);
+                
+                //player dead?
+                if(battleShips[0].hp.now <=0 ){
+                    game.time.events.add(Phaser.Timer.SECOND * .5, endBattleDueToDeath);
+                }
             } else
                 {
                
@@ -1281,6 +1294,13 @@ function showEnemyAttacks(enemyPosition) {
 
         }
         
+        function endBattleDueToDeath()
+        {
+            console.log("ending battle due to player death")
+            state = 'shipMenu' ;
+            clearBattle(true)  ;
+            updateUserData();
+        }
         function torpedoExplosion()
         {
             var explosion = game.add.sprite(projectile.x, projectile.y, 'kaboom');
@@ -2533,6 +2553,8 @@ function buildShipMenu(spaceStationScene)
                     shipModel = game.add.sprite(650,300,spaceStation.parkedShip.generateTexture())
                     shipModel.alpha = 1;
                     shipModel.anchor.setTo(0.5,0.5)
+                    drawHPBar(0, 1, {x:825,y:170+shipModel.height/2})
+                    button.pane.group.add(hpBarHandle[0])
                     
                     var creditLabelString = 'CREDITS: ' + currentUser.credits
                     shipCreditLabel = game.add.text(650,425 , creditLabelString)
@@ -2591,10 +2613,12 @@ function buildShipMenu(spaceStationScene)
         
         function scoreBoard(sortKey)
         {
+            // var ref = new Firebase("https://dinosaur-facts.firebaseio.com/dinosaurs");
+            // ref.orderByChild("dimensions/height").on("child_added", function(snapshot) 
             console.log("drawing")
             var ref = new Firebase("https://mages.firebaseio.com/users");
-            var itemCount = 0
-            ref.orderByChild(sortKey).on("child_added", function(snapshot) {
+            var itemCount = 9;
+            ref.orderByChild(sortKey).limitToLast(10).on("child_added", function(snapshot) {
                 console.log(snapshot.val().userData[sortKey])
                 if(itemCount<10)
                 {
@@ -2603,11 +2627,11 @@ function buildShipMenu(spaceStationScene)
                     
                     if(itemCount > 5)  //put it in the second column
                     {
-                       boxX = 280 
+                       boxX = 500 
                        boxY = 60+(itemCount-5)*80
                     }
                     
-                    itemCount++
+                    itemCount--
                     var swatchColorBox;
                     var swatchColorSprite;
                     var rowLength;
@@ -2752,20 +2776,28 @@ function buildShipMenu(spaceStationScene)
         function startBattle(questCharacter)
         {
             console.log(questCharacter)
-            turnOffMenu(true);  //this menu needs to be public so I can turn it back on upon returning
-            currentUser.currentQuest = questCharacter.characterID;
-            var characters = game.cache.getJSON('characters');
-            if(currentUser.characters[questCharacter.characterID].questPoint > characters[questCharacter.characterID].bounty.rewards.length)
+            if(currentUser.ship.hp.now > 0)
             {
-                currentUser.currentQuestID = questCharacter.characterID + 'Default'
-                continueBattle(currentUser.currentQuestID);
+                turnOffMenu(true);  //this menu needs to be public so I can turn it back on upon returning
+                currentUser.currentQuest = questCharacter.characterID;
+                var characters = game.cache.getJSON('characters');
+                if(currentUser.characters[questCharacter.characterID].questPoint > characters[questCharacter.characterID].bounty.rewards.length)
+                {
+                    currentUser.currentQuestID = questCharacter.characterID + 'Default'
+                    continueBattle(currentUser.currentQuestID);
+                    
+                } else
+                {
+                    currentUser.currentQuestID = questCharacter.questID
+                    continueBattle(questCharacter.questID);   
+                }
+            
                 
             } else
             {
-                currentUser.currentQuestID = questCharacter.questID
-                continueBattle(questCharacter.questID);   
+                battleAlert("You are too damaged.")
             }
-            
+
             
         }
         
@@ -3409,15 +3441,7 @@ function buildShipMenu(spaceStationScene)
             var logoOffsetX = 130;
             var logoOffsetY = 10;
 
-            if(typeof currentUser.logo === 'undefined')
-            {
-                console.log("making first logo")
-                currentUser.logo = []
-                for (var i = 0 ; i < 100 ; i++)
-                {
-                    currentUser.logo.push(getRandomInt(2,tints.length-1))
-                }
-            }
+            
             
             var boxNumber = 0;
             for(var row = 0 ; row < 10 ; row++)

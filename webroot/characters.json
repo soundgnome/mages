@@ -31,6 +31,18 @@
             "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
             "keys":["bounty"] 
         },
+        "Repair" : { 
+            "text": "I can repair you, one credit for 5 points of HP. ", 
+            "keys":[["Accept repair" , "Decline repair"]]
+        },
+        "Decline repair" : { 
+            "text": "If you need a repair, just ask. ", 
+            "keys":[]
+        },
+        "Accept repair"  : { 
+            "text": "Here you go, all fixed up. ", 
+            "keys":[]
+        },
         "bounty" : { 
             "text": [
                 "I'm paying a bounty right now.  Communications are detecting a Trad scout ship.  I need you to drive it away with your laser blasters.  I'll pay you 5 credits if you succeed.",

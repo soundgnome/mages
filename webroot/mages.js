@@ -1054,7 +1054,10 @@ function updateUserData()
             }
             
             game.ref.child("users").child(game.authData.google.id).set({
-              userData:currentUser
+              userData:currentUser,
+              credits:currentUser.credits,
+              challengesMastered:currentUser.challengesMastered,
+              battlesWon:currentUser.battlesWon
             });
             console.log("Network Userdata updated");
         } else

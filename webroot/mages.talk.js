@@ -119,8 +119,28 @@ function scrollText(talk, key, chatScreen, menuButtons)
         {
             currentUser.characters[talk.keyID].knownJob = talk.job.label;
         }
+        if(key == 'Accept repair')
+        {
+            var repairCost = Math.round((currentUser.ship.hp.total-currentUser.ship.hp.now)/5);
+            currentUser.credits-= repairCost;
+            if(currentUser.credits<0){currentUser.credits=0;}
+            currentUser.ship.hp.now = currentUser.ship.hp.total;
+            
+            
+        }
+        //why is this necessary?
+        if(key == 'Accept repair' || key == 'Decline repair' )
+        {
+            var index = currentTalkKeys.indexOf('Accept repair');
+            currentTalkKeys.splice(index, 1);
+            index = currentTalkKeys.indexOf('Decline repair');
+            currentTalkKeys.splice(index, 1);
+        }
         if(key == 'bounty' || key == 'accept' || key == 'reward'  )
         {
+            //this is needed so the battle can start; blunt fix
+            currentUser.characters[talk.keyID].knownJob = talk.job.label;
+            
             var characters = game.cache.getJSON('characters');
             //if our questPoint is past the number of rewards
             if(currentUser.characters[talk.keyID].questPoint > characters[talk.keyID].bounty.rewards.length )
@@ -167,6 +187,13 @@ function scrollText(talk, key, chatScreen, menuButtons)
 
     
     currentTalkKeys.push("goodbye")  //always have a goodbye
+    
+    //add a heal to stationAgent if ship is damaged
+    if(currentUser.ship.hp.now < currentUser.ship.hp.total  && talk.keyID == "stationAgent")
+    {
+        currentTalkKeys.push("Repair")
+    }
+    
     //check for duplicate keys
     var uniqueKeys = [];
     console.log(currentTalkKeys)
