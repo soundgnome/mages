@@ -2565,6 +2565,7 @@ function buildShipMenu(spaceStationScene)
                     shipCreditLabel.align = 'center';
                     button.pane.group.add(shipCreditLabel)
                     
+                    //
                     button.pane.group.add(shipModel)
 
 
