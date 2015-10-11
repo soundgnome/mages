@@ -4,7 +4,6 @@ var battleButtons = [];
 var battleOrders = null;
 var battleShips = [];
 var battleCombatLabels = [];
-var battleFirstRound = true
 var torpedoLabel = null;
 
 var arenaLeftEdge = 275
@@ -99,14 +98,15 @@ function continueBattle(questID)
         }
         if(battleShips.length == 1) //NEW BATTLE: no enemy ship sprites created yet
         {
-            battleFirstRound=true
+            battleShips[0].loadTexture(buildShip(1,[255,255,255],getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1)))
+            enemyAttackSequenceComplete = true;
             //player dead? reset -- remove this later
             if(battleShips[0].hp.now <=0 ){battleShips[0].hp.now = battleShips[0].hp.total}
             getQuestShips(questID);
             
         }else
         {
-            battleFirstRound = false;
+            enemyAttackSequenceComplete = false;
         }
         
         
@@ -140,6 +140,8 @@ function continueBattle(questID)
         battleButtons[battleButtons.length-1].angle=315;
         battleButtons.push(game.add.sprite(buttonPoint.x+53, buttonPoint.y+53, 'battleNavSmall'))
         battleButtons[battleButtons.length-1].angle=135;
+        
+        battleButtons.push(game.add.sprite(buttonPoint.x, buttonPoint.y, 'battlePass'))
         
         var buttonID = 0;
         battleButtons.forEach(function(item){
@@ -1223,7 +1225,7 @@ function showEnemyAttacks(enemyPosition) {
                     // 1/48 damage per hit.
                     // Player lives: 20 rounds. (with 50% chance of hit)
                     var damage = battleShips[0].hp.total/getRandomInt(12,30);
-                } else if(battleShips.length == 4)
+                } else if(battleShips.length > 3)
                 {   // enemies: 3
                     // upperRange: 16
                     // lowerRange: 50
@@ -1241,18 +1243,22 @@ function showEnemyAttacks(enemyPosition) {
                     //projectile.buff = {name:'1 in 10 chance critical hit!' , range:[0,(getRandomInt(0,4)==0?1:0)]}
                     damage += getRandomInt(projectile.buff.range[0],projectile.buff.range[1])
                 }
+                console.log("Initial Damade: " + damage)
+                var damageModifier = 3;  //this is an overall toughness modifier on all enemies
+                damage = damage*damageModifier*battleShips[enemyPosition-1].toughness;
+                console.log("Attack Damade: " + damage)
                 battleShips[0].hp.now -= damage;
                 hpBarHandle[0].destroy();
                 drawHPBar(0);
-                } else
+            } else
                 {
-                   
+               
                    if(projectile.hit)
                    {
                        battleShips[0].weaponsDisabled = getRandomInt(1,3)
                    }
                 }
-                console.log("TYPE:  " + projectile.type)
+            console.log("TYPE:  " + projectile.type)
                 
 
             } 
@@ -1467,6 +1473,7 @@ function clearBattle(end) {
                     button.input.useHandCursor = true;
                 });
         hiddenButtons.spaceStationScene.alpha=1;
+        spaceStation.parkedShip.loadTexture(buildShip(1,[255,255,255],getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1)));
     } else
     {
         //go to the queued applet
@@ -1481,7 +1488,7 @@ var targetButton = null;
 var enemyClickReady = true;
 function enemyShipClick(item) {
     var reticuleYOffset = 4*item.height/55
-    if(enemyAttackSequenceComplete || battleFirstRound )
+    if(enemyAttackSequenceComplete)
     {
         if(enemyClickReady && !battleShips[item.enemyID].dead && battleShips[item.enemyID].alpha == 1){
             buildPaneAndReticule()   
@@ -1603,7 +1610,7 @@ function enemyShipClick(item) {
     function addDetailPane()
     {
         reticuleLines(false)
-        if( (enemyAttackSequenceComplete && !item.dead) || battleFirstRound )
+        if( enemyAttackSequenceComplete && !item.dead)
         {
             if(battleShipDetailPane == null)
             {
@@ -1857,7 +1864,7 @@ function retreat()
 }
 
 function battleButtonClick(item) {
-    if(enemyAttackSequenceComplete || battleFirstRound )
+    if(enemyAttackSequenceComplete )
     {
         switch(item.buttonID) 
         {
@@ -1907,6 +1914,41 @@ function battleButtonClick(item) {
                 
             case 11: //back-right
                 checkPlayerMove(1, 1)
+                break;
+                
+            case 12: //pass
+                if(battleShipDetailPane != null)
+                {
+                    
+                    battleShipDetailPane.destroy(true);
+                    battleShipDetailPane=null;
+                    targetButton = null;
+                }
+                
+                if(battleReticule != null)
+                {
+                    battleReticule.lines.forEach(function(item){
+                                item.destroy();
+                            });
+                    battleReticule.destroy();
+                    battleReticule = null;
+                }
+                enemyAttackSequenceComplete=false;
+                showEnemyAttacks(1)
+                hpBarHandle.forEach(function(item){
+                    if(item!=null)
+                    {
+                        item.destroy();
+                    }
+                });
+                
+                for(var i = 0; i < battleShips.length ; i++)
+                {
+                    if(!battleShips[i].dead)
+                    {
+                        drawHPBar(i)
+                    }
+                }
                 break;
     
             default:
@@ -1997,7 +2039,7 @@ function movePlayerAnimation(xSpaces, ySpaces)
 function battleButtonOver(item){
     if(battleShips[0].weaponsDisabled == 0  || item.buttonID>3)
     {
-        if(battleTargettingWeapon == false && (enemyAttackSequenceComplete || battleFirstRound ))
+        if(battleTargettingWeapon == false && enemyAttackSequenceComplete )
         {
             if(battleShipDetailPane != null)
             {
@@ -2245,13 +2287,13 @@ function testRollsVsEnemy()
 
 
 
-
+var spaceStation
 function parkingMovement()
 {
     // defineCharacters();
     var starsSprite = game.add.sprite(400,300, 'starfield');
     starsSprite.anchor.setTo(0.5,0.5)
-    var spaceStation = game.add.group();
+    spaceStation = game.add.group();
     spaceStation.add(game.add.sprite(-460, -355, 'spaceStation'))
     var parkingSpots = [
             {x: 597, y: 7, angle: 190, iterations: 190 , finalOffset: {x: -20, y: -10}},
@@ -2279,13 +2321,14 @@ function parkingMovement()
                 parkedShip.scale.setTo(1/3,1/3);
                 parkedShip.anchor.setTo(0.5,0.3)
                 parkedShip.angle = spot.angle
-                spaceStation.add(parkedShip)   
+                spaceStation.add(parkedShip) 
+                
             }
 
         });
         
-    var playerSprite = game.add.sprite(400, 300,  buildShip(1,[255,255,255],getPlayerShip(currentUser.challengesMastered/3+1))); //set to currentUser.challengesMastered/3+1
-    
+    var playerSprite = game.add.sprite(400, 300,  buildShip(1,[255,255,255],getPlayerShip(Math.floor(currentUser.challengesMastered/3)+1))); //set to currentUser.challengesMastered/3+1
+    spaceStation.parkedShip = playerSprite;
     var radius = 700;
     
     playerSprite.angle = 180;
@@ -2397,7 +2440,7 @@ function buildShipMenu(spaceStationScene)
     buttons.push(game.add.sprite(10,470, 'shipMenuMiningButton'));
     
     var panelTextures = ['shipMenuCombatPane', 'shipMenuShipPane'  , 'shipMenuCommPane' , 'shipMenuMiningPane' ]
-    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'MINING']
+    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'TABLES']
     var buttonCount = 0;
     buttons.forEach(function(button){
             menuItems.add(button)
@@ -2470,20 +2513,23 @@ function buildShipMenu(spaceStationScene)
                     break;
                 case 1:
                     //Ship
-                    shipShadowModel= game.add.sprite(650,300,battleShips[0].generateTexture())
+
+                    shipShadowModel= game.add.sprite(650,300,spaceStation.parkedShip.generateTexture())
                     shipShadowModel.anchor.setTo(0.45,0.45)
                     shipShadowModel.tint = 0x000000
                     shipShadowModel.alpha=0.5
                     button.pane.group.add(shipShadowModel)
                     
-                    shipModel= game.add.sprite(650,300,battleShips[0].generateTexture())
+                    shipModel= game.add.sprite(650,300,spaceStation.parkedShip.generateTexture())
+                    shipModel.alpha = 1;
                     shipModel.anchor.setTo(0.5,0.5)
-                    button.pane.group.add(shipModel)
                     
+                    button.pane.group.add(shipModel)
+
 
                     var shipLevelLabels = ['LASERS:' , 'TORPEDOES:' , 'HACK ARRAY:' , 'HEAT SHIELD:' , 'BLAST SHIELD:' , 'FIREWALL:']
                     var shipLevelKeys = ['laserLevel', 'torpedoLevel' , 'hackArrayLevel' , 'heatShieldLevel' , 'blastShieldLevel' , 'firewallLevel']
-                    var shipLevelLocations = [{x:400,y:450},{x:400,y:490},{x:400,y:530},{x:650,y:450},{x:650,y:490},{x:650,y:530}]
+                    var shipLevelLocations = [{x:375,y:450},{x:375,y:490},{x:375,y:530},{x:630,y:450},{x:630,y:490},{x:630,y:530}]
                     
                     drawShipLevelBar(shipLevelLocations[0], shipLevelKeys[0] , shipLevelLabels[0])
                     

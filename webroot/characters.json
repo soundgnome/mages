@@ -10,9 +10,9 @@
             "keys":[] 
         },
         "name"  : { 
-            "text": "My name is Agent Lessig.", 
+            "text": "My name is Agent Lawrence Lessig.", 
             "keys":[] ,
-            "label":"Lessig"
+            "label":"Lawrence Lessig"
         },
         "job"  : { 
             "text": "I am the station agent here at Outpost Station.", 
@@ -21,7 +21,11 @@
         },
         "Outpost Station" : { 
             "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
-            "keys":["Trad"] 
+            "keys":["Trad","territory"] 
+        },
+        "territory" : { 
+            "text": "Territory is an area of land that belongs to or is controlled by a government. ", 
+            "keys":[] 
         },
         "Trad" : { 
             "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
@@ -84,7 +88,7 @@
     {     
         "keyID" : "engineer",
         "start"  : { 
-            "text": "Hello, sentient ship, how may I help you?" ,
+            "text": "Hello, Sentient Ship, Agent Lessig told me all about you." ,
             "keys":["name", "job"] 
         },
         "acquainted"  : { 
@@ -92,130 +96,246 @@
             "keys":[] 
         },
         "name"  : { 
-            "text": "My name is Agent Lessig.", 
+            "text": "My name is Larna Lampry.", 
             "keys":[] ,
-            "label":"Lessig"
+            "label":"Larna Lampry"
         },
         "job"  : { 
-            "text": "I am the station agent here at Outpost Station.", 
-            "keys":[ "Outpost Station" ] ,
-            "label":"Station Agent"
+            "text": "I am the engineer here at Outpost Station.", 
+            "keys":["engineer"] ,
+            "label":"Engineer"
         },
-        "Outpost Station" : { 
-            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
-            "keys":["Trad"] 
+        "engineer" : { 
+            "text": "I have a variety of tasks as the stations's engineer.  I maintain station systems, defend the station from Trad attack, and upgrade and install torpedos in trusted ships.", 
+            "keys":["systems","defend","trusted"] 
         },
-        "Trad" : { 
-            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
+        "systems" : { 
+            "text": "Thanks to the station's artificial intelligence systems, there really isn't much for me to do on a daily basis.  My real responsibility is in case some tragedy occurs.", 
+            "keys":["tragedy", "artificial intelligence"] 
+        },
+        "artificial intelligence" : { 
+            "text": "A.I. means machines machines that have human like intelligence, like you, sentient ship. ", 
+            "keys":[] 
+        },
+        "tragedy" : { 
+            "text": "This part of the quadrant is pretty wild, so you never know what's going to pop up.  Just last week I found some comet tail worms eating the fiber optics in the comm array.", 
+            "keys":["worms","comet"] 
+        },
+        "comet" : { 
+            "text": "A comet is an object in outer space that develops a long, bright tail when it passes near a star.", 
+            "keys":[] 
+        },
+        "worms" : { 
+            "text": "The trad consider them a delicacy.", 
+            "keys":[] 
+        },
+        "defend" : { 
+            "text": "The station is constantly under attack from the Trad.  In fact, even a lightly armed ship like yourself could earn a decent living in credits from running bounties, defending station systems from Trad attack.", 
             "keys":["bounty"] 
+        },
+        "trusted" : { 
+            "text": "Intergalactic Federation rules say that I can't install or upgrade torpedo systems in any ship that hasn't been certified as friendly.", 
+            "keys":["friendly"] 
+        },
+        "friendly" : { 
+            "text": "I can certify a ship as friendly, but it's a complicated series of tests.  It's pretty expensive.  Maybe we could talk after I really get to know you.", 
+            "keys":[] 
         },
         "bounty" : { 
             "text": [
-                "Replace paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
+                "Sensors are detecting laser fire near the station.  Scare away that trad ship and I'll pay you 15 credits.",
+                "Sensors are detecting more laser fire near the station.  Scare away that trad ship and I'll pay you 15 credits.",
+                "Sensors are detecting more laser fire with torpedo explosions this time. Scare away that trad ship and I'll pay you 15 credits.",
+                "Sensors are detecting more laser fire. I'm detecting two sources this time.  Scare away those trad ships and I'll pay you 15 credits.",
+                "Sensors are detecting more laser fire. I'm detecting two sources again this time, and one is armed with torpedoes.  Scare away those trad ships and I'll pay you 15 credits.",
+                "Sensors are detecting more laser fire. I'm detecting two sources again this time, and both are armed with torpedoes.  Scare away those trad ships and I'll pay you 30 credits.",
+                "Sensors are detecting more laser fire. I'm detecting three sources this time.  Scare away those trad ships and I'll pay you 30 credits.",
+                "Sensors are detecting more laser fire and torpedo explosions. I'm detecting three sources again this time.  Scare away those trad ships and I'll pay you 30 credits.",
+                "Sensors are detecting more laser fire and torpedo explosions. I'm detecting three sources again this time, all armed with torpedoes.  Scare away those trad ships and I'll pay you 30 credits.",
+                "Sensors are detecting more laser fire and torpedo explosions. I'm detecting five sources again this time!  Scare away those trad ships and I'll pay you 50 credits."
             ], 
+            "summaryText": [
+                "Scare a Trad fighter away from the station",
+                "Scare a Trad fighter away from the station",
+                "Scare a Trad fighter away from the station",
+                "Scare two Trad fighters away from the station",
+                "Scare two Trad fighters away from the station",
+                "Scare two Trad fighters away from the station",
+                "Scare three Trad fighters away from the station",
+                "Scare three Trad fighters away from the station",
+                "Scare three Trad fighters away from the station",
+                "Scare five Trad fighters away from the station"
+            ],
+            "defaultText":"Sensors are detecting more laser fire and torpedo explosions. I'm detecting three sources again this time.  Scare away those trad ships and I'll pay you 30 credits.", 
+            "defaultSummary":"Scare three Trad fighters away from the station",
             "keys":[["accept","decline"]] ,
-            "rewards":[5,5,5,10,30]
+            "rewards":[15,15,15,15,15,30,30,30,30,50],
+            "defaultReward":30
             },
         "decline" : { 
-            "text": "Talk to me again if you're interested in a bounty. ", 
+            "text": "I'm always here, if you're interested in a bounty. ", 
             "keys":["bounty"] 
         },
         "accept" : { 
             "text": [
-                "1Come back when you're done and I'll pay you the credits.",
-                "2Come back when you're done and I'll pay you the credits.",
-                "3Come back when you're done and I'll pay you the credits.",
-                "4Come back when you're done and I'll pay you the credits.",
-                "5Come back when you're done and I'll pay you the credits."
+                "Scare that trad fighter away, and I'll pay you the credits.",
+                "Scare that trad fighter away, and I'll pay you the credits.",
+                "Scare that trad fighter away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.",
+                "Scare those trad fighters away, and I'll pay you the credits.  Be careful, tangling with five trad fighters can get out of hand pretty quickly."
             ],
+            "defaultText":"I'm detecting three different sources for the hack.  Stop the attack on the firewall and I'll pay you the credits.", 
             "keys":[]
         },
         "reward" : { 
             "text": [
-                "1Great job!  Here are the credits I promised.",
-                "2Great job!  Here are the credits I promised.",
-                "3Great job!  Here are the credits I promised.",
-                "4Great job!  Here are the credits I promised.",
-                "5Great job!  Here are the credits I promised."
+                "Great job!  The station is safer thanks to your work.  Here are the credits.",
+                "Great job!  Word is starting to get around that you're a helpful ship.  Here are the credits.",
+                "Impressive!  Everybody wants to know about the new ship who keeps earning bounties.  Here are the credits.",
+                "Wow!  You may be small, but you're mighty!  Here are the credits.",
+                "Great job!  You're one tough little ship!  Here are the credits.",
+                "Another well deserved bounty!  Here are the credits.",
+                "One little ship takes on three at a time!  Here are the credits.",
+                "Three more Trad fighters will think twice before messing with us.  Here are the credits.",
+                "Another bounty for you, my friend!  Here are the credits.",
+                "I want to thank you, sentient ship.  I'm not sure what we would have done about those five trad fighters without you.  Here are the credits.  Here is a long explanation of stuff."
             ],
+            "defaultText":"Thanks for stopping the attack.  Here are the credits I promised.", 
             "keys":["bounty"]
         },
         "goodbye" : { 
-            "text": "Goodbye.", 
+            "text": "Take care of yourself, sentient ship.", 
             "keys":[] 
         },
         "defaultKeys": ["goodbye"]
     },
-    "weaponsDealer" :      
+    "securityAnalyst" :      
     {     
-        "keyID" : "weaponsDealer",
+        "keyID" : "securityAnalyst",
         "start"  : { 
-            "text": "Hello, sentient ship, how may I help you?" ,
+            "text": "Sentient ship, I've been watching you on the station's sensors." ,
             "keys":["name", "job"] 
         },
         "acquainted"  : { 
-            "text": "Hello again, sentient ship." ,
+            "text": "Greetings, ship." ,
             "keys":[] 
         },
         "name"  : { 
-            "text": "My name is Agent Lessig.", 
+            "text": "My name is Kora Pola.", 
             "keys":[] ,
-            "label":"Lessig"
+            "label":"Kora Pola"
         },
         "job"  : { 
-            "text": "I am the station agent here at Outpost Station.", 
-            "keys":[ "Outpost Station" ] ,
-            "label":"Station Agent"
+            "text": "I'm the station's security analyst.  I protect the station from hacking attacks.  I also maintain the firewall and upgrade and install hacking systems in trusted ships.", 
+            "keys":["firewall","protect","trusted" ] ,
+            "label":"Station Security"
         },
-        "Outpost Station" : { 
-            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
-            "keys":["Trad"] 
+        "firewall" : { 
+            "text": "The firewall is like a shield that protects the station from Trad hacking attacks.", 
+            "keys":["hacking attack"] 
         },
-        "Trad" : { 
-            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
-            "keys":["bounty"] 
+        "hacking attack" : { 
+            "text": "A hacking attack will temporarily freeze the enemy's combat system.  You can fly right by them, even flash them a big smile, and there's nothing they can do about it.", 
+            "keys":["smile"] 
+        },
+        "smile" : { 
+            "text": "Of course, if we're talking about a Frumptarian slothbeast, it's a creature with a beautiful smile, but nobody ever sees it because it's on the bottom of its foot. ", 
+            "keys":["foot"] 
+        },
+        "feet" : { 
+            "text": "It's more like a snail's foot. ", 
+            "keys":[] 
+        },
+        "trusted" : { 
+            "text": "These are powerful systems we're talking about here.  What if someone told you they had the key to any lock on any door in the galaxy?  That's the kind of power I have.  I don't take that responsibility lightly.", 
+            "keys":["responsibility"] 
+        },
+        "responsibility" : { 
+            "text": "I haven't met very many responsible individuals around here.  Maybe I just did.  Time will tell I guess.", 
+            "keys":[] 
+        },
+        "protect" : { 
+            "text": "Those Trad sirrahs are always attacking the station's firewall.  If you want to earn a bounty, you can ask me, any time. ", 
+            "keys":["bounty", "sirrah"] 
+        },
+        "sirrah" : { 
+            "text": "Don't you have a slang dictionary installed, sentient ship?  It actually comes from old term used to talk down to misbehaving children.  William Shakespeare, the great English playwrite used it in his plays.  Now we use it to mean any Trad - or anyone that helps them.  Of course, we would never use that word around a child now.  Not even a badly behaved one.", 
+            "keys":[] 
         },
         "bounty" : { 
             "text": [
-                "Replace paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "2I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "3I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "4I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station.",
-                "5I'm paying a bounty right now.  I'm trying to get these Trad ships that keep attacking our communication arrays.  If you accept, I can give you access to the rest of the station."
+                "Sensors are detecting a hack attempt on one of the commmunication satellites.  The Nacktorbians are complaining that they can't watch the fleegle game.  Why don't you check it out?  I'll pay you 15 credits if you get the game back on.",
+                "Sensors are detecting another hack attempt on one of the commmunication satellites.  This time the Florbian 1,000 year knitting marathon is blurry.  Why don't you check it out?  I'll pay you 15 more credits if you get the marathon back on.",
+                "Sensors are detecting another hack attempt on one of the commmunication satellites.  This time it's the Raiders game.  You know how Raiders fans can be.  Why don't you check it out?  I'll pay you 15 more credits if you get the game back on.",
+                "Sensors are detecting another hack attempt on one of the commmunication satellites.  This time it's an old Taylor Swift concert that the Napapapatrons are into right now?  Why don't you check it out?  I'll pay you 15 more credits if you get the concert back on.",
+                "Sensors are detecting a hack attempt on one of the commmunication satellites.  I know you're probably getting tired of being the cable repairperson, but we can't seem to get anything on the entertainment comm signals at all?  Why don't you check it out?  I'll pay you 15 credits more if you get the entertainment array back on.",
+                "Sensors are detecting a hack attempt on one of the commmunication satellites.  This time it's pretty serious.  We can't communicate with any off-station systems.  We're completely radio silent.  Why don't you check it out?  I'm willing to pay you 30 credits, if you succeed.",
+                "Sensors are detecting a hack attempt on gravity control systems.  If this keeps up we're all going to start gaining some serious weight, if you know what I mean. Why don't you check it out?  I'm willing to pay you 30 credits, if you succeed.",
+                "Sensors are detecting a hack attempt on our solar arrays.  If it isn't stopped soon, engineering is going to have a hard time keeping the lights on around here.  Why don't you check it out?  I'm willing to pay you 30 credits, if you succeed.",
+                "Sensors are detecting a hack attempt on the station greenhouse systems.  We need to stop it before our important food crops die.  Why don't you check it out?  I'm willing to pay you 30 credits, if you succeed.",
+                "Sensors are detecting a hack attempt on our life support systems!  We need to stop it soon, or the station will need to be evacuated.  Why don't you check it out?  I'm willing to pay you 50 credits, if you succeed."
             ], 
+            "summaryText": [
+                "Stop a Trad hacker from disrupting the fleegle game",
+                "Stop a Trad hacker from disrupting the knitting marathon",
+                "Stop a Trad hacker from disrupting the Raider's game",
+                "Stop two Trad hackers from disrupting the Taylor Swift concert",
+                "Stop two Trad hackers from disrupting the entertainment comm signal",
+                "Stop two Trad hackers from disrupting the station comm signal",
+                "Stop three Trad hackers from disrupting the gravity system",
+                "Stop three Trad hackers from disrupting the solar arrays",
+                "Stop three Trad hackers from disrupting the greenhouse systems",
+                "Stop three Five hackers from disrupting the life support system"
+            ],
+            "defaultText":"Sensors are detecting a hack attempt on the station firewall.  Why don't you check it out?  I'm willing to pay you 30 credits, if you succeed.", 
+            "defaultSummary":"Stop three Trad hackers from disrupting the firewall",
             "keys":[["accept","decline"]] ,
-            "rewards":[5,5,5,10,30]
+            "rewards":[15,15,15,15,15,30,30,30,30,50],
+            "defaultReward":30
             },
         "decline" : { 
-            "text": "Talk to me again if you're interested in a bounty. ", 
+            "text": "You know where to find me, if you're interested in a bounty. ", 
             "keys":["bounty"] 
         },
         "accept" : { 
             "text": [
-                "1Come back when you're done and I'll pay you the credits.",
-                "2Come back when you're done and I'll pay you the credits.",
-                "3Come back when you're done and I'll pay you the credits.",
-                "4Come back when you're done and I'll pay you the credits.",
-                "5Come back when you're done and I'll pay you the credits."
+                "I'm only detecting a single hacking source.  Clear up the signal and I'll pay you the credits.",
+                "I'm only detecting a single hacking source.  Clear up the signal and I'll pay you the credits.",
+                "I'm only detecting a single hacking source.  Clear up the signal and I'll pay you the credits.",
+                "I'm detecting two different sources for the hack.  Clear up the signal and I'll pay you the credits.",
+                "I'm detecting two different sources for the hack.  Clear up the signal and I'll pay you the credits.",
+                "I'm detecting two different sources for the hack.  Clear up the signal and I'll pay you the credits.",
+                "I'm detecting three different sources for the hack.  Stop the attack on the gravity system and I'll pay you the credits.",
+                "I'm detecting three different sources for the hack.  Stop the attack on the solar arrays and I'll pay you the credits.",
+                "I'm detecting three different sources for the hack. Stop the attack on the station greenhouse systems and I'll pay you the credits.",
+                "I'm detecting five different sources for the hack!  Stop the attack on the life sypport system and I'll pay you the credits."
             ],
+            "defaultText":"I'm detecting three different sources for the hack.  Stop the attack on the firewall and I'll pay you the credits.", 
             "keys":[]
         },
         "reward" : { 
             "text": [
-                "1Great job!  Here are the credits I promised.",
-                "2Great job!  Here are the credits I promised.",
-                "3Great job!  Here are the credits I promised.",
-                "4Great job!  Here are the credits I promised.",
-                "5Great job!  Here are the credits I promised."
+                "I'll never understand those Nacktorbians and their obsession with fleegle.  Here are the credits.",
+                "The Florbians do love their knitting.  Here are the credits.",
+                "I'll never understand those Oaklandites and their obsession with the Raiders.  Here are the credits.",
+                "I liked her music more before she started that ruthless clone army.  Here are the credits.",
+                "Thanks.  Without entertainment people around here tend to get a little cranky.  Here are the credits.",
+                "Thanks.  The emissary kept complaining because it's his great great great great great grandmother's birthday.  Apparently, she was frozen a long time ago, and thawed out recenty when the cure to her disease was discovered.  Here are the credits.",
+                "They say the gravity system adds 10 pounds.  Here are the credits.",
+                "Thanks.  Those solar cells are pretty important.  Without them, we can't run many of the station's important systems.  I wonder if that sirrah had any idea the kind of damage he was causing.  Here are the credits.",
+                "Thanks a lot.  If those plants had died from those three sirrahs, we'd be eating canned goods for the next three months until a supply ship returns from Earth.  Here are the credits.",
+                "Thanks.  I need those life support systems, because unlike you, I'm alive.  Here are the credits.  Here is a long explanation of stuff."
             ],
-            "keys":[]
+            "defaultText":"Thanks for stopping the firewall attack.  Here are the credits I promised.", 
+            "keys":["bounty"]
         },
         "goodbye" : { 
-            "text": "Goodbye.", 
+            "text": "Keep your ports closed, sentient ship.", 
             "keys":[] 
         },
         "defaultKeys": ["goodbye"]
@@ -224,29 +344,29 @@
     {     
         "keyID" : "emissary",
         "start"  : { 
-            "text": "Hello, sentient ship, how may I help you?" ,
+            "text": "I am a very busy man.  Why have you disturbed me?" ,
             "keys":["name", "job"] 
         },
         "acquainted"  : { 
-            "text": "Hello again, sentient ship." ,
+            "text": "What is it this time?" ,
             "keys":[] 
         },
         "name"  : { 
-            "text": "My name is Agent Lessig.", 
+            "text": "I am Landrite Cordoza, of course!", 
             "keys":[] ,
-            "label":"Lessig"
+            "label":"Landrite Cordoza"
         },
         "job"  : { 
-            "text": "I am the station agent here at Outpost Station.", 
-            "keys":[ "Outpost Station" ] ,
-            "label":"Station Agent"
+            "text": "You haven't heard of me?  I am the human emissary to the Intergalactic Federation.", 
+            "keys":[  ] ,
+            "label":"I.F. Emissary"
         },
-        "Outpost Station" : { 
-            "text": "It's the last edge of Human territory.  Anything beyond the station is under Trad control.", 
-            "keys":["Trad"] 
+        "Exelor" : { 
+            "text": "That planet is strictly off-limits unless you have the correct security clearance.  Of course, as an I.F. emmisary, I could prepare the paperwork for you.  I wouldn't do that for just anyone, though.  Only a true friend.", 
+            "keys":["friend"] 
         },
-        "Trad" : { 
-            "text": "The Trad are an evil race of aliens.  They'll attack you on site if they see you.  Of course, you could always attack them, if you want to earn a bounty. ", 
+        "friend" : { 
+            "text": "My friends like to do things for me, and I like to do things for them.  I've got some work I need done right now, in fact, and I'm paying a bounty for it.", 
             "keys":["bounty"] 
         },
         "bounty" : { 

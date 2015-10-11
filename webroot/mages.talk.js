@@ -414,7 +414,7 @@ function scrollText(talk, key, chatScreen, menuButtons)
                         {
                             currentTalkKeys.forEach(function(key){
                                 console.log(key.toString())
-                                //get rid of any accept/decline keys and replace with bounty
+                                //get rid of any accept/decline keys and replace with bounty; decerement the questpoint
                                 if(key.toString() == 'accept,decline')
                                 {
                                     console.log("Found unanswered invitation!")
@@ -451,7 +451,7 @@ function scrollText(talk, key, chatScreen, menuButtons)
             switch(currentUser.currentQuestID) {
                 case 'stationAgent5':
                     currentUser.charactersActivated.push('engineer');
-                    currentUser.charactersActivated.push('weaponsDealer');
+                    currentUser.charactersActivated.push('securityAnalyst');
                     currentUser.charactersActivated.push('emissary');
                     break;
             }

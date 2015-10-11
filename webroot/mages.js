@@ -49,9 +49,7 @@ function preload() {
     game.load.image('helpScreen1', 'assets/helpScreen1.png');
     game.load.image('helpScreen2', 'assets/helpScreen2.png');
     game.load.image('helpScreen3', 'assets/helpScreen3.png');
-    game.load.image('startCampaignButton', 'assets/startCampaignButton.png');
-    game.load.image('continueCampaignButton', 'assets/continueCampaignButton.png');
-    
+    game.load.image('startCampaignButton', 'assets/startGameButton.png');
     
     //widget assets
     game.load.image('whiteBox80', 'assets/whiteBox.png');
@@ -255,6 +253,7 @@ function preload() {
     game.load.image('battleTorpedo', 'assets/battleTorpedo.png');
     game.load.image('battleNavLarge', 'assets/battleNavLarge.png');
     game.load.image('battleNavSmall', 'assets/battleNavSmall.png');
+    game.load.image('battlePass', 'assets/battlePass.png');
     game.load.image('battleShipDetailPane', 'assets/battleShipDetailPane.png');
     game.load.image('battleTarget', 'assets/battleTarget.png');
     game.load.image('battleReticule', 'assets/battleReticule.png');
@@ -286,8 +285,8 @@ function preload() {
     game.load.image('emissaryMini', 'assets/portraits/emissaryMini.png');
     game.load.image('engineer', 'assets/portraits/engineer.png');
     game.load.image('engineerMini', 'assets/portraits/engineerMini.png');
-    game.load.image('weaponsDealer', 'assets/portraits/weaponsDealer.png');
-    game.load.image('weaponsDealerMini', 'assets/portraits/weaponsDealerMini.png');
+    game.load.image('securityAnalyst', 'assets/portraits/securityAnalyst.png');
+    game.load.image('securityAnalystMini', 'assets/portraits/securityAnalystMini.png');
     
     game.load.image('spaceStation', 'assets/spaceStation.png');
     game.load.image('stationField', 'assets/stationField.png');
@@ -389,7 +388,6 @@ var buildButton;
 var helpButton;
 var threadButton;
 var startCampaignButton;
-var continueCampaignButton;
 var titleText;
 function title() {
     if(titleInitiated==0)
@@ -432,18 +430,12 @@ function title() {
         helpButton.anchor.setTo(0.5, 0.5);
         
         startCampaignButton = game.add.sprite(0, 0, 'startCampaignButton');
-        startCampaignButton.x = 250;
+        startCampaignButton.x = 400;
         startCampaignButton.y = 500;
         startCampaignButton.inputEnabled='true';
         startCampaignButton.events.onInputDown.add(startCampaignButtonClick, this);
         startCampaignButton.anchor.setTo(0.5, 0.5);
         
-        continueCampaignButton = game.add.sprite(0, 0, 'continueCampaignButton');
-        continueCampaignButton.x = 550;
-        continueCampaignButton.y = 500;
-        continueCampaignButton.inputEnabled='true';
-        continueCampaignButton.events.onInputDown.add(continueCampaignButtonClick, this);
-        continueCampaignButton.anchor.setTo(0.5, 0.5);
     }
 }
 
@@ -467,12 +459,9 @@ function buildButtonClick() {
 }
 
 function startCampaignButtonClick() {
-    startCampaign();
+    startGame();
 }
 
-function continueCampaignButtonClick() {
-    loadCampaign();
-}
 
 var helpSprite;
 var helpScreen=1;
@@ -532,7 +521,6 @@ function appletSelection() {
     loadButton.destroy(true);
     threadButton.destroy(true);
     startCampaignButton.destroy(true);
-    continueCampaignButton.destroy(true);
     appletIDPrompt();  //this is in mages.dialogs.js
 }
 
@@ -543,7 +531,6 @@ function threadSelection() {
     loadButton.destroy(true);
     threadButton.destroy(true);
     startCampaignButton.destroy(true);
-    continueCampaignButton.destroy(true);
     threadPrompt(); 
 }
 
@@ -1059,14 +1046,10 @@ function updateUserData()
     {
         if(networkStorage)
         {
-            $.ajax({
-                url: "https://openws.herokuapp.com/"+openWSCollection+"/"+userID+"?apiKey="+openWSapiKey,
-                type: "PUT",
-                data: currentUser
-                })
-            .done(function(data) {
-                console.log("Network Userdata updated");
-            });    
+            game.ref.child("users").child(game.authData.google.id).set({
+              userData:currentUser
+            });
+            console.log("Network Userdata updated");
         } else
         {
             localStorage.setObject(currentUser.name,currentUser);
@@ -1125,7 +1108,6 @@ function setupCanvas() {
     loadButton.destroy(true);
     threadButton.destroy(true);
     startCampaignButton.destroy(true);
-    continueCampaignButton.destroy(true);
     var background = game.add.sprite(0, 0, 'grid');
     defineMenu();
     buildState='';

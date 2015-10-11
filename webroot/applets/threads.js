@@ -13,9 +13,7 @@ var userID;
 
 var networkStorage = true;
 var networkStandings = { key:'sortUsersByKey' , keyToSort:'challengesMastered' , sorted:'unavailable'} ;
-var openWSCollection = 'mages_users';
-// go to https://openws-app.herokuapp.com/ to get your own WS api key:
-var openWSapiKey = '0527e44c67c8d70e86a8e8a77f1e0bbb';
+
 
 function loadThreads()
 {
@@ -27,217 +25,122 @@ function loadThreads()
     thread[5]=["6-1","6-2","6-2.1","6-3","6-4","6-5","6-6","6-7","6-8","6-8.5","6-8.7","6-9","9","29","30","6-10","6-11","6-12","6-13","6-14","6-15","6-16","6-17","6-18","6-19","6-20","6-21","6-22","6-23","6-24","6-25"];
 }
 
-function loadCampaign()
+function startGame()
 {
+    game.ref = new Firebase("https://Mages.firebaseio.com");
     state = 'prompt';
     getOaklandWeather();
     netUserMaintenance(networkStandings);
-    bootbox.prompt("Type user name:", function(result) {                
-        if (result == "") {                                             
-        } else
-        {
-            if(networkStorage)
+    
+    game.ref.authWithOAuthPopup("google", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        var isNewUser;
+        game.authData = authData;
+        console.log("Authenticated successfully with payload:", authData);
+        var usersRef = new Firebase('https://Mages.firebaseio.com/users');
+        usersRef.child(authData.google.id).once('value', function(snapshot) {
+            console.log(snapshot.val())
+            isNewUser = (snapshot.val() == null);
+            if(isNewUser)
             {
-                var query = JSON.stringify({name:result});
-                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-                    .done(function(data) {
-                    if (typeof data[0] === 'undefined' ) 
-                    { 
-                        bootbox.alert("User not found in database!")
-                    } else
-                    {
-                        bootbox.prompt({
-                            title: "Type password:", 
-                            inputType: "password",
-                            callback: function(passwordResult) {
-                                if(data[0].password == passwordResult)
-                                {
-                                    loadUser(data[0]);   
-                                } else
-                                {
-                                    bootbox.alert("Incorrect password.")
-                                }
-                            }
-                        });
-        
-                    }
-                  });   
+                storeNewUser()
             } else
             {
-                var data = localStorage.getObject(result)
-                console.log(data)
-                if (typeof data === 'undefined' ) 
-                    { 
-                        bootbox.alert("User not found in database!")
-                    } else
-                    {
-                        bootbox.prompt({
-                            title: "Type password:", 
-                            inputType: "password",
-                            callback: function(passwordResult) {
-                                if(data.password == passwordResult)
-                                {
-                                    loadUser(data);   
-                                } else
-                                {
-                                    bootbox.alert("Incorrect password.")
-                                }
-                            }
-                        });
-        
-                    }
+                loadOldUser()
             }
+          });
+         
+        function storeNewUser() 
+        {
+            console.log(game.ref.child("users").child(authData.google.id))
+
+            helpButton.destroy(true);
+            buildButton.destroy(true);
+            titleText.destroy(true);
+            loadButton.destroy(true);
+            threadButton.destroy(true);
+            startCampaignButton.destroy(true);
             
+            appletInitiated=0;
+            threadMode = 1;
+            campaignMode = 1;
+        
+            campaignFurthestPoint = [1,5];
+            campaignChallenges = [  {threadNumber:1 , threadPoint:1 , mastered:0} , 
+                                    {threadNumber:1 , threadPoint:2 , mastered:0} ,
+                                    {threadNumber:1 , threadPoint:3 , mastered:0} ,
+                                    {threadNumber:1 , threadPoint:4 , mastered:0} ,
+                                    {threadNumber:1 , threadPoint:5 , mastered:0} ]
+            currentCampaignChallenge = getRandomInt(0,4);
+            
+            currentUser = {
+                campaignChallenges: campaignChallenges,
+                challengesMastered: 0,
+                charactersActivated: ['stationAgent'],
+                characters:{stationAgent:{},engineer:{},securityAnalyst:{},emissary:{}}
+              };
+             
+             currentUser.characters.stationAgent.keys = []
+             currentUser.characters.stationAgent.startKey = 'start'
+             currentUser.characters.engineer.keys = []
+             currentUser.characters.engineer.startKey = 'start'
+             currentUser.characters.securityAnalyst.keys = []
+             currentUser.characters.securityAnalyst.startKey = 'start'
+             currentUser.characters.emissary.keys = []
+             currentUser.characters.emissary.startKey = 'start'
+            
+            game.ref.child("users").child(authData.google.id).set({
+              userData:currentUser
+            });   
+
+    
+            threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
+            threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
+            loadAppletID=thread[threadNumber-1][threadPoint-1];
+            showWelcomeMessage();
+            titleBack.destroy(true);
         }
-        }); 
-
-    function loadUser(userData)
-    {
-    userID = userData._id;
-
-    helpButton.destroy(true);
-    buildButton.destroy(true);
-    titleText.destroy(true);
-    loadButton.destroy(true);
-    threadButton.destroy(true);
-    startCampaignButton.destroy(true);
-    continueCampaignButton.destroy(true);
-
-    appletInitiated=0;
-    threadMode = 1;
-    campaignMode = 1;
-
-    campaignFurthestPoint = [1,5];
-    //campaignChallenges = localStorage.getObject("campaignChallenges")
-    campaignChallenges = userData.campaignChallenges;
-    
-    currentUser = userData;
-    currentCampaignChallenge = getRandomInt(0,4);
-    threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
-    threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
-    loadAppletID=thread[threadNumber-1][threadPoint-1];
-    
-    showWelcomeMessage();
-   // state = 'applet';
-    
-    titleBack.destroy(true);  
-    }
-    
-}
-
-function startCampaign()
-{
-    getOaklandWeather();
-    netUserMaintenance(networkStandings);
-    state = 'prompt';
-        bootbox.prompt("Type a new user name:", function(result) {   
-        if (result === "") {                                             
-        } else
+        
+        function loadOldUser()
         {
-            if(networkStorage)
-            {
-                var query = JSON.stringify({name:result});
-                $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-                    .done(function(data) {
-                        if (typeof data[0] === 'undefined' ) 
-                        {
-                            getNewPassword(result);  
-                        } else
-                        {
-                            bootbox.alert("That user already exists!") 
-                        }
-                    });   
-            } else
-            {
-                var data = localStorage.getObject(result)
-                if (typeof data === 'undefined' ) 
-                {
-                    getNewPassword(result);  
-                } else
-                {
-                    bootbox.alert("That user already exists!") 
-                }
-            }
-
-        }
-        }); 
-                
-
-    function getNewPassword(userName) {
-        bootbox.prompt("Type a password for your new user (minimum 6 characters):", function(result) {                
-                if (result === null) {                                             
-                   getNewPassword()
-                } else if (result.length < 6)
-                {
-                    bootbox.alert("Must be 6 or more characters!" , getNewPassword)
-                } else
-                {
-                    
-                    newCampaign(userName, result);
-                }
-                }); 
-    }
-    
-    function newCampaign(userName, userPassword)
-    {
         helpButton.destroy(true);
         buildButton.destroy(true);
         titleText.destroy(true);
         loadButton.destroy(true);
         threadButton.destroy(true);
         startCampaignButton.destroy(true);
-        continueCampaignButton.destroy(true);
-        
+    
         appletInitiated=0;
         threadMode = 1;
         campaignMode = 1;
     
         campaignFurthestPoint = [1,5];
-        campaignChallenges = [  {threadNumber:1 , threadPoint:1 , mastered:0} , 
-                                {threadNumber:1 , threadPoint:2 , mastered:0} ,
-                                {threadNumber:1 , threadPoint:3 , mastered:0} ,
-                                {threadNumber:1 , threadPoint:4 , mastered:0} ,
-                                {threadNumber:1 , threadPoint:5 , mastered:0} ]
-        currentCampaignChallenge = getRandomInt(0,4);
+        //campaignChallenges = localStorage.getObject("campaignChallenges")
+        var usersRef = new Firebase('https://Mages.firebaseio.com/users');
         
-        currentUser = {
-            name: userName,
-            password: userPassword,
-            campaignChallenges: campaignChallenges,
-            challengesMastered: 0,
-            charactersActivated: ['stationAgent'],
-            characters:{stationAgent:{},engineer:{},weaponsDealer:{},emissary:{}}
-          };
-         
-         currentUser.characters.stationAgent.keys = []
-         currentUser.characters.stationAgent.startKey = 'start'
-         currentUser.characters.engineer.keys = []
-         currentUser.characters.engineer.startKey = 'start'
-         currentUser.characters.weaponsDealer.keys = []
-         currentUser.characters.weaponsDealer.startKey = 'start'
-         currentUser.characters.emissary.keys = []
-         currentUser.characters.emissary.startKey = 'start'
+        usersRef.child(authData.google.id).once('value', function(snapshot) {
+            console.log(snapshot.val())
+            var userData = snapshot.val().userData;
+            campaignChallenges = userData.campaignChallenges;
+            
+            currentUser = userData;
+            currentCampaignChallenge = getRandomInt(0,4);
+            threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
+            threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
+            loadAppletID=thread[threadNumber-1][threadPoint-1];
+            
+            showWelcomeMessage();
+            // state = 'applet';
+            
+            titleBack.destroy(true);  
+          });
         
-        if(networkStorage)
-        {
-            $.post("https://openws.herokuapp.com/"+openWSCollection+"/?apiKey="+openWSapiKey,currentUser)
-                .done(function(data) {
-                userID= data._id;
-                console.log("User saved successfully");
-            });   
-        } else
-        {
-           localStorage.setObject(currentUser.name,currentUser) 
-        }
 
-        threadNumber = campaignChallenges[currentCampaignChallenge].threadNumber;
-        threadPoint  = campaignChallenges[currentCampaignChallenge].threadPoint;
-        loadAppletID=thread[threadNumber-1][threadPoint-1];
-        showWelcomeMessage();
-       // state = 'applet';
-        
-        titleBack.destroy(true);
-    }
+        }
+      }
+    });
 }
 
 var threadModeOnly = false;
@@ -628,83 +531,6 @@ Storage.prototype.getObject = function(key) {
     return value && JSON.parse(value);
 }
 
-//this is used to delete an individual user from the openWS user data collection
-function deleteNetUser(userName)
-{
-    if(networkStorage)
-    {
-        var query = JSON.stringify( { name : userName } );
-        $.get("https://openws.herokuapp.com/"+openWSCollection+"?q="+query+"&apiKey="+openWSapiKey)
-            .done(function(data) {
-            if (typeof data[0] !== 'undefined') {
-                var deleteID = data[0]._id ;
-                $.ajax({
-                url: "https://openws.herokuapp.com/"+openWSCollection+"/"+deleteID+"?apiKey="+openWSapiKey,
-                type: 'DELETE',
-                success: function(result) {
-                      console.log('User deleted: "' + userName +'"');
-                    },
-                    error: function() {
-                      console.log("Error");
-                    }
-                });    
-            } else
-            {
-                console.log('User "' + userName + '" does not exist!' )
-            }
-        });    
-    } else
-    {
-        console.log("Network storage is inactive!");
-    }
-    
-}
-
-
-function netUserMaintenance(order)
-{
-    $.get("https://openws.herokuapp.com/" + openWSCollection + "?apiKey=" + openWSapiKey)
-        .done(function(data) {
-            console.log("Users retrieved.");
-            switch(order.key) 
-            {
-                case 'sortUsersByKey':
-                    //var order = { key:'sortUsersByKey' , keyToSort:'challengesMastered' }
-                    order.sorted = data.sort(function(a, b) {
-                            var y = a[order.keyToSort]; var x = b[order.keyToSort];
-                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                        });
-                break;
-                
-                case 'setDefaultValueForAll':
-                    //var order = { key:'setDefaultValueForAll' , newKey:'challengesMastered' , newValue:0 }
-                    data.forEach(function(user) { 
-                        if (typeof user[order.newKey] === 'undefined') 
-                        { user[order.newKey] = order.newValue}
-                    });
-                    
-                    console.log(data)
-                    saveUserData();
-                break; 
-
-            }
-            
-            function saveUserData()
-            {   
-                data.forEach(function(user) { 
-                        $.ajax({
-                            url: "https://openws.herokuapp.com/"+openWSCollection+"/"+user._id+"?apiKey="+openWSapiKey,
-                            type: "PUT",
-                            data: user
-                        });
-                         
-                    });
-                    
-                
-            }
-        });    
-    }
-
 
 
 function showWelcomeMessage()
@@ -822,4 +648,33 @@ function getOaklandWeather ()
     }
   });
     
+}
+
+function testFirebaseLogin()
+{
+   
+
+    game.ref.authWithOAuthPopup("google", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+        
+      }
+    });
+    
+    // we would probably save a profile when we register new users on our site
+    // we could also read the profile to see if it's null
+    // here we will just simulate this with an isNewUser boolean
+    var isNewUser = true;
+    game.ref.onAuth(function(authData) {
+        
+      if (authData && isNewUser) {
+        // save the user's profile into the database so we can list users,
+        // use them in Security and Firebase Rules, and show profiles
+        game.ref.child("users").child(authData.uid).set({
+          userData:currentUser
+        });
+      }
+    });
 }
