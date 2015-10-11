@@ -2440,7 +2440,7 @@ function buildShipMenu(spaceStationScene)
     buttons.push(game.add.sprite(10,470, 'shipMenuMiningButton'));
     
     var panelTextures = ['shipMenuCombatPane', 'shipMenuShipPane'  , 'shipMenuCommPane' , 'shipMenuMiningPane' ]
-    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'STORE']
+    var buttonLabels = ['COMBAT' , 'SHIP' , 'COMM' , 'TABLES']
     var buttonCount = 0;
     buttons.forEach(function(button){
             menuItems.add(button)
@@ -2526,7 +2526,7 @@ function buildShipMenu(spaceStationScene)
                     shipModel.anchor.setTo(0.5,0.5)
                     
                     var creditLabelString = 'CREDITS: ' + currentUser.credits
-                    shipCreditLabel = game.add.text(650,410 , creditLabelString)
+                    shipCreditLabel = game.add.text(650,425 , creditLabelString)
                     shipCreditLabel.anchor.setTo(0.5,0.5)
                     shipCreditLabel.font = 'Michroma';
                     shipCreditLabel.fontSize = 12;
@@ -2572,12 +2572,103 @@ function buildShipMenu(spaceStationScene)
                     console.log("Comm stuff here")
                     break;
                 case 3:
-                    //Mining
-                    console.log("Mining stuff here")
+                    //Tables
+                    console.log("Tables stuff here")
+                    testScoreBoard()
                     break;
                 
                 
             }
+        
+        function testScoreBoard()
+        {
+            var ref = new Firebase("https://mages.firebaseio.com/users");
+            var itemCount = 0
+            ref.orderByChild("credits").on("child_added", function(snapshot) {
+                if(itemCount<10)
+                {
+                    console.log(snapshot.val().userData.credits); 
+                    var boxX = 180
+                    var boxY = 60+itemCount*80
+                    
+                    if(itemCount > 5)  //put it in the second column
+                    {
+                       boxX = 280 
+                       boxY = 60+(itemCount-5)*80
+                    }
+                    
+                    itemCount++
+                    var swatchColorBox;
+                    var swatchColorSprite;
+                    var rowLength;
+                    var tints = [0xFFFFFF , 0x000000 ];
+                    var tintNumber = 0;
+                    var frequency = .15;
+                    var redFrequency = .1;
+                    var grnFrequency = .1;
+                    var bluFrequency = .1;
+                    var center = 255;
+                    var width = 0;
+                    
+                    //http://krazydad.com/tutorials/makecolors.php
+                    for (var i = 0; i < 32; ++i)
+                    {
+                       red   = Math.sin(redFrequency*i + 0) * center + width;
+                       green = Math.sin(grnFrequency*i + 2*Math.PI/3) * center + width;
+                       blue  = Math.sin(bluFrequency*i + 4*Math.PI/3) * center + width;
+                    
+                       tints.push(RGB2Color(red,green,blue))
+                    }
+                    
+                    var squareSize = 7
+                    var logoOffsetX = 130;
+                    var logoOffsetY = 10;
+                    
+                    shipCreditLabel = game.add.text(90+boxX+logoOffsetX,38+boxY+logoOffsetY , snapshot.val().userData.credits)
+                    shipCreditLabel.anchor.setTo(0.5,0.5)
+                    shipCreditLabel.font = 'Michroma';
+                    shipCreditLabel.fontSize = 12;
+                    shipCreditLabel.fill = '#FFFFFF';
+                    shipCreditLabel.align = 'center';
+                    button.pane.group.add(shipCreditLabel)
+                    
+                    var boxNumber = 0;
+                    for(var row = 0 ; row < 10 ; row++)
+                    {
+                      for(var column = 0 ; column < 10 ; column++)
+                        {
+                            var swatchBox = game.add.graphics(boxX, boxY);
+                            swatchBox.lineStyle(0.5, 0x000000, 1);
+                            button.pane.group.add(swatchBox)
+                            logo.push(swatchBox)
+                            swatchBox.beginFill(tints[snapshot.val().userData.logo[boxNumber]]); 
+                            swatchBox.tintNumber = snapshot.val().userData.logo[boxNumber];
+                            swatchBox.drawRect(logoOffsetX+row*squareSize, logoOffsetY+column*squareSize, squareSize, squareSize);
+                            swatchBox.endFill(); 
+                            swatchBox.boxNumber = boxNumber;
+                            swatchBox.row=row
+                            swatchBox.column=column
+                            swatchBox.logoOffsetX=logoOffsetX
+                            swatchBox.logoOffsetY=logoOffsetY
+                            swatchBox.squareSize =squareSize
+                            boxNumber++;
+                        }  
+                    }
+                }
+                
+
+                function RGB2Color(r,g,b)
+                  {
+                    return '0x' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+                  }   
+                function byte2Hex(n)
+                  {
+                    var nybHexString = "0123456789ABCDEF";
+                    return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+                  }
+            });
+        }
+                    
         function startBattle(questCharacter)
         {
             console.log(questCharacter)
@@ -3212,9 +3303,6 @@ function buildShipMenu(spaceStationScene)
                 boxX = 180;
                 boxY = 200;
             }
-            
-            
-            
             var swatchColorBox;
             var swatchColorSprite;
             var rowLength;
@@ -3418,3 +3506,4 @@ function battleAlert(text)
     }
 
 }
+

@@ -1046,6 +1046,8 @@ function updateUserData()
     {
         if(networkStorage)
         {
+            console.log(currentUser.lastLogoEdit)
+            currentUser.lastLogoEdit = currentUser.lastLogoEdit.toString();
             game.ref.child("users").child(game.authData.google.id).set({
               userData:currentUser
             });
